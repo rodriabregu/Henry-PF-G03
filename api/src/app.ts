@@ -6,6 +6,8 @@ import cors from 'cors';
 
 import config from './lib/config';
 
+import routes from './routes/index'
+
 const app: Application = express();
 app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
 app.use(express.json({ limit: '50mb' }));
@@ -29,8 +31,6 @@ app.use((err: error, req: Request, res: Response, next: NextFunction) => {
   res.status(status).send(message);
 });
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('hola typescript!');
-});
+app.use('/',routes);
 
 export default app;
