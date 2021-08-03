@@ -1,10 +1,13 @@
-import { Model, Column, Table } from 'sequelize-typescript';
-import { HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey } from 'sequelize-typescript'
+import {
+  Model, Column, Table, HasMany, BelongsToMany
+} from 'sequelize-typescript'
 
 import { Photo } from './Photo';
+import { Category } from './Category';
+import {ProductCategory} from './ProductCategory';
 
 @Table
-export class Product extends Model<Product> {
+export class Product extends Model {
 
   @Column({ unique: true })
   name!: string;
@@ -27,7 +30,7 @@ export class Product extends Model<Product> {
   @Column
   sportID!: string;
 
-  @Column
-  category!: string;
+  @BelongsToMany(() => Category, () => ProductCategory)
+  categories!: Category[];
 
 }
