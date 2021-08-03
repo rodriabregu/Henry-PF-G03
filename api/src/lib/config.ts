@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+console.log("env: ",process.env);
+
 const config = {
   dbUser: process.env.DB_USER || 'postgres',
   dbPassword: process.env.DB_PASSWORD || 'password',
@@ -13,5 +15,7 @@ const config = {
   host: process.env.API_HOST || 'localhost',
   cors: process.env.CORS || 'localhost:3000',
 };
+
+console.log("cof: ",config);
 
 export default config;

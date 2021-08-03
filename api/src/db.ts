@@ -3,9 +3,9 @@ import config from './lib/config';
 config;
 export const sequelize = new Sequelize({
 	dialect: 'postgres',
-	database: 'socialclub',
-	password: 'password',
-	username: 'postgres',
+	database: config.dbName,
+	password: config.dbPassword,
+	username: config.dbUser,
 	storage: ':memory:',
 	models: [__dirname + '/models'],
 });
