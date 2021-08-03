@@ -1,6 +1,6 @@
 import { Model, Column, Table } from 'sequelize-typescript';
 import {HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey} from 'sequelize-typescript'
-
+import { Photo } from './Photo';
 @Table
 export class Product extends Model<Product> {
   @Column
