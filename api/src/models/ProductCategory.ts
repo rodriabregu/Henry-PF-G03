@@ -2,15 +2,18 @@ import { Model, Column, Table, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey,
 import { Col } from 'sequelize/types/lib/utils';
 import { CategoryType } from './CategoryType';
 import {Product} from './Product'
-import { ProductCategory } from './ProductCategory';
+import {Category} from './Category'
 
 @Table
-export class Category extends Model{
+export class ProductCategory extends Model{
 
-    @Column
-    descritpion!:string;
+    @ForeignKey (()=>Product)
+    @Column 
+    productId!:number;
 
-    @BelongsToMany(()=>Product,()=>ProductCategory)
-    products!:Product[]
+    @ForeignKey (()=>Category)
+    @Column 
+    categoryId!:number;
+
 
 }
