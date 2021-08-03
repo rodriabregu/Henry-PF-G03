@@ -1,9 +1,10 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import {error} from "./@app"
 import cors from 'cors';
 
+import routes from './routes/index';
+import { error } from "./@app";
 import config from './lib/config';
 
 import routes from './routes/index'
