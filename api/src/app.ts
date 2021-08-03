@@ -1,9 +1,10 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import {error} from "./@app"
 import cors from 'cors';
 
+import routes from './routes/index';
+import { error } from "./@app";
 import config from './lib/config';
 
 const app: Application = express();
@@ -29,8 +30,6 @@ app.use((err: error, req: Request, res: Response, next: NextFunction) => {
   res.status(status).send(message);
 });
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('hola typescript!');
-});
+app.use('/',routes);
 
 export default app;
