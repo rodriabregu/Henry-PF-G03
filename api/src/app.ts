@@ -7,8 +7,6 @@ import routes from './routes/index';
 import { error } from "./@app";
 import config from './lib/config';
 
-import routes from './routes/index'
-
 const app: Application = express();
 app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
 app.use(express.json({ limit: '50mb' }));
