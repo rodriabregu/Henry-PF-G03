@@ -7,7 +7,6 @@ const initialState = {
 };
 
 function getProductReducer(state = initialState, action: any) {
-  console.log('console reducer', action.type,action.payload);
   switch (action.type) {
     case GET_PRODUCTS:
       return {

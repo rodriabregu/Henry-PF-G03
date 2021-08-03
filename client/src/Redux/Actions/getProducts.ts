@@ -1,11 +1,10 @@
 import { info } from '../../Data/index';
-
+import { Dispatch } from 'redux';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 
-export function getProducts() {
-  console.log(info)
-  return {
+export function getProducts(dispatch: Dispatch<any>) {
+  return dispatch({
     type: GET_PRODUCTS,
     payload: info,
-  };
+  });
 }
