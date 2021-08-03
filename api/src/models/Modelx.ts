@@ -3,9 +3,18 @@ import {
   HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
 } from 'sequelize-typescript'
 
-
 @Table
 export class Modelx extends Model<Modelx> {
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    unique: true,
+    primaryKey: true,
+    comment: 'Some value'
+  })
+  id!: number;
 
   /*  options: 
 string  ->	STRING
@@ -21,18 +30,5 @@ Buffer  ->  BLOB
 
   @Column(DataType.TEXT)
   dato1!: string;
-
-  @Column({
-    type: DataType.FLOAT,
-    comment: 'Some value',
-  })
-  dato2!: number;
-
-  @Column({
-    type: DataType.INTEGER,
-    unique: true,
-    allowNull: false
-  })
-  dato3!: number;
 
 }
