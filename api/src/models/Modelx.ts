@@ -1,29 +1,17 @@
 import {
-  Model, Column, Table, DataType,
+  Model, Column, Table, DataType, Comment,
+  PrimaryKey, AutoIncrement, AllowNull,
   HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
 } from 'sequelize-typescript'
 
 @Table
 export class Modelx extends Model<Modelx> {
 
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    unique: true,
-    primaryKey: true,
-    comment: 'Some value'
-  })
+  @AllowNull
+  @AutoIncrement
+  @PrimaryKey
+  @Column
   id!: number;
-
-  /*  options: 
-string  ->	STRING
-boolean ->	BOOLEAN
-number  ->  INTEGER
-bigint  ->	BIGINT
-Date    ->	DATE
-Buffer  ->  BLOB
- */
 
   @Column
   name!: string;

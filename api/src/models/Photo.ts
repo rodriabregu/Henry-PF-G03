@@ -1,20 +1,17 @@
 import {
-  Model, Column, Table, DataType, ForeignKey
+  Model, Column, Table, PrimaryKey,
+  AutoIncrement, ForeignKey
 } from 'sequelize-typescript'
 
 import { Product } from './Product';
 
 @Table
-export class Photo extends Model<Photo> {
+export class Photo extends Model {
 
   @ForeignKey(() => Product)
-  @Column({
-    type: DataType.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    unique: true,
-    allowNull: false
-  })
+  @AutoIncrement
+  @PrimaryKey
+  @Column
   id!: number;
 
   @Column
