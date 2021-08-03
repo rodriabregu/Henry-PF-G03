@@ -1,6 +1,5 @@
 import {
-  Model, Column, Table, DataType,
-  HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
+  Model, Column, Table, DataType, ForeignKey
 } from 'sequelize-typescript'
 
 import { Product } from './Product';
