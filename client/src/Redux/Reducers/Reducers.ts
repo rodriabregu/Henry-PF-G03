@@ -3,7 +3,7 @@ const initialState = {
     productsDetail:[],
   };
 
-  export default function rootReducer(state = initialState, action:any){
+  export default function getProductReducer(state = initialState, action:any){
       switch (action.type) {
           case "GET_PRODUCTS":
               return {
@@ -13,7 +13,7 @@ const initialState = {
             case "GET_PRODUCTS_DETAIL":
                 return{
                     ...state,
-                    productsDetail: action.payload
+                    productsDetail: state.products.filter((product:any)=>product.id !== action.payload)
                 }
             default:
                 return state;
