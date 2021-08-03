@@ -1,22 +1,29 @@
+import { GET_PRODUCTS } from '../Actions/getProducts';
+import { GET_PRODUCTS_DETAIL } from '../Actions/getProductsDetail';
+
 const initialState = {
-    products: [],
-    productsDetail:[],
-  };
+  products: [],
+  productsDetail: [],
+};
 
-  export default function getProductReducer(state = initialState, action:any){
-      switch (action.type) {
-          case "GET_PRODUCTS":
-              return {
-                  ...state,
-                  products:action.payload
-              }
-            case "GET_PRODUCTS_DETAIL":
-                return{
-                    ...state,
-                    productsDetail: state.products.filter((product:any)=>product.id !== action.payload)
-                }
-            default:
-                return state;
-      }
+function getProductReducer(state = initialState, action: any) {
+  console.log('console reducer', action.type,action.payload);
+  switch (action.type) {
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case GET_PRODUCTS_DETAIL:
+      return {
+        ...state,
+        productsDetail: state.products.filter(
+          (product: any) => product.id !== action.payload,
+        ),
+      };
+    default:
+      return state;
   }
+}
 
+export default getProductReducer;

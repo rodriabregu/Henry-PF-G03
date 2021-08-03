@@ -4,16 +4,16 @@ import { getProducts } from '../../Redux/Actions/getProducts';
 
 const Home = (): JSX.Element => {
   const dispatch = useDispatch();
-
   const products = useSelector<any>((state) => state.products);
+  console.log(products);
 
   useEffect(() => {
     dispatch(getProducts);
-  });
+  },[]);
 
   return (
     <div>
-      <div></div>
+      <h1>NO ME LA CREO</h1>
     </div>
   );
 };
