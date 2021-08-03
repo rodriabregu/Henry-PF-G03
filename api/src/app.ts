@@ -30,10 +30,6 @@ app.use((err: error, req: Request, res: Response, next: NextFunction) => {
   res.status(status).send(message);
 });
 
-app.use('/', routes);
-
-app.get('/app', (req: Request, res: Response) => {
-	res.send('hola typescript!');
-});
+app.use('/',routes);
 
 export default app;
