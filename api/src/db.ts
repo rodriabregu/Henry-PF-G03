@@ -10,9 +10,11 @@ export const sequelize = new Sequelize({
 	models: [__dirname + '/models'],
 });
 
-/* 
+/*
 
-SELECT *
-	FROM public."Categories";
-  
+COMANDO PARA LEER LOS DATOS DE LAS 
+TABLAS DESDE LA CONSOLA postgres
+
+SELECT * FROM public."Tabla";
+
  */
