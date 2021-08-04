@@ -17,7 +17,7 @@ function getProductReducer(state = initialState, action: any) {
       return {
         ...state,
         productsDetail: state.products.filter(
-          (product: any) => product.id !== action.payload,
+          (product: any) => product.id === action.payload,
         ),
       };
     default:

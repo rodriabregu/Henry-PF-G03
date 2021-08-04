@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState, /* useEffect */ } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
-import { IInfo } from '../../Data';
+/* import { IInfo } from '../../Data'; */
 import { VscSearch } from 'react-icons/vsc';
 
 const SearchBar = (): JSX.Element => {
   const [title, setTitle] = useState("");
-  const productDetail = useSelector((s:any) => s.productsDetail)
+/*   const productDetail = useSelector((s:any) => s.productsDetail) */
   const dispatch = useDispatch();
 
   const handleChange = (e:any) => {
@@ -18,7 +18,9 @@ const SearchBar = (): JSX.Element => {
         dispatch(getProductsDetail(dispatch, title));
   };
 
-  console.log(title)
+/*   useEffect(() => {
+    dispatch(getProductsDetail(dispatch, title));
+  }, [dispatch]); */
 
   return (
     <div>
