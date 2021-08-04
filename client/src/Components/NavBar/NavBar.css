@@ -1,0 +1,57 @@
+.nav-container{
+    /* display: grid;
+    grid-template-columns: 0.5fr 0.5fr 0.2fr;
+    background-color: rgb(21, 21, 75); */
+    height: 50px;
+    background-color: /*  rgb(21, 21, 75) */ #2E2E48 ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;   
+    font-size: 15px; 
+}
+
+.link-home a {
+        color: #bcbdf1;
+        height: 100%;
+        padding: 6px 10px;
+        border-bottom: 4px solid transparent;
+        border-radius: 3px;
+}
+    
+.link-home a:hover,
+.link-home a.active {
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+ }
+
+ .links-compra a {
+    color: #bcbdf1;
+    height: 100%;
+    padding: 6px 5px;
+    border-bottom: 4px solid transparent;
+    border-radius: 3px;
+}
+
+.links-compra a:hover,
+.links-compra a.active {
+background-color:  #bcbdf1;
+color:  #2E2E48;
+}
+
+
+.links-login a {
+    color: #bcbdf1;
+    height: 100%;
+    padding: 6px 5px;
+    border-bottom: 4px solid transparent;
+    border-radius: 3px;
+}
+
+.links-login a:hover,
+.links-login a.active {
+background-color:  #bcbdf1;
+color:  #2E2E48;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
