@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink as Link } from 'react-router-dom';
 import './NavBar.css';
 import {RiShoppingCartLine, RiSettings5Line, RiAccountCircleLine, RiHome2Line} from 'react-icons/ri';
-
+import SearchBar from '../SearchBar/SearchBar';
 
 export const NavBar = () => {
   return (
@@ -22,10 +22,9 @@ export const NavBar = () => {
           
             <Link to='/login'> LOGIN <RiAccountCircleLine/> </Link>
           </div>
+          <SearchBar />
         </div>
         </nav>
     </header>
-  );
-};
 
 export default NavBar;
