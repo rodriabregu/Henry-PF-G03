@@ -1,4 +1,4 @@
-interface IInfo {
+export interface IInfo {
   name: string;
   id: number;
   price: number;
@@ -6,7 +6,7 @@ interface IInfo {
   img: string;
 }
 
-export let info: Array<IInfo> = [
+export const info: Array<IInfo> = [
   {
     name: 'shirtblue',
     id: 1,
