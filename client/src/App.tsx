@@ -1,14 +1,21 @@
 import React from 'react';
 import './App.css';
 import Home from './Components/Home/Home';
-import { Provider } from 'react-redux';
-import store from './Redux/Store';
+import NavBar from './Components/NavBar/NavBar';
+import {BrowserRouter as Router,
+  Switch,
+  Route,} from 'react-router-dom'
 
 function App() {
   return (
-    <Provider store={store}>
-      <Home />
-    </Provider>
+    <Router>
+      <Switch>
+        <div className="App">
+          <Route path="/" component={NavBar} />
+          <Route exact path="/home" component={Home} />
+        </div>
+      </Switch>
+    </Router>
   );
 }
 
