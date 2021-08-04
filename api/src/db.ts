@@ -10,4 +10,9 @@ export const sequelize = new Sequelize({
 	models: [__dirname + '/models'],
 });
 
+/* 
 
+SELECT *
+	FROM public."Categories";
+  
+ */
