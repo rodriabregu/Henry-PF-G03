@@ -4,7 +4,11 @@ const router = Router();
 import {Category} from '../models/Category'
 
 router.get('/', async(req: Request, res: Response) => {
-  const categories=await Category.findAll();
+  const categories=await Category.findAll(
+    {
+      order:['description']
+    }
+  );
   res.json(categories)  
 })
 
