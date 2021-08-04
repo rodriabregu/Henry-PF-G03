@@ -4,7 +4,7 @@ import {
 
 import { Photo } from './Photo';
 import { Category } from './Category';
-import {ProductCategory} from './ProductCategory';
+import { ProductCategory } from './ProductCategory';
 
 @Table
 export class Product extends Model {
@@ -19,10 +19,10 @@ export class Product extends Model {
   description!: string;
 
   @Column
-  amount!: string;
+  amount!: number;
 
   @Column
-  stock!: string;
+  stock!: number;
 
   @Column
   brand!: string;
