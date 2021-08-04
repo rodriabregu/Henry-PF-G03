@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { /* useState, */ useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../Footer/Footer';
 import { getProducts } from '../../Redux/Actions/getProducts';
 import { IInfo } from "../../Data/index";
+import './home.css';
 
 const Home = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Home = (): JSX.Element => {
 
   return (
     <div>
+      <div className='sheetGrid'>
 {/*       <select onChange={e => handleFilterCategories(e)} >
         { categories && categories.length > 0 ? categories.map((c:string) => { /// Done para mapeado del filtrado de categories
           return (                                                             /// Done para mapeado del filtrado de categories
@@ -32,8 +34,8 @@ const Home = (): JSX.Element => {
       { productDetail?.length >= 1 ? 
       productDetail?.map((e:IInfo,index:number) =>{
         return (
-          <div key={index}>
-            <h1>{e.name}</h1>
+          <div className='imgproducts'  key={index}>
+            <h1>{e.name.toUpperCase()}</h1>
             <h2>{e.price}</h2>
             <img src={e.img} alt={e.name} />
           </div>
@@ -41,13 +43,14 @@ const Home = (): JSX.Element => {
         :
         products?.map((e:IInfo,index:number) =>{
           return (
-            <div key={index}>
-              <h1>{e.name}</h1>
-              <h2>{e.price}</h2>
+            <div className='imgproducts' key={index}>
+              <div>{e.name.toUpperCase()}</div>
+              <div>${e.price}.00</div>
               <img src={e.img} alt={e.name} />
             </div>
           )}) 
       }
+      </div>
       <Footer />
     </div>
   );
