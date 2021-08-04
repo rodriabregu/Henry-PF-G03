@@ -1,15 +1,22 @@
-import {Router} from 'express';
-const router=Router();
-import productRoute from './products';
+import { Router } from 'express';
+
+const router = Router();
+
+import productsRoute from './productsRoute';
 import categoryRoute from './categories';
-
-import users from './users';
+import usersRoute from './users';
 import rutax from './rutax';
+import categoryTypeRoute from './categoryTypes';
+import productDetails from './productDetails';
 
-router.use('/products',productRoute)
-router.use('/categories',categoryRoute)
+import roductsCategoryRoute from './productsCategoryRoute';
 
-router.use('/users', users);
+router.use('/products/category', roductsCategoryRoute);
+router.use('/products', productsRoute);
+router.use('/categories', categoryRoute);
+router.use('/users', usersRoute);
 router.use('/rutax', rutax);
+router.use('/categoryTypes',categoryTypeRoute)
+router.use('/productDetails',productDetails)
 
 export default router;
