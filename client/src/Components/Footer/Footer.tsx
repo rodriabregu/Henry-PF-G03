@@ -1,12 +1,31 @@
-import { FaGithubAlt } from 'react-icons/fa';
 
-export const Footer = () => {
+import React from 'react';
+import { NavLink } from "react-router-dom";
+
+export const Footer = () => { 
   return (
-    <div>
-      <h1>Averg si func <FaGithubAlt/></h1>
+    <div className='containFooter'>
+      
+        <div>
+          <NavLink to="/aboutUs">About us</NavLink>
+          <br></br>
+          <NavLink to="/aboutUs">Contact us</NavLink>
+          <br></br>
+          <NavLink to="/faq">F.A.Q</NavLink>
+        </div>
+        <div>
+          <div>
+              Instagram
+          </div>
+            <div>
+                Facebook 
+            </div>
+          <div>
+              © Copyrigth 2021 - Grupo 03/ FT 14a
+          </div>
+        </div>
     </div>
-  )
+  );
 };
-
 
 export default Footer;
