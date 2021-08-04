@@ -9,6 +9,9 @@ import rutax from './rutax';
 import categoryTypeRoute from './categoryTypes';
 import productDetails from './productDetails';
 
+import roductsCategoryRoute from './productsCategoryRoute';
+
+router.use('/products/category', roductsCategoryRoute);
 router.use('/products', productsRoute);
 router.use('/categories', categoryRoute);
 router.use('/users', usersRoute);
