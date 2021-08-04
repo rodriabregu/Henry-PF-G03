@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink as Link } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 
 export const NavBar = () => {
   return (
@@ -13,6 +13,8 @@ export const NavBar = () => {
       <Link to='/register'> REGISTRARSE </Link>
 
       <Link to='/login'> LOGIN </Link>
+
+      <SearchBar />
     </div>
   );
 };
