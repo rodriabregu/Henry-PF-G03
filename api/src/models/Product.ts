@@ -9,7 +9,7 @@ import { ProductCategory } from './ProductCategory';
 @Table
 export class Product extends Model {
 
-  @Column({ unique: true })
+  @Column({ unique: false })
   name!: string;
 
   @HasMany(() => Photo)

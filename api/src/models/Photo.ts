@@ -12,7 +12,7 @@ export class Photo extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column
-  id!: number;
+  productId!: number;
 
   @Column(DataType.TEXT)
   url!: string;
