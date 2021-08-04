@@ -3,7 +3,6 @@ import { Category } from '../models/Category';
 import {CategoryType} from '../models/CategoryType'
 const router = Router();
 
-
 router.get('/', async(req: Request, res: Response) => {
 
   console.log('estoy en tipo de categorias');
