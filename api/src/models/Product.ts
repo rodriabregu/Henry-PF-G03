@@ -1,8 +1,9 @@
-import { Model, Column, Table } from 'sequelize-typescript';
-import { HasMany, BelongsToMany} from 'sequelize-typescript'
-import { Category } from './Category';
+import {
+  Model, Column, Table, HasMany, BelongsToMany
+} from 'sequelize-typescript'
 
 import { Photo } from './Photo';
+import { Category } from './Category';
 import { ProductCategory } from './ProductCategory';
 
 @Table
@@ -18,10 +19,10 @@ export class Product extends Model {
   description!: string;
 
   @Column
-  amount!: string;
+  amount!: number;
 
   @Column
-  stock!: string;
+  stock!: number;
 
   @Column
   brand!: string;
@@ -29,7 +30,7 @@ export class Product extends Model {
   @Column
   sportID!: string;
 
-  @BelongsToMany(()=>Category,()=>ProductCategory)
-  categories!:Category[];
+  @BelongsToMany(() => Category, () => ProductCategory)
+  categories!: Category[];
 
 }
