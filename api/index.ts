@@ -1,5 +1,8 @@
 import {sequelize} from './src/db';
 import app from './src/app';
+import config from './src/lib/config'
+
+
 sequelize
 	.sync({force: true, logging: false})
 	.then(() => {
@@ -9,3 +12,6 @@ sequelize
 		});
 	})
 	.catch((err) => console.error(err));
+
+
+

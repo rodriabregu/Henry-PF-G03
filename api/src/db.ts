@@ -1,6 +1,6 @@
 import {Sequelize} from 'sequelize-typescript';
 import config from './lib/config';
-config;
+
 export const sequelize = new Sequelize({
 	dialect: 'postgres',
 	database: config.dbName,
@@ -9,3 +9,5 @@ export const sequelize = new Sequelize({
 	storage: ':memory:',
 	models: [__dirname + '/models'],
 });
+
+
