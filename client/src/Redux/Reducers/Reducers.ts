@@ -4,6 +4,7 @@ import { GET_PRODUCTS_DETAIL } from '../Actions/getProductsDetail';
 const initialState = {
   products: [],
   productsDetail: [],
+  categories: [],
 };
 
 function getProductReducer(state = initialState, action: any) {
@@ -17,7 +18,7 @@ function getProductReducer(state = initialState, action: any) {
       return {
         ...state,
         productsDetail: state.products.filter(
-          (product: any) => product.id === action.payload,
+          (product: any) => product.id === action.payload ||  product.name === action.payload.toLowerCase(),
         ),
       };
     default:

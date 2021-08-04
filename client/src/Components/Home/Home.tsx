@@ -1,27 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Footer from '../Footer/Footer';
 import { getProducts } from '../../Redux/Actions/getProducts';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
-import {IInfo} from "../../Data/index";
-import { VscSearch } from 'react-icons/vsc';
-/* import SearchBar from '../SearchBar/SearchBar'; */
+import { IInfo } from "../../Data/index";
 
 const Home = (): JSX.Element => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
   const products:any = useSelector<any>((state) => state.products);
-  const productDetail = useSelector((s:any) => s.productsDetail)
-  console.log('Product detail', productDetail)
+  const productDetail = useSelector((s:any) => s.productsDetail);
+/*   const categories = useSelector((s:any) => s.categories);             //filtrado de categories
+  const [filter, setFilter] = useState([]); */                            //filtrado de categories
 
-  const handleChange = (e:any) => {
-    setTitle(e.target.value)
-  };
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-        dispatch(getProductsDetail(dispatch, title));
-        console.log('Dispatch getPD', dispatch(getProductsDetail(dispatch, title)))
-  };
+/*   const handleFilterCategories = (e:any) => {                          //filtrado de categories
+    setFilter(e.target.value)                                             //filtrado de categories
+  } */                                                                    //filtrado de categories
 
   useEffect(() => {
     dispatch(getProducts);
@@ -29,25 +22,19 @@ const Home = (): JSX.Element => {
 
   return (
     <div>
-      {/* <SearchBar/> */}
-      <div>
-      <form onSubmit={ e => handleSubmit(e)}>
-        <input type="text"
-        autoComplete="off"
-        value={title}
-        onChange={e => handleChange(e)}    
-        placeholder='Find product'  
-        />
-        <button type='submit'>
-          Search <VscSearch/>
-        </button>
-      </form>
-    </div>
+{/*       <select onChange={e => handleFilterCategories(e)} >
+        { categories && categories.length > 0 ? categories.map((c:string) => { /// Done para mapeado del filtrado de categories
+          return (                                                             /// Done para mapeado del filtrado de categories
+            <option key={c.id} value={c.name}>{c.name}</option>                /// Done para mapeado del filtrado de categories
+          )                                                                    /// Done para mapeado del filtrado de categories
+        }) : null}                                                             /// Done para mapeado del filtrado de categories
+      </select> */}
       { productDetail?.length >= 1 ? 
       productDetail?.map((e:IInfo,index:number) =>{
         return (
           <div key={index}>
-            <h1>{e.id}</h1>
+            <h1>{e.name}</h1>
+            <h2>{e.price}</h2>
             <img src={e.img} alt={e.name} />
           </div>
         )}) 
@@ -56,10 +43,12 @@ const Home = (): JSX.Element => {
           return (
             <div key={index}>
               <h1>{e.name}</h1>
+              <h2>{e.price}</h2>
               <img src={e.img} alt={e.name} />
             </div>
           )}) 
       }
+      <Footer />
     </div>
   );
 };
