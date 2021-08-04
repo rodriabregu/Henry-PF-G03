@@ -1,8 +1,11 @@
 import { Router, Request, Response } from 'express';
 const router = Router();
+import {Category} from '../models/Category'
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('estoy en categorias')
+router.get('/', async(req: Request, res: Response) => {
+
+
+  
 })
 
 router.post('/', (req: Request, res: Response) => {

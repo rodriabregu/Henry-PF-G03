@@ -1,11 +1,17 @@
 import { Model, Column, Table, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, BelongsToMany } from 'sequelize-typescript';
-import { Col } from 'sequelize/types/lib/utils';
-import { CategoryType } from './CategoryType';
+import {Optional} from 'sequelize'
 import {Product} from './Product'
 import { ProductCategory } from './ProductCategory';
 
+interface ICategory{
+    id:number,
+    description:string
+}
+
+interface CategoryCreationAttributes extends Optional<ICategory,'id'>{}
+
 @Table
-export class Category extends Model{
+export class Category extends Model<ICategory,CategoryCreationAttributes>{
 
     @Column
     descritpion!:string;
