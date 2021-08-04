@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-//import { Product } from '../models/Product';
 import { sequelize } from '../db';
-import { Photo } from '../models/Photo';
-const { Product } = sequelize.models
+
+const { Product } = sequelize.models;
+
 const router = Router();
 router.get('/', (req: Request, res: Response) => {
   res.send('estoy en get productos')
@@ -11,10 +11,8 @@ router.get('/', (req: Request, res: Response) => {
 router.post('/', (req: Request, res: Response) => {
 
   Product.create({}).then(() => {
-    res.send('photo guardada')
-  }).catch((err) => {
-    res.send(err)
-  })
+    res.send('post en photo guardada')
+  }).catch((err) => { res.send(err) })
 })
 
 export default router;
