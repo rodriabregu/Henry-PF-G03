@@ -8,7 +8,6 @@ export default async (nameFils: string[]) => {
   let count = await Product.count()
   if (count > 0) return `they already exist ${count} products in db!`
 
-
   nameFils.reduce((products, category) => {
     return products.concat(JSON.parse(
       readFileSync(__dirname + `/../lib/${category}.json`, 'utf8')
@@ -22,7 +21,8 @@ export default async (nameFils: string[]) => {
           price: typeof product.price === "string" ?
             parseInt(product.price) : product.price,
           description: product.name + product.brand,
-          stock: product.name.length
+          stock: product.name.length,
+        category: product.category
         }
       })
         .then((res) => {

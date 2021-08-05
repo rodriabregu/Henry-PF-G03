@@ -2,11 +2,12 @@
 export default interface appProduct {
 
   name: string
-  photos: string[] // | appPhoto[];
+  photos?: string[] // | appPhoto[];
   description: string
   price: number
   stock: number
   brand: string
+  category: string
   //sport: string
   //categories: string[] //| appCategory[]
 
@@ -19,5 +20,6 @@ const product: appProduct = {
   "description": "zeuscalabria",
   "price": 54,
   "stock": 15,
-  "brand": "NIKE"
+  "brand": "NIKE",
+  "category": "deportes"
 }
