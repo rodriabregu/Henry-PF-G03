@@ -24,7 +24,8 @@ export default async () => {
     })
       .then((res) => {
         return Photo.create({
-          url: product.photos[0]
+          url: product.photos[0],
+          productId: res[0].getDataValue("id")
         })
       })
   }
