@@ -1,11 +1,14 @@
+import Products from '../../Components/Products/Products';
 import { GET_PRODUCTS } from '../Actions/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/getProductsDetail';
+import { POST_PRODUCTS } from '../Actions/postProducts';
 
 const initialState = {
   products: [],
   productsDetail: [],
   categories: [],
 };
+
 
 function getProductReducer(state = initialState, action: any) {
   switch (action.type) {
@@ -21,6 +24,11 @@ function getProductReducer(state = initialState, action: any) {
           (product: any) => product.id === action.payload ||  product.name === action.payload.toLowerCase(),
         ),
       };
+      case POST_PRODUCTS:
+        return{
+          ...state,
+          products:[...state.products, action.payload]
+        }
     default:
       return state;
   }
