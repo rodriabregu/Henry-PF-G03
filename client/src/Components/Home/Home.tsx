@@ -1,6 +1,5 @@
 import { /* useState, */ useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Footer from '../Footer/Footer';
 import { getProducts } from '../../Redux/Actions/getProducts';
 import { IInfo } from "../../Data/index";
 import './home.css';
@@ -51,7 +50,7 @@ const Home = (): JSX.Element => {
           )}) 
       }
       </div>
-      <Footer />
+      
     </div>
   );
 };
