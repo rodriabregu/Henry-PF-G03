@@ -17,6 +17,6 @@ export const sequelize = new Sequelize({
 COMANDO PARA LEER LOS DATOS DE LAS 
 TABLAS DESDE LA CONSOLA postgres
 
-SELECT * FROM public."Tabla";
+SELECT * FROM public."TablaName";
 
  */
