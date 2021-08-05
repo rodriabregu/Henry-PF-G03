@@ -12,13 +12,13 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.post('/', (req: Request, res: Response) => {
-  const { product } = req.body
-  if (!product.name  || product.photos.length <= 0)
+  const { product, photos } = req.body
+  if (!product.name || !photos || photos.length <= 0)
     return res.status(404).send({
       message: " uuups !! ",
       data: {}
     })
-  return addProduct(product)
+  return addProduct(product, photos)
     .then((product: appProduct) => {
       res.json({
         message: " product saved successfully ",

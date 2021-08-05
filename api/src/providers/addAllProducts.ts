@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 import { appProduct } from '../@app'
-import addProduct from './addProduc'
+import addProducA from './addProducA'
 import { sequelize } from '../db';
 
 const { Product } = sequelize.models;
@@ -19,7 +19,7 @@ export default async () => {
       array[idx + 1].photos.push(current.photos[0])
     } else {
 
-      addProduct({
+      addProducA({
         name: current.name,
         photos: [current.photos[0]],
         brand: current.brand,
