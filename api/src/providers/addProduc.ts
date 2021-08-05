@@ -1,13 +1,14 @@
 import { sequelize } from '../db';
 const { Product, Photo } = sequelize.models;
+import { appProduct } from '../@app'
 
-export default async function addProduct
-(product: {}, photos: {}[]): Promise<any> {
+export default async function
+  (product: appProduct): Promise<any> {
 
   const neWProduct = await Product.create(product)
   const productId = await neWProduct.getDataValue('id')
-  const neWphotos = await Promise.all(photos.map(photo => {
-    return Photo.create({ ...photo, productId })
+  await Promise.all(product.photos.map(photo => {
+    return Photo.create({ url: photo, productId })
   }))
   return Product.findOne({
     where: { id: productId },
