@@ -12,8 +12,8 @@ export const NavBar = () => {
       <nav>
         <div className='nav-container'>
           <div className='link-home'>
-            <Link style={{ textDecoration: 'none' }} to='/home'> 
-              <button onClick={dispatch<any>(getProducts)}>
+            <Link to='/home'> 
+              <button className='button-home' onClick={dispatch<any>(getProducts)}>
                 HOME <RiHome2Line/> 
               </button>
             </Link>
