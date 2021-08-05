@@ -3,9 +3,21 @@ import { Router, Request, Response } from 'express';
 import { addProduct } from '../providers';
 import { appProduct } from "../@app"
 
+import { sequelize } from '../db';
+const { Product, Photo } = sequelize.models;
+
 const router = Router();
+
 router.get('/', (req: Request, res: Response) => {
-  res.send('estoy en get productos')
+  return Product.findAll({
+    include: "photos",
+  }).then((products) => {
+    return res.json({
+      message: 'Success',
+      data: products
+    })
+  })
+
 })
 
 router.post('/', (req: Request, res: Response) => {
@@ -33,8 +45,6 @@ router.post('/', (req: Request, res: Response) => {
 })
 
 
-import { sequelize } from '../db';
-const { Product, Photo } = sequelize.models;
 
 router.delete('/', (_req: Request, res: Response) => {
 
