@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../Redux/Actions/getProducts';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
+import './Pagination.css';
 
 const Pagination = () => {
     const dispatch = useDispatch();
@@ -123,25 +124,25 @@ const Pagination = () => {
 
     return (
         <div>
-            <ul className='pageNumbers'>
-                <li>
+            <div className='pageNumbers'>
+                {/* <li> */}
                     <button
                         onClick={handlePrevbtn}
                         disabled={currentPage === pages[0] ? true : false}>
                         Prev
                     </button>
-                </li>
+                {/* </li> */}
                 {pageDecrementBtn}
                 {renderPageNumbers}
                 {pageIncrementBtn}
-                <li>
+               {/*  <li> */}
                     <button
                         onClick={handleNextbtn}
                         disabled={currentPage === pages[pages.length - 1] ? true : false}>
                         Next
                     </button>
-                </li>
-            </ul>
+                {/* </li> */}
+            </div>
             {renderProduct(currentItems)}
         </div>
     );
