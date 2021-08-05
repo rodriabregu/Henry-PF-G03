@@ -1,5 +1,6 @@
 import { /* useState, */ useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink as Link } from 'react-router-dom';
 import { getProducts } from '../../Redux/Actions/getProducts';
 import { IInfo } from "../../Data/index";
 import './home.css';
@@ -18,7 +19,7 @@ const Home = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getProducts);
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
@@ -34,18 +35,22 @@ const Home = (): JSX.Element => {
       productDetail?.map((e:IInfo,index:number) =>{
         return (
           <div className='imgproducts'  key={index}>
+            <Link style={{ textDecoration: 'none', color: '#FFF'}} to={`/product/${e.id}`}>
             <h1>{e.name.toUpperCase()}</h1>
-            <h2>{e.price}</h2>
+            <h2>${e.price}.00</h2>
             <img src={e.img} alt={e.name} />
+            </Link>
           </div>
         )}) 
         :
         products?.map((e:IInfo,index:number) =>{
           return (
             <div className='imgproducts' key={index}>
+              <Link style={{ textDecoration: 'none', color: '#FFF'}} to={`/product/${e.id}`}>
               <div>{e.name.toUpperCase()}</div>
               <div>${e.price}.00</div>
               <img src={e.img} alt={e.name} />
+              </Link>
             </div>
           )}) 
       }

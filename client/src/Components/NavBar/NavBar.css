@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+
 .nav-container{
     /* display: grid;
     grid-template-columns: 0.5fr 0.5fr 0.2fr;
@@ -54,4 +56,6 @@ background-color:  #bcbdf1;
 color:  #2E2E48;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+.searchbar {
+    padding-right: 15px;
+}
