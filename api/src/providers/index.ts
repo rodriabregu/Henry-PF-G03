@@ -1,3 +1,3 @@
 import addProduct from './addProduc'
-
-export {addProduct}
+import addAllProducts from './addAllProducts'
+export { addProduct, addAllProducts }

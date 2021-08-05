@@ -1,6 +1,6 @@
 import { sequelize } from './src/db';
 import app from './src/app';
-import addAllProducts from './src/providers/addAllProducts'
+import { addAllProducts } from './src/providers'
 
 sequelize
   .sync({ force: true })
