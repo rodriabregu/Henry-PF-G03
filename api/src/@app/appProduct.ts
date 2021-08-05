@@ -12,7 +12,7 @@ export default interface appProduct {
 
 }
 
-const prodect: appProduct = {
+const product: appProduct = {
 
   "name": "NIKE - Esteban 6 pack",
   "photos": ["https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg"],
