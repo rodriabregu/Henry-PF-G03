@@ -14,13 +14,12 @@ type KeyParams = {
 const ProductDetail = () => {
     const { id } = useParams<KeyParams>();
     const detail = useSelector((s:any) => s.productsDetail);
-    const products:any = useSelector<any>((state) => state.products);
     const dispatch = useDispatch();
     console.log('detail', detail)
 
     useEffect(() => {
         dispatch(getProductsDetail(dispatch, id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
 /*     useEffect(() => {
         dispatch(getProducts);
