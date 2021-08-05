@@ -1,10 +1,7 @@
 import { Router, Request, Response } from 'express';
 
-import { sequelize } from '../db';
 import { addProduct } from '../providers';
 import { appProduct } from "../@app"
-
-const { Product, Photo } = sequelize.models;
 
 const router = Router();
 router.get('/', (req: Request, res: Response) => {
@@ -12,22 +9,34 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.post('/', (req: Request, res: Response) => {
-  const { product, photos } = req.body
-  if (!product.name || !photos || photos.length <= 0)
-    return res.status(404).send({
-      message: " uuups !! ",
+  const product = req.body
+  if (!(
+    product &&
+    product.name &&
+    typeof product.name === "string" &&
+    product.photos[0] &&
+    typeof product.photos[0] === "string"
+  )) {
+    return res.status(404).json({
+      message: " product is not validate ",
       data: {}
     })
-  return addProduct(product, photos)
+  }
+
+  return addProduct(product)
     .then((product: appProduct) => {
-      res.json({
+      return res.json({
         message: " product saved successfully ",
-        data: { product }
+        data: product
       })
     })
 })
 
-router.delete('/', (req: Request, res: Response) => {
+
+import { sequelize } from '../db';
+const { Product, Photo } = sequelize.models;
+
+router.delete('/', (_req: Request, res: Response) => {
 
   Product.create({ name: 'produc name' })
     .then((produc) => {

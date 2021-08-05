@@ -1,7 +1,4 @@
 export default interface appProduct {
-
-  productId?: number;
+  productId: number;
   url: string;
-  alt: string;
-
 }
