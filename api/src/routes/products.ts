@@ -10,7 +10,11 @@ const router = Router();
 
 router.get('/', (req: Request, res: Response) => {
   return Product.findAll({
-    include: "photos",
+    attributes: { exclude: ['updatedAt', 'createdAt'] },
+    include: {
+      model: Photo,
+      attributes: ['url']
+    }
   }).then((products) => {
     return res.json({
       message: 'Success',
