@@ -10,6 +10,7 @@ export default async function
   await Promise.all(product.photos.map(photo => {
     return Photo.create({ url: photo, productId })
   }))
+  
   return Product.findOne({
     where: { id: productId },
     include: "photos",

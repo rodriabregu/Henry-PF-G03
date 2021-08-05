@@ -15,7 +15,7 @@ export class Product extends Model {
   @HasMany(() => Photo)
   photos!: Photo[]
 
-  @Column
+  @Column(DataType.TEXT)
   description!: string;
 
   @Column(DataType.INTEGER)
@@ -24,7 +24,7 @@ export class Product extends Model {
   @Column(DataType.INTEGER)
   stock!: number;
 
-  @Column
+  @Column(DataType.TEXT)
   brand!: string;
 
   //@Column
