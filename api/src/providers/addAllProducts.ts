@@ -19,12 +19,13 @@ export default async () => {
         price: typeof product.price === "string" ?
           parseInt(product.price) : product.price,
         description: product.name + product.brand,
-        stock: product.name.length
+        stock: product.name.length,
+        category: product.category
       }
     })
       .then((res) => {
         return Photo.create({
-          url: product.photos[0],
+          url: product.photos && product.photos[0],
           productId: res[0].getDataValue("id")
         })
       })

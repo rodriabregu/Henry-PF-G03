@@ -4,19 +4,17 @@ import { appProduct } from '../@app'
 
 export default async function
   (product: appProduct): Promise<any> {
+  const { photos } = product
+  delete product.photos
+  const neWProduct = await Product.findOrCreate({ where: { ...product } })
+  const productId = await neWProduct[0].getDataValue('id')
+  await Promise.all(photos ? photos.map(photo => {
+    return Photo.findOrCreate({ where: { url: photo, productId } })
+  }) : [])
 
-  const neWProduct = await Product.create(product)
-  const productId = await neWProduct.getDataValue('id')
-  await Promise.all(product.photos.map(photo => {
-    return Photo.create({ url: photo, productId })
-  }))
-  
   return Product.findOne({
     where: { id: productId },
     attributes: { exclude: ['updatedAt', 'createdAt'] },
-    include: {
-      model: Photo,
-      attributes: ['url']
-    }
+    include: { model: Photo, attributes: ['url'] }
   });
 }
