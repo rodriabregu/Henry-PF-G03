@@ -1,6 +1,6 @@
 import {
-  Model, Column, Table, PrimaryKey,
-  AutoIncrement, ForeignKey
+  DataType, Model, Column, Table,
+  PrimaryKey, AutoIncrement, ForeignKey
 } from 'sequelize-typescript'
 
 import { Product } from './Product';
@@ -9,15 +9,12 @@ import { Product } from './Product';
 export class Photo extends Model {
 
   @ForeignKey(() => Product)
-  @AutoIncrement
   @PrimaryKey
+  @AutoIncrement
   @Column
-  id!: number;
+  productId!: number;
 
-  @Column
+  @Column(DataType.TEXT)
   url!: string;
-
-  @Column
-  alt!: string;
 
 }
