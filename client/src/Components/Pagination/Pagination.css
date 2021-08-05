@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.pageNumbers{
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+    color: #2E2E48;
+    margin-left: 80vh;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    display: flex;
+    justify-content: space-around;
+    width: 50vh;
+}
+
+.pageNumbers button{
+    color: #bcbdf1;
+    background-color: #2E2E48;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+    
+.pageNumbers button:hover,
+.pageNumbers button.active {
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+ }
+
+
+
+
