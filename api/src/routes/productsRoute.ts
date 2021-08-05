@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 
-import { sequelize } from '../db';
 import { addProduct } from '../providers';
 import { appProduct } from "../@app"
+import { sequelize } from '../db';
 
 const { Product, Photo } = sequelize.models;
 
@@ -12,13 +12,13 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.post('/', (req: Request, res: Response) => {
-  const { product, photos } = req.body
-  if (!product.name || !photos || photos.length <= 0)
+  const { product } = req.body
+  if (!product.name  || product.photos.length <= 0)
     return res.status(404).send({
       message: " uuups !! ",
       data: {}
     })
-  return addProduct(product, photos)
+  return addProduct(product)
     .then((product: appProduct) => {
       res.json({
         message: " product saved successfully ",
@@ -27,7 +27,7 @@ router.post('/', (req: Request, res: Response) => {
     })
 })
 
-router.delete('/', (req: Request, res: Response) => {
+router.delete('/', (_req: Request, res: Response) => {
 
   Product.create({ name: 'produc name' })
     .then((produc) => {

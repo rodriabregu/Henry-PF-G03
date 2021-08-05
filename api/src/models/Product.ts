@@ -27,8 +27,8 @@ export class Product extends Model {
   @Column
   brand!: string;
 
-  @Column
-  sport!: string;
+  //@Column
+  //sport!: string;
 
   @BelongsToMany(() => Category, () => ProductCategory)
   categories!: Category[];
