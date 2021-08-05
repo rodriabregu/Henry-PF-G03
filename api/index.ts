@@ -3,10 +3,12 @@ import app from './src/app';
 import { addAllProducts } from './src/providers'
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log('database connected!');
-    return addAllProducts()
+    return addAllProducts([
+      "accesories", "kids", "men", "women"
+    ])
   })
   .then((message) => {
     console.log(message)
