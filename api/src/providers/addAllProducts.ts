@@ -22,16 +22,17 @@ export default async (nameFils: string[]) => {
             parseInt(product.price) : product.price,
           description: product.name + product.brand,
           stock: product.name.length,
-        category: product.category
+          category: product.category
         }
       })
         .then((res) => {
           return Photo.create({
-            url: product.photos[0],
+            url: product.photos && product.photos[0],
             productId: res[0].getDataValue("id")
           })
         })
-    })
+    }
+    )
 
   return 'products were saved in db!'
 }
