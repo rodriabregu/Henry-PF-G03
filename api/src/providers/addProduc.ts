@@ -13,6 +13,10 @@ export default async function
   
   return Product.findOne({
     where: { id: productId },
-    include: "photos",
+    attributes: { exclude: ['updatedAt', 'createdAt'] },
+    include: {
+      model: Photo,
+      attributes: ['url']
+    }
   });
 }
