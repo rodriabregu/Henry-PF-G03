@@ -1,6 +1,6 @@
 import { sequelize } from '../db';
 const { Product, Photo } = sequelize.models;
-import { appProduct, appPhoto } from '../@app'
+import { appProduct } from '../@app'
 
 export default async function
   (product: appProduct): Promise<any> {

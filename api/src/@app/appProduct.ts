@@ -1,5 +1,3 @@
-import { appPhoto } from "../@app"
-
 export default interface appProduct {
 
   name: string;
