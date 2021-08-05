@@ -10,6 +10,7 @@ import categoryTypeRoute from './categoryTypes';
 import getProductById from './getProductById';
 
 import roductsCategoryRoute from './productsCategoryRoute';
+import brandRoute from './brand';
 
 router.use('/products/category', roductsCategoryRoute);
 router.use('/products', productsRoute);
@@ -18,5 +19,6 @@ router.use('/users', usersRoute);
 router.use('/rutax', rutax);
 router.use('/categoryTypes',categoryTypeRoute)
 router.use('/getproductById',getProductById)
+router.use('/brand', brandRoute);
 
 export default router;
