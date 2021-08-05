@@ -13,7 +13,7 @@
     font-size: 15px; 
 }
 
-.link-home a {
+.link-home button {
         color: #bcbdf1;
         height: 100%;
         padding: 6px 10px;
@@ -21,8 +21,8 @@
         border-radius: 3px;
 }
     
-.link-home a:hover,
-.link-home a.active {
+.link-home button:hover,
+.link-home button.active {
     background-color:  #bcbdf1;
     color:  #2E2E48;
  }
