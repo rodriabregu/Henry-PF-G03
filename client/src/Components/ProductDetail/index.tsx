@@ -28,7 +28,7 @@ const ProductDetail = () => {
 
     return (
         <div>
-            <div>
+            <div className='button'>
                 <Link to='/home'>
                     <button onClick={dispatch<any>(getProducts)}>
                         Back to home <AiOutlineRollback />
@@ -38,11 +38,13 @@ const ProductDetail = () => {
             { detail.map((e:any) => {
                 return (
                 <div className='detailgeneral'>
-                        <h2 className='title'>{e.name.toUpperCase()}</h2>
+                    <div className='product-detail'>    
+                        <h1 className='title'>{e.name.toUpperCase()}</h1>
                         <h2>${e.price}.00</h2>
                         <h3>Size: {e.size.toUpperCase()}</h3>
                         <h3>Review: {e.review}</h3>
-                        <h3><img src={e.img} alt='img not found'/></h3>
+                    </div>
+                        <div className='product-img'><img src={e.img} alt='img not found'/></div>
                     </div>         
                 )
             })}

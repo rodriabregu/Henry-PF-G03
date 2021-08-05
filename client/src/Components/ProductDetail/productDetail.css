@@ -1,46 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
 
-.detailgeneral{
-    position: absolute;
-    width: 554px;
-    height: 553px;
-    left: 110px;
-    top: 148px;
+
+.product-detail{
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 800px;
+    margin-top: 100px;
+    margin-bottom: 60px;
 }
 
-.detailgeneral h2 {
-    margin-bottom: -15px;
+.product-detail h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
-.detailgeneral h3 {
-    margin-bottom: -15px;
-}
-.detailgeneral span {
-    margin-top: 20px;
-    margin-bottom: -10px;
-}
-.detailgeneral img {
+
+.product-img img{
     height: 380px;
+    width: 670;
+    margin-bottom: 100px;
+    margin-left: 200px;
+    margin-top: -230px;
     border-radius: 5px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
-.title {
-    Vertical-align: Top;
-    Letter-spacing: -1.5px;
-    height: 44px;
-    width: 519px;
-    left: 740px;
-    top: 138px;
-    border-radius: nullpx;
-    font-family: 'Public Sans', sans-serif;
+.button button{
+    box-shadow: 0px 10px 14px -12px #276873;
+	background:linear-gradient(to bottom, #6e6e96 5%, #41428b 100%);
+	background-color:#50518d;
+	border-radius:8px;
+    font-size:15px;
+	font-family: 'Montserrat', sans-serif;
+	padding:8px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+    color: #dcdcf0;
 }
 
-.description {
-Font-family: Public Sans;
-Font-style: Regular;
-Font-size: 18px;
-Line-height: 26px;
-Line-height: 123%;
-Vertical-align: Top;
-Letter-spacing: -0.3px;
+.button button a:hover {
+	background:linear-gradient(to bottom, #414099 5%, #1b275c 100%);
+	background-color:#1b275c;
 }
+.button button a:active {
+	position:relative;
+	top:1px;
+}
+/* 
+
+.description {
+    font-family: 'Public Sans', sans-serif;
+    font-style: Regular;
+    Font-size: 18px;
+    Line-height: 26px;
+    Line-height: 123%;
+    Vertical-align: Top;
+    Letter-spacing: -0.3px;
+} */
