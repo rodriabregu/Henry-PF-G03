@@ -4,7 +4,7 @@ import { GET_PRODUCTS_DETAIL } from '../Actions/getProductsDetail';
 const initialState = {
   products: [],
   productsDetail: [],
-  categories: [],
+  filtros: [],
 };
 
 function getProductReducer(state = initialState, action: any) {
