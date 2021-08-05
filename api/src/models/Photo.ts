@@ -17,7 +17,4 @@ export class Photo extends Model {
   @Column(DataType.TEXT)
   url!: string;
 
-  @Column(DataType.TEXT)
-  alt!: string;
-
 }

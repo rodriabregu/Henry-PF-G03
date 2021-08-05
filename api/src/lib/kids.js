@@ -3,8 +3,8 @@
       nombre: 'ADIDAS  BORSA',
       brand: 'ADIDAS  BORSA',
       photos: ['https://www.zeuscalabria.it/img/p/it-default-home_default.jpg'],
-      price: '32.79,
-      category: 'Niños''
+      price: '32.79',
+      category: 'Niños'
     },
     {
       nombre: 'Nike Sportswear - T-Shirt',
