@@ -9,6 +9,7 @@ const initialState = {
   categories: [],
 };
 
+
 function getProductReducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_PRODUCTS:
