@@ -1,3 +1,3 @@
-import addProduct from './addProduc'
-import addAllProducts from './addAllProducts'
-export { addProduct, addAllProducts }
+import addProduct from './addProduc';
+import addAllProducts from './addAllProducts';
+export { addProduct, addAllProducts };
