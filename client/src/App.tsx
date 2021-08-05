@@ -1,11 +1,25 @@
-import React from 'react';
 import './App.css';
+import Home from './Components/Home/Home';
+import NavBar from './Components/NavBar/NavBar';
+import Footer from './Components/Footer/Footer';
+import ProductDetail from './Components/ProductDetail';
+import {BrowserRouter as Router,
+  Switch,
+  Route,} from 'react-router-dom'
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Sosial Club App</h1>
-    </div>
+    <Router>
+      <Switch>
+        <div className="App">
+          <Route path="/" component={NavBar} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/product/:id" component={ProductDetail} />
+          <Route path="/" component={Footer} />
+        </div>
+      </Switch>
+    </Router>
   );
 }
 
