@@ -1,35 +1,37 @@
 import { readFileSync } from 'fs'
 import { appProduct } from '../@app'
-import addProduc from './addProduc'
+
 import { sequelize } from '../db';
+const { Product, Photo } = sequelize.models;
 
-const { Product } = sequelize.models;
-
-export default async () => {
+export default async (nameFils: string[]) => {
   let count = await Product.count()
-  if( count > 0 ) return `they already exist ${count} products in db!`
+  if (count > 0) return `they already exist ${count} products in db!`
 
-  JSON.parse(
-    readFileSync(__dirname + '/../lib/accesories.json', 'utf8')
-  ).map((current: appProduct, idx: number, array: appProduct[],
-  ) => {
-    if (idx < array.length - 1 && current.name === array[idx + 1].name)
-    {
-      array[idx + 1].photos.push(current.photos[0])
-    } else {
 
-      addProduc({
-        name: current.name,
-        photos: [current.photos[0]],
-        brand: current.brand,
-        price: typeof current.price === "string" ?
-          parseInt(current.price) : current.price,
-        description: current.name + current.brand,
-        stock: Math.floor(Math.random() * 9 + 12),
+  nameFils.reduce((products, category) => {
+    return products.concat(JSON.parse(
+      readFileSync(__dirname + `/../lib/${category}.json`, 'utf8')
+    ))
+  }, [])
+    .map((product: appProduct) => {
+      Product.findOrCreate({
+        where: {
+          name: product.name,
+          brand: product.brand,
+          price: typeof product.price === "string" ?
+            parseInt(product.price) : product.price,
+          description: product.name + product.brand,
+          stock: product.name.length
+        }
       })
-
-    }
-  })
+        .then((res) => {
+          return Photo.create({
+            url: product.photos[0],
+            productId: res[0].getDataValue("id")
+          })
+        })
+    })
 
   return 'products were saved in db!'
 }

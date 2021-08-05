@@ -7,10 +7,19 @@ router.get('/', async(req: Request, res: Response) => {
 
   console.log('estoy en brand');
 
-  const BrandNueva = await Brand.create({description:'Crotone'})
+  const brandFound = await Brand.findAll()
 
-  res.send('marca crotone creada')
+  res.send({ ok: true, brandFound })
   
+})
+
+router.post('/new', async(req: Request, res: Response) => {
+  const {description}=req.body;
+
+  await Brand.create({ description })
+
+  res.json({ ok:true, description })
+
 })
 
 export default router;

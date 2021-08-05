@@ -9,9 +9,7 @@ import { Product } from './Product';
 export class Photo extends Model {
 
   @ForeignKey(() => Product)
-  @PrimaryKey
-  @AutoIncrement
-  @Column
+  @Column(DataType.INTEGER)
   productId!: number;
 
   @Column(DataType.TEXT)
