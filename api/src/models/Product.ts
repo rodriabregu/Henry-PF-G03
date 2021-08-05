@@ -27,6 +27,9 @@ export class Product extends Model {
   @Column(DataType.TEXT)
   brand!: string;
 
+  @Column(DataType.TEXT)
+  category!: string;
+
   //@Column
   //sport!: string;
 
