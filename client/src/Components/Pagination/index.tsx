@@ -116,11 +116,7 @@ const Pagination = () => {
 
     useEffect(() => {
         dispatch(getProducts());
-<<<<<<< HEAD
-    }, [getProducts]);
-=======
     }, [dispatch]);
->>>>>>> 819a503d842c0e794dcd956b23e6c9f39f51c661
 
     useEffect(() => {
         setRender(products);
