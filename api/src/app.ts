@@ -14,23 +14,13 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use(
-<<<<<<< HEAD
-  /*cors({
-=======
 /*   cors({
->>>>>>> 819a503d842c0e794dcd956b23e6c9f39f51c661
     origin: config.cors,
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-<<<<<<< HEAD
-  })*/
-  cors()
- 
-=======
   }) */
   cors()
->>>>>>> 819a503d842c0e794dcd956b23e6c9f39f51c661
 );
 
 app.use((err: error, _req: Request, res: Response, next: NextFunction) => {
