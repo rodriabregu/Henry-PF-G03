@@ -29,7 +29,7 @@ const ProductDetail = () => {
         <div>
             <div className='button'>
                 <Link to='/home'>
-                    <button onClick={dispatch<any>(getProducts)}>
+                    <button onClick={dispatch<any>(getProducts())}>
                         Back to home <AiOutlineRollback />
                     </button>
                 </Link>

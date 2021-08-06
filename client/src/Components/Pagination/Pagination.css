@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
 
 .pageNumbers{
     list-style: none;
     font-family: 'Montserrat', sans-serif;
     color: #2E2E48;
-    margin-left: 80vh;
+    margin-left: 6vh;
     margin-top: 5vh;
     margin-bottom: 3vh;
     display: flex;
     justify-content: space-around;
     width: 50vh;
+    
 }
 
 .pageNumbers button{
@@ -23,13 +25,38 @@
     cursor: pointer;
 }
 
-    
 .pageNumbers button:hover,
 .pageNumbers button.active {
     background-color:  #bcbdf1;
     color:  #2E2E48;
- }
+}
 
+.imgproducts {  
+    max-width: 100%;  
+    height: auto;
 
+}
+.imgproducts img {  
+    max-width: 100%;  
+    height: auto;  
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+}
 
-
+.sheetGrid {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+    grid-template-rows: 21rem;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    margin-bottom: 20vh;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-shadow: 2px 1px #000000;
+    font-size: 19px;
+}

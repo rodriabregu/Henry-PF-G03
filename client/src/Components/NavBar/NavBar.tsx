@@ -13,7 +13,7 @@ export const NavBar = () => {
         <div className='nav-container'>
           <div className='link-home'>
             <Link to='/home'> 
-              <button className='button-home' onClick={dispatch<any>(getProducts)}>
+              <button className='button-home' onClick={dispatch<any>(getProducts())}>
                 HOME <RiHome2Line/> 
               </button>
             </Link>

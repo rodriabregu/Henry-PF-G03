@@ -5,7 +5,7 @@ import cors from 'cors';
 
 import routes from './routes/index';
 import { error } from "./@app";
-import config from './lib/config';
+/* import config from './lib/config'; */
 
 const app: Application = express();
 app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
@@ -14,15 +14,16 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use(
-  cors({
+/*   cors({
     origin: config.cors,
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-  })
+  }) */
+  cors()
 );
 
-app.use((err: error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: error, _req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;

@@ -5,9 +5,10 @@ export interface IInfo {
   size: string;
   review: string;
   img: string;
+  photos: any;
 }
 
-export const info: Array<IInfo> = [
+/* export const info: Array<IInfo> = [
   {
     name: 'shirtblue',
     id: '1',
@@ -65,3 +66,4 @@ export const info: Array<IInfo> = [
     img: 'https://www.zeuscalabria.it/24447-large_default/calzettone-fc-crotone-rossoblu-20192020.jpg',
   },
 ];
+ */
