@@ -1,34 +1,44 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../Redux/Actions/getProducts';
 import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
-import { VscSearch } from 'react-icons/vsc';
 
-const SearchBar = (): JSX.Element => {
-  const [title, setTitle] = useState("");
-  const dispatch = useDispatch();
+interface ISearchBar {
+  onSearch: (input:string) => void;
+}
 
-  const handleChange = (e:any) => {
-    setTitle(e.target.value)
-  };
+const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
+/*   const [title, setTitle] = useState(""); */
+  const [input, setInput ] = useState<string>('');
+/*   const [filterp, setFilterp] = useState([]); */
+/*   const dispatch = useDispatch();
+  const products:any = useSelector<any>(s => s.products); */
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-        //dispatch(getProductsDetail(dispatch, title));
-        //Debe despachar otra accion
-  };
+  const handleChange = (event:ChangeEvent):void=>{
+    const {value} = event.target as HTMLInputElement
+    setInput(value)
+  }
+
+/*   useEffect(() => {
+    dispatch(getProducts())
+  }, []) */
+
+  useEffect(() => {
+    onSearch(input);
+  }, [input]);
 
   return (
     <div>
-    <form onSubmit={ e => handleSubmit(e)}>
+    <form>
       <input type="text"
       autoComplete="off"
-      value={title}
-      onChange={e => handleChange(e)}    
+      value={input}
+      onChange={handleChange}    
       placeholder='Find product'  
       />
-      <button type='submit'>
+{/*       <button type='submit'>
         Search <VscSearch/>
-      </button>
+      </button> */}
     </form>
   </div>
   )

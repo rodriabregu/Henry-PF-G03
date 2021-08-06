@@ -4,14 +4,15 @@ import { getProducts } from '../../Redux/Actions/getProducts';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import './Pagination.css';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Pagination = () => {
     const dispatch = useDispatch();
 
     const products:any = useSelector<any>(s => s.products);
     const productDetail:any = useSelector<any>(s => s.productsDetail);
-
-    const [render, setRender] = useState([]);
+    const [filterp, setFilterp] = useState([]);
+/*     const [render, setRender] = useState([]); */
 
     const [currentPage, setcurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(10);
@@ -25,7 +26,7 @@ const Pagination = () => {
     };
 
     const pages = [];
-    for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
         pages.push(i);
     }
 
@@ -35,7 +36,7 @@ const Pagination = () => {
     let currentItems;
 
     if (Array.isArray(products)) {
-        currentItems = render.slice(indexOfFirstItem, indexOfLastItem); //0-8
+        currentItems = filterp.slice(indexOfFirstItem, indexOfLastItem); //0-8
     }
 
     const renderPageNumbers = pages.map((number: any) => {
@@ -80,7 +81,7 @@ const Pagination = () => {
         pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
     }
 
-    const renderProduct = (products: any) => {
+    const renderProduct = (filterp: any) => {
         return (
             <div>
                 <div className='sheetGrid'>
@@ -97,7 +98,7 @@ const Pagination = () => {
                             )
                         })
                         :
-                        products?.map((e: IInfo, index: number) => {
+                        filterp?.map((e: IInfo, index: number) => {
                             return (
                                 <div className='imgproducts' key={index}>
                                     <Link style={{ textDecoration: 'none', color: '#FFF' }} to={`/product/${e.id}`}>
@@ -114,12 +115,18 @@ const Pagination = () => {
         )
     }
 
+    function onSearch(value:any) {
+    const filtrados = products.filter(
+        (p:any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */ );
+            setFilterp(filtrados);
+    }
+
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
 
     useEffect(() => {
-        setRender(products);
+        setFilterp(products);
     }, [products]);
 
     return (
@@ -143,6 +150,7 @@ const Pagination = () => {
                     </button>
                 {/* </li> */}
             </div>
+            <SearchBar onSearch={onSearch}/>
             {renderProduct(currentItems)}
         </div>
     );
