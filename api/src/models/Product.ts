@@ -12,6 +12,9 @@ export class Product extends Model {
   @Column({ unique: false })
   name!: string;
 
+  @Column(DataType.TEXT)
+  photo!: string;
+
   @HasMany(() => Photo)
   photos!: Photo[]
 
