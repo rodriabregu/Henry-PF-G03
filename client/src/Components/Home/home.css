@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
 
-.sheetGrid {
+/* .sheetGrid {
     display: grid;
     gap: 1rem;
     grid-auto-flow: dense;
@@ -16,7 +16,7 @@
     color: white;
     text-shadow: 2px 1px #000000;
     font-size: 19px;
-};
+}; */
 
 
 /* .imgproducts {  

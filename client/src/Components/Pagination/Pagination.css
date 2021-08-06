@@ -47,8 +47,8 @@
     display: grid;
     gap: 1rem;
     grid-auto-flow: dense;
-    grid-template-rows: 21rem;
-    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    grid-template-rows: 24rem;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     justify-content: center;
     text-align: center;
     height: 100vh;
