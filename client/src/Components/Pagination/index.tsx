@@ -115,7 +115,7 @@ const Pagination = () => {
     }
 
     useEffect(() => {
-        dispatch(getProducts);
+        dispatch(getProducts());
     }, [getProducts]);
 
     useEffect(() => {
