@@ -4,11 +4,15 @@ import { appProduct } from '../@app'
 import { sequelize } from '../db';
 const { Product, Photo } = sequelize.models;
 
-export default async () => {
+export default async (nameFils: string[]) => {
   let count = await Product.count()
   if (count > 0) return `they already exist ${count} products in db!`
 
-  JSON.parse(readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8'))
+  nameFils.reduce((products, category) => {
+    return products.concat(JSON.parse(
+      readFileSync(__dirname + `/../lib/${category}.json`, 'utf8')
+    ))
+  }, [])
     .map((product: appProduct) => {
       Product.findOrCreate({
         where: {

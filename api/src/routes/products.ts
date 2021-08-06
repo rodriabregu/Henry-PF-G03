@@ -40,15 +40,17 @@ router.post('/', (req: Request, res: Response) => {
   }
 
   return addProduct(product)
-    .then((product: appProduct) => {
+    .then((productId) => {
       return res.json({
         message: " product saved successfully ",
-        data: product
+        data: Product.findOne({
+          where: { id: productId },
+          attributes: { exclude: ['updatedAt', 'createdAt'] },
+          include: { model: Photo, attributes: ['url'] }
+        })
       })
     })
 })
-
-
 
 router.delete('/', (_req: Request, res: Response) => {
 

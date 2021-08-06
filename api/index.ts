@@ -1,14 +1,13 @@
 import { sequelize } from './src/db';
 import app from './src/app';
-import { addAllProducts } from './src/providers'
+import { addAllProducts, addAllFils } from './src/providers'
 
 sequelize
   .sync({ force: true })
   .then(() => {
     console.log('database connected!');
-    return addAllProducts([
-      "accesories", "kids", "men", "women"
-    ])
+    return addAllFils(["accesories", "kids", "men", "women"]);
+    return addAllProducts();
   })
   .then((message) => {
     console.log(message)
