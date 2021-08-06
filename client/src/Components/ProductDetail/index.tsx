@@ -19,10 +19,10 @@ const ProductDetail = () => {
     useEffect(() => {
         dispatch(getProductsDetail(parseInt(id)));
         console.log('detail ',detail)
-    }, [dispatch, id]);
+    }, [dispatch]);
 
     return (
-        <div>
+        <div> 
             <div className='button'>
                 <Link to='/home'>
                     <button onClick={dispatch<any>(getProducts())}>
@@ -38,7 +38,7 @@ const ProductDetail = () => {
                     <h3>Size: {detail.size}</h3>
                     <h3>Review: {detail.review}</h3>
                 </div>
-                <div className='product-img'><img src={detail.img} alt='img not found' /></div>
+                <div className='product-img'><img src={detail.photos?detail.photos[0].url:''} alt='img not found' /></div>
             </div> 
 
         </div>

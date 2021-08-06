@@ -18,7 +18,6 @@ function getProductReducer(state = initialState, action: any) {
         products: action.payload,
       };
     case GET_PRODUCTS_DETAIL:
-      console.log('reducer product detail')
       return {
         ...state,
         productsDetail:action.payload
