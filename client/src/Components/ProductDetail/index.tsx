@@ -15,15 +15,10 @@ const ProductDetail = () => {
     const { id } = useParams<KeyParams>();
     const detail = useSelector((s:any) => s.productsDetail);
     const dispatch = useDispatch();
-    console.log('detail', detail)
 
     useEffect(() => {
         dispatch(getProductsDetail(dispatch, id));
     }, [dispatch, id]);
-
-/*     useEffect(() => {
-        dispatch(getProducts);
-      }, [dispatch]); */
 
     return (
         <div>
