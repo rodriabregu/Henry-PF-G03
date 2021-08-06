@@ -15,8 +15,6 @@ export class Product extends Model {
   @Column(DataType.TEXT)
   photo!: string;
 
-  @HasMany(() => Photo)
-  photos!: Photo[]
 
   @Column(DataType.TEXT)
   description!: string;
@@ -35,6 +33,9 @@ export class Product extends Model {
 
   //@Column
   //sport!: string;
+  
+  @HasMany(() => Photo)
+  photos!: Photo[]
 
   @BelongsToMany(() => Category, () => ProductCategory)
   categories!: Category[];

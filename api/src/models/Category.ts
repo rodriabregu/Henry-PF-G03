@@ -7,7 +7,7 @@ import { ProductCategory } from './ProductCategory';
 export class Category extends Model {
 
   @Column
-  description!: string;
+  name!: string;
 
   @BelongsToMany(() => Product, () => ProductCategory)
   products!: Product[]
