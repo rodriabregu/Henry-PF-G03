@@ -14,7 +14,7 @@ const Pagination = () => {
     const [render, setRender] = useState([]);
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, setitemsPerPage] = useState(8);
+    const [itemsPerPage, setitemsPerPage] = useState(10);
 
     const [pageNumberLimit, setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
@@ -103,7 +103,7 @@ const Pagination = () => {
                                     <Link style={{ textDecoration: 'none', color: '#FFF' }} to={`/product/${e.id}`}>
                                         <div>{e.name.toUpperCase()}</div>
                                         <div>${e.price}.00</div>
-                                        <img src={e.img} alt={e.name} />
+                                        <img src={e.photos[0].url} alt={e.name} />
                                     </Link>
                                 </div>
                             )
@@ -115,8 +115,8 @@ const Pagination = () => {
     }
 
     useEffect(() => {
-        dispatch(getProducts);
-    }, [getProducts]);
+        dispatch(getProducts());
+    }, [dispatch]);
 
     useEffect(() => {
         setRender(products);

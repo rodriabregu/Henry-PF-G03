@@ -2,21 +2,22 @@
 export default interface appProduct {
 
   name: string
-  photos?: string[] // | appPhoto[];
+  photo: string
+  //photos: appPhoto[]
   description: string
   price: number
   stock: number
   brand: string
   category: string
   //sport: string
-  //categories: string[] //| appCategory[]
+  //categories: appCategory[]
 
 }
 
 const product: appProduct = {
-
+  
   "name": "NIKE - Esteban 6 pack",
-  "photos": ["https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg"],
+  "photo": "https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg",
   "description": "zeuscalabria",
   "price": 54,
   "stock": 15,

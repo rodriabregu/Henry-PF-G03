@@ -24,31 +24,59 @@ router.get('/', (req: Request, res: Response) => {
 
 })
 
+/* de los campos repetidos deve estar
+ almenos uno en su respectivo formato*/
+const body = {
+  "product": {
+    "name": " Esteban 6 pack",
+    "price": 54,
+    "stock": 15,
+    "photo": "https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg",
+    "description": "zeuscalabria",
+    "brand": "NIKE",
+    "category": "deportes"
+  },
+  "photos": ["photo1", "photoN"],
+  "descriptions": ["description1", "descriptionN"],
+  "brands": ["brand1", "brand"],
+  "categories": ["category1", "categoryN"]
+}
+
 router.post('/', (req: Request, res: Response) => {
-  const product = req.body
+  const { product, photos } = req.body
   if (!(
-    product &&
-    product.name &&
-    typeof product.name === "string" &&
-    product.photos[0] &&
-    typeof product.photos[0] === "string"
-  )) {
+    product
+    && product.name
+    && typeof product.name === "string"
+    && (product.photo || photos)
+  ))
     return res.status(404).json({
       message: " product is not validate ",
       data: {}
     })
-  }
 
-  return addProduct(product)
-    .then((product: appProduct) => {
+  return addProduct(product, photos || [product.photo])
+    .then((productId) => {
+      return Product.findOne({
+        where: { id: productId },
+        attributes: { exclude: ['updatedAt', 'createdAt'] },
+        include: { model: Photo, attributes: ['url'] }
+      })
+    })
+    .then((product) => {
       return res.json({
         message: " product saved successfully ",
         data: product
       })
     })
+    .catch((error)=>{
+      return res.status(404).json({
+        message: " failed operation ",
+        error,
+        data: {}
+      })
+    })
 })
-
-
 
 router.delete('/', (_req: Request, res: Response) => {
 
