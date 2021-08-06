@@ -103,7 +103,7 @@ const Pagination = () => {
                                     <Link style={{ textDecoration: 'none', color: '#FFF' }} to={`/product/${e.id}`}>
                                         <div>{e.name.toUpperCase()}</div>
                                         <div>${e.price}.00</div>
-                                        <img src={e.img} alt={e.name} />
+                                        <img src={e.photos[0].url} alt={e.name} />
                                     </Link>
                                 </div>
                             )
@@ -116,7 +116,11 @@ const Pagination = () => {
 
     useEffect(() => {
         dispatch(getProducts());
+<<<<<<< HEAD
     }, [getProducts]);
+=======
+    }, [dispatch]);
+>>>>>>> 819a503d842c0e794dcd956b23e6c9f39f51c661
 
     useEffect(() => {
         setRender(products);
