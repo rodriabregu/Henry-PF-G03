@@ -13,7 +13,8 @@ const SearchBar = (): JSX.Element => {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-        dispatch(getProductsDetail(dispatch, title));
+        //dispatch(getProductsDetail(dispatch, title));
+        //Debe despachar otra accion
   };
 
   return (

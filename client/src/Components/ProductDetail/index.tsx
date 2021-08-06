@@ -9,21 +9,22 @@ import './productDetail.css';
 
 type KeyParams = {
     id: string;
-  };
+};
 
 const ProductDetail = () => {
     const { id } = useParams<KeyParams>();
-    const detail = useSelector((s:any) => s.productsDetail);
+    const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
     console.log('detail', detail)
 
     useEffect(() => {
-        dispatch(getProductsDetail(dispatch, id));
+        dispatch(getProductsDetail(parseInt(id)));
+        console.log('detail ',detail)
     }, [dispatch, id]);
 
-/*     useEffect(() => {
-        dispatch(getProducts);
-      }, [dispatch]); */
+    /*     useEffect(() => {
+            dispatch(getProducts);
+          }, [dispatch]); */
 
     return (
         <div>
@@ -34,20 +35,17 @@ const ProductDetail = () => {
                     </button>
                 </Link>
             </div>
-            { detail.map((e:any) => {
-                return (
-                <div className='detailgeneral'>
-                    <div className='product-detail'>    
-                        <h1 className='title'>{e.name.toUpperCase()}</h1>
-                        <h2>${e.price}.00</h2>
-                        <h3>Size: {e.size.toUpperCase()}</h3>
-                        <h3>Review: {e.review}</h3>
-                    </div>
-                        <div className='product-img'><img src={e.img} alt='img not found'/></div>
-                    </div>         
-                )
-            })}
             
+             <div className='detailgeneral'>
+                <div className='product-detail'>
+                    <h1 className='title'>{detail.name}</h1>
+                    <h2>${detail.price}.00</h2>
+                    <h3>Size: {detail.size}</h3>
+                    <h3>Review: {detail.review}</h3>
+                </div>
+                <div className='product-img'><img src={detail.img} alt='img not found' /></div>
+            </div> 
+
         </div>
     )
 }
