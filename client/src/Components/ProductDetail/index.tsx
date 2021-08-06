@@ -15,17 +15,19 @@ const ProductDetail = () => {
     const { id } = useParams<KeyParams>();
     const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
-    console.log('detail', detail)
 
     useEffect(() => {
         dispatch(getProductsDetail(parseInt(id)));
         console.log('detail ',detail)
     }, [dispatch, id]);
 
+<<<<<<< HEAD
     /*     useEffect(() => {
             dispatch(getProducts);
           }, [dispatch]); */
 
+=======
+>>>>>>> 9967fc2be768e87b616f735f8f24cc6526a4dd44
     return (
         <div>
             <div className='button'>

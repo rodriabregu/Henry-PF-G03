@@ -24,7 +24,7 @@ const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
   }, []) */
 
   useEffect(() => {
-    onSearch(input);
+    onSearch(input.toLowerCase());
   }, [input]);
 
   return (
