@@ -16,7 +16,8 @@ export default async (nameFils: string[]) => {
     .map((product: appProduct) => {
       Product.findOrCreate({
         where: {
-          name: product.name,
+          name: product.name,          
+          photo: product.photo,
           brand: product.brand,
           price: typeof product.price === "string" ?
             parseInt(product.price) : product.price,

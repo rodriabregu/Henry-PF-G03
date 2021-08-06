@@ -6,7 +6,7 @@ sequelize
   .sync({ force: true })
   .then(() => {
     console.log('database connected!');
-    return addAllFils(["accesories", "kids", "men", "women"]);
+    //return addAllFils(["accesories", "kids", "men", "women"]);
     return addAllProducts();
   })
   .then((message) => {

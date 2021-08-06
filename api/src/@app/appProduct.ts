@@ -3,13 +3,14 @@ export default interface appProduct {
 
   name: string
   photo: string
+  //photos: appPhoto[]
   description: string
   price: number
   stock: number
   brand: string
   category: string
   //sport: string
-  //categories: string[] //| appCategory[]
+  //categories: appCategory[]
 
 }
 
