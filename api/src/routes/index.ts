@@ -10,7 +10,6 @@ import categoryTypeRoute from './categoryTypes';
 import productsCategoryRoute from './productsCategory';
 import productName from './ProductName';
 import productId from './ProductId';
-
 import brandRoute from './brand';
 router.use('/products/category', productsCategoryRoute);
 router.use('/products', productsRoute);
