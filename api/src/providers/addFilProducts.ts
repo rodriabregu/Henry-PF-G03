@@ -13,7 +13,7 @@ export default async () => {
       Product.findOrCreate({
         where: {
           name: product.name,
-          photo: product.photo,
+          //photo: product.photo,
           brand: product.brand,
           price: typeof product.price === "string" ?
             parseInt(product.price) : product.price,

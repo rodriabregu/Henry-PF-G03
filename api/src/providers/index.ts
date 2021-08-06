@@ -1,5 +1,4 @@
 import addProduct from './addProduc';
-import addAllProducts from './addAllProducts';
-import addAllFils from './addAllFils'
+import addFilProducts from './addFilProducts';
 //import  from './'
-export { addProduct, addAllProducts, addAllFils };
+export { addProduct, addFilProducts };
