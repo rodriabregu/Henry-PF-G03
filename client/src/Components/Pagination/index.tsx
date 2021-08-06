@@ -14,7 +14,7 @@ const Pagination = () => {
     const [render, setRender] = useState([]);
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, setitemsPerPage] = useState(8);
+    const [itemsPerPage, setitemsPerPage] = useState(10);
 
     const [pageNumberLimit, setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
