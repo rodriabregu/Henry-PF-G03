@@ -5,9 +5,9 @@ import Footer from './Components/Footer/Footer';
 import ProductDetail from './Components/ProductDetail';
 import Login from './Components/LogIn';
 import Register from './Components/Register';
-import {BrowserRouter as Router,
+import { BrowserRouter as Router,
   Switch,
-  Route,} from 'react-router-dom'
+  Route } from 'react-router-dom'
 import CreateProducts from './Components/Products/CreateProducts';
 
 
@@ -27,6 +27,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import './login.css';
 import { Form, Input, Button, Checkbox } from 'antd';
 
@@ -17,7 +16,6 @@ const Login = () => {
     return (
         <div className='containerPrincipal'>
             <div className='containerSecundario'>
-            
                 <Form name='form' initialValues={{remember: true}}
                 onFinish={formSuccess}
                 onFinishFailed={formFailed}
@@ -51,7 +49,7 @@ const Login = () => {
                 </Form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Login;

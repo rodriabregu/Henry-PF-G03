@@ -1,8 +1,7 @@
-import Products from '../../Components/Products/CreateProducts';
 import { GET_PRODUCTS } from '../Actions/Products/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
-import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
+import { POST_PRODUCTS } from '../Actions/Products/postProduct';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
 
 const initialState = {
@@ -10,7 +9,6 @@ const initialState = {
   productsDetail: {},
   AllProducts: [],//no tocar!
 };
-
 
 function getProductReducer(state = initialState, action: any) {
   switch (action.type) {
@@ -46,12 +44,9 @@ function getProductReducer(state = initialState, action: any) {
           ...state,
           products: [ ...state.products, action.payload ]
         }
-
-
-
-    default:
-      return state;
-  }
-}
+      default:
+        return state;
+  };
+};
 
 export default getProductReducer;
