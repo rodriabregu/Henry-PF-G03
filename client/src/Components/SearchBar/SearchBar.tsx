@@ -2,6 +2,8 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../Redux/Actions/getProducts';
 import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
+import { BsSearch } from 'react-icons/bs';
+import './SearchBar.css';
 
 interface ISearchBar {
   onSearch: (input:string) => void;
@@ -28,18 +30,20 @@ const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
   }, [input]);
 
   return (
-    <div>
-    <form>
+    <div >
+    <div className='container-search'>
+      
       <input type="text"
       autoComplete="off"
       value={input}
       onChange={handleChange}    
       placeholder='Find product'  
       />
+   {/*    <span className='icon'> <BsSearch/> </span> */}
 {/*       <button type='submit'>
         Search <VscSearch/>
       </button> */}
-    </form>
+    </div>
   </div>
   )
 };
