@@ -27,14 +27,14 @@ export class Product extends Model {
   @Column(DataType.TEXT)
   brand!: string;
 
-  @Column(DataType.INTEGER)
-  category!: number;
+  @Column(DataType.TEXT)
+  category!: string;
 
   //@Column
   //sport!: string;
   
   @HasMany(() => Photo)
-  photos!: Photo[]
+  photos!: Photo[];
 
   @BelongsToMany(() => Category, () => ProductsCategory)
   categories!: Category[];
