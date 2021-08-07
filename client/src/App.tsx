@@ -7,6 +7,7 @@ import Login from './Components/LogIn';
 import {BrowserRouter as Router,
   Switch,
   Route,} from 'react-router-dom'
+import CreateProducts from './Components/Products/CreateProducts';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/product/:id" component={ProductDetail} />
           <Route exact path='/login' component={Login} />
           <Route path="/" component={Footer} />
+          <Route exact path='/create' component={CreateProducts} />
         </div>
       </Switch>
     </Router>

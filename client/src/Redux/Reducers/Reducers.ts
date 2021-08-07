@@ -1,4 +1,4 @@
-import Products from '../../Components/Products/Products';
+import Products from '../../Components/Products/CreateProducts';
 import { GET_PRODUCTS } from '../Actions/Products/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
 import { POST_PRODUCTS } from '../Actions/Products/postProducts';
@@ -41,6 +41,11 @@ function getProductReducer(state = initialState, action: any) {
         ...state,
         products:state.AllProducts
       }
+      case POST_PRODUCTS:
+        return{
+          ...state,
+          products: [ ...state.products, action.payload ]
+        }
 
 
 
