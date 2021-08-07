@@ -1,0 +1,19 @@
+.container-search{
+    display: grid;
+    grid-auto-flow: dense;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+.container-search input{
+    width: 300px;
+    height: 40px;
+    background: white;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #63717f;
+    padding-left: 30px;
+    border-radius: 5px;
+  }
+  

@@ -5,7 +5,7 @@ import { POST_PRODUCTS } from '../Actions/postProducts';
 
 const initialState = {
   products: [],
-  productsDetail: [],
+  productsDetail: {},
   categories: [],
 };
 
@@ -20,9 +20,7 @@ function getProductReducer(state = initialState, action: any) {
     case GET_PRODUCTS_DETAIL:
       return {
         ...state,
-        productsDetail: state.products.filter(
-          (product: any) => product.id === action.payload ||  product.name === action.payload.toLowerCase(),
-        ),
+        productsDetail:action.payload
       };
       case POST_PRODUCTS:
         return{
