@@ -15,7 +15,6 @@ export class Product extends Model {
   @Column(DataType.TEXT)
   photo!: string;
 
-
   @Column(DataType.TEXT)
   description!: string;
 
@@ -38,7 +37,7 @@ export class Product extends Model {
   photos!: Photo[]
 
   @BelongsToMany(() => Category, () => ProductsCategory)
-  Categories!: Category[];
+  categories!: Category[];
 
 }
 

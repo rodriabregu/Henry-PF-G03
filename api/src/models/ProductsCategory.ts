@@ -9,11 +9,11 @@ export class ProductsCategory extends Model{
 
     @ForeignKey (()=>Product)
     @Column 
-    ProductId!:number;
+    productId!:number;
 
     @ForeignKey (()=>Category)
     @Column 
-    CategoryId!:number;
+    categoryId!:number;
 
 
 }

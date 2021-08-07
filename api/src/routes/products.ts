@@ -4,21 +4,25 @@ import { addProduct } from '../providers';
 import { appProduct } from "../@app"
 
 import { sequelize } from '../db';
-import categories from './categories';
-const { Product, Photo, Category, Categories } = sequelize.models;
+const { Product, Photo, Category } = sequelize.models;
 
 const router = Router();
 
+const config = {
+  attributes: { exclude: ['updatedAt', 'createdAt'] },
+  include: [
+    { model: Category, attributes: ['name', 'id'] },
+    { model: Photo, attributes: ['url', 'id'] }
+  ]
+}
+
 router.get('/', (req: Request, res: Response) => {
-  return Product.findAll({
-    attributes: { exclude: ['updatedAt', 'createdAt'] },
-    include: Category
-  }).then((products) => {
-      return res.json({
-        message: 'Success',
-        data: products
-      })
+  return Product.findAll(config).then((products) => {
+    return res.json({
+      message: 'Success',
+      data: products
     })
+  })
 
 })
 
@@ -26,15 +30,16 @@ router.get('/', (req: Request, res: Response) => {
  almenos uno en su respectivo formato*/
 const body = {
   "product": {
-    "name": " Esteban 6 pack",
+    "name": " Esteban pack",
     "price": 54,
     "stock": 15,
     "description": "zeuscalabria",
-    "brand": "NIKE",
+    "brand": "NIKE"
   },
-  "photos": ["https://www.z", "photoN"],
-  "comments": ["omentario por ahora el primero", "commentsN"],
-  "categories": ["deportes", "categoryN"]
+  "photos": ["https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg", "photoN"],
+  "descriptions": ["description1","descriptionN"],
+  "brands": ["brand1"],
+  "categories": [2, 3]
 }
 
 
@@ -54,16 +59,16 @@ router.post('/', (req: Request, res: Response) => {
       data: {}
     })
 
-  if (categories && categories[0]) product.category = categories[0];
+  //if (categories && categories[0]) product.category = categories[0];
   if (comments && comments[0]) product.commentary = comments[0];
 
-  return addProduct(product, photos)
+  return addProduct(product,
+    photos || [product.photo],
+    categories || [product.category]
+  )
     .then((productId) => {
       return Product.findOne({
-        where: { id: productId },
-        attributes: { exclude: ['updatedAt', 'createdAt'] },
-        include: { model: Category, attributes: ['name'] }
-
+        where: { id: productId }, ...config,
       })
     })
     .then((product) => {

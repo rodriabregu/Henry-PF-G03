@@ -8,7 +8,7 @@ export default interface appProduct {
   price: number
   stock: number
   brand: string
-  category: string
+  category: number
   //sport: string
   //categories: appCategory[]
 
@@ -22,5 +22,5 @@ const product: appProduct = {
   "price": 54,
   "stock": 15,
   "brand": "NIKE",
-  "category": "deportes"
+  "category": 2
 }
