@@ -12,6 +12,7 @@ export const sequelize = new Sequelize({
 	models: [__dirname + '/models'],
 });
 
+
 /*
 
 COMANDO PARA LEER LOS DATOS DE LAS 
