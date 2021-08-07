@@ -5,23 +5,20 @@ import { appProduct } from "../@app"
 
 import { sequelize } from '../db';
 import categories from './categories';
-const { Product, Photo } = sequelize.models;
+const { Product, Photo, Category, Categories } = sequelize.models;
 
 const router = Router();
 
 router.get('/', (req: Request, res: Response) => {
   return Product.findAll({
     attributes: { exclude: ['updatedAt', 'createdAt'] },
-    include: {
-      model: Photo,
-      attributes: ['url']
-    }
+    include: Category
   }).then((products) => {
-    return res.json({
-      message: 'Success',
-      data: products
+      return res.json({
+        message: 'Success',
+        data: products
+      })
     })
-  })
 
 })
 
@@ -65,7 +62,8 @@ router.post('/', (req: Request, res: Response) => {
       return Product.findOne({
         where: { id: productId },
         attributes: { exclude: ['updatedAt', 'createdAt'] },
-        include: { model: Photo, attributes: ['url'] }
+        include: { model: Category, attributes: ['name'] }
+
       })
     })
     .then((product) => {

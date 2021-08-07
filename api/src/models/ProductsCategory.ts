@@ -5,15 +5,15 @@ import {Product} from './Product'
 import {Category} from './Category'
 
 @Table
-export class ProductCategory extends Model{
+export class ProductsCategory extends Model{
 
     @ForeignKey (()=>Product)
     @Column 
-    productId!:number;
+    ProductId!:number;
 
     @ForeignKey (()=>Category)
     @Column 
-    categoryId!:number;
+    CategoryId!:number;
 
 
 }

@@ -2,7 +2,7 @@ import { readFileSync } from 'fs'
 import { appProduct } from '../@app'
 import { sequelize } from '../db'
 const {
-  Product, Photo, Category, ProductCategory, ProductCategories
+  Product, Photo, Category, ProductsCategory, ProductsCategories
 } = sequelize.models;
 
 export default async () => {
@@ -14,40 +14,46 @@ export default async () => {
   await Category.create({ name: "Women" })
   await Category.create({ name: "Kids" })
   await Category.create({ name: "Undefine" })
+  await Category.create({ name: "Hombre" })
 
-  JSON.parse(readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8'))
-    .map(async (product: appProduct) => {
+  const products = await JSON.parse(
+    readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8')
+  )
+  console.log("pro: ", products.length)
 
-      const NewPoduct = (await Product.findOrCreate({
-        where: {
-          name: product.name,
-          brand: product.brand,
-          price: typeof product.price === "string" ?
-            parseInt(product.price) : product.price,
-          description: product.name + product.brand,
-          stock: product.name.length
-        }
-      }))[0]
+  const AddProduct = async (product: appProduct) => {
+    const NewPoduct = (await Product.findOrCreate({
+      where: {
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        description: product.name + product.brand,
+        stock: product.name.length
+      }
+    }))[0]
+    
+    const ProductId = await NewPoduct.getDataValue("id")
+    await Photo.create({ url: product.photo, ProductId })
+    const category = (await Category.findOrCreate({
+      where: { name: product.category }
+    }))[0]
 
-      const productId = await NewPoduct.getDataValue("id")
-      await Photo.create({ url: product.photo, productId })
-      const category = (await Category.findOrCreate({
-        where: { name: product.category }
-      }))[0]
+    const CategoryId = await category.getDataValue("id")
 
-      const CategoryId = await category.getDataValue("id")
+    console.log("productId: ", ProductId, "categorId: ", CategoryId, " cate: ", product.category)
+    
+    await ProductsCategory.findOrCreate({ where: { ProductId, CategoryId } })
+    /*
+          await ProductCategories.findOrCreate(
+            { where: { productId, CategoryId } }
+          )
+    */
+  }
 
-      console.log("pid: ", productId, " cate: ", product.category)
-      console.log("id: ", CategoryId, " cate: ", product.category)
 
 
-      await ProductCategory.findOrCreate({ where: { productId, CategoryId } })
-      /*
-            await ProductCategories.findOrCreate(
-              { where: { productId, CategoryId } }
-            )
-      */
-    })
-
+  await Promise.all(
+    products.map(AddProduct)
+  )
   return 'products were saved in db!'
 }

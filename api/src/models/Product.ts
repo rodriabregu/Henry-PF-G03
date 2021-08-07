@@ -4,7 +4,7 @@ import {
 
 import { Photo } from './Photo';
 import { Category } from './Category';
-import { ProductCategory } from './ProductCategory';
+import { ProductsCategory } from './ProductsCategory';
 
 @Table
 export class Product extends Model {
@@ -37,7 +37,10 @@ export class Product extends Model {
   @HasMany(() => Photo)
   photos!: Photo[]
 
-  @BelongsToMany(() => Category, () => ProductCategory)
-  categories!: Category[];
+  @BelongsToMany(() => Category, () => ProductsCategory)
+  Categories!: Category[];
 
 }
+
+//Product.belongsToMany(Category, { through: ProductsCategory });
+
