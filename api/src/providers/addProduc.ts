@@ -11,8 +11,13 @@ export default async function (
 ): Promise<number> {
 
   const neWProduct = (
-    await Product.findOrCreate({ where: { ...product } })
+    await Product.findOrCreate({
+      where: { name: product.name },
+      defaults: { ...product }
+    })
   )[0]
+
+
   const productId = await neWProduct.getDataValue('id');
 
   await Promise.all(photos.map(photo => {
