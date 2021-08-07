@@ -5,7 +5,7 @@
     list-style: none;
     font-family: 'Montserrat', sans-serif;
     color: #2E2E48;
-    margin-left: 38%;
+    margin: 0 auto;
     margin-top: 5vh;
     margin-bottom: 3vh;
     display: flex;
@@ -56,10 +56,9 @@
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     justify-content: center;
     text-align: center;
-    height: 100vh;
     margin-left: 6vh;
     margin-right: 1vh;
-    margin-bottom: 80%; /* 20 vh 1000px */
+    margin-bottom: 40px;
     font-family: 'Montserrat', sans-serif;
     color: rgb(29, 41, 109);
     font-size: 19px;

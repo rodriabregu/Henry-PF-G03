@@ -12,11 +12,12 @@ const Pagination = () => {
     const products:any = useSelector<any>(s => s.products);
     const productDetail:any = useSelector<any>(s => s.productsDetail);
     const [filterp, setFilterp] = useState([]);
+/*     const [render, setRender] = useState([]); */
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, _setitemsPerPage] = useState(10);
+    const [itemsPerPage, setitemsPerPage] = useState(10);
 
-    const [pageNumberLimit, _setpageNumberLimit] = useState(8);
+    const [pageNumberLimit, setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
@@ -116,7 +117,7 @@ const Pagination = () => {
 
     function onSearch(value:any) {
     const filtrados = products.filter(
-        (p:any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value) );
+        (p:any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */ );
             setFilterp(filtrados);
     }
 
