@@ -27,7 +27,6 @@ router.get('/', (_req: Request, res: Response) => {
         data: products
       })
     })
-
 })
 
 /* de los campos repetidos deve estar
