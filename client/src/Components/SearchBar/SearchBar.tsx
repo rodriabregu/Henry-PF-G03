@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../Redux/Actions/getProducts';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { BsSearch } from 'react-icons/bs';
 import './SearchBar.css';
 
