@@ -1,6 +1,5 @@
 import {
-  DataType, Model, Column, Table,
-  PrimaryKey, AutoIncrement, ForeignKey
+  DataType, Model, Column, Table, ForeignKey
 } from 'sequelize-typescript'
 
 import { Product } from './Product';

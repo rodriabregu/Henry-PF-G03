@@ -27,8 +27,8 @@ export class Product extends Model {
   @Column(DataType.TEXT)
   brand!: string;
 
-  @Column(DataType.TEXT)
-  category!: string;
+  @Column(DataType.INTEGER)
+  category!: number;
 
   //@Column
   //sport!: string;
@@ -40,6 +40,4 @@ export class Product extends Model {
   categories!: Category[];
 
 }
-
-//Product.belongsToMany(Category, { through: ProductsCategory });
 

@@ -1,5 +1,7 @@
 import { sequelize } from '../db';
-const { Product, Photo, ProductsCategory } = sequelize.models;
+const {
+  Product, Photo, ProductsCategory
+} = sequelize.models;
 import { appProduct } from '../@app'
 
 export default async function (

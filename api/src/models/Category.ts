@@ -1,4 +1,6 @@
-import { Model, Column, Table, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, BelongsToMany } from 'sequelize-typescript';
+import {
+  Model, Column, Table, BelongsToMany
+} from 'sequelize-typescript';
 import { Product } from './Product'
 import { ProductsCategory } from './ProductsCategory';
 
@@ -13,5 +15,3 @@ export class Category extends Model {
   products!: Product[]
 
 }
-
-//Category.belongsToMany(Product, { through: ProductsCategory });

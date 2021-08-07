@@ -17,9 +17,14 @@ export default async () => {
   const products = await JSON.parse(
     readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8')
   )
-  console.log("pro: ", products.length)
+  console.log("prooducts in fil: ", products.length);
 
   const AddProduct = async (product: appProduct) => {
+    
+    const category = (await Category.findOrCreate({
+      where: { name: product.category }
+    }))[0]
+    
     const NewPoduct = (await Product.findOrCreate({
       where: {
         name: product.name,
@@ -34,26 +39,12 @@ export default async () => {
 
     const productId = await NewPoduct.getDataValue("id")
     await Photo.create({ url: product.photo, productId })
-    const category = (await Category.findOrCreate({
-      where: { name: product.category }
-    }))[0]
-
     const categoryId = await category.getDataValue("id")
-
-    console.log("productId: ", productId, "categorId: ", categoryId, " cate: ", product.category)
-
     await ProductsCategory.findOrCreate({ where: { productId, categoryId } })
-    /*
-          await ProductCategories.findOrCreate(
-            { where: { productId, CategoryId } }
-          )
-    */
+    
   }
-
-
-
   await Promise.all(
     products.map(AddProduct)
   )
-  return 'products were saved in db!'
+  return `${await Product.count()} products were saved in db!`
 }

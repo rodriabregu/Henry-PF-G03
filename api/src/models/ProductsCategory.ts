@@ -15,5 +15,4 @@ export class ProductsCategory extends Model{
     @Column 
     categoryId!:number;
 
-
 }
