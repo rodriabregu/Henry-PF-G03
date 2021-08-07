@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../Redux/Actions/getProducts';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { BsSearch } from 'react-icons/bs';
 import './SearchBar.css';
 
@@ -19,11 +19,6 @@ const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
   const handleChange = (event:ChangeEvent):void=>{
     const {value} = event.target as HTMLInputElement
     setInput(value)
-  }
-
-  const handleSelect=(event:ChangeEvent):void=>{
-    const {value} = event.target as HTMLSelectElement
-    alert(value)
   }
 
 /*   useEffect(() => {
@@ -44,12 +39,6 @@ const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
       onChange={handleChange}    
       placeholder='Find product'  
       />
-      <select onChange={handleSelect}>
-        <option>Accesories</option>
-        <option>Kids</option>
-        <option>Men</option>
-        <option>Women</option>
-      </select>
    {/*    <span className='icon'> <BsSearch/> </span> */}
 {/*       <button type='submit'>
         Search <VscSearch/>

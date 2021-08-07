@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProducts } from '../../Redux/Actions/getProducts';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { NavLink as Link } from 'react-router-dom';
 import { AiOutlineRollback } from 'react-icons/ai';
 import './productDetail.css';
