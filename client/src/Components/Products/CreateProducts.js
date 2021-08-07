@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import postProducts from '../../Redux/Actions/Products/PostProduct'
+import postProduct from '../../Redux/Actions/Products/postProduct';
 
 function validate(input) {
   let errors = {};
@@ -9,6 +9,7 @@ function validate(input) {
   } else {
     errors.name = "";
   }
+
   if (!input.weight) {
     errors.weight = "You must type a weight range";
   } else if (!/\d{1,2}-\d{1,2}/g.test(input.weight)) {
@@ -24,6 +25,7 @@ function validate(input) {
   } else {
     errors.height = "";
   }
+  
   if (!input.years) {
     errors.years = "You must type a Years";
   } else if (!/\d{1,2}-\d{1,2}/g.test(input.years)) {
@@ -33,7 +35,6 @@ function validate(input) {
   }
   return errors;
 }
-
 
 const CreateProducts = () => {
 
@@ -52,7 +53,6 @@ const CreateProducts = () => {
   });
   
 
-
   function handleInput(e) {
     setInput({
       ...input,
@@ -68,7 +68,7 @@ const CreateProducts = () => {
 
   async function handleSubmit(e){
     e.preventDefault();
-    dispatch(postProducts(input))
+    dispatch(postProduct(input))
   }
 
   return (
@@ -92,6 +92,3 @@ const CreateProducts = () => {
 };
 
 export default CreateProducts;
-
-
-

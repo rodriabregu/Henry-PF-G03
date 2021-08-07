@@ -1,7 +1,6 @@
-import React from 'react';
 import { NavLink } from "react-router-dom";
 import './Footer.css';
-import {RiInstagramLine, RiFacebookFill, RiTwitterLine} from 'react-icons/ri'
+import { RiInstagramLine, RiFacebookFill, RiTwitterLine } from 'react-icons/ri'
 
 export const Footer = () => { 
   return (
