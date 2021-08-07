@@ -4,7 +4,7 @@ import {
 
 import { Photo } from './Photo';
 import { Category } from './Category';
-import { ProductCategory } from './ProductCategory';
+import { ProductsCategory } from './ProductsCategory';
 
 @Table
 export class Product extends Model {
@@ -14,9 +14,6 @@ export class Product extends Model {
 
   @Column(DataType.TEXT)
   photo!: string;
-
-  @HasMany(() => Photo)
-  photos!: Photo[]
 
   @Column(DataType.TEXT)
   description!: string;
@@ -30,13 +27,17 @@ export class Product extends Model {
   @Column(DataType.TEXT)
   brand!: string;
 
-  @Column(DataType.TEXT)
-  category!: string;
+  @Column(DataType.INTEGER)
+  category!: number;
 
   //@Column
   //sport!: string;
+  
+  @HasMany(() => Photo)
+  photos!: Photo[]
 
-  @BelongsToMany(() => Category, () => ProductCategory)
+  @BelongsToMany(() => Category, () => ProductsCategory)
   categories!: Category[];
 
 }
+

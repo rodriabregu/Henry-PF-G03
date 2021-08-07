@@ -4,23 +4,29 @@ import { addProduct } from '../providers';
 import { appProduct } from "../@app"
 
 import { sequelize } from '../db';
-const { Product, Photo } = sequelize.models;
+const {
+  Product, Photo, Category, ProductsCategory
+} = sequelize.models;
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  return Product.findAll({
-    attributes: { exclude: ['updatedAt', 'createdAt'] },
-    include: {
-      model: Photo,
-      attributes: ['url']
-    }
-  }).then((products) => {
-    return res.json({
-      message: 'Success',
-      data: products
+const config = {
+  attributes: { exclude: ['updatedAt', 'createdAt'] },
+  include: [
+    { model: Category, attributes: ['name', 'id'] },
+    { model: Photo, attributes: ['url', 'id'] }
+  ]
+}
+
+router.get('/', (_req: Request, res: Response) => {
+  return Product
+    .findAll(config)
+    .then((products) => {
+      return res.json({
+        message: 'Success',
+        data: products
+      })
     })
-  })
 
 })
 
@@ -28,22 +34,24 @@ router.get('/', (req: Request, res: Response) => {
  almenos uno en su respectivo formato*/
 const body = {
   "product": {
-    "name": " Esteban 6 pack",
+    "name": " Esteban pack",
     "price": 54,
     "stock": 15,
-    "photo": "https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg",
     "description": "zeuscalabria",
-    "brand": "NIKE",
-    "category": "deportes"
+    "brand": "NIKE"
   },
-  "photos": ["photo1", "photoN"],
+  "photos": ["https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg", "photoN"],
   "descriptions": ["description1", "descriptionN"],
-  "brands": ["brand1", "brand"],
-  "categories": ["category1", "categoryN"]
+  "brands": ["brand1"],
+  "categories": [2, 3],
+  "brand": "NIKE"
 }
 
 router.post('/', (req: Request, res: Response) => {
-  const { product, photos } = req.body
+  const {
+    product, photos, categories, comments, brand
+  } = req.body
+
   if (!(
     product
     && product.name
@@ -51,16 +59,22 @@ router.post('/', (req: Request, res: Response) => {
     && (product.photo || photos)
   ))
     return res.status(404).json({
-      message: " product is not validate ",
+      message: " body data is not validate ",
       data: {}
     })
 
-  return addProduct(product, photos || [product.photo])
+  //if (categories && categories[0]) product.category = categories[0];
+  if (comments && comments[0]) product.commentary = comments[0];
+  //if (photos && photos[0]) product.photo = photos[0];
+  if (brand) product.brand = brand;
+
+  return addProduct(product,
+    photos || [product.photo],
+    categories || [product.category]
+  )
     .then((productId) => {
       return Product.findOne({
-        where: { id: productId },
-        attributes: { exclude: ['updatedAt', 'createdAt'] },
-        include: { model: Photo, attributes: ['url'] }
+        where: { id: productId }, ...config,
       })
     })
     .then((product) => {
@@ -69,36 +83,13 @@ router.post('/', (req: Request, res: Response) => {
         data: product
       })
     })
-    .catch((error)=>{
+    .catch((error) => {
       return res.status(404).json({
         message: " failed operation ",
         error,
         data: {}
       })
     })
-})
-
-router.delete('/', (_req: Request, res: Response) => {
-
-  Product.create({ name: 'produc name' })
-    .then((produc) => {
-      return Photo.create({
-        productId: produc.getDataValue('id'),
-        url: 'https://', alt: "text"
-      })
-    })
-    .then((produc) => {
-      console.log("producId", produc)
-      return Product.findOne({
-        where: { id: produc.getDataValue('productId') },
-        include: "photos",
-      });
-    })
-    .then((produc) => {
-      res.send(produc);
-    })
-    .catch((err) => { res.send(err) })
-
 })
 
 export default router;
