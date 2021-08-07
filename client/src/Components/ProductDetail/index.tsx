@@ -39,18 +39,12 @@ const ProductDetail = () => {
 
     return (
         <div>
-            <div className='button'>
-                <Link to='/home'>
-                    <button onClick={dispatch<any>(getProducts())}>
-                        Back to home <AiOutlineRollback />
-                    </button>
-                </Link>
-            </div>
-
+        
             <div className='detailgeneral'>
                 <button name='prev' onClick={changePhoto}>Anterior</button>
                 <button name='next' onClick={changePhoto}>Siguiente</button>
                 <div className='product-detail'>
+                  
                     <h1 className='title'>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
                     <h3>Size: {detail.size}</h3>
@@ -64,6 +58,7 @@ const ProductDetail = () => {
                 <div className='product-img'>
                     <img src={detail.photos ? detail.photos[photo].url : ''} alt={detail.name} />
                 </div>
+
             </div>
 
         </div>
