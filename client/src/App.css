@@ -1,12 +1,7 @@
 body {
     background:rgb(209, 216, 240);
-/*     background:#353654; */
     margin: 0;
     padding: 0;
     max-width: 100%;
 }
 
-
-footer{
-    align-items:flex-end
-}

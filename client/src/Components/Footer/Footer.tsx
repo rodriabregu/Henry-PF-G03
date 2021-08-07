@@ -7,6 +7,7 @@ export const Footer = () => {
   return (
     <div className='footer-container'>
       <footer>
+        <div className='footer'>
         <div className='links'>
           <NavLink to="/aboutUs">About us</NavLink>
           <br></br>
@@ -20,10 +21,11 @@ export const Footer = () => {
               <NavLink to="/contactUs"><RiFacebookFill/></NavLink>
               <NavLink to="/contactUs"><RiTwitterLine/></NavLink>
             </div>
+        </div>
+        </div>
           <div className='copyrigth'>
               © Copyrigth 2021 - Grupo 03/ FT 14a. For PG HenryLabs.
           </div>
-        </div>
       </footer>
     </div>
   );
