@@ -21,6 +21,11 @@ const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
     setInput(value)
   }
 
+  const handleSelect=(event:ChangeEvent):void=>{
+    const {value} = event.target as HTMLSelectElement
+    alert(value)
+  }
+
 /*   useEffect(() => {
     dispatch(getProducts())
   }, []) */
@@ -39,6 +44,12 @@ const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
       onChange={handleChange}    
       placeholder='Find product'  
       />
+      <select onChange={handleSelect}>
+        <option>Accesories</option>
+        <option>Kids</option>
+        <option>Men</option>
+        <option>Women</option>
+      </select>
    {/*    <span className='icon'> <BsSearch/> </span> */}
 {/*       <button type='submit'>
         Search <VscSearch/>

@@ -62,7 +62,7 @@ const ProductDetail = () => {
                     }
                 </div>
                 <div className='product-img'>
-                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' />
+                    <img src={detail.photos ? detail.photos[photo].url : ''} alt={detail.name} />
                 </div>
             </div>
 
