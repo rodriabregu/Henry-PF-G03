@@ -8,6 +8,7 @@ import Register from './Components/Register';
 import {BrowserRouter as Router,
   Switch,
   Route,} from 'react-router-dom'
+import CreateProducts from './Components/Products/CreateProducts';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <Route path="/" component={Footer} />
+          <Route exact path='/create' component={CreateProducts} />
         </div>
       </Switch>
     </Router>
