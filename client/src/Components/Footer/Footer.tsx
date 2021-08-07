@@ -6,7 +6,7 @@ import {RiInstagramLine, RiFacebookFill, RiTwitterLine} from 'react-icons/ri'
 export const Footer = () => { 
   return (
     <div className='footer-container'>
-      
+      <footer>
         <div className='links'>
           <NavLink to="/aboutUs">About us</NavLink>
           <br></br>
@@ -24,6 +24,7 @@ export const Footer = () => {
               © Copyrigth 2021 - Grupo 03/ FT 14a. For PG HenryLabs.
           </div>
         </div>
+      </footer>
     </div>
   );
 };

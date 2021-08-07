@@ -89,7 +89,7 @@ const Pagination = () => {
                         productDetail?.map((e: IInfo, index: number) => {
                             return (
                                 <div className='imgproducts' key={index}>
-                                    <Link style={{ textDecoration: 'none', color: '#FFF' }} to={`/product/${e.id}`}>
+                                    <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
                                         <h1>{e.name.toUpperCase()}</h1>
                                         <h2>${e.price}.00</h2>
                                         <img src={e.img} alt={e.name} />
@@ -101,7 +101,7 @@ const Pagination = () => {
                         filterp?.map((e: IInfo, index: number) => {
                             return (
                                 <div className='imgproducts' key={index}>
-                                    <Link style={{ textDecoration: 'none', color: '#FFF' }} to={`/product/${e.id}`}>
+                                    <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
                                         <div>{e.name.toUpperCase()}</div>
                                         <div>${e.price}.00</div>
                                         <img src={e.photos[0].url} alt={e.name} />
@@ -131,6 +131,9 @@ const Pagination = () => {
 
     return (
         <div>
+            <div className='search-bar'>
+            <SearchBar onSearch={onSearch}/>
+            </div>
             <div className='pageNumbers'>
                 {/* <li> */}
                     <button
@@ -150,8 +153,9 @@ const Pagination = () => {
                     </button>
                 {/* </li> */}
             </div>
-            <SearchBar onSearch={onSearch}/>
+            
             {renderProduct(currentItems)}
+            
         </div>
     );
 };
