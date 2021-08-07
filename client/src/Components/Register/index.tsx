@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
 import './register.css';
-import { Form, Input, Button, Checkbox, } from 'antd';
+/* import { useForm } from "react-cool-form"; */
+/* import { Form, Input, Button, Checkbox } from 'antd'; */
+import { useForm } from "react-hook-form";
 
-const { Item } = Form;
-const { Password } = Input;
+/* const { Item } = Form;
+const { Password } = Input; */
 
 const Register = () => {
-
     const formSuccess = (datos:any) => {
         console.log('Send nice', datos);
     }
@@ -14,44 +14,30 @@ const Register = () => {
         console.log('Failed send', error);
     }
 
-    return (
-        <div className='containerPrincipal'>
-            <div className='containerSecundario'>
-            
-                <Form name='form' initialValues={{remember: true}}
-                onFinish={formSuccess}
-                onFinishFailed={formFailed}
-                >
-                    <Item 
-                    label='User'
-                    name='username'
-                    rules={[{
-                        required: true,
-                        message: 'Please enter your username.'
-                    }]}
-                    >
-                        <Input />
-                    </Item>
-                    <Item 
-                    label='Password'
-                    name='password'
-                    rules={[{
-                        required: true,
-                        message: 'Please enter your password.'
-                    }]}
-                    >
-                        <Password />
-                    </Item>
-                    <Item name='remember' valuePropName='checked'>
-                        <Checkbox>Member username</Checkbox>
-                    </Item>
-                    <Item>
-                        <Button type='primary' htmlType='submit'>Log in</Button>
-                    </Item>
-                </Form>
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data:any) => console.log(data);
 
-            </div>
-        </div>
+    return (
+<form onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="name">Name</label>
+
+      {/* use aria-invalid to indicate field contain error */}
+      <input
+        id="name"
+        aria-invalid={errors.name ? "true" : "false"}
+        {...register('name', { required: true, maxLength: 30 })}
+      />
+      
+      {/* use role="alert" to announce the error message */}
+      {errors.name && errors.name.type === "required" && (
+        <span role="alert">This is required</span>
+      )}
+      {errors.name && errors.name.type === "maxLength" && (
+        <span role="alert">Max length exceeded</span>
+      )}
+      
+      <input type="submit" />
+    </form>
     )
 }
 
