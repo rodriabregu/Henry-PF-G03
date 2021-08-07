@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { NavLink as Link } from 'react-router-dom';
-import { AiOutlineRollback } from 'react-icons/ai';
+import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import './productDetail.css';
 
 type KeyParams = {
@@ -39,28 +39,22 @@ const ProductDetail = () => {
 
     return (
         <div>
-        
-            <div className='detailgeneral'>
-                <button name='prev' onClick={changePhoto}>Anterior</button>
-                <button name='next' onClick={changePhoto}>Siguiente</button>
-                <div className='product-detail'>
-                  
-                    <h1 className='title'>{detail.name}</h1>
+            <div className='product-detail'>
+                <div className='product-img'>
+                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' />
+                </div>
+                <div className='detail'>
+                    <h1>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
                     <h3>Size: {detail.size}</h3>
                     <h3>Review: {detail.review}</h3>
+                    <div className='subdetail'>
+                    <button name='prev' onClick={changePhoto}><GoArrowLeft/></button>
+                    {detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px' height='50px'></img>):''}
+                    <button name='next' onClick={changePhoto}><GoArrowRight/></button>
+                    </div>
                 </div>
-                <div>
-                    {
-                        detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px'></img>):''
-                    }
-                </div>
-                <div className='product-img'>
-                    <img src={detail.photos ? detail.photos[photo].url : ''} alt={detail.name} />
-                </div>
-
-            </div>
-
+            </div> 
         </div>
     )
 }
