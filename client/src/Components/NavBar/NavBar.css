@@ -14,7 +14,7 @@
 }
 
 .link-home button {
-        color: #bcbdf1;
+        color: white;
         background-color: #2E2E48;
         height: 100%;
         padding: 6px 10px;
@@ -33,7 +33,7 @@
  }
 
  .links-compra a {
-    color: #bcbdf1;
+    color: white;
     height: 100%;
     padding: 6px 5px;
     border-bottom: 4px solid transparent;
@@ -48,7 +48,7 @@ color:  #2E2E48;
 
 
 .links-login a {
-    color: #bcbdf1;
+    color: white;
     height: 100%;
     padding: 6px 5px;
     border-bottom: 4px solid transparent;
