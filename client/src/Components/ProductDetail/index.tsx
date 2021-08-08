@@ -20,6 +20,7 @@ const ProductDetail = () => {
 
     const changePhoto=(e:any)=>{
         const action=e.target.name;
+        console.log(action)
         if( action === 'next' ){
             if( photo < detail.photos.length - 1 ){
                 setPhoto(photo+1)
@@ -33,24 +34,24 @@ const ProductDetail = () => {
 
     useEffect(() => {
         dispatch(getProductsDetail(parseInt(id)));
-        console.log('detail', detail)
     }, [dispatch]);
 
     return (
         <div>
             <div className='product-detail'>
                 <div className='product-img'>
-                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' />
+                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
                 </div>
                 <div className='detail'>
                     <h1>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
-                    <h3>Size: {detail.size}</h3>
+                    <h3>Stock: {detail.stock}</h3>
+                    <h3>Brand: {detail.brand}</h3>
                     <h3>Review: {detail.review}</h3>
                     <div className='subdetail'>
-                    <button name='prev' onClick={changePhoto}><GoArrowLeft/></button>
+                    <button name='prev' onClick={changePhoto}>{`<`}</button>
                     {detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px' height='50px'></img>):''}
-                    <button name='next' onClick={changePhoto}><GoArrowRight/></button>
+                    <button name='next' onClick={changePhoto}>{`>`}</button>
                     </div>
                 </div>
             </div> 
