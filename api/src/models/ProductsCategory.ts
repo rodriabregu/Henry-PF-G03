@@ -1,5 +1,5 @@
 import {
-  Model, Column, Table, ForeignKey
+  Model, Table, ForeignKey
 } from 'sequelize-typescript';
 import { Product } from './Product'
 import { Category } from './Category'
@@ -8,11 +8,9 @@ import { Category } from './Category'
 export class ProductsCategory extends Model {
 
   @ForeignKey(() => Product)
-  @Column
   productId!: number;
 
   @ForeignKey(() => Category)
-  @Column
   categoryId!: number;
 
 }

@@ -1,22 +1,26 @@
 import { sequelize } from '../db';
 const {
-  Product, Photo, ProductsCategory
+  Product, Photo, ProductsCategory, Brand
 } = sequelize.models;
 import { appProduct } from '../@app'
 
 export default async function (
   product: appProduct,
   photos: string[],
-  categories: number[]
+  categories: number[],
 ): Promise<number> {
+
+  const [brand] = await Brand.findOrCreate(
+    { where: { name: product.brand.toUpperCase() } })
+
+  const brandId = await brand.getDataValue("id")
 
   const neWProduct = (
     await Product.findOrCreate({
       where: { name: product.name },
-      defaults: { ...product }
+      defaults: { ...product, brandId }
     })
   )[0]
-
 
   const productId = await neWProduct.getDataValue('id');
 
