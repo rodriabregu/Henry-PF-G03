@@ -11,29 +11,47 @@
 import { Response, Request, Router } from 'express';
 import { Op } from 'sequelize';
 import { Product } from '../models/Product';
+import { Category } from '../models/Category';
+import { ProductsCategory } from '../models/ProductsCategory';
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
  
   console.table(req.query);
-  console.log(req.query);
  
   try {
+ 
+ 
+      let array: number[] = Object["values"](req.query as any);
+ 
+       console.log(req.query);
+     
+       let productsFound = await ProductsCategory.findAll({
+      
+       where: { categoryId: {
+         [Op.in]: array }
+        },
+       })
+ 
+      
+      let productIdFound = [];
 
-    let array: string[] = Object["values"](req.query as any);
+       for (let i = 0; i < productsFound.length; i++) {
+         productIdFound.push(productsFound[i].productId);
+       }
 
-    console.log(req.query);
+       let productsFoundShow = await Product.findAll({
+      
+        where: { id: {
+          [Op.in]: productIdFound }
+         },
+        })
   
-    let productFound = await Product.findAll({
-  
-    where: { category: {
-      [Op.in]: array }
-     }})
+       console.log(productsFoundShow);
 
-    if (productFound) return res.send(productFound);
-  
-  throw new Error();
+       if (productsFoundShow) return res.send(productsFoundShow);
+    
   
   } catch (error) {
 
