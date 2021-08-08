@@ -21,8 +21,8 @@ function App() {
           <Route exact path="/product/:id" component={ProductDetail} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
-          <Route path="/" component={Footer} />
           <Route exact path='/create' component={CreateProducts} />
+          <Route path="/" component={Footer} />
         </div>
       </Switch>
     </Router>
