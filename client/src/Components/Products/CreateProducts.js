@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import postProduct from '../../Redux/Actions/Products/postProduct';
+import postProduct from '../../Redux/Actions/Products/PostProduct';
+
 
 function validate(input) {
   let errors = {};
