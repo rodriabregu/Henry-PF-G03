@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProducts } from '../../Redux/Actions/getProducts';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { NavLink as Link } from 'react-router-dom';
 import { AiOutlineRollback } from 'react-icons/ai';
 import './productDetail.css';
@@ -39,18 +39,12 @@ const ProductDetail = () => {
 
     return (
         <div>
-            <div className='button'>
-                <Link to='/home'>
-                    <button onClick={dispatch<any>(getProducts())}>
-                        Back to home <AiOutlineRollback />
-                    </button>
-                </Link>
-            </div>
-
+        
             <div className='detailgeneral'>
                 <button name='prev' onClick={changePhoto}>Anterior</button>
                 <button name='next' onClick={changePhoto}>Siguiente</button>
                 <div className='product-detail'>
+                  
                     <h1 className='title'>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
                     <h3>Size: {detail.size}</h3>
@@ -62,8 +56,9 @@ const ProductDetail = () => {
                     }
                 </div>
                 <div className='product-img'>
-                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' />
+                    <img src={detail.photos ? detail.photos[photo].url : ''} alt={detail.name} />
                 </div>
+
             </div>
 
         </div>

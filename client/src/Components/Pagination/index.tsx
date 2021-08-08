@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../Redux/Actions/getProducts';
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
+import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import './Pagination.css';
@@ -9,10 +11,16 @@ import SearchBar from '../SearchBar/SearchBar';
 const Pagination = () => {
     const dispatch = useDispatch();
 
-    const products:any = useSelector<any>(s => s.products);
-    const productDetail:any = useSelector<any>(s => s.productsDetail);
+    /*
+    const [state, setState] = useState({
+        category: ''
+    })
+    */
+
+    const products: any = useSelector<any>(s => s.products);
+    const productDetail: any = useSelector<any>(s => s.productsDetail);
     const [filterp, setFilterp] = useState([]);
-/*     const [render, setRender] = useState([]); */
+    /*     const [render, setRender] = useState([]); */
 
     const [currentPage, setcurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(10);
@@ -24,6 +32,16 @@ const Pagination = () => {
     const handleClick = (e: any) => {
         setcurrentPage(Number(e.target.id));
     };
+
+
+    const selectChange=(e:any)=>{
+        dispatch(getFilteredProducts(e.target.value))
+    }
+
+    const handleFilter=()=>{
+        dispatch(clearFilters())
+    }
+
 
     const pages = [];
     for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
@@ -84,6 +102,16 @@ const Pagination = () => {
     const renderProduct = (filterp: any) => {
         return (
             <div>
+
+                <select onChange={selectChange}>
+                    <option>Accesories</option>
+                    <option>Kids</option>
+                    <option>Men</option>
+                    <option>Women</option>
+                </select>
+
+                <button onClick={handleFilter}>Set Filters</button>
+
                 <div className='sheetGrid'>
                     {productDetail?.length >= 1 ?
                         productDetail?.map((e: IInfo, index: number) => {
@@ -115,15 +143,17 @@ const Pagination = () => {
         )
     }
 
-    function onSearch(value:any) {
-    const filtrados = products.filter(
-        (p:any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */ );
-            setFilterp(filtrados);
+    function onSearch(value: any) {
+        const filtrados = products.filter(
+            (p: any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */);
+        setFilterp(filtrados);
     }
 
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
+
+
 
     useEffect(() => {
         setFilterp(products);
@@ -132,30 +162,30 @@ const Pagination = () => {
     return (
         <div>
             <div className='search-bar'>
-            <SearchBar onSearch={onSearch}/>
+                <SearchBar onSearch={onSearch} />
             </div>
             <div className='pageNumbers'>
                 {/* <li> */}
-                    <button
-                        onClick={handlePrevbtn}
-                        disabled={currentPage === pages[0] ? true : false}>
-                        Prev
-                    </button>
+                <button
+                    onClick={handlePrevbtn}
+                    disabled={currentPage === pages[0] ? true : false}>
+                    Prev
+                </button>
                 {/* </li> */}
                 {pageDecrementBtn}
                 {renderPageNumbers}
                 {pageIncrementBtn}
-               {/*  <li> */}
-                    <button
-                        onClick={handleNextbtn}
-                        disabled={currentPage === pages[pages.length - 1] ? true : false}>
-                        Next
-                    </button>
+                {/*  <li> */}
+                <button
+                    onClick={handleNextbtn}
+                    disabled={currentPage === pages[pages.length - 1] ? true : false}>
+                    Next
+                </button>
                 {/* </li> */}
             </div>
-            
+
             {renderProduct(currentItems)}
-            
+
         </div>
     );
 };
