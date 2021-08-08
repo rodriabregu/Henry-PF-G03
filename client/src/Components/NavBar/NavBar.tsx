@@ -1,10 +1,6 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { NavLink as Link } from 'react-router-dom';
-import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import { RiShoppingCartLine, RiSettings5Line, RiAccountCircleLine, RiHome2Line } from 'react-icons/ri';
 import './NavBar.css';
-import SearchBar from '../SearchBar/SearchBar';
 
 export const NavBar = () => {
   return (

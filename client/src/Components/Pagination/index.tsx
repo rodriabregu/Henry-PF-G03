@@ -33,7 +33,6 @@ const Pagination = () => {
         setcurrentPage(Number(e.target.id));
     };
 
-
     const selectChange=(e:any)=>{
         dispatch(getFilteredProducts(e.target.value))
     }
@@ -41,7 +40,6 @@ const Pagination = () => {
     const handleFilter=()=>{
         dispatch(clearFilters())
     }
-
 
     const pages = [];
     for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
@@ -73,6 +71,12 @@ const Pagination = () => {
         }
     });
 
+    function onSearch(value: any) {
+        const filtrados = products.filter(
+            (p: any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */);
+        setFilterp(filtrados);
+    }
+
     const handleNextbtn = () => {
         setcurrentPage(currentPage + 1);
         if (currentPage + 1 > maxPageNumberLimit) {
@@ -102,16 +106,13 @@ const Pagination = () => {
     const renderProduct = (filterp: any) => {
         return (
             <div>
-
                 <select onChange={selectChange}>
                     <option>Accesories</option>
                     <option>Kids</option>
                     <option>Men</option>
                     <option>Women</option>
                 </select>
-
                 <button onClick={handleFilter}>Set Filters</button>
-
                 <div className='sheetGrid'>
                     {productDetail?.length >= 1 ?
                         productDetail?.map((e: IInfo, index: number) => {
@@ -143,17 +144,9 @@ const Pagination = () => {
         )
     }
 
-    function onSearch(value: any) {
-        const filtrados = products.filter(
-            (p: any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */);
-        setFilterp(filtrados);
-    }
-
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
-
-
 
     useEffect(() => {
         setFilterp(products);
@@ -165,27 +158,21 @@ const Pagination = () => {
                 <SearchBar onSearch={onSearch} />
             </div>
             <div className='pageNumbers'>
-                {/* <li> */}
                 <button
                     onClick={handlePrevbtn}
                     disabled={currentPage === pages[0] ? true : false}>
-                    Prev
+                        Prev
                 </button>
-                {/* </li> */}
-                {pageDecrementBtn}
-                {renderPageNumbers}
-                {pageIncrementBtn}
-                {/*  <li> */}
+                    {pageDecrementBtn}
+                    {renderPageNumbers}
+                    {pageIncrementBtn}
                 <button
                     onClick={handleNextbtn}
                     disabled={currentPage === pages[pages.length - 1] ? true : false}>
-                    Next
+                        Next
                 </button>
-                {/* </li> */}
             </div>
-
             {renderProduct(currentItems)}
-
         </div>
     );
 };

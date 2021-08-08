@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { NavLink as Link } from 'react-router-dom';
 import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
@@ -16,26 +15,26 @@ const ProductDetail = () => {
     const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getProductsDetail(parseInt(id)));
-        console.log('detail ', detail)
-    }, [dispatch]);
 
     const [photo, setPhoto] = useState(0);
 
     const changePhoto=(e:any)=>{
         const action=e.target.name;
-        if(action==='next'){
-            if(photo<detail.photos.length-1){
+        if( action === 'next' ){
+            if( photo < detail.photos.length - 1 ){
                 setPhoto(photo+1)
             }
-        }else{
-            if(photo>0){
+        } else {
+            if( photo > 0 ) {
                 setPhoto(photo-1)
             }
         }
-        
-    }
+    };
+
+    useEffect(() => {
+        dispatch(getProductsDetail(parseInt(id)));
+        console.log('detail', detail)
+    }, [dispatch]);
 
     return (
         <div>
@@ -56,7 +55,7 @@ const ProductDetail = () => {
                 </div>
             </div> 
         </div>
-    )
-}
+    );
+};
 
 export default ProductDetail;
