@@ -11,16 +11,9 @@ import SearchBar from '../SearchBar/SearchBar';
 const Pagination = () => {
     const dispatch = useDispatch();
 
-    /*
-    const [state, setState] = useState({
-        category: ''
-    })
-    */
-
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
     const [filterp, setFilterp] = useState([]);
-    /*     const [render, setRender] = useState([]); */
 
     const [currentPage, setcurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(10);
@@ -73,7 +66,7 @@ const Pagination = () => {
 
     function onSearch(value: any) {
         const filtrados = products.filter(
-            (p: any) => p.name.toLowerCase().includes(value) || p.brand ? p.brand.name.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */ : '');
+            (p: any) => p.name ? p.name.toLowerCase().includes(value) : '' || p.brand ? p.brand.name.toLowerCase().includes(value) : '');
         setFilterp(filtrados);
     }
 
