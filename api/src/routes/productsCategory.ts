@@ -17,7 +17,6 @@ const router = Router();
 router.get('/', async (req: Request, res: Response) => {
  
   console.table(req.query);
-  console.log(req.query);
  
   try {
 
