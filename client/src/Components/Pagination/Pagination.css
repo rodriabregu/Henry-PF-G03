@@ -5,12 +5,10 @@
     font-family: 'Montserrat', sans-serif;
     color: #2E2E48;
     margin: 0 auto;
-    margin-top: 5vh;
-    margin-bottom: 3vh;
+    margin-top: 6vh;
     display: flex;
     justify-content: space-around;
-    width: 50vh;
-    
+    width: 50vh;    
 }
 
 .pageNumbers button{
@@ -65,3 +63,41 @@
     color: rgb(29, 41, 109);
     font-size: 19px;
 }
+
+.filters{
+    margin: 0 auto;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    display: flex;
+    justify-content: space-around;
+    width: 30vh;
+}
+
+.filters button{
+    color:  #7b7bc2;
+    background-color:white;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 10px;
+    border: solid 1px;
+    cursor: pointer;   
+}
+
+.filters button:hover,
+.filters button.active {
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+}
+
+.filters select{
+    background-color: #ffffff;
+    color:#2E2E48;
+    border: 1px solid #7b7bc2;
+    border-radius: 9px;
+  }
+  
+  .filters select option {
+    padding: 10px;
+  }
