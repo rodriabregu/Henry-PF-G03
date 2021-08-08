@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import postProduct from '../../Redux/Actions/Products/postProduct';
+import postProduct from '../../Redux/Actions/Products/postProducts.ts';
 import { useForm } from 'react-hook-form';
 
 function validate(input) {
