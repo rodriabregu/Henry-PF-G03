@@ -5,7 +5,7 @@ import { appProduct } from "../@app"
 
 import { sequelize } from '../db';
 const {
-  Product, Photo, Category, ProductsCategory
+  Product, Photo, Category, Brand,
 } = sequelize.models;
 
 const router = Router();
@@ -13,6 +13,7 @@ const router = Router();
 const config = {
   attributes: { exclude: ['updatedAt', 'createdAt'] },
   include: [
+    { model: Brand, attributes: ['name', 'id'] },
     { model: Category, attributes: ['name', 'id'] },
     { model: Photo, attributes: ['url', 'id'] }
   ]
@@ -27,7 +28,6 @@ router.get('/', (_req: Request, res: Response) => {
         data: products
       })
     })
-
 })
 
 /* de los campos repetidos deve estar
@@ -35,16 +35,17 @@ router.get('/', (_req: Request, res: Response) => {
 const body = {
   "product": {
     "name": " Esteban pack",
-    "price": 54,
+    "price": 45,
     "stock": 15,
+    "photo": "product.photo",
+    "category": 4,
     "description": "zeuscalabria",
     "brand": "NIKE"
   },
   "photos": ["https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg", "photoN"],
   "descriptions": ["description1", "descriptionN"],
-  "brands": ["brand1"],
-  "categories": [2, 3],
-  "brand": "NIKE"
+  "brand": "brand1",
+  "categories": [2, 4]
 }
 
 router.post('/', (req: Request, res: Response) => {
@@ -63,9 +64,9 @@ router.post('/', (req: Request, res: Response) => {
       data: {}
     })
 
-  //if (categories && categories[0]) product.category = categories[0];
+  if (categories && categories[0]) product.category = categories[0];
   if (comments && comments[0]) product.commentary = comments[0];
-  //if (photos && photos[0]) product.photo = photos[0];
+  if (photos && photos[0]) product.photo = photos[0];
   if (brand) product.brand = brand;
 
   return addProduct(product,
