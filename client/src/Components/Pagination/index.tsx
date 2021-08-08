@@ -11,16 +11,9 @@ import SearchBar from '../SearchBar/SearchBar';
 const Pagination = () => {
     const dispatch = useDispatch();
 
-    /*
-    const [state, setState] = useState({
-        category: ''
-    })
-    */
-
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
     const [filterp, setFilterp] = useState([]);
-    /*     const [render, setRender] = useState([]); */
 
     const [currentPage, setcurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(10);
@@ -33,7 +26,6 @@ const Pagination = () => {
         setcurrentPage(Number(e.target.id));
     };
 
-
     const selectChange=(e:any)=>{
         dispatch(getFilteredProducts(e.target.value))
     }
@@ -41,7 +33,6 @@ const Pagination = () => {
     const handleFilter=()=>{
         dispatch(clearFilters())
     }
-
 
     const pages = [];
     for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
@@ -73,6 +64,12 @@ const Pagination = () => {
         }
     });
 
+    function onSearch(value: any) {
+        const filtrados = products.filter(
+            (p: any) => p.name ? p.name.toLowerCase().includes(value) : '' || p.brand ? p.brand.name.toLowerCase().includes(value) : '');
+        setFilterp(filtrados);
+    }
+
     const handleNextbtn = () => {
         setcurrentPage(currentPage + 1);
         if (currentPage + 1 > maxPageNumberLimit) {
@@ -102,24 +99,14 @@ const Pagination = () => {
     const renderProduct = (filterp: any) => {
         return (
             <div>
-
-                <select onChange={selectChange}>
-                    <option>Accesories</option>
-                    <option>Kids</option>
-                    <option>Men</option>
-                    <option>Women</option>
-                </select>
-
-                <button onClick={handleFilter}>Set Filters</button>
-
-                <div className='sheetGrid'>
+        <div className='sheetGrid'>
                     {productDetail?.length >= 1 ?
                         productDetail?.map((e: IInfo, index: number) => {
                             return (
                                 <div className='imgproducts' key={index}>
                                     <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
-                                        <h1>{e.name.toUpperCase()}</h1>
-                                        <h2>${e.price}.00</h2>
+                                        <h2>{e.name.toUpperCase()}</h2>
+                                        <h3>${e.price}.00</h3>
                                         <img src={e.img} alt={e.name} />
                                     </Link>
                                 </div>
@@ -143,17 +130,9 @@ const Pagination = () => {
         )
     }
 
-    function onSearch(value: any) {
-        const filtrados = products.filter(
-            (p: any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */);
-        setFilterp(filtrados);
-    }
-
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
-
-
 
     useEffect(() => {
         setFilterp(products);
@@ -164,28 +143,31 @@ const Pagination = () => {
             <div className='search-bar'>
                 <SearchBar onSearch={onSearch} />
             </div>
+                <div className='filters'>
+                        <select onChange={selectChange}>
+                            <option>Accesories</option>
+                            <option>Kids</option>
+                            <option>Men</option>
+                            <option>Women</option>
+                        </select>
+                        <button onClick={handleFilter}>Set Filters</button>
+                </div>  
             <div className='pageNumbers'>
-                {/* <li> */}
                 <button
                     onClick={handlePrevbtn}
                     disabled={currentPage === pages[0] ? true : false}>
-                    Prev
+                        Prev
                 </button>
-                {/* </li> */}
-                {pageDecrementBtn}
-                {renderPageNumbers}
-                {pageIncrementBtn}
-                {/*  <li> */}
+                    {pageDecrementBtn}
+                    {renderPageNumbers}
+                    {pageIncrementBtn}
                 <button
                     onClick={handleNextbtn}
                     disabled={currentPage === pages[pages.length - 1] ? true : false}>
-                    Next
+                        Next
                 </button>
-                {/* </li> */}
             </div>
-
             {renderProduct(currentItems)}
-
         </div>
     );
 };

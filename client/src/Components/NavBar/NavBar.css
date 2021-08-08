@@ -14,26 +14,27 @@
 }
 
 .link-home button {
-        color: #bcbdf1;
-        background-color: #2E2E48;
-        height: 100%;
-        padding: 6px 10px;
-        border-bottom: 1px solid transparent;
-        border-top: 1px solid transparent;
-        border-left: 1px solid transparent;
-        border-right: 1px solid transparent;
-        border-radius: 3px;
-        font-family: 'Montserrat', sans-serif;   
+    color: white;
+    background-color: #2E2E48;
+    height: 100%;
+    padding: 6px 10px;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;   
+    margin-left: 20px;
 }
-    
+
 .link-home button:hover,
 .link-home button.active {
     background-color:  #bcbdf1;
     color:  #2E2E48;
- }
+}
 
- .links-compra a {
-    color: #bcbdf1;
+.links-compra a {
+    color: white;
     height: 100%;
     padding: 6px 5px;
     border-bottom: 4px solid transparent;
@@ -46,13 +47,13 @@ background-color:  #bcbdf1;
 color:  #2E2E48;
 }
 
-
 .links-login a {
-    color: #bcbdf1;
+    color: white;
     height: 100%;
     padding: 6px 5px;
     border-bottom: 4px solid transparent;
     border-radius: 3px;
+    margin-right: 20px;
 }
 
 .links-login a:hover,

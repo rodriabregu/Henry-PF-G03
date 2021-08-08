@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Product } from '../models/Product';
 import { Photo } from '../models/Photo'
 import { Category } from '../models/Category';
+import {Brand} from '../models/Brand'
 
 const router = Router();
 
@@ -16,7 +17,8 @@ router.get('/:id', async (req: Request, res: Response) => {
     let productFound = await Product.findByPk(req.params.id, {
       include: [
         {model:Photo},
-        {model:Category}
+        {model:Category},
+        {model:Brand}
       ]
     }
     );

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
 
 .pageNumbers{
@@ -6,12 +5,10 @@
     font-family: 'Montserrat', sans-serif;
     color: #2E2E48;
     margin: 0 auto;
-    margin-top: 5vh;
-    margin-bottom: 3vh;
+    margin-top: 6vh;
     display: flex;
     justify-content: space-around;
-    width: 50vh;
-    
+    width: 50vh;    
 }
 
 .pageNumbers button{
@@ -23,6 +20,7 @@
     border-right: 1px solid transparent;
     border-radius: 3px;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .pageNumbers button:hover,
@@ -33,33 +31,75 @@
 
 .imgproducts {  
     max-width: 100%;  
-    height: auto;
-    -webkit-box-shadow:  4px 4px 3px rgba(84,85,100,0.4); 
+    height: 320px;
+    /* -webkit-box-shadow:  4px 4px 3px rgba(84,85,100,0.4); 
     box-shadow:  4px 4px 3px rgba(84,85,100,0.151);
-    width: 90%;
+     */
+    border-radius: 5px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19); 
+    width: 270px;
     border-radius: 20px;
-    border: 0.1px solid rgba(84, 85, 100, 0.151);
+    /* border: 0.1px solid rgba(84, 85, 100, 0.151); */
 }
 
 .imgproducts img {  
-    max-width: 100%;  
-    height: auto;  
+    max-width: 90%;  
+    height: auto; 
+    width: auto; 
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
 }
 
 .sheetGrid {
     display: grid;
-    gap: 3rem;
+    gap: 5rem 1rem;
     grid-auto-flow: dense;
-    grid-template-rows: 25rem;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    justify-content: center;
+    grid-template-rows: 18rem 18rem 18rem;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 17rem));
+    justify-content: space-around;
     text-align: center;
-    margin-left: 6vh;
-    margin-right: 1vh;
-    margin-bottom: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
     font-family: 'Montserrat', sans-serif;
     color: rgb(29, 41, 109);
-    font-size: 19px;
 }
+
+
+.filters{
+    margin: 0 auto;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    display: flex;
+    justify-content: space-around;
+    width: 30vh;
+}
+
+.filters button{
+    color:  #7b7bc2;
+    background-color:white;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 10px;
+    border: solid 1px;
+    cursor: pointer;   
+}
+
+.filters button:hover,
+.filters button.active {
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+}
+
+.filters select{
+    background-color: #ffffff;
+    color:#2E2E48;
+    border: 1px solid #7b7bc2;
+    border-radius: 9px;
+  }
+  
+  .filters select option {
+    padding: 10px;
+  }

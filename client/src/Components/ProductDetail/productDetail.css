@@ -5,56 +5,46 @@
     font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: space-evenly;
-    flex-direction: row-reverse;
-    /* margin-left: 800px;*/
     margin-top: 60px;
     margin-bottom: 60px;
 }
 
-/* .product-detail h1{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-} */
-
 .product-img img{
     height: 380px;
     width: 670;
-    /* margin-bottom: 100px;
-    margin-left: 200px;
-    margin-top: -230px; */
     border-radius: 5px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
-.button button{
-    box-shadow: 0px 10px 14px -12px #276873;
-	background:linear-gradient(to bottom, #6e6e96 5%, #41428b 100%);
-	background-color:#50518d;
-	border-radius:8px;
-    font-size:15px;
-	font-family: 'Montserrat', sans-serif;
-	padding:8px 20px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #3d768a;
-    color: #dcdcf0;
+.detail button{
+	background-color:#343692b7;
+    border-radius: 20px;    
+    text-align: center;
+    height: 22px;
+	width: 22px;
+    line-height: 3px;
+    color:#dcdcf0;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    cursor: pointer;
 }
 
-.button button a:hover {
-	background:linear-gradient(to bottom, #414099 5%, #1b275c 100%);
-	background-color:#1b275c;
-}
-.button button a:active {
-	position:relative;
-	top:1px;
-}
-/* 
+.detail button:hover,
+.detail button.active {
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+ }
 
-.description {
-    font-family: 'Public Sans', sans-serif;
-    font-style: Regular;
-    Font-size: 18px;
-    Line-height: 26px;
-    Line-height: 123%;
-    Vertical-align: Top;
-    Letter-spacing: -0.3px;
-} */
+ .detail img{
+    border-radius: 3px;
+ }
+
+ .subdetail{
+     display:flex;
+     align-items: center;
+     justify-content:space-evenly;
+     margin-right: 30vw;
+     width: 300px;
+ }

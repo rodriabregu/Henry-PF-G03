@@ -1,8 +1,7 @@
-import Products from '../../Components/Products/Products';
 import { GET_PRODUCTS } from '../Actions/Products/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
-import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
+import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
 
 const initialState = {
@@ -11,11 +10,9 @@ const initialState = {
   AllProducts: [],//no tocar!
 };
 
-
 function getProductReducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_PRODUCTS:
-      console.log(action.payload);
       return {
         ...state,
         AllProducts: action.payload,
@@ -25,11 +22,6 @@ function getProductReducer(state = initialState, action: any) {
       return {
         ...state,
         productsDetail: action.payload
-      };
-    case POST_PRODUCTS:
-      return {
-        ...state,
-        products: [...state.products, action.payload]
       };
     case GET_FILTERED_PRODUCTS:
       return {
@@ -41,12 +33,14 @@ function getProductReducer(state = initialState, action: any) {
         ...state,
         products:state.AllProducts
       }
-
-
-
-    default:
-      return state;
-  }
-}
+      case POST_PRODUCTS:
+        return{
+          ...state,
+          products: [ ...state.products, action.payload ]
+        }
+      default:
+        return state;
+  };
+};
 
 export default getProductReducer;
