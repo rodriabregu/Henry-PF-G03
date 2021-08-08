@@ -20,6 +20,7 @@
     border-right: 1px solid transparent;
     border-radius: 3px;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .pageNumbers button:hover,
@@ -30,39 +31,40 @@
 
 .imgproducts {  
     max-width: 100%;  
-    height: auto;
+    height: 320px;
     /* -webkit-box-shadow:  4px 4px 3px rgba(84,85,100,0.4); 
     box-shadow:  4px 4px 3px rgba(84,85,100,0.151);
      */
-     border-radius: 5px;
+    border-radius: 5px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19); 
-    width: 90%;
+    width: 270px;
     border-radius: 20px;
     /* border: 0.1px solid rgba(84, 85, 100, 0.151); */
 }
 
 .imgproducts img {  
-    max-width: 100%;  
-    height: auto;  
+    max-width: 90%;  
+    height: auto; 
+    width: auto; 
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
 }
 
 .sheetGrid {
     display: grid;
-    gap: 3rem;
+    gap: 5rem 1rem;
     grid-auto-flow: dense;
-    grid-template-rows: 25rem;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    justify-content: center;
+    grid-template-rows: 18rem 18rem 18rem;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 17rem));
+    justify-content: space-around;
     text-align: center;
-    margin-left: 6vh;
-    margin-right: 1vh;
-    margin-bottom: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
     font-family: 'Montserrat', sans-serif;
     color: rgb(29, 41, 109);
-    font-size: 19px;
 }
+
 
 .filters{
     margin: 0 auto;
