@@ -73,7 +73,7 @@ const Pagination = () => {
 
     function onSearch(value: any) {
         const filtrados = products.filter(
-            (p: any) => p.name.toLowerCase().includes(value) || p.brand.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */);
+            (p: any) => p.name.toLowerCase().includes(value) || p.brand ? p.brand.name.toLowerCase().includes(value)/*  || console.log(p.name.includes(value)) */ : '');
         setFilterp(filtrados);
     }
 
