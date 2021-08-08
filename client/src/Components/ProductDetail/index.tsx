@@ -46,7 +46,7 @@ const ProductDetail = () => {
                     <h1>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
                     <h3>Stock: {detail.stock}</h3>
-                    <h3>Brand: {detail.brand}</h3>
+                    <h3>Brand: {detail.brand?detail.brand.name:''}</h3>
                     <h3>Review: {detail.review}</h3>
                     <div className='subdetail'>
                     <button name='prev' onClick={changePhoto}>{`<`}</button>
