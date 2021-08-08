@@ -1,19 +1,18 @@
 import {
-  Model, DataType, Column, Table, HasMany, BelongsToMany
+  Model, DataType, Column, Table, ForeignKey,
+  HasMany, BelongsToMany,BelongsTo
 } from 'sequelize-typescript'
 
 import { Photo } from './Photo';
 import { Category } from './Category';
 import { ProductsCategory } from './ProductsCategory';
+import { Brand } from './Brand';
 
 @Table
 export class Product extends Model {
 
-  @Column({ unique: false })
+  @Column({ unique: true })
   name!: string;
-
-  @Column(DataType.TEXT)
-  photo!: string;
 
   @Column(DataType.TEXT)
   description!: string;
@@ -24,15 +23,22 @@ export class Product extends Model {
   @Column(DataType.INTEGER)
   stock!: number;
 
-  @Column(DataType.TEXT)
-  brand!: string;
-
-  @Column(DataType.TEXT)
+  @Column
+  photo!: string;
+  
+  @Column
   category!: string;
 
   //@Column
   //sport!: string;
-  
+
+  @BelongsTo(() => Brand)
+  brand!: Brand;
+
+  @ForeignKey(() => Brand)
+  @Column
+  brandId!: number;
+
   @HasMany(() => Photo)
   photos!: Photo[];
 

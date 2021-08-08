@@ -8,7 +8,6 @@ import { Product } from './Product';
 export class Photo extends Model {
 
   @ForeignKey(() => Product)
-  @Column(DataType.INTEGER)
   productId!: number;
 
   @Column(DataType.TEXT)
