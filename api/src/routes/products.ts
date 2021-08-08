@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 
 import { addProduct } from '../providers';
-import { appProduct } from "../@app"
+import { appProduct, poductOptions } from "../@app"
 
 import { sequelize } from '../db';
 const {
@@ -10,18 +10,9 @@ const {
 
 const router = Router();
 
-const config = {
-  attributes: { exclude: ['updatedAt', 'createdAt'] },
-  include: [
-    { model: Brand, attributes: ['name', 'id'] },
-    { model: Category, attributes: ['name', 'id'] },
-    { model: Photo, attributes: ['url', 'id'] }
-  ]
-}
-
 router.get('/', (_req: Request, res: Response) => {
   return Product
-    .findAll(config)
+    .findAll(poductOptions)
     .then((products) => {
       return res.json({
         message: 'Success',
@@ -75,7 +66,7 @@ router.post('/', (req: Request, res: Response) => {
   )
     .then((productId) => {
       return Product.findOne({
-        where: { id: productId }, ...config,
+        where: { id: productId }, ...poductOptions,
       })
     })
     .then((product) => {
