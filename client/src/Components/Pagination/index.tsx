@@ -105,8 +105,8 @@ const Pagination = () => {
                             return (
                                 <div className='imgproducts' key={index}>
                                     <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
-                                        <h1>{e.name.toUpperCase()}</h1>
-                                        <h2>${e.price}.00</h2>
+                                        <h2>{e.name.toUpperCase()}</h2>
+                                        <h3>${e.price}.00</h3>
                                         <img src={e.img} alt={e.name} />
                                     </Link>
                                 </div>
