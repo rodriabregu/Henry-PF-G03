@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import postProduct from '../../Redux/Actions/Products/postProduct';
-import { useForm } from 'react-hook-form';
 
-function validate(input) {
+const validate = (input) => {
   let errors = {};
   if (!input.name) {
     errors.name = "You must type a name";
@@ -35,7 +34,8 @@ function validate(input) {
     errors.years = "";
   }
   return errors;
-}
+};
+
 
 const CreateProducts = () => {
   const dispatch = useDispatch()  
@@ -69,11 +69,6 @@ const CreateProducts = () => {
     ...input, 
     photos:input.photos.concat(e.target.value) } )
   };
-  
-/*   const handleCategories = e => { setInput({
-    ...input, 
-    categories:input.categories.concat(e.target.value) } )
-  }; */
 
   const product = {"product": {
     "price": input.price,
@@ -198,28 +193,5 @@ const CreateProducts = () => {
     </div>
   )
 };
-/* const { register, handleSubmit, formState: { errors } } = useForm(); */
-
-/* const onSubmit = data => console.log(data); */
-
-/* function onSubmit2(data){
-  dispatch(postProduct(data))
-  console.log('data aca', data);
-} */
-
-/* return (
-  <form onSubmit={handleSubmit(onSubmit2)}>
-    <input type="text" placeholder="Name product" {...register("name", {required: true, max: 16, min: 3, maxLength: 80})} />
-    <input type="text" placeholder="Photo URL" {...register("photo", {required: true})} />
-    <input type="text" placeholder="Description" {...register("description", {required: true, max: 4, min: 80})} />
-    <input type="number" placeholder="Price" {...register("price", {required: true, max: 1000, min: 1, maxLength: 12})} />
-    <input type="number" placeholder="Stock" {...register("stock", {required: true, max: 999, min: 1})} />
-    <input type="text" placeholder="Brand" {...register("brand", {required: true, max: 16, min: 2})} />
-    <input type="text" placeholder="Category" {...register("categories", {max: 16, min: 3})} />
-
-    <input type="submit" />
-  </form>
-);
-} */
 
 export default CreateProducts;
