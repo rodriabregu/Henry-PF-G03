@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
+import { NavLink as Link } from 'react-router-dom';
+import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import './productDetail.css';
 
 type KeyParams = {
@@ -36,25 +38,23 @@ const ProductDetail = () => {
 
     return (
         <div>
-            <div className='detailgeneral'>
-                <button name='prev' onClick={changePhoto}>Anterior</button>
-                <button name='next' onClick={changePhoto}>Siguiente</button>
-                <div className='product-detail'>                
-                    <h1 className='title'>{detail.name}</h1>
+            <div className='product-detail'>
+                <div className='product-img'>
+                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' />
+                </div>
+                <div className='detail'>
+                    <h1>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
                     <h3>Stock: {detail.stock}</h3>
                     <h3>Brand: {detail.brand}</h3>
                     <h3>Review: {detail.review}</h3>
+                    <div className='subdetail'>
+                    <button name='prev' onClick={changePhoto}><GoArrowLeft/></button>
+                    {detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px' height='50px'></img>):''}
+                    <button name='next' onClick={changePhoto}><GoArrowRight/></button>
+                    </div>
                 </div>
-                <div>
-                    {
-                        detail.photos?detail.photos.map((f:any) => <img src={f.url} width='50px'/>):''
-                    }
-                </div>
-                <div className='product-img'>
-                    <img src={detail.photos ? detail.photos[photo].url : ''} alt={detail.name} />
-                </div>
-            </div>
+            </div> 
         </div>
     );
 };
