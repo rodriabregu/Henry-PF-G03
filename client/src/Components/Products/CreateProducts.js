@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import postProduct from '../../Redux/Actions/Products/postProducts.ts';
 import { useForm } from 'react-hook-form';
+import './CreateProducts.css';
 
 function validate(input) {
   let errors = {};
