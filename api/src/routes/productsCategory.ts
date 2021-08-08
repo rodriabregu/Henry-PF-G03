@@ -19,41 +19,24 @@ router.get('/', async (req: Request, res: Response) => {
   console.table(req.query);
  
   try {
-    //req.query empty!
-    if(req.query.filter1 === undefined && req.query.filter2 === undefined) throw new Error()
 
-    //req.query.filter1 ok!, and req.query.filter2 empty
-    if(req.query.filter1 !== undefined && req.query.filter2 === undefined ) {
+    let array: string[] = Object["values"](req.query as any);
+
+    console.log(req.query);
   
-      let productFound = await Product.findAll({
-        where: {
-              category: req.query.filter1 },
-        })
+    let productFound = await Product.findAll({
+  
+    where: { category: {
+      [Op.in]: array }
+     }})
 
-        if (productFound) return res.send(productFound);
-
-    } else {
-
-      //req.query.filter1 ok!, and req.query.filter2 ok!
-
-      let productFound = await Product.findAll({
-    
-        where: {
-        [Op.or]: [
-          { category: req.query.filter1 },
-          { category: req.query.filter2 },
-        ]
-      }})
-
-      if (productFound) return res.send(productFound);
-
-    }
-    
-    throw new Error();
+    if (productFound) return res.send(productFound);
+  
+  throw new Error();
   
   } catch (error) {
 
-    res.status(404).send(`Product Categories : ${req.params.category} not found!`);
+    res.status(404).send(`Product Categories : ${req.query.category} not found!`);
   }
 });
 
