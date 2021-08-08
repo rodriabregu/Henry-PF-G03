@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 
 import { addProduct } from '../providers';
-import { appProduct, poductOptions } from "../@app"
+import { appProduct, productOptions } from "../@app"
 
 import { sequelize } from '../db';
 const {
@@ -12,7 +12,7 @@ const router = Router();
 
 router.get('/', (_req: Request, res: Response) => {
   return Product
-    .findAll(poductOptions)
+    .findAll(productOptions)
     .then((products) => {
       return res.json({
         message: 'Success',
@@ -66,7 +66,7 @@ router.post('/', (req: Request, res: Response) => {
   )
     .then((productId) => {
       return Product.findOne({
-        where: { id: productId }, ...poductOptions,
+        where: { id: productId }, ...productOptions,
       })
     })
     .then((product) => {

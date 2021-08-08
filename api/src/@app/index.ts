@@ -8,7 +8,7 @@ const {
   Product, Photo, Category, Brand,
 } = sequelize.models;
 
-const poductOptions = {
+const productOptions = {
   attributes: { exclude: ['updatedAt', 'createdAt'] },
   include: [
     { model: Brand, attributes: ['name', 'id'] },
@@ -18,7 +18,7 @@ const poductOptions = {
 }
 
 export {
-  poductOptions,
+  productOptions,
   error,
   appRes,
   appPhoto,
