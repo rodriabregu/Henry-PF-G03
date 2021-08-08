@@ -24,11 +24,6 @@ function getProductReducer(state = initialState, action: any) {
         ...state,
         productsDetail: action.payload
       };
-    case POST_PRODUCTS:
-      return {
-        ...state,
-        products: [...state.products, action.payload]
-      };
     case GET_FILTERED_PRODUCTS:
       return {
         ...state,

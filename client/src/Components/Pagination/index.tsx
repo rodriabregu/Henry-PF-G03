@@ -106,14 +106,7 @@ const Pagination = () => {
     const renderProduct = (filterp: any) => {
         return (
             <div>
-                <select onChange={selectChange}>
-                    <option>Accesories</option>
-                    <option>Kids</option>
-                    <option>Men</option>
-                    <option>Women</option>
-                </select>
-                <button onClick={handleFilter}>Set Filters</button>
-                <div className='sheetGrid'>
+        <div className='sheetGrid'>
                     {productDetail?.length >= 1 ?
                         productDetail?.map((e: IInfo, index: number) => {
                             return (
@@ -157,6 +150,15 @@ const Pagination = () => {
             <div className='search-bar'>
                 <SearchBar onSearch={onSearch} />
             </div>
+                <div className='filters'>
+                        <select onChange={selectChange}>
+                            <option>Accesories</option>
+                            <option>Kids</option>
+                            <option>Men</option>
+                            <option>Women</option>
+                        </select>
+                        <button onClick={handleFilter}>Set Filters</button>
+                </div>  
             <div className='pageNumbers'>
                 <button
                     onClick={handlePrevbtn}

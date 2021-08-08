@@ -13,8 +13,12 @@
     font-size: 10pt;
     float: left;
     color: #63717f;
-    padding-left: 30px;
+    padding-left: 40px;
     border-radius: 5px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS1m_P3215M6LZ5wHAgYLEJ4zFJj_XEO6gYzWdhhSPmIILd-wuxgfv3Y_sUNHlm_gxRUs&usqp=CAU');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    background-size: 20px;
   }
   
