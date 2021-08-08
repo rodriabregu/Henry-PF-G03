@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import postProduct from '../../Redux/Actions/Products/postProduct';
+import postProducts from "../../Redux/Actions/Products/postProducts";
 
 const validate = (input) => {
   let errors = {};
@@ -84,8 +84,7 @@ const CreateProducts = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(postProduct(product))
-    console.log('el input', product)
+    dispatch(postProducts(product))
   }
 
   return (
