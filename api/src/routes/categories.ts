@@ -1,27 +1,27 @@
 import { Router, Request, Response } from 'express';
-import { CreatedAt } from 'sequelize-typescript';
 const router = Router();
 import {Category} from '../models/Category'
 
 router.get('/', async(req: Request, res: Response) => {
-  const categories=await Category.findAll(
+  const categoriesAll=await Category.findAll(
     {
-      order:['description']
+      order:['name']
     }
   );
-  res.json(categories)  
+  res.json(categoriesAll)  
 })
 
-router.post('/', async(req: Request, res: Response) => {
-    const {description}=req.body;
+router.post('/new', async(req: Request, res: Response) => {
+    const {categoryTypeId, name}=req.body;
 
-    await Category.create({
-      description
+    const categoryNew = await Category.create({
+      categoryTypeId,
+      name
     })
 
     res.json({
       ok:true,
-      description
+      categoryNew
     })
 
 })
