@@ -24,6 +24,7 @@
     border-right: 1px solid transparent;
     border-radius: 3px;
     font-family: 'Montserrat', sans-serif;   
+    margin-left: 20px;
 }
 
 .link-home button:hover,
@@ -52,6 +53,7 @@ color:  #2E2E48;
     padding: 6px 5px;
     border-bottom: 4px solid transparent;
     border-radius: 3px;
+    margin-right: 20px;
 }
 
 .links-login a:hover,

@@ -1,7 +1,7 @@
 import { GET_PRODUCTS } from '../Actions/Products/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
-import { POST_PRODUCTS } from '../Actions/Products/postProduct';
+import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
 
 const initialState = {
