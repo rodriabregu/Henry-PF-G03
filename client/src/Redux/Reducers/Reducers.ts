@@ -13,7 +13,6 @@ const initialState = {
 function getProductReducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_PRODUCTS:
-      console.log(action.payload);
       return {
         ...state,
         AllProducts: action.payload,
@@ -23,11 +22,6 @@ function getProductReducer(state = initialState, action: any) {
       return {
         ...state,
         productsDetail: action.payload
-      };
-    case POST_PRODUCTS:
-      return {
-        ...state,
-        products: [...state.products, action.payload]
       };
     case GET_FILTERED_PRODUCTS:
       return {
