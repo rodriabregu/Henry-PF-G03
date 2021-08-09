@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { VscError} from 'react-icons/vsc';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import './CreateProducts.css';
 
 const notify = () => toast.success('Successfully created!');
-
 
 const validate = (input) => {
   let errors = {};
@@ -116,7 +115,7 @@ const CreateProducts = () => {
     <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div><h1>Add a new product</h1></div>
-        <div><label for="name">Product name</label>
+        <div><label for="name">Product name:</label>
           <input
           type="text"
           name="name"
@@ -127,7 +126,7 @@ const CreateProducts = () => {
           {errors.name && <p className="danger">{errors.name}</p>}
         </div>
         <div>
-          <label for="photos"> Photos </label>
+          <label for="photos">Photos:</label>
           <input
           type="text"
           name="photos"
@@ -138,7 +137,7 @@ const CreateProducts = () => {
           {errors.photos && <p className="danger">{errors.photos}</p>}
         </div>
         <div>
-          <label for="descriptions">Description</label>
+          <label for="descriptions">Description:</label>
           <input
           type="text"
           name="description"
@@ -149,7 +148,7 @@ const CreateProducts = () => {
           {errors.description && <p className="danger">{errors.description}</p>}
         </div>
         <div>
-          <label for="price">Price</label>
+          <label for="price">Price:</label>
           <input
           type="number"
           name="price"
@@ -160,7 +159,7 @@ const CreateProducts = () => {
           {errors.price && <p className="danger">{errors.price}</p>}
         </div>
         <div>
-          <label for="stock">Stock</label>
+          <label for="stock">Stock:</label>
           <input
           type="number"
           name="stock"
@@ -171,7 +170,7 @@ const CreateProducts = () => {
           {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
         <div>
-          <label for="brand">Brand</label>
+          <label for="brand">Brand:</label>
           <input
           type="text"
           name="brand"
