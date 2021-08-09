@@ -6,7 +6,7 @@ import {Category} from '../models/Category'
 router.get('/', async(req: Request, res: Response) => {
   const categories=await Category.findAll(
     {
-      order:['description']
+      order:['name']
     }
   );
   res.json(categories)  

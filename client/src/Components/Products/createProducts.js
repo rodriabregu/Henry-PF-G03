@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import postProducts from "../../Redux/Actions/Products/postProducts";
 
+
 const validate = (input) => {
   let errors = {};
   if (!input.name) {
@@ -167,10 +168,11 @@ const CreateProducts = () => {
           onChange={handleInput}
         />
         {errors.brand && <p className="danger">{errors.brand}</p>}
-        category
-        <label for="categories">
+         category         
+         <label for="categories">
         Category
-        </label>
+        </label> 
+        <selectCategories/>
 {/*         <select name="categories" value={input.categories} onChange={handleCategories}>
             <option value="---">Categorie:</option>
             <option value={accesories.Accesories}>1</option>
