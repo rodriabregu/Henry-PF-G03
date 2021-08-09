@@ -153,11 +153,12 @@ const Pagination = () => {
                         <button onClick={handleFilter}>Set Filters</button>
                 </div>  
             <div className='pageNumbers'>
-                <button
+                {currentPage > 1 ? <button onClick={handlePrevbtn}>Prev</button> : ""}
+{/*                 <button
                     onClick={handlePrevbtn}
                     disabled={currentPage === pages[0] ? true : false}>
                         Prev
-                </button>
+                </button> */}
                     {pageDecrementBtn}
                     {renderPageNumbers}
                     {pageIncrementBtn}

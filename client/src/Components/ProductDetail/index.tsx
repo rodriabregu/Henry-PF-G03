@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
-import { NavLink as Link } from 'react-router-dom';
-import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import './productDetail.css';
 
 type KeyParams = {
@@ -14,7 +12,6 @@ const ProductDetail = () => {
     const { id } = useParams<KeyParams>();
     const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
-
 
     const [photo, setPhoto] = useState(0);
 
@@ -34,7 +31,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         dispatch(getProductsDetail(parseInt(id)));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     return (
         <div>
@@ -50,7 +47,7 @@ const ProductDetail = () => {
                     <h3>Review: {detail.review}</h3>
                     <div className='subdetail'>
                     <button name='prev' onClick={changePhoto}>{`<`}</button>
-                    {detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px' height='50px'></img>):''}
+                    {detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px' height='50px' alt='not found'></img>):''}
                     <button name='next' onClick={changePhoto}>{`>`}</button>
                     </div>
                 </div>
