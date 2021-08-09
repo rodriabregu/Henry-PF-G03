@@ -10,58 +10,37 @@ import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
 
 const Pagination = () => {
-  const dispatch = useDispatch();
 
-  const products: any = useSelector<any>((s) => s.products);
-  const productDetail: any = useSelector<any>((s) => s.productsDetail);
-  const [filterp, setFilterp] = useState([]);
+    const dispatch = useDispatch();
 
-  const [currentPage, setcurrentPage] = useState(1);
-  const [itemsPerPage, _setitemsPerPage] = useState(10);
+    const products: any = useSelector<any>(s => s.products);
+    const productDetail: any = useSelector<any>(s => s.productsDetail);
+    const [filterp, setFilterp] = useState([]);
 
-  const [pageNumberLimit, _setpageNumberLimit] = useState(8);
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
-  const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+    const [currentPage, setcurrentPage] = useState(1);
+    const [itemsPerPage, _setitemsPerPage] = useState(10);
 
-  const handleClick = (e: any) => {
-    setcurrentPage(Number(e.target.id));
-  };
+    const [pageNumberLimit, _setpageNumberLimit] = useState(8);
+    const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
+    const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+    const [category,setCategory]=useState('');
 
-  const selectChange = (e: any) => {
-    dispatch(getFilteredProducts(e.target.value));
-  };
+    const handleClick = (e: any) => {
+        setcurrentPage(Number(e.target.id));
+    };
 
-  const handleFilter = () => {
-    dispatch(clearFilters());
-  };
+    const selectChange=(e:any)=>{
+        setcurrentPage(1)
+        dispatch(getFilteredProducts(e.target.value))
+    }
 
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
-    pages.push(i);
-  }
+    const handleFilter=()=>{
+        dispatch(clearFilters())
+    }
 
-  const indexOfLastItem = currentPage * itemsPerPage; // 8
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage; //0
-
-  let currentItems;
-
-  if (Array.isArray(products)) {
-    currentItems = filterp.slice(indexOfFirstItem, indexOfLastItem); //0-8
-  }
-
-  const renderPageNumbers = pages.map((number: any) => {
-    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
-      return (
-        <li
-          key={number}
-          id={number}
-          onClick={handleClick}
-          className={currentPage === number ? 'active' : ''}>
-          {number}
-        </li>
-      );
-    } else {
-      return null;
+    const pages = [];
+    for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
+        pages.push(i);
     }
   });
 
@@ -145,16 +124,16 @@ const Pagination = () => {
   useEffect(() => {
     setFilterp(products);
   }, [products]);
-
-  return (
-    <div>
-      <div className='search-bar'>
-        <SearchBar onSearch={onSearch} />
-      </div>
-      <div className='filters'>
-        <SelectCategory path='categories' />
-
-        {/* <select onChange={selectChange}>
+      
+    return (
+        <div>
+            <div className='search-bar'>
+                <SearchBar onSearch={onSearch} />
+            </div>
+                <div className='filters'>
+                    <SelectCategory onChange={selectChange} path='categories'/>
+                    
+                        {/* <select onChange={selectChange}>
                             <option>Accesories</option>
                             <option>Kids</option>
                             <option>Men</option>

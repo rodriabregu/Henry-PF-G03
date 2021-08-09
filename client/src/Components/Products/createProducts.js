@@ -179,7 +179,7 @@ const CreateProducts = () => {
         </div>
         <div>
           <label for="brand">Brand</label>
-          <SelectCategory name="brand" path='brand' onChange={handleChange}/>
+          <SelectCategory required="required" name="brand" path='brand' onChange={handleChange}/>
           {/* <input
           <label for="brand">Brand:</label>
           <input
