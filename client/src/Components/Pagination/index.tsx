@@ -29,57 +29,76 @@ const Pagination = () => {
         setcurrentPage(Number(e.target.id));
     };
 
-    const selectChange=(e:any)=>{
+    const selectChange = (e:any) => {
         setcurrentPage(1)
         dispatch(getFilteredProducts(e.target.value))
-    }
+    };
 
     const handleFilter=()=>{
         dispatch(clearFilters())
-    }
+    };
 
     const pages = [];
     for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
         pages.push(i);
     }
-  });
 
-  function onSearch(value: any) {
-    const filtrados = products.filter((p: any) =>
-      p.name
-        ? p.name.toLowerCase().includes(value)
-        : '' || p.brand
-        ? p.brand.name.toLowerCase().includes(value)
-        : '',
-    );
-    setFilterp(filtrados);
-  }
+    const indexOfLastItem = currentPage * itemsPerPage; // 8
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage; //0
 
-  const handleNextbtn = () => {
-    setcurrentPage(currentPage + 1);
-    if (currentPage + 1 > maxPageNumberLimit) {
-      setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    let currentItems;
+
+    if (Array.isArray(products)) {
+        currentItems = filterp.slice(indexOfFirstItem, indexOfLastItem); //0-8
     }
-  };
 
-  const handlePrevbtn = () => {
-    setcurrentPage(currentPage - 1);
-    if ((currentPage - 1) % pageNumberLimit === 0) {
-      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    const renderPageNumbers = pages.map((number: any) => {
+        if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+            return (
+                <li
+                    key={number}
+                    id={number}
+                    onClick={handleClick}
+                    className={currentPage === number ? 'active' : ''}>
+                    {number}
+                </li>
+            );
+        } else {
+            return null;
+        }
+    });
+
+    function onSearch(value: any) {
+        const filtrados = products.filter(
+            (p: any) => p.name ? p.name.toLowerCase().includes(value) : '' || p.brand ? p.brand.name.toLowerCase().includes(value) : '');
+        setFilterp(filtrados);
     }
-  };
 
-  let pageIncrementBtn = null;
-  if (pages.length > maxPageNumberLimit) {
-    pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
-  }
+    const handleNextbtn = () => {
+        setcurrentPage(currentPage + 1);
+        if (currentPage + 1 > maxPageNumberLimit) {
+            setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+            setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+        }
+    };
 
-  let pageDecrementBtn = null;
-  if (minPageNumberLimit >= 1) {
-    pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
-  }
+    const handlePrevbtn = () => {
+        setcurrentPage(currentPage - 1);
+        if ((currentPage - 1) % pageNumberLimit === 0) {
+            setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+            setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+        }
+    };
+
+    let pageIncrementBtn = null;
+    if (pages.length > maxPageNumberLimit) {
+        pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
+    }
+
+    let pageDecrementBtn = null;
+    if (minPageNumberLimit >= 1) {
+        pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
+    }
 
   const renderProduct = (filterp: any) => {
     return (
