@@ -4,6 +4,7 @@ import { VscError} from 'react-icons/vsc';
 import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import './CreateProducts.css';
+import SelectCategory from "./SelectCategory";
 
 const notify = () => toast.success('Successfully created!');
 
@@ -172,13 +173,15 @@ const CreateProducts = () => {
         </div>
         <div>
           <label for="brand">Brand</label>
-          <input
+          <SelectCategory path='brand'/>
+
+          {/* <input
           type="text"
           name="brand"
           placeholder="Enter the brand"
           required="required"
           value={input.brand}
-          onChange={handleInput}/>
+          onChange={handleInput}/> */}
           {errors.brand && <p className="danger">{errors.brand}</p>}
         </div>
         {/* <div> */}

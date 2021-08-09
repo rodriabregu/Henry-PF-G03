@@ -6,6 +6,7 @@ import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
+import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
 
 const Pagination = () => {
@@ -144,12 +145,14 @@ const Pagination = () => {
                 <SearchBar onSearch={onSearch} />
             </div>
                 <div className='filters'>
-                        <select onChange={selectChange}>
+                    <SelectCategory path='categories'/>
+                    
+                        {/* <select onChange={selectChange}>
                             <option>Accesories</option>
                             <option>Kids</option>
                             <option>Men</option>
                             <option>Women</option>
-                        </select>
+                        </select> */}
                         <button onClick={handleFilter}>Set Filters</button>
                 </div>  
             <div className='pageNumbers'>
