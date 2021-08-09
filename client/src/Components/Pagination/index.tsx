@@ -22,12 +22,14 @@ const Pagination = () => {
     const [pageNumberLimit, _setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+    const [category,setCategory]=useState('');
 
     const handleClick = (e: any) => {
         setcurrentPage(Number(e.target.id));
     };
 
     const selectChange=(e:any)=>{
+        setcurrentPage(1)
         dispatch(getFilteredProducts(e.target.value))
     }
 
@@ -145,7 +147,7 @@ const Pagination = () => {
                 <SearchBar onSearch={onSearch} />
             </div>
                 <div className='filters'>
-                    <SelectCategory path='categories'/>
+                    <SelectCategory onChange={selectChange} path='categories'/>
                     
                         {/* <select onChange={selectChange}>
                             <option>Accesories</option>
