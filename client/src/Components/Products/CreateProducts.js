@@ -1,40 +1,57 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { VscError} from 'react-icons/vsc';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import './CreateProducts.css';
-import { VscError} from 'react-icons/vsc';
 
 const validate = (input) => {
   let errors = {};
   if (!input.name) {
-    errors.name = /* "You must type a name" */<VscError/>;
+    errors.name = <VscError/>;
   } else {
     errors.name = "";
   }
 
-  if (!input.weight) {
-    errors.weight = "You must type a weight range";
-  } else if (!/\d{1,2}-\d{1,2}/g.test(input.weight)) {
-    errors.weight = "Weight must be a range. Example: '10-15'";
+  if (!input.photos) {
+    errors.photos = <VscError/>;
+  } else if (input.photos.length < 1) {
+    errors.photos = <VscError/>;
   } else {
-    errors.weight = "";
+    errors.photos = "";
   }
 
-  if (!input.height) {
-    errors.height = "You must type a height range";
-  } else if (!/\d{1,2}-\d{1,2}/g.test(input.height)) {
-    errors.height = "Height must be a range. Example: '10-15'";
+  if (!input.description) {
+    errors.description = <VscError/>;
+  } else if (input.description.length < 8) {
+    errors.description = <VscError/>;
   } else {
-    errors.height = "";
+    errors.description = "";
   }
   
-  if (!input.years) {
-    errors.years = "You must type a Years";
-  } else if (!/\d{1,2}-\d{1,2}/g.test(input.years)) {
-    errors.years = "Years must be a range. Example: '10-15'";
+  if (!input.price) {
+    errors.price = <VscError/>;
+  } else if (input.price.value <= 0) {
+    errors.price = <VscError/>;
   } else {
-    errors.years = "";
+    errors.price = "";
   }
+
+  if (!input.stock) {
+    errors.stock = <VscError/>;
+  } else if (input.stock.value <= 0) {
+    errors.stock = <VscError/>;
+  } else {
+    errors.stock = "";
+  }
+
+  if (!input.brand) {
+    errors.brand = <VscError/>;
+  } else if (input.brand.length < 2) {
+    errors.brand = <VscError/>;
+  } else {
+    errors.brand = "";
+  }
+
   return errors;
 };
 
@@ -45,7 +62,7 @@ const CreateProducts = () => {
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
-    "name":'',
+    name:'',
     photos: [],
     description:'',
     price: 0,
@@ -94,15 +111,14 @@ const CreateProducts = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div><h1>Add a new product</h1></div>
         <div><label for="name">Product name</label>
-          
-        {errors.name && <p className="danger">{errors.name}</p>}
           <input
           type="text"
           name="name"
-          placeholder="name product here"
+          placeholder="Name product here"
           required="required"
           value={input.name}
           onChange={handleInput}/> 
+          {errors.name && <p className="danger">{errors.name}</p>}
         </div>
         <div>
           <label for="photos"> Photos </label>
@@ -112,7 +128,8 @@ const CreateProducts = () => {
           placeholder="Enter url photos here"
           required="required"
           value={input.photos}
-          onChange={handlePhotos}/> {errors.photos && <p className="danger">{errors.photos}</p>}
+          onChange={handlePhotos}/> 
+          {errors.photos && <p className="danger">{errors.photos}</p>}
         </div>
         <div>
           <label for="descriptions">Description</label>
@@ -122,7 +139,8 @@ const CreateProducts = () => {
           placeholder="Enter the description"
           required="required"
           value={input.description}
-          onChange={handleInput}/>{errors.description && <p className="danger">{errors.description}</p>}
+          onChange={handleInput}/>
+          {errors.description && <p className="danger">{errors.description}</p>}
         </div>
         <div>
           <label for="price">Price</label>
@@ -143,19 +161,21 @@ const CreateProducts = () => {
           placeholder="Enter the stock"
           required="required"
           value={input.stock}
-          onChange={handleInput}/>{errors.stock && <p className="danger">{errors.stock}</p>}
+          onChange={handleInput}/>
+          {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
         <div>
           <label for="brand">Brand</label>
-           <input
+          <input
           type="text"
           name="brand"
           placeholder="Enter the brand"
           required="required"
           value={input.brand}
-          onChange={handleInput}/>{errors.brand && <p className="danger">{errors.brand}</p>}
+          onChange={handleInput}/>
+          {errors.brand && <p className="danger">{errors.brand}</p>}
         </div>
-        <div>
+        {/* <div> */}
           {/* <label for="categories">Category</label> */}
 {/*         <select name="categories" value={input.categories} onChange={handleCategories}>
             <option value="---">Categorie:</option>
@@ -172,8 +192,8 @@ const CreateProducts = () => {
           value={input.categories}
           onChange={handleInput}
         /> */}
-          {errors.categories && <p className="danger">{errors.categories}</p>}
-        </div>
+          {/* {errors.categories && <p className="danger">{errors.categories}</p>} */}
+        {/* </div> */}
         <div>
           <button>Submit</button>
         </div>
