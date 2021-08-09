@@ -11,9 +11,12 @@ const Login = () => {
     const onSubmit = (data: any) => (console.log(data), notify(), reset())
 
     return (
+        <div className='form-register'>
         <form onSubmit={handleSubmit(onSubmit)}>
+        <div><h1>Login an account</h1></div>
+            <div>
             <label htmlFor="username">Username</label>
-            <input id='username' type="text" placeholder="Username" {...register("username", {
+            <input id='username' type="text" placeholder="Fort24 (example)" {...register("username", {
                 required: "required",
                 minLength: {
                     value: 3,
@@ -26,7 +29,8 @@ const Login = () => {
             }
             )} />
             {errors.username && <span role="alert">{errors.username.message}</span>}
-
+            </div>
+            <div>
             <label htmlFor="password">Password</label>
             <input
                 id="password"
@@ -45,10 +49,11 @@ const Login = () => {
                 })}
             />
             {errors.password && <span role="alert">{errors.password.message}</span>}
-
-            <input type="submit" />
+            </div>
+            <input className='button-r' type="submit" />
             <Toaster />
         </form>
+        </div>
     );
 };
 
