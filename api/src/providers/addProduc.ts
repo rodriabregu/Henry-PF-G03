@@ -1,6 +1,6 @@
 import { sequelize } from '../db';
 const {
-  Product, Photo, ProductsCategory, Brand
+  Product, Photo, ProductCategory, Brand
 } = sequelize.models;
 import { appProduct } from '../@app'
 
@@ -30,7 +30,7 @@ export default async function (
     )
   }))
   await Promise.all(categories.map(categoryId =>
-    ProductsCategory.findOrCreate(
+    ProductCategory.findOrCreate(
       { where: { categoryId, productId } }
     )
   ))

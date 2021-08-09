@@ -1,7 +1,7 @@
 import { Response, Request, Router } from 'express';
 import { Op } from 'sequelize';
 import { productOptions } from '../@app'
-import { Product, ProductsCategory } from '../db';
+import { Product, ProductCategory } from '../db';
 
 /**
  * Root Example : GET /products/category/renew/?c1=1&c2=2....cn=n
@@ -17,7 +17,7 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     const categories: number[] = Object.values(req.query as any)
 
-    const relations: any[] = await ProductsCategory.findAll({
+    const relations: any[] = await ProductCategory.findAll({
       where: { categoryId: { [Op.or]: categories } }
     })
 
