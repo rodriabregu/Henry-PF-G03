@@ -17,15 +17,17 @@ router.post('/new', async(req: Request, res: Response) => {
     name=name.toLowerCase();
     name=name.replace(/\w\S*/g, (w:any) => (w.replace(/^\w/, (c:any) => c.toUpperCase())));
 
-    const categoryNew = await Category.create({
-      categoryTypeId,
-      name
+    const categoryNew = await Category.findOrCreate({
+      where:{name}
     })
 
-    res.json({
-      ok:true,
-      categoryNew
-    })
+    console.log(categoryNew[1])
+
+    if(categoryNew[1]==false){
+      return res.status(400).json(`Category ${name} already exists`)
+    }
+
+    return res.json(`Category '${name}' created!`)
 
 })
 
