@@ -1,0 +1,10 @@
+
+.landing{
+    display: flex;
+    justify-content: center;
+}
+
+.loading{
+    width: 1300px;
+    height: auto;
+}

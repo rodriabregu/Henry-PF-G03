@@ -1,0 +1,9 @@
+.prev{
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
