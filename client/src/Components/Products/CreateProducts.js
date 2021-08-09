@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import postProducts from "../../Redux/Actions/Products/postProducts";
+import './CreateProducts.css';
+import { VscError} from 'react-icons/vsc';
 
 const validate = (input) => {
   let errors = {};
   if (!input.name) {
-    errors.name = "You must type a name";
+    errors.name = /* "You must type a name" */<VscError/>;
   } else {
     errors.name = "";
   }
@@ -88,89 +90,73 @@ const CreateProducts = () => {
   }
 
   return (
-    <div>
+    <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label for="name">
-          Product name
-        </label>
-        <input
+        <div><h1>Add a new product</h1></div>
+        <div><label for="name">Product name</label>
+          
+        {errors.name && <p className="danger">{errors.name}</p>}
+          <input
           type="text"
           name="name"
           placeholder="name product here"
           required="required"
           value={input.name}
-          onChange={handleInput}
-        />
-        {errors.name && <p className="danger">{errors.name}</p>}
-
-        <label for="photos">
-        photos url
-        </label>
-        <input
+          onChange={handleInput}/> 
+        </div>
+        <div>
+          <label for="photos"> Photos </label>
+          <input
           type="text"
           name="photos"
           placeholder="Enter url photos here"
           required="required"
           value={input.photos}
-          onChange={handlePhotos}
-        />
-        {errors.photos && <p className="danger">{errors.photos}</p>}
-        
-        <label for="descriptions">
-        descriptions
-        </label>
-        <input
+          onChange={handlePhotos}/> {errors.photos && <p className="danger">{errors.photos}</p>}
+        </div>
+        <div>
+          <label for="descriptions">Description</label>
+          <input
           type="text"
           name="description"
           placeholder="Enter the description"
           required="required"
           value={input.description}
-          onChange={handleInput}
-        />
-        {errors.description && <p className="danger">{errors.description}</p>}
-        
-        <label for="price">
-        Price
-        </label>
-        <input
+          onChange={handleInput}/>{errors.description && <p className="danger">{errors.description}</p>}
+        </div>
+        <div>
+          <label for="price">Price</label>
+          <input
           type="number"
           name="price"
           placeholder="Enter the price"
           required="required"
           value={input.price}
-          onChange={handleInput}
-        />
-        {errors.price && <p className="danger">{errors.price}</p>}
-        
-        <label for="stock">
-        Stock
-        </label>
-        <input
+          onChange={handleInput}/>
+          {errors.price && <p className="danger">{errors.price}</p>}
+        </div>
+        <div>
+          <label for="stock">Stock</label>
+          <input
           type="number"
           name="stock"
           placeholder="Enter the stock"
           required="required"
           value={input.stock}
-          onChange={handleInput}
-        />
-        {errors.stock && <p className="danger">{errors.stock}</p>}
-
-        <label for="brand">
-        Brand
-        </label>
-        <input
+          onChange={handleInput}/>{errors.stock && <p className="danger">{errors.stock}</p>}
+        </div>
+        <div>
+          <label for="brand">Brand</label>
+           <input
           type="text"
           name="brand"
           placeholder="Enter the brand"
           required="required"
           value={input.brand}
-          onChange={handleInput}
-        />
-        {errors.brand && <p className="danger">{errors.brand}</p>}
-        category
-        <label for="categories">
-        Category
-        </label>
+          onChange={handleInput}/>{errors.brand && <p className="danger">{errors.brand}</p>}
+        </div>
+        <div>
+          {/* <label for="categories">Category</label> */}
 {/*         <select name="categories" value={input.categories} onChange={handleCategories}>
             <option value="---">Categorie:</option>
             <option value={accesories.Accesories}>1</option>
@@ -186,8 +172,11 @@ const CreateProducts = () => {
           value={input.categories}
           onChange={handleInput}
         /> */}
-        {errors.categories && <p className="danger">{errors.categories}</p>}
-        <button>Submit</button>
+          {errors.categories && <p className="danger">{errors.categories}</p>}
+        </div>
+        <div>
+          <button>Submit</button>
+        </div>
       </form>
     </div>
   )
