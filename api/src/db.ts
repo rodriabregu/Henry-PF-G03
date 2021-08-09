@@ -12,6 +12,10 @@ export const sequelize = new Sequelize({
 	models: [__dirname + '/models'],
 });
 
+export const {
+  Product, User, Photo, Category, Brand,
+  CategoryType, ProductsCategory
+} = sequelize.models;
 
 /*
 

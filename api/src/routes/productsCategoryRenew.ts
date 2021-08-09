@@ -1,10 +1,10 @@
-import { Response, Request } from 'express';
+import { Response, Request, Router } from 'express';
 import { Op } from 'sequelize';
 import { productOptions } from '../@app'
-import { Product, ProductsCategory }  from '../db';
+import { Product, ProductsCategory } from '../db';
 
 /**
- * Root Example : GET /api/products/category?c1=1&c2=2....cn=n
+ * Root Example : GET /products/category/renew/?c1=1&c2=2....cn=n
  * responde con los productos que contengan
  * las n categorias especificadas por query
  */
