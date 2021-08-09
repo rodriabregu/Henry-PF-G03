@@ -94,6 +94,13 @@ const CreateProducts = () => {
     photos:input.photos.concat(e.target.value) } )
   };
 
+  const handleChange=(e)=>{
+    setInput({
+      ...input,
+      [e.target.name]:e.target.value
+    })
+  }
+
   const product = {"product": {
     "price": input.price,
     "name": input.name,
@@ -173,8 +180,7 @@ const CreateProducts = () => {
         </div>
         <div>
           <label for="brand">Brand</label>
-          <SelectCategory path='brand'/>
-
+          <SelectCategory name="brand" path='brand' onChange={handleChange}/>
           {/* <input
           type="text"
           name="brand"
