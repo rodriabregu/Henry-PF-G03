@@ -6,6 +6,7 @@ import ProductDetail from './Components/ProductDetail';
 import CreateProducts from './Components/Products/CreateProducts';
 import Login from './Components/LogIn';
 import Register from './Components/Register';
+import CreateCategory from './Components/Categories/createCategory'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/create' component={CreateProducts} />
+          <Route exact path='/createCategory' component={CreateCategory}/>
           <Route path="/" component={Footer} />
         </div>
       </Switch>

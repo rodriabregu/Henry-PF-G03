@@ -7,6 +7,7 @@ import './CreateProducts.css';
 
 const notify = () => toast.success('Successfully created!');
 
+
 const validate = (input) => {
   let errors = {};
   if (!input.name) {

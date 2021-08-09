@@ -12,7 +12,10 @@ router.get('/', async(req: Request, res: Response) => {
 })
 
 router.post('/new', async(req: Request, res: Response) => {
-    const {categoryTypeId, name}=req.body;
+    let {categoryTypeId, name}=req.body;
+
+    name=name.toLowerCase();
+    name=name.replace(/\w\S*/g, (w:any) => (w.replace(/^\w/, (c:any) => c.toUpperCase())));
 
     const categoryNew = await Category.create({
       categoryTypeId,
