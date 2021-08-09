@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from 'axios';
+import './CreateProducts.css'
 
 
 const SelectCategory=(props:any)=>{

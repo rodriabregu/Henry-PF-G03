@@ -177,8 +177,8 @@ const CreateProducts = () => {
           onChange={handleInput}/>
           {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
-        <div>
-          <label for="brand">Brand</label>
+        <div className='brand-s'>
+          <label for="brand">Brand:</label>
           <SelectCategory name="brand" path='brand' onChange={handleChange}/>
           {/* <input
           <label for="brand">Brand:</label>
