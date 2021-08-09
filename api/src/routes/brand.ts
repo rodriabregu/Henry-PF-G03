@@ -7,9 +7,11 @@ router.get('/', async(req: Request, res: Response) => {
 
   console.log('estoy en brand');
 
-  const brandFound = await Brand.findAll()
+  const brandFound = await Brand.findAll({
+    order:['name']
+  })
 
-  res.send({ ok: true, brandFound })
+  res.send(brandFound)
   
 })
 

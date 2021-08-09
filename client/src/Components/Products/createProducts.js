@@ -4,6 +4,7 @@ import { VscError} from 'react-icons/vsc';
 import toast from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import './CreateProducts.css';
+import SelectCategory from "./SelectCategory";
 
 const notify = () => toast.success('Successfully created!');
 
@@ -92,6 +93,13 @@ const CreateProducts = () => {
     photos:input.photos.concat(e.target.value) } )
   };
 
+  const handleChange=(e)=>{
+    setInput({
+      ...input,
+      [e.target.name]:e.target.value
+    })
+  }
+
   const product = {"product": {
     "price": input.price,
     "name": input.name,
@@ -170,6 +178,9 @@ const CreateProducts = () => {
           {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
         <div>
+          <label for="brand">Brand</label>
+          <SelectCategory name="brand" path='brand' onChange={handleChange}/>
+          {/* <input
           <label for="brand">Brand:</label>
           <input
           type="text"
@@ -177,7 +188,7 @@ const CreateProducts = () => {
           placeholder="Enter the brand"
           required="required"
           value={input.brand}
-          onChange={handleInput}/>
+          onChange={handleInput}/> */}
           {errors.brand && <p className="danger">{errors.brand}</p>}
         </div>
         {/* <div> */}
