@@ -5,8 +5,8 @@ import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredPro
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
-import './Pagination.css';
 import SearchBar from '../SearchBar/SearchBar';
+import './Pagination.css';
 
 const Pagination = () => {
     const dispatch = useDispatch();
@@ -16,9 +16,9 @@ const Pagination = () => {
     const [filterp, setFilterp] = useState([]);
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, setitemsPerPage] = useState(10);
+    const [itemsPerPage, _setitemsPerPage] = useState(10);
 
-    const [pageNumberLimit, setpageNumberLimit] = useState(8);
+    const [pageNumberLimit, _setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
