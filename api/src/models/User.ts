@@ -1,7 +1,5 @@
 import {
-  Model, Column, Table, DataType, Comment,
-  PrimaryKey, AutoIncrement, AllowNull,
-  HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
+  Model, Column, Table, HasMany
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
@@ -10,7 +8,7 @@ import { Sale } from './Sale';
 export class User extends Model<User> {
 
   @Column
-  nickNane!: string; //userName
+  userNane!: string; //userName
 
   @Column
   email!: string;
@@ -23,7 +21,7 @@ export class User extends Model<User> {
 
   @Column
   lastName!: string;
-  
+
   @HasMany(() => Sale)
   Sales!: Sale[];
 

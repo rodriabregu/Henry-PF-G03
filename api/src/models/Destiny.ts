@@ -4,12 +4,8 @@ import {
   HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
 } from 'sequelize-typescript'
 
-import { Product } from "./Product"
+import { Sale } from "./Sale"
 import { User } from "./User"
-import { Photo } from './Photo';
-import { Category } from './Category';
-import { ProductCategory } from './ProductCategory';
-import { Brand } from './Brand';
 
 
 @Table

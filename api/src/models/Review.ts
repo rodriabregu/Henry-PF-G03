@@ -1,7 +1,5 @@
 import {
-  Model, Column, Table, DataType, Comment,
-  PrimaryKey, AutoIncrement, AllowNull,
-  HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
+  Model, Column, Table, DataType, ForeignKey
 } from 'sequelize-typescript'
 
 import { User } from "./User"

@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs'
 import { appProduct } from '../@app'
-import { sequelize } from '../db'
-const {
+
+import {
   Product, Photo, Brand, Category, ProductCategory
-} = sequelize.models;
+} from '../db'
 
 export default async () => {
   let count = await Product.count()

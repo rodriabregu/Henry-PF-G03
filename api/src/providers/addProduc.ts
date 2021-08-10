@@ -1,8 +1,8 @@
-import { sequelize } from '../db';
-const {
-  Product, Photo, ProductCategory, Brand
-} = sequelize.models;
 import { appProduct } from '../@app'
+
+import {
+  Product, Photo, Brand, ProductCategory
+} from '../db';
 
 export default async function (
   product: appProduct,
@@ -15,12 +15,12 @@ export default async function (
 
   const brandId = await brand.getDataValue("id")
 
-  const neWProduct = (
+  const [neWProduct] = (
     await Product.findOrCreate({
       where: { name: product.name },
       defaults: { ...product, brandId }
     })
-  )[0]
+  )
 
   const productId = await neWProduct.getDataValue('id');
 
