@@ -22,19 +22,21 @@ const ProductDetail = () => {
     const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
     const [photo, setPhoto] = useState(0);
+    const [show, setShow] = useState<boolean>(false);
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [review, setReview] = useState({
         review: '',
-        stars: '',
-
+        stars: 0,
+        id: 0,
     });
 
     function handleInput(e: any) {
         setReview({
-            ...review,
             review: e.target.value,
+            stars: currentValue,
+            id: detail.id
         });
     };
 
@@ -73,15 +75,21 @@ const ProductDetail = () => {
         setHoverValue(undefined)
     }
 
+const [detallaso, setDetallaso] = useState<any>()
 
     useEffect(() => {
         dispatch(getProductsDetail(parseInt(id)));
+/*         setTimeout(() => {
+            setDetallaso({
+                ...detail, 
+                stock: 0
+            })
+        }, 0) */
     }, [dispatch, id]);
-
-    let flag = false;
+/*     let flag = false; */
 
     const changeFlag = () => {
-        flag = !flag
+        setShow(!show)
     };
 
     return (
@@ -93,7 +101,7 @@ const ProductDetail = () => {
                 <div className='detail'>
                     <h1>{detail.name}</h1>
                     <h2>${detail.price}.00</h2>
-                    <h3>Stock: {detail.stock}</h3>
+                    <h3>Stock: {detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                     <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
                     <h3>Review: {detail.review}</h3>
                     <div className='subdetail'>
@@ -102,50 +110,11 @@ const ProductDetail = () => {
                         <button name='next' onClick={changePhoto}>{`>`}</button>
                     </div>
                 </div>
-                {/*                 <button onClick={() => flag = true}> Boton review </button>
-                {flag ?
-                    <div>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <div>
-                                <label htmlFor="username">Username:</label>
-                                {errors.username && <span role="alert">{errors.username.message}</span>}
-                                <input id='username' type="text" placeholder="username (example)" {...register("username", {
-                                    required: "required",
-                                    minLength: {
-                                        value: 3,
-                                        message: "Min length is 3."
-                                    },
-                                    maxLength: {
-                                        value: 16,
-                                        message: "Max length is 16."
-                                    }
-                                }
-                                )} />
-                            </div>
-                            <div>
-                                <label htmlFor="review">Review:</label>
-                                {errors.review && <span role="alert">{errors.review.message}</span>}
-                                <input id='review' type="text" placeholder="review (example)" {...register("review", {
-                                    required: "required",
-                                    minLength: {
-                                        value: 3,
-                                        message: "Min length is 3."
-                                    },
-                                    maxLength: {
-                                        value: 32,
-                                        message: "Max length is 32."
-                                    }
-                                }
-                                )} />
-                            </div>
-                            <input className='button-r' type="submit" />
-                            <Toaster />
-                        </form>
-                    </div>
-                    : ''
-                } */}
+
+                <button onClick={changeFlag}>Clickame papu</button>
+                { show &&
                 <div>
-                    <h2> React Ratings </h2>
+                    <h3> Write a review and rating </h3>
                     <form>
                         <div>
                             {stars.map((_, index) => {
@@ -157,11 +126,7 @@ const ProductDetail = () => {
                                         onMouseOver={() => handleMouseOver(index + 1)}
                                         onMouseLeave={handleMouseLeave}
                                         color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-                                        style={{
-                                            marginRight: 10,
-                                            cursor: "pointer"
-                                        }}
-                                    />
+                                        style={{ marginRight: 10, cursor: "pointer" }} />
                                 )
                             })}
                         </div>
@@ -175,13 +140,14 @@ const ProductDetail = () => {
                         Submit
                     </button>
                     </form>
-            </div>
+                </div>
+                }
         </div>
         </div >
     );
 };
 
-const styles = {
+/* const styles = {
     container: {
         display: "flex",
         flexDirection: "column",
@@ -206,5 +172,5 @@ const styles = {
         padding: 10,
     }
 
-};
+}; */
 export default ProductDetail;
