@@ -1,16 +1,27 @@
 import { Router, Request, Response } from 'express';
-import { Brand } from '../models/Brand';
+import { Brand } from '../db';
 const router = Router();
 
 
-router.get('/', async(req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
 
   console.log('estoy en brand');
 
-  const BrandNueva = await Brand.create({description:'Crotone'})
+  const brandFound = await Brand.findAll({
+    order: ['name']
+  })
 
-  res.send('marca crotone creada')
-  
+  res.send(brandFound)
+
+})
+
+router.post('/new', async (req: Request, res: Response) => {
+  const { description } = req.body;
+
+  await Brand.create({ description })
+
+  res.json({ ok: true, description })
+
 })
 
 export default router;

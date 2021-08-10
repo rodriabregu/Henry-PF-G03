@@ -1,5 +1,7 @@
 import { Response, Request, Router } from 'express';
-
+import {
+  User, Sale, Product
+} from '../db'
 const router = Router();
 
 router.get('/', (req: Request, res: Response) => {

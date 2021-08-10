@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+
+/* .sheetGrid {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+    grid-template-rows: 21rem;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    margin-bottom: 20vh;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-shadow: 2px 1px #000000;
+    font-size: 19px;
+}; */
+
+
+/* .imgproducts {  
+    max-width: 100%;  
+    height: auto;
+
+} 
+.imgproducts img {  
+    max-width: 100%;  
+    height: auto;  
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+}  */

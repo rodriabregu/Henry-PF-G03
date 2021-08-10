@@ -1,14 +1,16 @@
-import { Model, Column, Table, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import {
+  Model, Column, Table, HasMany
+} from 'sequelize-typescript';
+
+import { Product } from './Product';
 
 @Table
-export class Brand extends Model{
-  
-  @PrimaryKey
-  @AutoIncrement
-  @Column
-  id!:number;
+export class Brand extends Model {
+
+  @HasMany(() => Product)
+  products!: Product[];
 
   @Column
-  description!: string;
+  name!: string;
 
 }

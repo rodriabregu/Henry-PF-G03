@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+
+
+.product-detail{
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+.product-img img{
+    height: 380px;
+    width: 670;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.detail button{
+	background-color:#343692b7;
+    border-radius: 20px;    
+    text-align: center;
+    height: 22px;
+	width: 22px;
+    line-height: 3px;
+    color:#dcdcf0;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    cursor: pointer;
+}
+
+.detail button:hover,
+.detail button.active {
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+ }
+
+ .detail img{
+    border-radius: 3px;
+ }
+
+ .subdetail{
+     display:flex;
+     align-items: center;
+     justify-content:space-evenly;
+     margin-right: 30vw;
+     width: 300px;
+ }

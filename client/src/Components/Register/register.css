@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* .card-form{
+    width: 500px;
+    border: 1px solid #f166c35d;
+    border-radius: 30px;
+    background: rgba(251, 204, 255, 0.747);
+    margin-left: 100px;
+} */
+
+.form-register{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-register div{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-register input{
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+}
+
+.form-register span{
+    color: red;
+    font-size: 12px;
+}
+
+.button-r{
+    color:  #7b7bc2;
+    background-color:white;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 10px;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: 260px;
+}
+
+.button-r:hover{
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+}
