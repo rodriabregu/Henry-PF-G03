@@ -1,53 +1,58 @@
 import './login.css';
-import { Form, Input, Button, Checkbox } from 'antd';
-
-const { Item } = Form;
-const { Password } = Input;
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
 
-    const formSuccess = (datos:any) => {
-        console.log('Send nice', datos);
-    }
-    const formFailed = (error:any) => {
-        console.log('Failed send', error);
-    }
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+    const notify = () => toast.success('Successfully created!');
+
+    const onSubmit = (data: any) => (console.log(data), notify(), reset())
 
     return (
-        <div className='containerPrincipal'>
-            <div className='containerSecundario'>
-                <Form name='form' initialValues={{remember: true}}
-                onFinish={formSuccess}
-                onFinishFailed={formFailed}
-                >
-                    <Item 
-                    label='User'
-                    name='username'
-                    rules={[{
-                        required: true,
-                        message: 'Please enter your username.'
-                    }]}
-                    >
-                        <Input />
-                    </Item>
-                    <Item 
-                    label='Password'
-                    name='password'
-                    rules={[{
-                        required: true,
-                        message: 'Please enter your password.'
-                    }]}
-                    >
-                        <Password />
-                    </Item>
-                    <Item name='remember' valuePropName='checked'>
-                        <Checkbox>Member username</Checkbox>
-                    </Item>
-                    <Item>
-                        <Button type='primary' htmlType='submit'>Log in</Button>
-                    </Item>
-                </Form>
+        <div className='form-register'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <div><h1>Login an account</h1></div>
+            <div>
+            <label htmlFor="username">Username</label>
+            <input id='username' type="text" placeholder="Fort24 (example)" {...register("username", {
+                required: "required",
+                minLength: {
+                    value: 3,
+                    message: "Min length is 3."
+                },
+                maxLength: {
+                    value: 16,
+                    message: "Max length is 16."
+                }
+            }
+            )} />
+            {errors.username && <span role="alert">{errors.username.message}</span>}
             </div>
+            <div>
+            <label htmlFor="password">Password</label>
+            <input
+                id="password"
+                placeholder='pepito123 (example)'
+                type="password"
+                {...register("password", {
+                    required: "required",
+                    minLength: {
+                        value: 3,
+                        message: "Min length is 3."
+                    },
+                    maxLength: {
+                        value: 24,
+                        message: "Max length is 24."
+                    }
+                })}
+            />
+            {errors.password && <span role="alert">{errors.password.message}</span>}
+            </div>
+            <input className='button-r' type="submit" />
+            <Toaster />
+        </form>
         </div>
     );
 };

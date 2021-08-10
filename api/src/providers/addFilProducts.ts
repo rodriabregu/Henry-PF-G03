@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs'
 import { appProduct } from '../@app'
-import { sequelize } from '../db'
-const {
-  Product, Photo, Brand, Category, ProductsCategory
-} = sequelize.models;
+
+import {
+  Product, Photo, Brand, Category, ProductCategory
+} from '../db'
 
 export default async () => {
   let count = await Product.count()
@@ -39,7 +39,7 @@ export default async () => {
     const productId = await newPoduct.getDataValue("id")
     const categoryId = await category.getDataValue("id")
     await Photo.findOrCreate({ where: { url: product.photo, productId } })
-    await ProductsCategory.findOrCreate({ where: { productId, categoryId } })
+    await ProductCategory.findOrCreate({ where: { productId, categoryId } })
 
   }
 

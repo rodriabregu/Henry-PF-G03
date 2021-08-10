@@ -1,6 +1,7 @@
 import {
   Model, Column, Table, HasMany
 } from 'sequelize-typescript';
+
 import { Product } from './Product';
 
 @Table

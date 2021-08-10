@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
-import { IInfo } from "../../Data/index";
+import { IInfo } from '../../Data/index';
 import { NavLink as Link } from 'react-router-dom';
-import './Pagination.css';
 import SearchBar from '../SearchBar/SearchBar';
+import SelectCategory from '../Products/SelectCategory';
+import './Pagination.css';
 
 const Pagination = () => {
+
     const dispatch = useDispatch();
 
     const products: any = useSelector<any>(s => s.products);
@@ -16,23 +18,25 @@ const Pagination = () => {
     const [filterp, setFilterp] = useState([]);
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, setitemsPerPage] = useState(10);
+    const [itemsPerPage, _setitemsPerPage] = useState(10);
 
-    const [pageNumberLimit, setpageNumberLimit] = useState(8);
+    const [pageNumberLimit, _setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+    const [category,setCategory]=useState('');
 
     const handleClick = (e: any) => {
         setcurrentPage(Number(e.target.id));
     };
 
-    const selectChange=(e:any)=>{
+    const selectChange = (e:any) => {
+        setcurrentPage(1)
         dispatch(getFilteredProducts(e.target.value))
-    }
+    };
 
     const handleFilter=()=>{
         dispatch(clearFilters())
-    }
+    };
 
     const pages = [];
     for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
@@ -96,80 +100,87 @@ const Pagination = () => {
         pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
     }
 
-    const renderProduct = (filterp: any) => {
-        return (
-            <div>
+  const renderProduct = (filterp: any) => {
+    return (
+      <div>
         <div className='sheetGrid'>
-                    {productDetail?.length >= 1 ?
-                        productDetail?.map((e: IInfo, index: number) => {
-                            return (
-                                <div className='imgproducts' key={index}>
-                                    <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
-                                        <h2>{e.name.toUpperCase()}</h2>
-                                        <h3>${e.price}.00</h3>
-                                        <img src={e.img} alt={e.name} />
-                                    </Link>
-                                </div>
-                            )
-                        })
-                        :
-                        filterp?.map((e: IInfo, index: number) => {
-                            return (
-                                <div className='imgproducts' key={index}>
-                                    <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
-                                        <div>{e.name}</div>
-                                        <div>${e.price}.00</div>
-                                        <img src={e.photos?e.photos[0].url:''} alt={e.name} />
-                                    </Link>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-        )
-    }
+          {productDetail?.length >= 1
+            ? productDetail?.map((e: IInfo, index: number) => {
+                return (
+                  <div className='imgproducts' key={index}>
+                    <Link
+                      style={{ textDecoration: 'none', color: '#000000' }}
+                      to={`/product/${e.id}`}>
+                      <h2>{e.name.toUpperCase()}</h2>
+                      <h3>${e.price}.00</h3>
+                      <img src={e.img} alt={e.name} />
+                    </Link>
+                  </div>
+                );
+              })
+            : filterp?.map((e: IInfo, index: number) => {
+                return (
+                  <div className='imgproducts' key={index}>
+                    <Link
+                      style={{ textDecoration: 'none', color: '#000000' }}
+                      to={`/product/${e.id}`}>
+                      <div>{e.name}</div>
+                      <div>${e.price}.00</div>
+                      <img src={e.photos ? e.photos[0].url : ''} alt={e.name} />
+                    </Link>
+                  </div>
+                );
+              })}
+        </div>
+      </div>
+    );
+  };
 
-    useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
-    useEffect(() => {
-        setFilterp(products);
-    }, [products]);
-
+  useEffect(() => {
+    setFilterp(products);
+  }, [products]);
+      
     return (
         <div>
             <div className='search-bar'>
                 <SearchBar onSearch={onSearch} />
             </div>
                 <div className='filters'>
-                        <select onChange={selectChange}>
+                    <SelectCategory onChange={selectChange} path='categories'/>
+                    
+                        {/* <select onChange={selectChange}>
                             <option>Accesories</option>
                             <option>Kids</option>
                             <option>Men</option>
                             <option>Women</option>
-                        </select>
-                        <button onClick={handleFilter}>Set Filters</button>
-                </div>  
-            <div className='pageNumbers'>
-                <button
+                        </select> */}
+        <button onClick={handleFilter}>Set Filters</button>
+      </div>
+      <div className='pageNumbers'>
+        {currentPage > 1 ? <button onClick={handlePrevbtn}>Prev</button> : ''}
+        {/*                 <button
                     onClick={handlePrevbtn}
                     disabled={currentPage === pages[0] ? true : false}>
                         Prev
-                </button>
-                    {pageDecrementBtn}
-                    {renderPageNumbers}
-                    {pageIncrementBtn}
-                <button
-                    onClick={handleNextbtn}
-                    disabled={currentPage === pages[pages.length - 1] ? true : false}>
-                        Next
-                </button>
-            </div>
-            {renderProduct(currentItems)}
-        </div>
-    );
+                </button> */}
+        <li>
+          {pageDecrementBtn}
+          {renderPageNumbers}
+          {pageIncrementBtn}
+        </li>
+        <button
+          onClick={handleNextbtn}
+          disabled={currentPage === pages[pages.length - 1] ? true : false}>
+          Next
+        </button>
+      </div>
+      {renderProduct(currentItems)}
+    </div>
+  );
 };
 
 export default Pagination;

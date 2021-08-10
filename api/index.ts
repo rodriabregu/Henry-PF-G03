@@ -3,11 +3,10 @@ import app from './src/app';
 import { addFilProducts } from './src/providers'
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log('database connected!');
-    return addFilProducts(); 
-    //  DROP DATABASE clubdb; CREATE DATABASE clubdb;
+    return addFilProducts();     
   })
   .then((message) => {
     console.log(message)
