@@ -31,15 +31,15 @@ function getProductReducer(state = initialState, action: any) {
     case CLEAR_FILTERS:
       return {
         ...state,
-        products:state.AllProducts
+        products: state.AllProducts
       }
-      case POST_PRODUCTS:
-        return{
-          ...state,
-          products: [ ...state.products, action.payload ]
-        }
-      default:
-        return state;
+    case POST_PRODUCTS:
+      return {
+        ...state,
+        products: [...state.products, action.payload]
+      }
+    default:
+      return state;
   };
 };
 

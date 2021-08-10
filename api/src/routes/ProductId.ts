@@ -1,8 +1,7 @@
 import { Router, Request, Response } from 'express';
-import { Product } from '../models/Product';
-import { Photo } from '../models/Photo'
-import { Category } from '../models/Category';
-import {Brand} from '../models/Brand'
+import {
+  Product, Photo, Category, Brand,
+} from '../db'
 
 const router = Router();
 

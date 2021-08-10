@@ -1,14 +1,28 @@
-import { Model, Column, Table } from 'sequelize-typescript';
+import {
+  Model, Column, Table, HasMany
+} from 'sequelize-typescript';
+
+import { Sale } from './Sale';
 
 @Table
 export class User extends Model<User> {
+
   @Column
-  name!: string;
+  userNane!: string; //userName
+
+  @Column
+  email!: string;
+
+  @Column
+  hashPasword!: string;
+
+  @Column
+  firstName!: string;
 
   @Column
   lastName!: string;
 
-  @Column
-  email!: string;
+  @HasMany(() => Sale)
+  Sales!: Sale[];
 
 }
