@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import './CreateProducts.css';
 import SelectCategory from "./SelectCategory";
+import { unstable_batchedUpdates } from "react-dom";
 
 const notify = () => toast.success('Successfully created!');
 
@@ -72,7 +73,7 @@ const CreateProducts = () => {
     price: 0,
     stock: 0,
     brand:'',
-    categories: [],
+    categories: []
   });
 
   function handleInput(e) {
@@ -88,12 +89,6 @@ const CreateProducts = () => {
     );
   };
 
-  const handleCategories = e => {
-    setInput({
-      ...input,
-      categories: [...input.categories, e.target.value]
-    })
-  }
 
   const handlePhotos = e => { setInput({
     ...input, 
@@ -101,9 +96,25 @@ const CreateProducts = () => {
   };
 
   const handleChange=(e)=>{
+      setInput({
+        ...input,
+        [e.target.name]:e.target.value
+      })  
+  }
+
+  const handleCategories=(e)=>{
+    console.log(e)
     setInput({
       ...input,
-      [e.target.name]:e.target.value
+      categories:[...input.categories,e.target.value],
+    })
+  }
+
+  const removeCategory=(e)=>{
+    //console.log('borrando ',e.target.value)
+    setInput({
+      ...input,
+      categories:input.categories.filter(c=>c!==e.target.id),
     })
   }
 
@@ -135,6 +146,7 @@ const CreateProducts = () => {
     })
   }
 
+  
   return (
     <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -199,20 +211,21 @@ const CreateProducts = () => {
         </div>
         <Toaster/>
         <label for="categories">Category</label>
-          <select name="categories" value={input.categories} onChange={handleCategories}>
+          <SelectCategory name="categories" path='categories' onChange={handleCategories}/>
+          {/* <select name="categories" value={input.categories} onChange={handleCategories}>
             <option value="---">Categorie:</option>
             <option value={parseInt(1)}>1 Acces</option>
             <option value={2}>2 men</option>
             <option value={3}>3 women</option>
             <option value={4}>4 kids</option>
-          </select>
+          </select> */}
           <div>
             {
               input.categories.map(c => {
                 return ( 
                   <>
                   {/* <p>{c}</p> */}
-                  <button >{c} X</button>
+                  <button id={c} onClick={removeCategory}>{c} X</button>
                   </>
                 )
               })

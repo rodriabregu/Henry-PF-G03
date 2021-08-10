@@ -14,7 +14,7 @@ export default async () => {
   )
   console.log("prooducts in fil: ", products.length);
 
-  const AddProduct = async (product: appProduct) => {
+  const AddProduct = async (product: any) => {
 
     const [brand] = await Brand.findOrCreate(
       { where: { name: product.brand.toUpperCase() } }    )
@@ -28,19 +28,31 @@ export default async () => {
         photo: product.photo,
         brandId,
         price: product.price,
-        category: product.category,
+        //category: product.category,
         description: product.name + product.brand + product.category,
         stock: product.name.length
       }
     })
-    const [category] = await Category.findOrCreate({
-      where: { name: product.category }
-    })
+    // const [category] = await Category.findOrCreate({
+    //   where: { name: product.category }
+    // })
     const productId = await newPoduct.getDataValue("id")
-    const categoryId = await category.getDataValue("id")
+    //const categoryId = await category.getDataValue("id")
     await Photo.findOrCreate({ where: { url: product.photo, productId } })
-    await ProductCategory.findOrCreate({ where: { productId, categoryId } })
+    //await ProductCategory.findOrCreate({ where: { productId, categoryId } })
+    //console.log(`categorias del producto ${productId} ${product.category}`)
+    
+    //console.log(`Creando ProductCategory con: ${productId} ${product.category}`);
 
+    try{
+      for(let i=0; i<product.category.length; i++){
+        //console.log(`product: ${productId} categoryId: ${product.category[i]}`)
+        await ProductCategory.findOrCreate({where:{productId,categoryId:product.category[i]}})
+      }
+
+    }catch(e){
+      console.log(e);
+    }
   }
 
   for (let i = 0; i < products.length; i++) {
