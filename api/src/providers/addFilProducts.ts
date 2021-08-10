@@ -46,16 +46,13 @@ export default async () => {
 
     try{
       for(let i=0; i<product.category.length; i++){
-        console.log(`product: ${productId} categoryId: ${product.category[i]}`)
+        //console.log(`product: ${productId} categoryId: ${product.category[i]}`)
         await ProductCategory.findOrCreate({where:{productId,categoryId:product.category[i]}})
       }
 
     }catch(e){
       console.log(e);
     }
-    
-
-
   }
 
   for (let i = 0; i < products.length; i++) {
