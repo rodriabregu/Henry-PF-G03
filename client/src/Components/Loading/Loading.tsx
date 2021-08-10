@@ -3,7 +3,7 @@ import './Loading.css';
 export const Loading = () => { 
     return (
     <div className='prev'>
-        <img className="loading-gif" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif" alt="Enter" />      
+        <img className="loading-gif" src="https://k-quarantineexpo.com/home/2020/qua/image/loading_eng.gif" alt="Enter" />      
     </div>
     )}
 

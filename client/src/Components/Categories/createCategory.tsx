@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import axios from 'axios'
+import './createCategory.css';
+
 const CreateCategory = () => {
     
   const [category,setCategory]=useState('')
@@ -24,22 +26,24 @@ const CreateCategory = () => {
 
       setTimeout(()=>{
         setMessage('')
-      },5000)
+      },10000)
   }
 
 
   return (
+    <div className='form-c'>
       <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nombre de la categoria</label>
-            <input required onChange={handleChange} type="text" name="category" value={category} />
-          </div>
-          <div>
-            <input type="submit" value="Submit"/>
-          </div>
-
-          <div><h4>{message}</h4></div>
+          <div><h1>Add a new category</h1></div>
+            <div>
+              <label>Category name:</label>
+              <input required onChange={handleChange} type="text" name="category" value={category} />
+            </div>          
+            <div>
+              <input className='btn-c' type="submit" value="Submit"/>
+            </div>
+            <div><h4>{message}</h4></div>
       </form>
+    </div>
     );
   };
 

@@ -28,14 +28,14 @@ const Pagination = () => {
         setcurrentPage(Number(e.target.id));
     };
 
-    const selectChange=(e:any)=>{
+    const selectChange = (e:any) => {
         setcurrentPage(1)
         dispatch(getFilteredProducts(e.target.value))
-    }
+    };
 
     const handleFilter=()=>{
         dispatch(clearFilters())
-    }
+    };
 
     const pages = [];
     for (let i = 1; i <= Math.ceil(filterp.length / itemsPerPage); i++) {
@@ -81,7 +81,7 @@ const Pagination = () => {
         }
     };
 
-    const handlePrevbtn = () => {
+  const handlePrevbtn = () => {
         setcurrentPage(currentPage - 1);
         if ((currentPage - 1) % pageNumberLimit === 0) {
             setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
@@ -98,6 +98,7 @@ const Pagination = () => {
     if (minPageNumberLimit >= 1) {
         pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
     }
+
 
     const renderProduct = (filterp: any) => {
         return (
