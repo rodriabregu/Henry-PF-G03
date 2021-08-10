@@ -81,7 +81,7 @@ const Pagination = () => {
         }
     };
 
-  const handlePrevbtn = () => {
+    const handlePrevbtn = () => {
         setcurrentPage(currentPage - 1);
         if ((currentPage - 1) % pageNumberLimit === 0) {
             setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
@@ -98,7 +98,6 @@ const Pagination = () => {
     if (minPageNumberLimit >= 1) {
         pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
     }
-
 
     const renderProduct = (filterp: any) => {
         return (

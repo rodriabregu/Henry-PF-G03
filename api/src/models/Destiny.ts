@@ -1,17 +1,15 @@
 import {
   Model, Column, Table, DataType, Comment,
-  PrimaryKey, AutoIncrement, AllowNull,
+  PrimaryKey, AutoIncrement, AllowNull, NotNull,
   HasMany, HasOne, BelongsTo, BelongsToMany, ForeignKey
 } from 'sequelize-typescript'
 
-@Table
-export class Modelx extends Model<Modelx> {
+import { Sale } from "./Sale"
+import { User } from "./User"
 
-  @AllowNull
-  @AutoIncrement
-  @PrimaryKey
-  @Column
-  id!: number;
+
+@Table
+export class Destiny extends Model<Destiny> {
 
   @Column
   name!: string;

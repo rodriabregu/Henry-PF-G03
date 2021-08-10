@@ -10,30 +10,33 @@
 
 import { Response, Request, Router } from 'express';
 import { Op } from 'sequelize';
-import { Product } from '../models/Product';
+import { Product } from '../db';
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
- 
+
   console.table(req.query);
- 
+
   try {
 
     let array: string[] = Object["values"](req.query as any);
 
     console.log(req.query);
-  
+
     let productFound = await Product.findAll({
-  
-    where: { category: {
-      [Op.in]: array }
-     }})
+
+      where: {
+        category: {
+          [Op.in]: array
+        }
+      }
+    })
 
     if (productFound) return res.send(productFound);
-  
-  throw new Error();
-  
+
+    throw new Error();
+
   } catch (error) {
 
     res.status(404).send(`Product Categories : ${req.query.category} not found!`);
