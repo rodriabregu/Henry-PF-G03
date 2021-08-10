@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { VscError} from 'react-icons/vsc';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import './CreateProducts.css';
 import SelectCategory from "./SelectCategory";
@@ -72,7 +72,7 @@ const CreateProducts = () => {
     price: 0,
     stock: 0,
     brand:'',
-    categories: [1, 2, 3, 4],
+    categories: [],
   });
 
   function handleInput(e) {
@@ -87,6 +87,13 @@ const CreateProducts = () => {
       })
     );
   };
+
+  const handleCategories = e => {
+    setInput({
+      ...input,
+      categories: [...input.categories, e.target.value]
+    })
+  }
 
   const handlePhotos = e => { setInput({
     ...input, 
@@ -115,8 +122,17 @@ const CreateProducts = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     dispatch(postProducts(product))
+    console.log(product)
     notify()
-    setInput({'':''})
+    setInput({
+      name:'',
+      photos: [],
+      description:'',
+      price: 0,
+      stock: 0,
+      brand:'',
+      categories: [],
+    })
   }
 
   return (
@@ -179,37 +195,29 @@ const CreateProducts = () => {
         </div>
         <div className='brand-s'>
           <label for="brand">Brand:</label>
-          <SelectCategory name="brand" path='brand' onChange={handleChange}/>
-          {/* <input
-          <label for="brand">Brand:</label>
-          <input
-          type="text"
-          name="brand"
-          placeholder="Enter the brand"
-          required="required"
-          value={input.brand}
-          onChange={handleInput}/> */}
-          {errors.brand && <p className="danger">{errors.brand}</p>}
+          <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
-        {/* <div> */}
-          {/* <label for="categories">Category</label> */}
-{/*         <select name="categories" value={input.categories} onChange={handleCategories}>
+        <Toaster/>
+        <label for="categories">Category</label>
+          <select name="categories" value={input.categories} onChange={handleCategories}>
             <option value="---">Categorie:</option>
-            <option value={accesories.Accesories}>1</option>
-            <option value={input.Men}>2</option>
-            <option value={input.Women}>3</option>
-            <option value={input.Kids}>4</option>
-        </select> */}
-{/*         <input
-          type="text"
-          name="categories"
-          placeholder="Enter the category"
-          required="required"
-          value={input.categories}
-          onChange={handleInput}
-        /> */}
-          {/* {errors.categories && <p className="danger">{errors.categories}</p>} */}
-        {/* </div> */}
+            <option value={parseInt(1)}>1 Acces</option>
+            <option value={2}>2 men</option>
+            <option value={3}>3 women</option>
+            <option value={4}>4 kids</option>
+          </select>
+          <div>
+            {
+              input.categories.map(c => {
+                return ( 
+                  <>
+                  {/* <p>{c}</p> */}
+                  <button >{c} X</button>
+                  </>
+                )
+              })
+            }
+          </div>
         <div>
           <button>Submit</button>
         </div>
