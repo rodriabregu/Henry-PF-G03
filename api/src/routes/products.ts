@@ -1,12 +1,9 @@
 import { Router, Request, Response } from 'express';
 
 import { addProduct } from '../providers';
-import { appProduct, productOptions } from "../@app"
+import { productOptions } from "../@app"
 
-import { sequelize } from '../db';
-const {
-  Product, Photo, Category, Brand,
-} = sequelize.models;
+import { Product } from '../db'
 
 const router = Router();
 

@@ -12,7 +12,6 @@ import { Product, ProductCategory } from '../db';
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
-  console.table(req.query);
 
   try {
     const categories: number[] = Object.values(req.query as any)

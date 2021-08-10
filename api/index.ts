@@ -6,8 +6,7 @@ sequelize
   .sync({ force: true })
   .then(() => {
     console.log('database connected!');
-    return addFilProducts(); 
-    //  DROP DATABASE clubdb; CREATE DATABASE clubdb;
+    return addFilProducts();     
   })
   .then((message) => {
     console.log(message)

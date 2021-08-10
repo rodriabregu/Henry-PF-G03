@@ -3,12 +3,7 @@ import { Category } from './Category';
 
 @Table
 export class CategoryType extends Model{  
-  
-  @PrimaryKey
-  @AutoIncrement
-  @Column
-  id!:number;
-  
+    
   @Column
   description!: string;
   

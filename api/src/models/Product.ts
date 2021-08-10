@@ -1,6 +1,6 @@
 import {
   Model, DataType, Column, Table, ForeignKey,
-  HasMany, BelongsToMany,BelongsTo
+  HasMany, BelongsToMany, BelongsTo,
 } from 'sequelize-typescript'
 
 import { Photo } from './Photo';
@@ -14,6 +14,9 @@ export class Product extends Model {
   @Column({ unique: true })
   name!: string;
 
+  @Column
+  isActive!: boolean;
+
   @Column(DataType.TEXT)
   description!: string;
 
@@ -25,18 +28,14 @@ export class Product extends Model {
 
   @Column
   photo!: string;
-  
+
   @Column
   category!: string;
-
-  //@Column
-  //sport!: string;
 
   @BelongsTo(() => Brand)
   brand!: Brand;
 
   @ForeignKey(() => Brand)
-  @Column
   brandId!: number;
 
   @HasMany(() => Photo)

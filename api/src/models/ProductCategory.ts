@@ -1,6 +1,7 @@
 import {
   Model, Table, ForeignKey
 } from 'sequelize-typescript';
+
 import { Product } from './Product'
 import { Category } from './Category'
 
