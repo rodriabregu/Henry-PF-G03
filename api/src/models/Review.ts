@@ -6,7 +6,7 @@ import { User } from "./User"
 import { Product } from "./Product"
 
 @Table
-export class Review extends Model {
+export class Review extends Model<Review> {
 
   @Column(DataType.TEXT)
   text!: string;
