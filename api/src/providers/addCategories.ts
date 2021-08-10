@@ -30,7 +30,7 @@ const addCategories = async () => {
     await Category.create({ name: 'Running', categoryTypeId: 3 })
     await Category.create({ name: 'Other', categoryTypeId: 3 })
 
-  
+    console.log('categorias creadas en BD')
 }
 
 
