@@ -7,7 +7,6 @@ import './CreateProducts.css'
 const SelectCategory=(props:any)=>{
 
     const {path}=props;
-
     const [elements,setelements]=useState([]);
 
     useEffect(()=>{
