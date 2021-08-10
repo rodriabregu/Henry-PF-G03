@@ -1,8 +1,11 @@
-import { Model, Column, Table, BelongsToMany, ForeignKey } from 'sequelize-typescript';
+import {
+  Model, Column, Table, BelongsToMany, ForeignKey
+} from 'sequelize-typescript';
+
 import { CategoryType } from './CategoryType';
 import { Product } from './Product'
-import { ProductsCategory } from './ProductsCategory';
- 
+import { ProductCategory } from './ProductCategory';
+
 
 @Table
 export class Category extends Model {
@@ -13,7 +16,7 @@ export class Category extends Model {
   @Column
   name!: string;
 
-  @BelongsToMany(() => Product, () => ProductsCategory)
+  @BelongsToMany(() => Product, () => ProductCategory)
   products!: Product[]
 
 }

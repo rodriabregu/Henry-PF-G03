@@ -1,11 +1,11 @@
 import {
   Model, DataType, Column, Table, ForeignKey,
-  HasMany, BelongsToMany,BelongsTo
+  HasMany, BelongsToMany, BelongsTo,
 } from 'sequelize-typescript'
 
 import { Photo } from './Photo';
 import { Category } from './Category';
-import { ProductsCategory } from './ProductsCategory';
+import { ProductCategory } from './ProductCategory';
 import { Brand } from './Brand';
 
 @Table
@@ -13,6 +13,9 @@ export class Product extends Model {
 
   @Column({ unique: true })
   name!: string;
+
+  @Column
+  isActive!: boolean;
 
   @Column(DataType.TEXT)
   description!: string;
@@ -25,24 +28,20 @@ export class Product extends Model {
 
   @Column
   photo!: string;
-  
+
   @Column
   category!: string;
-
-  //@Column
-  //sport!: string;
 
   @BelongsTo(() => Brand)
   brand!: Brand;
 
   @ForeignKey(() => Brand)
-  @Column
   brandId!: number;
 
   @HasMany(() => Photo)
   photos!: Photo[];
 
-  @BelongsToMany(() => Category, () => ProductsCategory)
+  @BelongsToMany(() => Category, () => ProductCategory)
   categories!: Category[];
 
 }

@@ -1,33 +1,33 @@
 import { Router, Request, Response } from 'express';
 const router = Router();
-import {Category} from '../models/Category'
+import { Category } from '../db'
 
-router.get('/', async(req: Request, res: Response) => {
-  const categoriesAll=await Category.findAll(
+router.get('/', async (req: Request, res: Response) => {
+  const categoriesAll = await Category.findAll(
     {
-      order:['name']
+      order: ['name']
     }
   );
-  res.json(categoriesAll)  
+  res.json(categoriesAll)
 })
 
-router.post('/new', async(req: Request, res: Response) => {
-    let {categoryTypeId, name}=req.body;
+router.post('/new', async (req: Request, res: Response) => {
+  let { categoryTypeId, name } = req.body;
 
-    name=name.toLowerCase();
-    name=name.replace(/\w\S*/g, (w:any) => (w.replace(/^\w/, (c:any) => c.toUpperCase())));
+  name = name.toLowerCase();
+  name = name.replace(/\w\S*/g, (w: any) => (w.replace(/^\w/, (c: any) => c.toUpperCase())));
 
-    const categoryNew = await Category.findOrCreate({
-      where:{name}
-    })
+  const categoryNew = await Category.findOrCreate({
+    where: { name }
+  })
 
-    console.log(categoryNew[1])
+  console.log(categoryNew[1])
 
-    if(categoryNew[1]==false){
-      return res.status(400).json(`Category ${name} already exists`)
-    }
+  if (categoryNew[1] == false) {
+    return res.status(400).json(`Category ${name} already exists`)
+  }
 
-    return res.json(`Category '${name}' created!`)
+  return res.json(`Category '${name}' created!`)
 
 })
 
