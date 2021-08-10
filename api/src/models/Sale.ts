@@ -10,12 +10,12 @@ import { Destiny } from "./Destiny"
 export class Sale extends Model<Sale> {
 
   @Column(DataType.ENUM(
-    'created', 'processing', 'cancelled', 'complete'
+    'Created', 'Processing', 'Cancelled', 'Complete'
   ))
   state!: string
 
   @Column(DataType.DATE)
-  date!: string
+  date!: Date
 
   @ForeignKey(() => User)
   userId!: number
