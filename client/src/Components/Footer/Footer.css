@@ -2,9 +2,15 @@
     background-color: #2E2E48;
     padding: 70px 0;
     font-family: 'Montserrat', sans-serif;   
-    bottom: 0 !important;
     width: 100%;
     color: #bcbdf1;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 0 33px;
 }
 
 .social-icons{
@@ -25,18 +31,14 @@
 	transition: all 0.5s ease;
     font-size: 30px;
 }
+
 .social-icons a:hover{
 	color: #24262b;
 	background-color: #50518d;
 }
 
-.links {
-    margin-left: 1000px;
-    margin-bottom: -50px;
-}
-
 .links a {
-    color: #bcbdf1;
+    color: white;
     text-decoration: none;
 }
 
@@ -44,27 +46,12 @@
 color:   #50518d;
 }
 
-
 .copyrigth{
     margin-left: 30px;
     margin-bottom: -60px;
     color: #bcbdf1;
     font-size: 11px;
+    place-self: center;
 }
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
-
-/* @media(max-width: 100px){
-    .footer-container{
-      width: 50%;
-      margin-bottom: 30px;
-  }
-  }
-  @media(max-width: 100px){
-    .footer-container{
-      width: 100%;
-  }
-  } */
-  

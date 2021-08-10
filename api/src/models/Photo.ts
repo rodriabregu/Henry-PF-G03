@@ -1,6 +1,5 @@
 import {
-  DataType, Model, Column, Table,
-  PrimaryKey, AutoIncrement, ForeignKey
+  DataType, Model, Column, Table, ForeignKey
 } from 'sequelize-typescript'
 
 import { Product } from './Product';
@@ -9,7 +8,6 @@ import { Product } from './Product';
 export class Photo extends Model {
 
   @ForeignKey(() => Product)
-  @Column(DataType.INTEGER)
   productId!: number;
 
   @Column(DataType.TEXT)

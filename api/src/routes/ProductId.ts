@@ -1,5 +1,7 @@
 import { Router, Request, Response } from 'express';
-import { Product } from '../models/Product';
+import {
+  Product, Photo, Category, Brand,
+} from '../db'
 
 const router = Router();
 
@@ -11,7 +13,14 @@ router.get('/:id', async (req: Request, res: Response) => {
 
   try {
     // Search product in DB
-    let productFound = await Product.findByPk(req.params.id);
+    let productFound = await Product.findByPk(req.params.id, {
+      include: [
+        {model:Photo},
+        {model:Category},
+        {model:Brand}
+      ]
+    }
+    );
 
     if (productFound) return res.send(productFound);
 

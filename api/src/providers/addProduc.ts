@@ -1,18 +1,39 @@
-import { sequelize } from '../db';
-const { Product, Photo } = sequelize.models;
 import { appProduct } from '../@app'
 
-export default async function
-  (product: appProduct): Promise<any> {
+import {
+  Product, Photo, Brand, ProductCategory
+} from '../db';
 
-  const neWProduct = await Product.create(product)
-  const productId = await neWProduct.getDataValue('id')
-  await Promise.all(product.photos.map(photo => {
-    return Photo.create({ url: photo, productId })
+export default async function (
+  product: appProduct,
+  photos: string[],
+  categories: number[],
+): Promise<number> {
+
+  const [brand] = await Brand.findOrCreate(
+    { where: { name: product.brand.toUpperCase() } })
+
+  const brandId = await brand.getDataValue("id")
+
+  const [neWProduct] = (
+    await Product.findOrCreate({
+      where: { name: product.name },
+      defaults: { ...product, brandId }
+    })
+  )
+
+  const productId = await neWProduct.getDataValue('id');
+
+  await Promise.all(photos.map(photo => {
+    return Photo.findOrCreate(
+      { where: { url: photo, productId } }
+    )
   }))
-  
-  return Product.findOne({
-    where: { id: productId },
-    include: "photos",
-  });
+  await Promise.all(categories.map(categoryId =>
+    ProductCategory.findOrCreate(
+      { where: { categoryId, productId } }
+    )
+  ))
+
+  return productId;
 }

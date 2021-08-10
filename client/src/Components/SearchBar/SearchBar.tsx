@@ -1,36 +1,35 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
-import { VscSearch } from 'react-icons/vsc';
+import { useState, useEffect, ChangeEvent } from 'react';
+import './SearchBar.css';
 
-const SearchBar = (): JSX.Element => {
-  const [title, setTitle] = useState("");
-  const dispatch = useDispatch();
+interface ISearchBar {
+  onSearch: (input:string) => void;
+};
 
-  const handleChange = (e:any) => {
-    setTitle(e.target.value)
-  };
+const SearchBar = ({onSearch}:ISearchBar): JSX.Element => {
+  const [input, setInput ] = useState<string>('');
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-        dispatch(getProductsDetail(dispatch, title));
-  };
+  const handleChange = (event:ChangeEvent):void => {
+    const {value} = event.target as HTMLInputElement
+    setInput(value);
+  }
+
+  useEffect(() => {
+    onSearch(input.toLowerCase());
+  }, [input]);
 
   return (
     <div>
-    <form onSubmit={ e => handleSubmit(e)}>
-      <input type="text"
-      autoComplete="off"
-      value={title}
-      onChange={e => handleChange(e)}    
-      placeholder='Find product'  
+      <div className='container-search'>
+      <input 
+        type="text"
+        autoComplete="off"
+        value={input}
+        onChange={handleChange}    
+        placeholder='Find product'  
       />
-      <button type='submit'>
-        Search <VscSearch/>
-      </button>
-    </form>
+      </div>
   </div>
-  )
+  );
 };
 
 export default SearchBar;

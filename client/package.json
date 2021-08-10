@@ -5,6 +5,7 @@
   "author": "FT-14a Grupo 03",
   "private": true,
   "dependencies": {
+    "@hookform/error-message": "^2.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -14,8 +15,10 @@
     "antd": "^4.16.10",
     "axios": "^0.21.1",
     "react": "^17.0.2",
+    "react-cool-form": "^0.4.1",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.12.2",
+    "react-hot-toast": "^2.1.0",
     "react-icons": "^4.2.0",
     "react-paginate": "^7.1.3",
     "react-redux": "^7.2.4",

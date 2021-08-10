@@ -1,55 +1,59 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProducts } from '../../Redux/Actions/getProducts';
-import { getProductsDetail } from '../../Redux/Actions/getProductsDetail';
-import { NavLink as Link } from 'react-router-dom';
-import { AiOutlineRollback } from 'react-icons/ai';
+import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import './productDetail.css';
 
 type KeyParams = {
     id: string;
-  };
+};
 
 const ProductDetail = () => {
     const { id } = useParams<KeyParams>();
-    const detail = useSelector((s:any) => s.productsDetail);
+    const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
-    console.log('detail', detail)
+
+    const [photo, setPhoto] = useState(0);
+
+    const changePhoto=(e:any)=>{
+        const action=e.target.name;
+        console.log(action)
+        if( action === 'next' ){
+            if( photo < detail.photos.length - 1 ){
+                setPhoto(photo+1)
+            }
+        } else {
+            if( photo > 0 ) {
+                setPhoto(photo-1)
+            }
+        }
+    };
 
     useEffect(() => {
-        dispatch(getProductsDetail(dispatch, id));
+        dispatch(getProductsDetail(parseInt(id)));
     }, [dispatch, id]);
-
-/*     useEffect(() => {
-        dispatch(getProducts);
-      }, [dispatch]); */
 
     return (
         <div>
-            <div className='button'>
-                <Link to='/home'>
-                    <button onClick={dispatch<any>(getProducts)}>
-                        Back to home <AiOutlineRollback />
-                    </button>
-                </Link>
-            </div>
-            { detail.map((e:any) => {
-                return (
-                <div className='detailgeneral'>
-                    <div className='product-detail'>    
-                        <h1 className='title'>{e.name.toUpperCase()}</h1>
-                        <h2>${e.price}.00</h2>
-                        <h3>Size: {e.size.toUpperCase()}</h3>
-                        <h3>Review: {e.review}</h3>
+            <div className='product-detail'>
+                <div className='product-img'>
+                    <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
+                </div>
+                <div className='detail'>
+                    <h1>{detail.name}</h1>
+                    <h2>${detail.price}.00</h2>
+                    <h3>Stock: {detail.stock}</h3>
+                    <h3>Brand: {detail.brand?detail.brand.name:''}</h3>
+                    <h3>Review: {detail.review}</h3>
+                    <div className='subdetail'>
+                    <button name='prev' onClick={changePhoto}>{`<`}</button>
+                    {detail.photos?detail.photos.map((f:any)=><img src={f.url} width='50px' height='50px' alt='not found'></img>):''}
+                    <button name='next' onClick={changePhoto}>{`>`}</button>
                     </div>
-                        <div className='product-img'><img src={e.img} alt='img not found'/></div>
-                    </div>         
-                )
-            })}
-            
+                </div>
+            </div> 
         </div>
-    )
-}
+    );
+};
 
 export default ProductDetail;
