@@ -120,7 +120,7 @@ const Pagination = () => {
                             return (
                                 <div className='imgproducts' key={index}>
                                     <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
-                                        <div>{e.name}</div>
+                                        <div className='name'>{e.name}</div>
                                         <div>${e.price}.00</div>
                                         <img src={e.photos?e.photos[0].url:''} alt={e.name} />
                                     </Link>

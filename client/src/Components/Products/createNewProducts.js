@@ -152,6 +152,7 @@ const CreateProducts = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div><h1>Add a new product</h1></div>
         <div><label for="name">Product name:</label>
+          {errors.name && <p className="danger">{errors.name}</p>}
           <input
           type="text"
           name="name"
@@ -159,10 +160,10 @@ const CreateProducts = () => {
           required="required"
           value={input.name}
           onChange={handleInput}/> 
-          {errors.name && <p className="danger">{errors.name}</p>}
         </div>
         <div>
           <label for="photos">Photos:</label>
+          {errors.photos && <p className="danger">{errors.photos}</p>}
           <input
           type="text"
           name="photos"
@@ -170,10 +171,10 @@ const CreateProducts = () => {
           required="required"
           value={input.photos}
           onChange={handlePhotos}/> 
-          {errors.photos && <p className="danger">{errors.photos}</p>}
         </div>
         <div>
           <label for="descriptions">Description:</label>
+          {errors.description && <p className="danger">{errors.description}</p>}
           <input
           type="text"
           name="description"
@@ -181,10 +182,10 @@ const CreateProducts = () => {
           required="required"
           value={input.description}
           onChange={handleInput}/>
-          {errors.description && <p className="danger">{errors.description}</p>}
-        </div>
+          </div>
         <div>
           <label for="price">Price:</label>
+          {errors.price && <p className="danger">{errors.price}</p>}
           <input
           type="number"
           name="price"
@@ -192,10 +193,10 @@ const CreateProducts = () => {
           required="required"
           value={input.price}
           onChange={handleInput}/>
-          {errors.price && <p className="danger">{errors.price}</p>}
         </div>
         <div>
           <label for="stock">Stock:</label>
+          {errors.stock && <p className="danger">{errors.stock}</p>}
           <input
           type="number"
           name="stock"
@@ -203,23 +204,24 @@ const CreateProducts = () => {
           required="required"
           value={input.stock}
           onChange={handleInput}/>
-          {errors.stock && <p className="danger">{errors.stock}</p>}
-        </div>
+          </div>
         <div className='brand-s'>
-          <label for="brand">Brand:</label>
-          <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
+            <label for="brand">Brand:</label>
+            <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
-        <Toaster/>
-        <label for="categories">Category</label>
-          <SelectCategory name="categories" path='categories' onChange={handleCategories}/>
-          {/* <select name="categories" value={input.categories} onChange={handleCategories}>
-            <option value="---">Categorie:</option>
-            <option value={parseInt(1)}>1 Acces</option>
-            <option value={2}>2 men</option>
-            <option value={3}>3 women</option>
-            <option value={4}>4 kids</option>
-          </select> */}
-          <div>
+          <Toaster/>
+        <div className='categ-s'>
+          <label for="categories">Category</label>
+            <SelectCategory name="categories" path='categories' onChange={handleCategories}/>
+            {/* <select name="categories" value={input.categories} onChange={handleCategories}>
+              <option value="---">Categorie:</option>
+              <option value={parseInt(1)}>1 Acces</option>
+              <option value={2}>2 men</option>
+              <option value={3}>3 women</option>
+              <option value={4}>4 kids</option>
+            </select> */}
+          </div> 
+          <div className='categ-btn'>
             {
               input.categories.map(c => {
                 return ( 
@@ -232,7 +234,7 @@ const CreateProducts = () => {
             }
           </div>
         <div>
-          <button>Submit</button>
+          <button className='btn-submit'>Submit</button>
         </div>
       </form>
     </div>
