@@ -9,15 +9,13 @@ import products from './products';
 import category from './categories';
 import usersRoute from './users';
 import categoryTypes from './categoryTypes';
-import ProductCategory from './productCategory';
-import ProductCategoryRenew from './productCategoryRenew';
+import ProductCategoryRoute from './ProductCategory';
 import productName from './ProductName';
 import productId from './ProductId';
 import brandRoute from './brand';
 import reviews from './reviews'
 
-router.use('/products/category/renew/', ProductCategoryRenew);
-router.use('/products/category', ProductCategory);
+router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);
 router.use('/categories', category);
 router.use('/users', usersRoute);
