@@ -222,7 +222,7 @@ const CreateProducts = () => {
             }
           </div>
 
-           <Toaster/>
+          <Toaster/>
         <div>
           <button className='btn-submit'>Submit</button>
         </div>
