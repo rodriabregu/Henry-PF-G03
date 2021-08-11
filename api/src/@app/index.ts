@@ -10,11 +10,6 @@ const {
 
 const productOptions = {
   attributes: { exclude: ['updatedAt', 'createdAt'] },
-  /*where:{
-    'stock':{
-      [Op.gt]:27
-    }
-  },*/
   include: [
     {
       model: Review, attributes: {

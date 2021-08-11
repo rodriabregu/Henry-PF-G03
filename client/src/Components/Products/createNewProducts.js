@@ -100,17 +100,30 @@ const CreateProducts = () => {
   };
 
   const handleCategories=(e)=>{
-    console.log(e)
+
+    let opciones=document.querySelectorAll('.cboCategory option');
+    let id;
+    opciones.forEach(o=>{
+      if(o.innerText===e.target.value){
+        id=o.id;
+      }
+    })
+    let cat={
+      name:e.target.value,
+      id
+    }
+    console.log(cat)
+
     setInput({
       ...input,
-      categories:[...input.categories,e.target.value],
+      categories:[...input.categories,cat],
     })
   };
 
   const removeCategory= e => {
     setInput({
       ...input,
-      categories:input.categories.filter( c => c !== e.target.id ),
+      categories:input.categories.filter( c => c.id !== e.target.id ),
     })
   };
 
@@ -122,12 +135,13 @@ const CreateProducts = () => {
     "brand": input.brand
   },
   "photos": input.photos,
-  "categories": input.categories,
+  "categories": input.categories.map(c=>c.id),
   "brand": input.brand
  };
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log('creando product ',product)
     dispatch(postProducts(product))
     console.log(product)
     notify()
@@ -191,8 +205,7 @@ const CreateProducts = () => {
           required="required"
           value={input.price}
           onChange={handleInput}/>
-          {errors.price && <p className="danger">{errors.price}</p>}
-        </div>
+          </div>
         <div>
         <label for="stock">Stock:</label>
           <input
@@ -208,21 +221,22 @@ const CreateProducts = () => {
           <label for="brand">Brand:</label>
           <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
-        <label for="categories">Category</label>
-          <SelectCategory name="categories" path='categories' onChange={handleCategories}/>
-          <div>
+        <div className='categ-s'>
+          <label for="categories">Category</label>
+          <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
+        </div>
+          <div className='categ-btn'>
             {
               input.categories.map(c => {
                 return ( 
                   <>
-                  <button id={c} onClick={removeCategory}>{c} X</button>
+                  <button id={c.id} onClick={removeCategory}>{c.name} X</button>
                   </>
                 )
               })
             }
           </div>
-
-           <Toaster/>
+          <Toaster/>
         <div>
           <button className='btn-submit'>Submit</button>
         </div>

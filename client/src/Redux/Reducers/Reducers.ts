@@ -3,11 +3,13 @@ import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
 import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
+import { ADD_CART_PRODUCTS } from '../Actions/Products/addingCart';
 
 const initialState = {
   products: [],//filtro o todos
   productsDetail: {},
   AllProducts: [],//no tocar!
+  cartProducts: [],
 };
 
 function getProductReducer(state = initialState, action: any) {
@@ -37,6 +39,11 @@ function getProductReducer(state = initialState, action: any) {
       return {
         ...state,
         products: [...state.products, action.payload]
+      }
+    case ADD_CART_PRODUCTS:
+      return {
+        ...state,
+        cartProducts: state.cartProducts.concat(action.payload)
       }
     default:
       return state;

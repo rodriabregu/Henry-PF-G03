@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import './CreateProducts.css';
 
 const SelectCategory = (props:any) => {
     const { path } = props;
-    const [elements, setelements]=useState([]);
+    const [elements, setelements] = useState([]);
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/${path}`)
@@ -13,12 +12,11 @@ const SelectCategory = (props:any) => {
                 setelements(resp.data);
             })
     }, [])
-
     return(
-        <select name={props.name} onChange={props.onChange}>
-            {elements?elements.map((c:any)=><option id={c.id}>{c.name}</option>):''}
+        <select className={props.className} name={props.name} onChange={props.onChange}>
+            {elements ? elements.map( (c:any) => <option id={c.id}>{c.name}</option>) : '' }
         </select>
     )
-}
+};
 
 export default SelectCategory;
