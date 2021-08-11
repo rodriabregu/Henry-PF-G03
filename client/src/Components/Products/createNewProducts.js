@@ -3,9 +3,8 @@ import { useDispatch } from "react-redux";
 import { VscError} from 'react-icons/vsc';
 import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
-import './CreateProducts.css';
 import SelectCategory from "./SelectCategory";
-import { unstable_batchedUpdates } from "react-dom";
+import './CreateProducts.css';
 
 const notify = () => toast.success('Successfully created!');
 
@@ -60,7 +59,6 @@ const validate = (input) => {
   return errors;
 };
 
-
 const CreateProducts = () => {
   const dispatch = useDispatch()  
 
@@ -89,18 +87,17 @@ const CreateProducts = () => {
     );
   };
 
-
   const handlePhotos = e => { setInput({
     ...input, 
     photos:input.photos.concat(e.target.value) } )
   };
 
-  const handleChange=(e)=>{
+  const handleChange = e => {
       setInput({
         ...input,
         [e.target.name]:e.target.value
       })  
-  }
+  };
 
   const handleCategories=(e)=>{
     console.log(e)
@@ -108,15 +105,14 @@ const CreateProducts = () => {
       ...input,
       categories:[...input.categories,e.target.value],
     })
-  }
+  };
 
-  const removeCategory=(e)=>{
-    //console.log('borrando ',e.target.value)
+  const removeCategory= e => {
     setInput({
       ...input,
-      categories:input.categories.filter(c=>c!==e.target.id),
+      categories:input.categories.filter( c => c !== e.target.id ),
     })
-  }
+  };
 
   const product = {"product": {
     "price": input.price,
@@ -128,7 +124,7 @@ const CreateProducts = () => {
   "photos": input.photos,
   "categories": input.categories,
   "brand": input.brand
-};
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -144,9 +140,8 @@ const CreateProducts = () => {
       brand:'',
       categories: [],
     })
-  }
+  };
 
-  
   return (
     <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -195,42 +190,34 @@ const CreateProducts = () => {
           {errors.price && <p className="danger">{errors.price}</p>}
         </div>
         <div>
-          <label for="stock">Stock:</label>
+        <label for="stock">Stock:</label>
           <input
-          type="number"
-          name="stock"
-          placeholder="Enter the stock"
-          required="required"
-          value={input.stock}
-          onChange={handleInput}/>
+            type="number"
+            name="stock"
+            placeholder="Enter the stock"
+            required="required"
+            value={input.stock}
+            onChange={handleInput}/>
           {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
         <div className='brand-s'>
           <label for="brand">Brand:</label>
           <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
-        <Toaster/>
         <label for="categories">Category</label>
           <SelectCategory name="categories" path='categories' onChange={handleCategories}/>
-          {/* <select name="categories" value={input.categories} onChange={handleCategories}>
-            <option value="---">Categorie:</option>
-            <option value={parseInt(1)}>1 Acces</option>
-            <option value={2}>2 men</option>
-            <option value={3}>3 women</option>
-            <option value={4}>4 kids</option>
-          </select> */}
           <div>
             {
               input.categories.map(c => {
                 return ( 
                   <>
-                  {/* <p>{c}</p> */}
                   <button id={c} onClick={removeCategory}>{c} X</button>
                   </>
                 )
               })
             }
           </div>
+        <Toaster/>
         <div>
           <button>Submit</button>
         </div>

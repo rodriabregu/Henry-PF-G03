@@ -1,11 +1,12 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from 'react-hot-toast';
-import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
-import './productDetail.css';
 import { FaStar } from "react-icons/fa";
+import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
+import toast, { Toaster } from 'react-hot-toast';
+import './productDetail.css';
 
 const colors = {
     orange: "#FFBA5A",
@@ -18,34 +19,41 @@ type KeyParams = {
 };
 
 const ProductDetail = () => {
-    const { id } = useParams<KeyParams>();
-    const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
+    const detail = useSelector((s: any) => s.productsDetail);
+    const { id } = useParams<KeyParams>();
+    const [container, setContainer] = useState<any>()
     const [photo, setPhoto] = useState(0);
     const [show, setShow] = useState<boolean>(false);
-
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [currentValue, setCurrentValue] = useState(0);
+    const [hoverValue, setHoverValue] = useState(undefined);
+    const stars = Array(5).fill(0)
+    
+    const { handleSubmit } = useForm();
 
     const [review, setReview] = useState({
-        review: '',
+        text: '',
         stars: 0,
-        id: 0,
+        ProductId: 0,
     });
 
     function handleInput(e: any) {
         setReview({
-            review: e.target.value,
+            text: e.target.value,
             stars: currentValue,
-            id: detail.id
+            ProductId: detail.id
         });
     };
 
     const notify = () => toast.success('Successfully created!');
 
-/*     const onSubmit = (data: any) => (console.log(data), notify(), reset()) */
-    const onSubmit = () => (console.log(review), notify(), reset())
+    const onSubmit = async () => {
+        const rev = review;
+        await axios.post('http://localhost:3001/reviews', rev);
+        alert('review enviada, gracias!');
+        notify();
+    };
 
-    
     const changePhoto = (e: any) => {
         const action = e.target.name;
         if (action === 'next') {
@@ -59,13 +67,13 @@ const ProductDetail = () => {
         }
     };
 
-    const [currentValue, setCurrentValue] = useState(0);
-    const [hoverValue, setHoverValue] = useState(undefined);
-    const stars = Array(5).fill(0)
+    const changeFlag = () => {
+        setShow(!show)
+    };
 
     const handleClick = (value: any) => {
         setCurrentValue(value)
-    }
+    };
 
     const handleMouseOver = (newHoverValue: any) => {
         setHoverValue(newHoverValue)
@@ -73,24 +81,16 @@ const ProductDetail = () => {
 
     const handleMouseLeave = () => {
         setHoverValue(undefined)
-    }
-
-const [detallaso, setDetallaso] = useState<any>()
-
-    useEffect(() => {
-        dispatch(getProductsDetail(parseInt(id)));
-/*         setTimeout(() => {
-            setDetallaso({
-                ...detail, 
-                stock: 0
-            })
-        }, 0) */
-    }, [dispatch, id]);
-/*     let flag = false; */
-
-    const changeFlag = () => {
-        setShow(!show)
     };
+
+    useEffect( () => {
+        dispatch(getProductsDetail(parseInt(id)));
+        const res:any = axios.get<any>(`http://localhost:3001/reviews/${id}`)
+        .then( res => {
+            setContainer(res.data)
+        })
+        console.log('container', res.data)
+    }, [dispatch, id]);
 
     return (
         <div>
@@ -104,6 +104,13 @@ const [detallaso, setDetallaso] = useState<any>()
                     <h3>Stock: {detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                     <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
                     <h3>Review: {detail.review}</h3>
+                        {
+                            container?.map((r:any)=> {
+                                return (
+                                    <div><span>{r.text} {r.stars}</span></div>
+                                )
+                            })
+                        }
                     <div className='subdetail'>
                         <button name='prev' onClick={changePhoto}>{`<`}</button>
                         {detail.photos ? detail.photos.map((f: any) => <img src={f.url} width='50px' height='50px' alt='not found'></img>) : ''}
@@ -111,7 +118,7 @@ const [detallaso, setDetallaso] = useState<any>()
                     </div>
                 </div>
 
-                <button onClick={changeFlag}>Clickame papu</button>
+                <button onClick={changeFlag}>Write review</button>
                 { show &&
                 <div>
                     <h3> Write a review and rating </h3>
@@ -126,19 +133,22 @@ const [detallaso, setDetallaso] = useState<any>()
                                         onMouseOver={() => handleMouseOver(index + 1)}
                                         onMouseLeave={handleMouseLeave}
                                         color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-                                        style={{ marginRight: 10, cursor: "pointer" }} />
+                                        style={{ marginRight: 10, cursor: "pointer" }} 
+                                    />
                                 )
                             })}
                         </div>
                         <input
                             type="text"
-                            name="rewview"
-                            placeholder="Enter the description"
-                            onChange={handleInput} />
+                            name="review"
+                            placeholder="Enter the description review..."
+                            onChange={handleInput} 
+                        />
 
-                    <button onClick={handleSubmit(onSubmit)} >
+                    <button onClick={ handleSubmit(onSubmit) } >
                         Submit
                     </button>
+                    <Toaster />
                     </form>
                 </div>
                 }
@@ -147,30 +157,4 @@ const [detallaso, setDetallaso] = useState<any>()
     );
 };
 
-/* const styles = {
-    container: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center"
-    },
-    stars: {
-        display: "flex",
-        flexDirection: "row",
-    },
-    textarea: {
-        border: "1px solid #a9a9a9",
-        borderRadius: 5,
-        padding: 10,
-        margin: "20px 0",
-        minHeight: 100,
-        width: 300
-    },
-    button: {
-        border: "1px solid #a9a9a9",
-        borderRadius: 5,
-        width: 300,
-        padding: 10,
-    }
-
-}; */
 export default ProductDetail;
