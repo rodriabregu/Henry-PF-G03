@@ -2,10 +2,10 @@ import error from "./error";
 import appRes from "./appRes";
 import appPhoto from "./appPhoto";
 import appProduct from "./appProduct";
-import {Op} from 'sequelize' 
+import { Op } from 'sequelize'
 import { sequelize } from '../db';
 const {
-  Product, Photo, Category, Brand,
+  Photo, Review, Category, Brand,
 } = sequelize.models;
 
 const productOptions = {
@@ -16,6 +16,11 @@ const productOptions = {
     }
   },*/
   include: [
+    {
+      model: Review, attributes: {
+        exclude: ['updatedAt', 'createdAt']
+      }
+    },
     { model: Brand, attributes: ['name', 'id'] },
     { model: Category, attributes: ['name', 'id'] },
     { model: Photo, attributes: ['url', 'id'] }

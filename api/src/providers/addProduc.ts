@@ -18,7 +18,7 @@ export default async function (
   const [neWProduct] = (
     await Product.findOrCreate({
       where: { name: product.name },
-      defaults: { ...product, brandId }
+      defaults: { ...product, brandId, isActive: true }
     })
   )
 
