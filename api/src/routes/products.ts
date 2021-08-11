@@ -2,14 +2,22 @@ import { Router, Request, Response } from 'express';
 
 import { addProduct } from '../providers';
 import { productOptions } from "../@app"
-
+import {Op} from 'sequelize' 
 import { Product } from '../db'
+import {Category} from '../models/Category'
 
 const router = Router();
 
 router.get('/', (_req: Request, res: Response) => {
   return Product
-    .findAll(productOptions)
+    .findAll({...productOptions,
+      where:{ 
+        stock:{
+      [Op.gt]:0
+      },
+      //isActive:true
+  }
+  })
     .then((products) => {
       return res.json({
         message: 'Success',
@@ -40,6 +48,20 @@ router.post('/', (req: Request, res: Response) => {
   const {
     product, photos, categories, comments, brand
   } = req.body
+
+  console.log(categories)
+
+  /*
+  let categories=[];
+  categoriesString.forEach(async(c:any,i:number)=>{
+    let category=await Category.findOne({where:{name:c},attributes:['id']})
+    let id=await category?.getDataValue('id');
+    categories.push(id)    
+  })
+
+  console.log(categories)
+  */
+
 
   if (!(
     product

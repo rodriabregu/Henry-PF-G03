@@ -128,6 +128,7 @@ const CreateProducts = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log('creando product ',product)
     dispatch(postProducts(product))
     console.log(product)
     notify()

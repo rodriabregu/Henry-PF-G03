@@ -18,6 +18,17 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.get('/:id', async (req: Request, res: Response) => {
 
+    try {
+        const reviews = await Review.findAll();
+        res.json(reviews);
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+router.get('/:id', async (req: Request, res: Response) => {
+
     const {id}=req.params;
     try {
         const reviews = await Review.findAll({where:{ProductId:id}});
