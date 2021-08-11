@@ -17,16 +17,19 @@ const colors = {
 type KeyParams = {
     id: string;
 };
-/// /reviews
+
 const ProductDetail = () => {
-    const { id } = useParams<KeyParams>();
-    const detail = useSelector((s: any) => s.productsDetail);
     const dispatch = useDispatch();
+    const detail = useSelector((s: any) => s.productsDetail);
+    const { id } = useParams<KeyParams>();
+    const [container, setContainer] = useState<any>()
     const [photo, setPhoto] = useState(0);
     const [show, setShow] = useState<boolean>(false);
-    const [container, setContainer] = useState<any>()
-
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [currentValue, setCurrentValue] = useState(0);
+    const [hoverValue, setHoverValue] = useState(undefined);
+    const stars = Array(5).fill(0)
+    
+    const { handleSubmit } = useForm();
 
     const [review, setReview] = useState({
         text: '',
@@ -46,13 +49,11 @@ const ProductDetail = () => {
 
     const onSubmit = async () => {
         const rev = review;
-        await axios.post('http://localhost:3001/reviews', rev)
-        alert('review enviada, gracias!')
-        notify()
-        reset()
+        await axios.post('http://localhost:3001/reviews', rev);
+        alert('review enviada, gracias!');
+        notify();
     };
 
-    
     const changePhoto = (e: any) => {
         const action = e.target.name;
         if (action === 'next') {
@@ -66,13 +67,13 @@ const ProductDetail = () => {
         }
     };
 
-    const [currentValue, setCurrentValue] = useState(0);
-    const [hoverValue, setHoverValue] = useState(undefined);
-    const stars = Array(5).fill(0)
+    const changeFlag = () => {
+        setShow(!show)
+    };
 
     const handleClick = (value: any) => {
         setCurrentValue(value)
-    }
+    };
 
     const handleMouseOver = (newHoverValue: any) => {
         setHoverValue(newHoverValue)
@@ -80,29 +81,16 @@ const ProductDetail = () => {
 
     const handleMouseLeave = () => {
         setHoverValue(undefined)
-    }
-
-/* const [detallaso, setDetallaso] = useState<any>() */
+    };
 
     useEffect( () => {
         dispatch(getProductsDetail(parseInt(id)));
-        const res:any = axios.get<any>('http://localhost:3001/reviews')
+        const res:any = axios.get<any>(`http://localhost:3001/reviews/${id}`)
         .then( res => {
             setContainer(res.data)
         })
         console.log('container', res.data)
-/*         setTimeout(() => {
-            setDetallaso({
-                ...detail, 
-                stock: 0
-            })
-        }, 0) */
     }, [dispatch, id]);
-/*     let flag = false; */
-console.log('container', container)
-    const changeFlag = () => {
-        setShow(!show)
-    };
 
     return (
         <div>
@@ -116,10 +104,10 @@ console.log('container', container)
                     <h3>Stock: {detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                     <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
                     <h3>Review: {detail.review}</h3>
-                        {   
+                        {
                             container?.map((r:any)=> {
                                 return (
-                                    <div><span>{r.text}{r.stars}</span></div>
+                                    <div><span>{r.text} {r.stars}</span></div>
                                 )
                             })
                         }
