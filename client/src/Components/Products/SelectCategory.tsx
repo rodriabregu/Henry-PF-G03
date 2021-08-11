@@ -10,11 +10,10 @@ const SelectCategory = (props:any) => {
         axios.get(`http://localhost:3001/${path}`)
             .then(resp=>{
                 setelements(resp.data);
-                console.log(resp.data)
             })
     }, [])
     return(
-        <select name={props.name} onChange={props.onChange}>
+        <select className={props.className} name={props.name} onChange={props.onChange}>
             {elements ? elements.map( (c:any) => <option id={c.id}>{c.name}</option>) : '' }
         </select>
     )
