@@ -24,6 +24,7 @@ export default async () => {
     const [newPoduct] = await Product.findOrCreate({
       where: { name: product.name },
       defaults: {
+        isActive: true,
         name: product.name,
         photo: product.photo,
         brandId,
@@ -51,7 +52,7 @@ export default async () => {
       }
 
     }catch(e){
-      console.log(e);
+      console.error(e);
     }
   }
 
