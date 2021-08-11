@@ -191,8 +191,7 @@ const CreateProducts = () => {
           required="required"
           value={input.price}
           onChange={handleInput}/>
-          {errors.price && <p className="danger">{errors.price}</p>}
-        </div>
+          </div>
         <div>
         <label for="stock">Stock:</label>
           <input
@@ -208,9 +207,11 @@ const CreateProducts = () => {
           <label for="brand">Brand:</label>
           <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
-        <label for="categories">Category</label>
+        <div className='categ-s'>
+          <label for="categories">Category</label>
           <SelectCategory name="categories" path='categories' onChange={handleCategories}/>
-          <div>
+        </div>
+          <div className='categ-btn'>
             {
               input.categories.map(c => {
                 return ( 
@@ -221,7 +222,6 @@ const CreateProducts = () => {
               })
             }
           </div>
-
           <Toaster/>
         <div>
           <button className='btn-submit'>Submit</button>
