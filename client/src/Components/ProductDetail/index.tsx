@@ -137,8 +137,10 @@ const ProductDetail = () => {
                                     )
                                 })
                             }
-                            <AddCart 
+                            <AddCart
+                            id={detail.id}
                             name={detail.name} 
+                            photo={detail.photos}
                             stock={detail.stock} 
                             price={detail.price} 
                             description={detail.description} 
