@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { TiShoppingCart } from 'react-icons/ti';
 import { addActionCart } from '../../Redux/Actions/Products/addingCart'
 
 const AddCart = ({name, stock, price, brand, description, categories}) => {
-	const [cart, setCart] = useState([]);
     const dispatch = useDispatch();
-    const allCart = useSelector(s => s.cartProducts)
     const product = {
         name,
         stock, 
@@ -13,34 +11,27 @@ const AddCart = ({name, stock, price, brand, description, categories}) => {
         brand,
         description,
         categories,
+    };
+
+    const addProduct = () => {
+        let products = [];
+        if(localStorage.getItem('products-cart')){
+            products = JSON.parse(localStorage.getItem('products-cart'));
+        }
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
     }
 
-	const saveToLocalStorage = items => {
-        let arrayProduct = localStorage.getItem('product-add')
-        
-		localStorage.setItem('product-add', JSON.stringify(items));
-	};
-
-/*      const addCart = () => { */
-        /* const newAddCart = [product]; */
-/*         setCart(product);
-        dispatch(addActionCart(cart));
-        saveToLocalStorage(allCart);
-    } */ 
-
-    const addCart = (product) => {
-/*         const newAddCart = [...cart, product];
-        setCart(newAddCart); */
-        console.log(product)
+    const addCart = product => {
         dispatch(addActionCart(product));
-        saveToLocalStorage(allCart);
-    }
+        addProduct();
+    };
 
     return (
         <div>
             <button
-                onClick={() => addCart(product)}>
-                add to cart
+                onClick={() => addCart()}>
+                Add to cart <TiShoppingCart />
             </button>
         </div>
     )
