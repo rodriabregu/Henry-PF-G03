@@ -1,21 +1,18 @@
-import { useEffect } from "react";
-import { useState } from "react";
 import axios from 'axios';
-import './CreateProducts.css'
+import { useState } from "react";
+import { useEffect } from "react";
+import './CreateProducts.css';
 
-
-const SelectCategory=(props:any)=>{
-
-    const {path}=props;
-
-    const [elements,setelements]=useState([]);
+const SelectCategory = (props:any) => {
+    const { path } = props;
+    const [elements, setelements]=useState([]);
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/${path}`)
             .then(resp=>{
                 setelements(resp.data);
             })
-    },[])
+    }, [])
 
     return(
         <select name={props.name} onChange={props.onChange}>
@@ -23,6 +20,5 @@ const SelectCategory=(props:any)=>{
         </select>
     )
 }
-
 
 export default SelectCategory;
