@@ -5,7 +5,7 @@ import { Product, User, Sale, SaleItem } from '../db';
 /* 
  * Route : POST "api/sale/"
  * Creara una nueva Sale con la 
- * informacin enviada por body  
+ * información enviada por body  
  * 
  *  Ejemplo body
  * 
