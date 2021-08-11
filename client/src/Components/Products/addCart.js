@@ -19,7 +19,7 @@ const AddCart = ({name, stock, price, brand, description, categories}) => {
             products = JSON.parse(localStorage.getItem('products-cart'));
         }
         products.push(product);
-        localStorage.setItem('products', JSON.stringify(products));
+        localStorage.setItem('products-cart', JSON.stringify(products));
     }
 
     const addCart = product => {
