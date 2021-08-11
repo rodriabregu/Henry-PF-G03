@@ -6,10 +6,11 @@ import controllers from '../controllers'
 controllers(router)
 
 import products from './products';
+import productsUpdate from './productsUpdate';
 import category from './categories';
 import users from './users';
 import categoryTypes from './categoryTypes';
-import ProductCategoryRoute from './ProductCategory';
+import ProductCategoryRoute from './productCategory';
 import productName from './ProductName';
 import productId from './ProductId';
 import brand from './brand';
@@ -17,6 +18,7 @@ import reviews from './reviews'
 
 router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);
+router.use('/productsUpdate', productsUpdate);
 router.use('/categories', category);
 router.use('/users', users);
 router.use('/brand', brand);
