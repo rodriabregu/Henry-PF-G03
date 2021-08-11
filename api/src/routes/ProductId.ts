@@ -14,11 +14,23 @@ router.get('/:id', async (req: Request, res: Response) => {
   try {
     // Search product in DB
     let productFound = await Product.findByPk(req.params.id, {
+      attributes:[
+        'id','name','stock','price',
+      ],
       include: [
-        {model:Photo},
-        {model:Category},
-        {model:Brand}
-      ]
+        {
+          model:Photo,
+          attributes:['id','url']
+        },
+        {
+          model:Category,
+          attributes:['id','name'],
+        },
+        {
+          model:Brand,
+          attributes:['id','name']
+        }
+      ],      
     }
     );
 
