@@ -19,11 +19,20 @@ import { Product, User, Sale, SaleItem } from '../db';
 export default async (req: Request, res: Response) => {
   const { saleId, newState } = req.body
   const states = ['Created', 'Processing', 'Cancelled', 'Complete']
-  const sale = await Sale.findByPk(saleId)
+  const sale = await Sale.findByPk(saleId, { include: "items" })
   if (!(sale && states.includes(newState)))
     throw { status: 404, message: "data is not validate" }
 
-    console.log(sale.get())
+  console.log(sale.get())
+
+  const { state, items } = await sale.get()
+
+  console.log(state, items )
+
+  if( state === "Created" && newState === "Processing")
+  if( state === "Created" && newState === "Cancelled")
+  if( state === "Processing" && newState === "Cancelled")
+  if( state === "Processing" && newState === "Complete")
 
   //setSaleState(saleId, newState)
 
@@ -42,7 +51,7 @@ interface appSaleItem {
   salePrice: number
 }
 
-const setSaleState = async (saleId: number, state: string) => {
+const cancelled = async (saleId: number) => {
 
 
   return false

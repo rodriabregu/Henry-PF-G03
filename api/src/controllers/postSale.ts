@@ -1,6 +1,5 @@
-import { Response, Request } from 'express';
-import { error } from "../@app"
-import { Product, User, Sale, SaleItem } from '../db';
+import { Response, Request } from 'express'
+import { Product, User, Sale, SaleItem } from '../db'
 
 /* 
  * Route : POST "api/sale/"
@@ -20,13 +19,11 @@ import { Product, User, Sale, SaleItem } from '../db';
   }
  */
 
-
 export default async (req: Request, res: Response) => {
 
-  await User.create({ userName: "Esteban" }) // quitar esta line cuando user user este implementado y envien datos reales
+  await User.create({ userName: "Esteban " }) // quitar esta line cuando user user este implementado y envien datos reales
 
   const { userId, items } = req.body
-  console.log(userId, items)
 
   if (!(userId && items && Array.isArray(items)))
     return res.status(404).json({
@@ -34,14 +31,19 @@ export default async (req: Request, res: Response) => {
       data: {}
     })
 
+  await Promise.all(items.map(item => {
+    return checkStok(item)
+  }))
+
   const saleId = (await Sale.create({
     userId: userId,
     state: 'Created',
     date: new Date(Date.now())
-  })).getDataValue("id")
+  }))
+  .getDataValue("id")
 
   await Promise.all(items.map(item => {
-    return addItem(saleId, item)
+    return addItem(item, saleId)
   }))
 
   return res.json({
@@ -59,22 +61,36 @@ interface appSaleItem {
   salePrice: number
 }
 
-const addItem = async (saleId: number, item: appSaleItem) => {
+interface item {
+  productId: number
+  units: number
+}
+
+const checkStok = async (item: item) => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
-  if (product) {
-    const stock = product.getDataValue("stock")
-    if (stock - units < 0)
-      throw { status: 404, message: "no hay stock" }
-    //await product.setDataValue("stock", stock - units)
-    //await product.save() 
-    return SaleItem.create({
-      saleId,
-      productId,
-      productName: product.getDataValue("name"),
-      units,
-      salePrice: product.getDataValue("price")
-    })
-  }
+  if (!product)
+    throw { status: 404, message: "producto no existe" }
+  const stock = product.getDataValue("stock")
+  if (stock - units < 0)
+    throw { status: 404, message: "no hay stock" }
+  return true;
+}
+
+const addItem = async (item: item, saleId: number) => {
+  const { productId, units } = item
+  const product = await Product.findByPk(productId)
+  if (!product)
+    throw { status: 404, message: "producto no existe" }
+  const { stock, price, name } = product.get()
+  await product.update({ stock: stock - units })
+  
+  return SaleItem.create({
+    saleId,
+    productId,
+    productName: name,
+    units,
+    salePrice: price
+  })
 
 }

@@ -1,12 +1,11 @@
-import { Response, Request } from 'express';
-import router from '../routes'
+import { Response, Request, Router } from 'express';
 import { error } from "../@app"
 
-import postSaleF from "./postSale"
+import postSale from "./postSale"
 import putSale from "./putSale"
 
 
-const controllersCatch = (controller: Function) => {
+const setCatch = (controller: Function) => {
   return async (req: Request, res: Response) => {
     try {
       return await controller(req, res);
@@ -15,11 +14,9 @@ const controllersCatch = (controller: Function) => {
     }
   }
 }
-const postSale = controllersCatch(postSaleF)
-//const putSale = controllersCatch(putSale)
-
-router.put('/sale',controllersCatch(putSale))
-export {
-  postSale,
-  //putSale
+const controllers = (router: Router) => {
+  router.post('/sale', setCatch(postSale))
+  router.put('/sale', setCatch(putSale))
 }
+
+export default controllers
