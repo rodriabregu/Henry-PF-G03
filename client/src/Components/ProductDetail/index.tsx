@@ -95,8 +95,15 @@ const ProductDetail = () => {
     return (
         <div>
             <div className='product-detail'>
+                <div className='imgs'>
                 <div className='product-img'>
                     <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
+                </div>
+                <div className='subdetail'>
+                        <button name='prev' onClick={changePhoto}>{`🡄`}</button>
+                        {detail.photos ? detail.photos.map((f: any) => <img src={f.url} width='50px' height='50px' alt='not found'></img>) : ''}
+                        <button name='next' onClick={changePhoto}>{`🡆`}</button>
+                </div>
                 </div>
                 <div className='detail'>
                     <h1>{detail.name}</h1>
@@ -104,55 +111,53 @@ const ProductDetail = () => {
                     <h3>Stock: {detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                     <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
                     <h3>Review: {detail.review}</h3>
-                        {
+                   {
                             container?.map((r:any)=> {
                                 return (
                                     <div><span>{r.text} {r.stars}</span></div>
                                 )
                             })
                         }
-                    <div className='subdetail'>
-                        <button name='prev' onClick={changePhoto}>{`<`}</button>
-                        {detail.photos ? detail.photos.map((f: any) => <img src={f.url} width='50px' height='50px' alt='not found'></img>) : ''}
-                        <button name='next' onClick={changePhoto}>{`>`}</button>
+
+                    <div className='form-review'>
+                    <button className='btn-add' onClick={changeFlag}>Write review</button>
+                    { show &&
+                    <div>
+                        <h3> Write a review and rating </h3>
+                        <form>
+                            <div>
+                                {stars.map((_, index) => {
+                                    return (
+                                        <FaStar
+                                            key={index}
+                                            size={24}
+                                            onClick={() => handleClick(index + 1)}
+                                            onMouseOver={() => handleMouseOver(index + 1)}
+                                            onMouseLeave={handleMouseLeave}
+                                            color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                                            style={{ marginRight: 10, cursor: "pointer" }} />
+                                    )
+                                })}
+                            </div>
+                            <input
+                                type="text"
+                                name="review"
+                                placeholder="Enter the description review..."
+                                onChange={handleInput} />
+
+                        <button onClick={handleSubmit(onSubmit)} >
+                            Submit
+                        </button>
+                          <Toaster />
+                        </form>
+
                     </div>
+                    }
+                </div>    
                 </div>
+                
+            </div>
 
-                <button onClick={changeFlag}>Write review</button>
-                { show &&
-                <div>
-                    <h3> Write a review and rating </h3>
-                    <form>
-                        <div>
-                            {stars.map((_, index) => {
-                                return (
-                                    <FaStar
-                                        key={index}
-                                        size={24}
-                                        onClick={() => handleClick(index + 1)}
-                                        onMouseOver={() => handleMouseOver(index + 1)}
-                                        onMouseLeave={handleMouseLeave}
-                                        color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-                                        style={{ marginRight: 10, cursor: "pointer" }} 
-                                    />
-                                )
-                            })}
-                        </div>
-                        <input
-                            type="text"
-                            name="review"
-                            placeholder="Enter the description review..."
-                            onChange={handleInput} 
-                        />
-
-                    <button onClick={ handleSubmit(onSubmit) } >
-                        Submit
-                    </button>
-                    <Toaster />
-                    </form>
-                </div>
-                }
-        </div>
         </div >
     );
 };

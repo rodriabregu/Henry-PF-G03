@@ -124,7 +124,7 @@ const CreateProducts = () => {
   "photos": input.photos,
   "categories": input.categories,
   "brand": input.brand
-  };
+ };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -147,6 +147,7 @@ const CreateProducts = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div><h1>Add a new product</h1></div>
         <div><label for="name">Product name:</label>
+          {errors.name && <p className="danger">{errors.name}</p>}
           <input
           type="text"
           name="name"
@@ -154,10 +155,11 @@ const CreateProducts = () => {
           required="required"
           value={input.name}
           onChange={handleInput}/> 
-          {errors.name && <p className="danger">{errors.name}</p>}
         </div>
         <div>
           <label for="photos">Photos:</label>
+          {errors.photos && <p className="danger">{errors.photos}</p>}
+
           <input
           type="text"
           name="photos"
@@ -165,10 +167,11 @@ const CreateProducts = () => {
           required="required"
           value={input.photos}
           onChange={handlePhotos}/> 
-          {errors.photos && <p className="danger">{errors.photos}</p>}
         </div>
         <div>
           <label for="descriptions">Description:</label>
+          {errors.description && <p className="danger">{errors.description}</p>}
+
           <input
           type="text"
           name="description"
@@ -176,10 +179,11 @@ const CreateProducts = () => {
           required="required"
           value={input.description}
           onChange={handleInput}/>
-          {errors.description && <p className="danger">{errors.description}</p>}
-        </div>
+          </div>
         <div>
           <label for="price">Price:</label>
+          {errors.price && <p className="danger">{errors.price}</p>}
+
           <input
           type="number"
           name="price"
@@ -217,9 +221,10 @@ const CreateProducts = () => {
               })
             }
           </div>
-        <Toaster/>
+
+           <Toaster/>
         <div>
-          <button>Submit</button>
+          <button className='btn-submit'>Submit</button>
         </div>
       </form>
     </div>
