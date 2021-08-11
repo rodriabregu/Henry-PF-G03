@@ -15,7 +15,7 @@ const SelectCategory = (props:any) => {
     }, [])
     return(
         <select name={props.name} onChange={props.onChange}>
-            {elements ? elements.map( (c:any) => <option key={c.categoryTypeId} value={c.categoryTypeId} id={c.id}>{c.name}</option>) : '' }
+            {elements ? elements.map( (c:any) => <option id={c.id}>{c.name}</option>) : '' }
         </select>
     )
 };

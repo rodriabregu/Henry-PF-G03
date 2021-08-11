@@ -49,6 +49,8 @@ router.post('/', (req: Request, res: Response) => {
     product, photos, categories, comments, brand
   } = req.body
 
+  console.log(categories)
+
   /*
   let categories=[];
   categoriesString.forEach(async(c:any,i:number)=>{
