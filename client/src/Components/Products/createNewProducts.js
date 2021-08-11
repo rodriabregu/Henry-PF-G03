@@ -3,9 +3,8 @@ import { useDispatch } from "react-redux";
 import { VscError} from 'react-icons/vsc';
 import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
-import './CreateProducts.css';
 import SelectCategory from "./SelectCategory";
-import { unstable_batchedUpdates } from "react-dom";
+import './CreateProducts.css';
 
 const notify = () => toast.success('Successfully created!');
 
@@ -95,12 +94,12 @@ const CreateProducts = () => {
     photos:input.photos.concat(e.target.value) } )
   };
 
-  const handleChange=(e)=>{
+  const handleChange = e => {
       setInput({
         ...input,
         [e.target.name]:e.target.value
       })  
-  }
+  };
 
   const handleCategories=(e)=>{
     console.log(e)
@@ -108,15 +107,14 @@ const CreateProducts = () => {
       ...input,
       categories:[...input.categories,e.target.value],
     })
-  }
+  };
 
-  const removeCategory=(e)=>{
-    //console.log('borrando ',e.target.value)
+  const removeCategory= e => {
     setInput({
       ...input,
-      categories:input.categories.filter(c=>c!==e.target.id),
+      categories:input.categories.filter( c => c !== e.target.id ),
     })
-  }
+  };
 
   const product = {"product": {
     "price": input.price,
@@ -128,7 +126,7 @@ const CreateProducts = () => {
   "photos": input.photos,
   "categories": input.categories,
   "brand": input.brand
-};
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -144,9 +142,8 @@ const CreateProducts = () => {
       brand:'',
       categories: [],
     })
-  }
+  };
 
-  
   return (
     <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -224,7 +221,6 @@ const CreateProducts = () => {
               input.categories.map(c => {
                 return ( 
                   <>
-                  {/* <p>{c}</p> */}
                   <button id={c} onClick={removeCategory}>{c} X</button>
                   </>
                 )
