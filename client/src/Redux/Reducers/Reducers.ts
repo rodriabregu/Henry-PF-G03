@@ -28,8 +28,15 @@ function getProductReducer(state = initialState, action: any) {
     case GET_FILTERED_PRODUCTS:
       return {
         ...state,
+        products:state.AllProducts.filter((p:any)=>p.categories.find((c:any)=>c.name===action.payload))
+      }
+
+      /*
+      return {
+        ...state,
         products: state.AllProducts.filter((p: any) => p.category === action.payload)
       }
+      */
     case CLEAR_FILTERS:
       return {
         ...state,
