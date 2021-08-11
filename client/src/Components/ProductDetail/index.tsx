@@ -11,7 +11,6 @@ import './productDetail.css';
 const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9"
-
 };
 
 type KeyParams = {
@@ -28,7 +27,7 @@ const ProductDetail = () => {
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const stars = Array(5).fill(0)
-    
+
     const { handleSubmit } = useForm();
 
     const [review, setReview] = useState({
@@ -111,7 +110,7 @@ const ProductDetail = () => {
                     <h3>Stock: {detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                     <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
                     <h3>Review: {detail.review}</h3>
-                   {
+                        {
                             container?.map((r:any)=> {
                                 return (
                                     <div><span>{r.text} {r.stars}</span></div>
@@ -145,19 +144,16 @@ const ProductDetail = () => {
                                 placeholder="Enter the description review..."
                                 onChange={handleInput} />
 
-                        <button onClick={handleSubmit(onSubmit)} >
-                            Submit
-                        </button>
-                          <Toaster />
+                            <button onClick={handleSubmit(onSubmit)} >
+                                Submit
+                            </button>
+                            <Toaster />
                         </form>
-
                     </div>
                     }
-                </div>    
+                    </div>    
                 </div>
-                
             </div>
-
         </div >
     );
 };
