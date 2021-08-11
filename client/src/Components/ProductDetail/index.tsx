@@ -145,7 +145,6 @@ const ProductDetail = () => {
                             categories={detail.categories} 
                             brand={detail.brand}
                             />
-
                     <div className='form-review'>
                     <button className='btn-add' onClick={changeFlag}>Write review</button>
                     { show &&
