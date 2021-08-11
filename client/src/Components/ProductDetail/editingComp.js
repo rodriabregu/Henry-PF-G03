@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { VscError} from 'react-icons/vsc';
 import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
-
+import './editComp.css';
 
 const notify = () => toast.success('Successfully created!');
 
@@ -83,9 +83,9 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
   };
 
   return (
-    <div className='form-create'>
+    <div className='form-edit'>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div><h2>Etiding a product</h2></div>
+        <div><h2>Edit product</h2></div>
         <div><label for="name">Product name:</label>
           <input
           type="text"
@@ -137,7 +137,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
         </div>
           <Toaster/>
         <div>
-          <button className='btn-submit'>Submit</button>
+          <button className='btnEdit'>Submit</button>
         </div>
       </form>
     </div>

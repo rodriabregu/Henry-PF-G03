@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
 import { addActionCart } from '../../Redux/Actions/Products/addingCart'
+import '../ProductDetail/productDetail.css';
 
 const AddCart = ({name, stock, price, brand, description, categories}) => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const AddCart = ({name, stock, price, brand, description, categories}) => {
 
     return (
         <div>
-            <button
+            <button className='btn-cart'
                 onClick={() => addCart()}>
                 Add to cart <TiShoppingCart />
             </button>
