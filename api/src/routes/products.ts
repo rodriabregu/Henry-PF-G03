@@ -2,14 +2,21 @@ import { Router, Request, Response } from 'express';
 
 import { addProduct } from '../providers';
 import { productOptions } from "../@app"
-
+import {Op} from 'sequelize' 
 import { Product } from '../db'
 
 const router = Router();
 
 router.get('/', (_req: Request, res: Response) => {
   return Product
-    .findAll(productOptions)
+    .findAll({...productOptions,
+      where:{ 
+        stock:{
+      [Op.gt]:0
+      },
+      //isActive:true
+  }
+  })
     .then((products) => {
       return res.json({
         message: 'Success',
