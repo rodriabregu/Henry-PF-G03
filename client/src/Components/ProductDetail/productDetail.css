@@ -62,9 +62,11 @@
      margin-right: 50px;
  }
 
- .btn-add{
+ .btn-review, .btn-cart, .btn-edit{
+    font-family: 'Montserrat', sans-serif;
     background-color:#343692b7;
-    padding: 8px 4px 8px 4px;
+    padding: 4px 0px 4px 0px;
+    width: 130px;
     border-radius: 20px;    
     text-align: center;
     color:#dcdcf0;
@@ -74,3 +76,43 @@
     border-right: 1px solid transparent;
     cursor: pointer;
  }
+
+ .btn-review:hover, .btn-cart:hover, .btn-edit:hover{
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+ }
+
+ .add-review{
+    display: flex;
+    flex-direction: column;
+    
+ }
+
+.text-add{
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.btn-addreview{
+    color:  #7b7bc2;
+    background-color:white;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 10px;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 4px 4px 4px 4px;
+    width: 60px;
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.btn-addreview:hover{
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+}
