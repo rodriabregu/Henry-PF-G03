@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
+import EditingProduct from './editingComp';
+import AddCart from '../Products/addCart';
 import toast, { Toaster } from 'react-hot-toast';
 import './productDetail.css';
 
@@ -24,9 +26,19 @@ const ProductDetail = () => {
     const [container, setContainer] = useState<any>()
     const [photo, setPhoto] = useState(0);
     const [show, setShow] = useState<boolean>(false);
+    const [show2, setShow2] = useState<boolean>(true);
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const stars = Array(5).fill(0)
+    const [editing, setEditing] = useState({
+        name:'',
+        photos: [],
+        description:'',
+        price: 0,
+        stock: 0,
+        brand:'',
+        categories: []
+    });
 
     const { handleSubmit } = useForm();
 
@@ -70,6 +82,11 @@ const ProductDetail = () => {
         setShow(!show)
     };
 
+    const changeEditing = () => {
+        setShow2(!show2)
+    };
+
+
     const handleClick = (value: any) => {
         setCurrentValue(value)
     };
@@ -88,7 +105,6 @@ const ProductDetail = () => {
         .then( res => {
             setContainer(res.data)
         })
-        console.log('container', res.data)
     }, [dispatch, id]);
 
     return (
@@ -105,18 +121,30 @@ const ProductDetail = () => {
                 </div>
                 </div>
                 <div className='detail'>
-                    <h1>{detail.name}</h1>
-                    <h2>${detail.price}.00</h2>
-                    <h3>Stock: {detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
-                    <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
-                    <h3>Review: {detail.review}</h3>
-                        {
-                            container?.map((r:any)=> {
-                                return (
-                                    <div><span>{r.text} {r.stars}</span></div>
-                                )
-                            })
-                        }
+                    <button onClick={changeEditing}>Editing product</button>
+                { show2 ?
+                    <div>
+                        <h1>{detail.name}</h1>
+                        <h2>${detail.price}.00</h2>
+                        <h3>{detail.description}</h3>
+                        <h3>Stock:{detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
+                        <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
+                        <h3>Review: {detail.review}</h3>
+                            {
+                                container?.map((r:any)=> {
+                                    return (
+                                        <div><span>{r.text} {r.stars}</span></div>
+                                    )
+                                })
+                            }
+                            <AddCart 
+                            name={detail.name} 
+                            stock={detail.stock} 
+                            price={detail.price} 
+                            description={detail.description} 
+                            categories={detail.categories} 
+                            brand={detail.brand}
+                            />
 
                     <div className='form-review'>
                     <button className='btn-add' onClick={changeFlag}>Write review</button>
@@ -143,7 +171,7 @@ const ProductDetail = () => {
                                 name="review"
                                 placeholder="Enter the description review..."
                                 onChange={handleInput} />
-
+                            
                             <button onClick={handleSubmit(onSubmit)} >
                                 Submit
                             </button>
@@ -151,7 +179,21 @@ const ProductDetail = () => {
                         </form>
                     </div>
                     }
-                    </div>    
+                    </div> 
+                    </div>
+                    : 
+                    <div>
+                        <EditingProduct 
+                            id={detail.id}
+                            name={detail.name} 
+                            stock={detail.stock} 
+                            price={detail.price} 
+                            description={detail.description} 
+                            categories={detail.categories} 
+                            brand={detail.brand} 
+                        />
+                    </div>
+                }
                 </div>
             </div>
         </div >

@@ -10,7 +10,6 @@ const SelectCategory = (props:any) => {
         axios.get(`http://localhost:3001/${path}`)
             .then(resp=>{
                 setelements(resp.data);
-                console.log(resp.data)
             })
     }, [])
     return(
