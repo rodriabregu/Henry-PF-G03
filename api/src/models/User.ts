@@ -1,11 +1,14 @@
 import {
-  Model, Column, Table, HasMany
+  Model, Column, Table, HasMany, DataType
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
 
 @Table
 export class User extends Model<User> {
+
+  @Column(DataType.ENUM('User', 'Admin'))
+  userType!: string;
 
   @Column
   userNane!: string; //userName
