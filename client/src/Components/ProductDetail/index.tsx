@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import toast, { Toaster } from 'react-hot-toast';
 import './productDetail.css';
+import config from '../../../src/config';
 
 const colors = {
     orange: "#FFBA5A",
@@ -48,7 +49,7 @@ const ProductDetail = () => {
 
     const onSubmit = async () => {
         const rev = review;
-        await axios.post('http://localhost:3001/reviews', rev);
+        await axios.post(`http://${config.REACT_APP_API_URL}:3001/reviews`, rev);
         alert('review enviada, gracias!');
         notify();
     };
@@ -84,7 +85,7 @@ const ProductDetail = () => {
 
     useEffect( () => {
         dispatch(getProductsDetail(parseInt(id)));
-        const res:any = axios.get<any>(`http://localhost:3001/reviews/${id}`)
+        const res:any = axios.get<any>(`http://${config.REACT_APP_API_URL}:3001/reviews/${id}`)
         .then( res => {
             setContainer(res.data)
         })
