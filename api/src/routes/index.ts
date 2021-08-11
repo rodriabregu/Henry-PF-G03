@@ -9,7 +9,7 @@ import products from './products';
 import category from './categories';
 import users from './users';
 import categoryTypes from './categoryTypes';
-import ProductCategoryRoute from './ProductCategory';
+import ProductCategoryRoute from './productCategory';
 import productName from './ProductName';
 import productId from './ProductId';
 import brand from './brand';
