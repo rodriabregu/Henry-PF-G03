@@ -2,13 +2,17 @@ import { Response, Request } from 'express'
 import { Sale, SaleItem } from '../db'
 
 /* 
- * Route : GET "api/sale/"
- * Responde con todas las Sales almacenadas en db 
+ * Route : GET "api/sale/user/:userId"
+ * Responde con todas las Sales almacenadas en db
+ * para un usuario especificado, recibe id por parametro.
  */
 
-export default async (_req: Request, res: Response) => {
+export default async (req: Request, res: Response) => {
+
+  const { userId } = req.params
 
   const sales = await Sale.findAll({
+    where: { userId },
     attributes: { exclude: ['updatedAt', 'createdAt'] },
     include: [
       {
@@ -19,7 +23,7 @@ export default async (_req: Request, res: Response) => {
   })
 
   if (!sales || sales.length < 1)
-    throw {data: [], status: 404, message: "No se encontrason Sales" }
+    throw { data: [], status: 404, message: "No se encontrason Sales" }
 
   return res.json({
     message: "successfully",
