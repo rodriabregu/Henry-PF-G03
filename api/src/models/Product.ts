@@ -15,7 +15,7 @@ export class Product extends Model {
   @Column({ unique: true })
   name!: string;
 
-  @Column
+  @Column({defaultValue: true})
   isActive!: boolean;
 
   @Column(DataType.TEXT)

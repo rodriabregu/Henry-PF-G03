@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { VscError} from 'react-icons/vsc';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
-import './CreateProducts.css';
 import SelectCategory from "./SelectCategory";
+import './CreateProducts.css';
 
 const notify = () => toast.success('Successfully created!');
 
@@ -59,7 +59,6 @@ const validate = (input) => {
   return errors;
 };
 
-
 const CreateProducts = () => {
   const dispatch = useDispatch()  
 
@@ -72,7 +71,7 @@ const CreateProducts = () => {
     price: 0,
     stock: 0,
     brand:'',
-    categories: [1, 2, 3, 4],
+    categories: []
   });
 
   function handleInput(e) {
@@ -93,12 +92,40 @@ const CreateProducts = () => {
     photos:input.photos.concat(e.target.value) } )
   };
 
-  const handleChange=(e)=>{
+  const handleChange = e => {
+      setInput({
+        ...input,
+        [e.target.name]:e.target.value
+      })  
+  };
+
+  const handleCategories=(e)=>{
+
+    let opciones=document.querySelectorAll('.cboCategory option');
+    let id;
+    opciones.forEach(o=>{
+      if(o.innerText===e.target.value){
+        id=o.id;
+      }
+    })
+    let cat={
+      name:e.target.value,
+      id
+    }
+    console.log(cat)
+
     setInput({
       ...input,
-      [e.target.name]:e.target.value
+      categories:[...input.categories,cat],
     })
-  }
+  };
+
+  const removeCategory= e => {
+    setInput({
+      ...input,
+      categories:input.categories.filter( c => c.id !== e.target.id ),
+    })
+  };
 
   const product = {"product": {
     "price": input.price,
@@ -108,22 +135,33 @@ const CreateProducts = () => {
     "brand": input.brand
   },
   "photos": input.photos,
-  "categories": input.categories,
+  "categories": input.categories.map(c=>c.id),
   "brand": input.brand
-};
+ };
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log('creando product ',product)
     dispatch(postProducts(product))
+    console.log(product)
     notify()
-    setInput({'':''})
-  }
+    setInput({
+      name:'',
+      photos: [],
+      description:'',
+      price: 0,
+      stock: 0,
+      brand:'',
+      categories: [],
+    })
+  };
 
   return (
     <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div><h1>Add a new product</h1></div>
         <div><label for="name">Product name:</label>
+          {errors.name && <p className="danger">{errors.name}</p>}
           <input
           type="text"
           name="name"
@@ -131,10 +169,11 @@ const CreateProducts = () => {
           required="required"
           value={input.name}
           onChange={handleInput}/> 
-          {errors.name && <p className="danger">{errors.name}</p>}
         </div>
         <div>
           <label for="photos">Photos:</label>
+          {errors.photos && <p className="danger">{errors.photos}</p>}
+
           <input
           type="text"
           name="photos"
@@ -142,10 +181,11 @@ const CreateProducts = () => {
           required="required"
           value={input.photos}
           onChange={handlePhotos}/> 
-          {errors.photos && <p className="danger">{errors.photos}</p>}
         </div>
         <div>
           <label for="descriptions">Description:</label>
+          {errors.description && <p className="danger">{errors.description}</p>}
+
           <input
           type="text"
           name="description"
@@ -153,10 +193,11 @@ const CreateProducts = () => {
           required="required"
           value={input.description}
           onChange={handleInput}/>
-          {errors.description && <p className="danger">{errors.description}</p>}
-        </div>
+          </div>
         <div>
           <label for="price">Price:</label>
+          {errors.price && <p className="danger">{errors.price}</p>}
+
           <input
           type="number"
           name="price"
@@ -164,54 +205,40 @@ const CreateProducts = () => {
           required="required"
           value={input.price}
           onChange={handleInput}/>
-          {errors.price && <p className="danger">{errors.price}</p>}
-        </div>
+          </div>
         <div>
-          <label for="stock">Stock:</label>
+        <label for="stock">Stock:</label>
           <input
-          type="number"
-          name="stock"
-          placeholder="Enter the stock"
-          required="required"
-          value={input.stock}
-          onChange={handleInput}/>
+            type="number"
+            name="stock"
+            placeholder="Enter the stock"
+            required="required"
+            value={input.stock}
+            onChange={handleInput}/>
           {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
         <div className='brand-s'>
           <label for="brand">Brand:</label>
-          <SelectCategory name="brand" path='brand' onChange={handleChange}/>
-          {/* <input
-          <label for="brand">Brand:</label>
-          <input
-          type="text"
-          name="brand"
-          placeholder="Enter the brand"
-          required="required"
-          value={input.brand}
-          onChange={handleInput}/> */}
-          {errors.brand && <p className="danger">{errors.brand}</p>}
+          <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
-        {/* <div> */}
-          {/* <label for="categories">Category</label> */}
-{/*         <select name="categories" value={input.categories} onChange={handleCategories}>
-            <option value="---">Categorie:</option>
-            <option value={accesories.Accesories}>1</option>
-            <option value={input.Men}>2</option>
-            <option value={input.Women}>3</option>
-            <option value={input.Kids}>4</option>
-        </select> */}
-{/*         <input
-          type="text"
-          name="categories"
-          placeholder="Enter the category"
-          required="required"
-          value={input.categories}
-          onChange={handleInput}
-        /> */}
-          {/* {errors.categories && <p className="danger">{errors.categories}</p>} */}
-        {/* </div> */}
+        <div className='categ-s'>
+          <label for="categories">Category</label>
+          <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
+        </div>
+          <div className='categ-btn'>
+            {
+              input.categories.map(c => {
+                return ( 
+                  <>
+                  <button id={c.id} onClick={removeCategory}>{c.name} X</button>
+                  </>
+                )
+              })
+            }
+          </div>
+          <Toaster/>
         <div>
-          <button>Submit</button>
+          <button className='btn-submit'>Submit</button>
         </div>
       </form>
     </div>

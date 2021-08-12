@@ -8,8 +8,8 @@ router.post('/', async (req: Request, res: Response) => {
 
     try {
         const { userId, ProductId, stars, text } = req.body;
-        const review = await Review.create({ text, stars, ProductId })
-        res.json("Revie added succesfully");
+        Review.create({ text, stars, ProductId })
+        res.json("Review added succesfully");
     } catch (e) {
         console.log(e);
     }
@@ -17,8 +17,21 @@ router.post('/', async (req: Request, res: Response) => {
 })
 
 router.get('/', async (req: Request, res: Response) => {
+
     try {
         const reviews = await Review.findAll();
+        res.json(reviews);
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+router.get('/:id', async (req: Request, res: Response) => {
+
+    const {id}=req.params;
+    try {
+        const reviews = await Review.findAll({where:{ProductId:id}});
         res.json(reviews);
 
     } catch (e) {

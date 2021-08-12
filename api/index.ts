@@ -4,7 +4,7 @@ import { addFilProducts } from './src/providers'
 import addCategories from './src/providers/addCategories'
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(async() => {
     console.log('database connected!');
     await addCategories();

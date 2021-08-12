@@ -9,9 +9,12 @@ import { Destiny } from "./Destiny"
 @Table
 export class Sale extends Model<Sale> {
 
-  @Column(DataType.ENUM(
-    'Created', 'Processing', 'Cancelled', 'Complete'
-  ))
+  @Column({
+    defaultValue: 'Created',
+    ...DataType.ENUM(
+      'Created', 'Processing', 'Cancelled', 'Complete'
+    )
+  })
   state!: string
 
   @Column(DataType.DATE)
