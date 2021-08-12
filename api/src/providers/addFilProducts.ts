@@ -1,14 +1,20 @@
 import { readFileSync } from 'fs'
-import { appProduct } from '../@app'
 
 import {
-  Product, Photo, Brand, Category, ProductCategory
+  Product, Photo, Brand, User, ProductCategory
 } from '../db'
 
 export default async () => {
   let count = await Product.count()
   if (count > 0) return `they already exist ${count} products in db!`
-
+  User.create({
+    userType: "Admin",
+    "userName": "user001",
+    "email": "user001@yopmail.com",
+    "firstName": "user001",
+    "lastName": "user002",
+    "hashPasword": "gTw34wNs64ndr75rXr56uVz"
+  })
   const products = await JSON.parse(
     readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8')
   )
@@ -17,7 +23,7 @@ export default async () => {
   const AddProduct = async (product: any) => {
 
     const [brand] = await Brand.findOrCreate(
-      { where: { name: product.brand.toUpperCase() } }    )
+      { where: { name: product.brand.toUpperCase() } })
 
     const brandId = await brand.getDataValue("id")
 
@@ -42,16 +48,16 @@ export default async () => {
     await Photo.findOrCreate({ where: { url: product.photo, productId } })
     //await ProductCategory.findOrCreate({ where: { productId, categoryId } })
     //console.log(`categorias del producto ${productId} ${product.category}`)
-    
+
     //console.log(`Creando ProductCategory con: ${productId} ${product.category}`);
 
-    try{
-      for(let i=0; i<product.category.length; i++){
+    try {
+      for (let i = 0; i < product.category.length; i++) {
         //console.log(`product: ${productId} categoryId: ${product.category[i]}`)
-        await ProductCategory.findOrCreate({where:{productId,categoryId:product.category[i]}})
+        await ProductCategory.findOrCreate({ where: { productId, categoryId: product.category[i] } })
       }
 
-    }catch(e){
+    } catch (e) {
       console.error(e);
     }
   }

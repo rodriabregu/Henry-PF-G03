@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 import { Product, Sale } from '../db';
-
+import { sendEmail } from '../providers'
 /* 
  * Route : PUT "api/sale/"
  * Cambia el estado de una Sale segun
@@ -23,14 +23,13 @@ export default async (req: Request, res: Response) => {
     if (!(sale && states.includes(newState)))
       throw { status: 404, message: "data is not validate" }
 
-    const { state, items } = await sale.get()
+    const { state, items, userId, id } = sale.get()
 
     if (state === "Created" && newState === "Processing") {
-
       await sale.update({ state: "Processing" })
       if (sale.get().state !== "Processing")
         throw { status: 404, message: "no actualizo a Processing" }
-
+      await sendEmail(userId, "Processing", id)
     } else if (state === "Created" && newState === "Cancelled") {
 
       await Promise.all(items.map((item: item) => {
@@ -39,27 +38,29 @@ export default async (req: Request, res: Response) => {
       await sale.update({ state: "Cancelled" })
       if (sale.get().state !== "Cancelled")
         throw { status: 505, message: "no actualizo a Cancelled" }
+      await sendEmail(userId, "Cancelled", id)
 
     } else if (state === "Processing" && newState === "Cancelled") {
 
       await Promise.all(items.map((item: item) => {
         return deleteItem(item)
       }))
-      console.log("Cancelled: ", sale.get())
       await sale.update({ state: "Cancelled" })
       if (sale.get().state !== "Cancelled")
         throw { status: 505, message: "no actualizo a Cancelled" }
+      await sendEmail(userId, "Cancelled", id)
 
     } else if (state === "Processing" && newState === "Complete") {
 
       await sale.update({ state: "Complete" })
       if (sale.get().state !== "Complete")
         throw { status: 505, message: "no actualizo a Complete" }
+        await sendEmail(userId, "Complete", id)
 
     } else throw { status: 404, message: "actualizacion no permitida" }
 
     return res.json({
-      message: "successfully",
+      message: `Sale ${saleId} actualized successfully to ${newState}`,
       data: sale.get()
     })
   } catch (error) {
