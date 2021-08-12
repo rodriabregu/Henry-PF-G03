@@ -15,52 +15,62 @@ import { Product, Sale } from '../db';
  */
 
 export default async (req: Request, res: Response) => {
-  const { saleId, newState } = req.body
-  const states = ['Created', 'Processing', 'Cancelled', 'Complete']
+  try {
+    const { saleId, newState } = req.body
+    const states = ['Created', 'Processing', 'Cancelled', 'Complete']
 
-  const sale = await Sale.findByPk(saleId, { include: "items" })
-  if (!(sale && states.includes(newState)))
-    throw { status: 404, message: "data is not validate" }
+    const sale = await Sale.findByPk(saleId, { include: "items" })
+    if (!(sale && states.includes(newState)))
+      throw { status: 404, message: "data is not validate" }
 
-  const { state, items } = await sale.get()
+    const { state, items } = await sale.get()
 
-  if (state === "Created" && newState === "Processing") {
+    if (state === "Created" && newState === "Processing") {
 
-    await sale.update({ state: "Processing" })
-    if (sale.get().state !== "Processing")
-      throw { status: 404, message: "no actualizo a Processing" }
+      await sale.update({ state: "Processing" })
+      if (sale.get().state !== "Processing")
+        throw { status: 404, message: "no actualizo a Processing" }
 
-  } else if (state === "Created" && newState === "Cancelled") {
+    } else if (state === "Created" && newState === "Cancelled") {
 
-    await Promise.all(items.map((item: item) => {
-      return deleteItem(item)
-    }))
-    await sale.update({ state: "Cancelled" })
-    if (sale.get().state !== "Cancelled")
-      throw { status: 505, message: "no actualizo a Cancelled" }
+      await Promise.all(items.map((item: item) => {
+        return deleteItem(item)
+      }))
+      await sale.update({ state: "Cancelled" })
+      if (sale.get().state !== "Cancelled")
+        throw { status: 505, message: "no actualizo a Cancelled" }
 
-  } else if (state === "Processing" && newState === "Cancelled") {
+    } else if (state === "Processing" && newState === "Cancelled") {
 
-    await Promise.all(items.map((item: item) => {
-      return deleteItem(item)
-    }))
-    console.log("Cancelled: ", sale.get())
-    await sale.update({ state: "Cancelled" })
-    if (sale.get().state !== "Cancelled")
-      throw { status: 505, message: "no actualizo a Cancelled" }
+      await Promise.all(items.map((item: item) => {
+        return deleteItem(item)
+      }))
+      console.log("Cancelled: ", sale.get())
+      await sale.update({ state: "Cancelled" })
+      if (sale.get().state !== "Cancelled")
+        throw { status: 505, message: "no actualizo a Cancelled" }
 
-  } else if (state === "Processing" && newState === "Complete") {
+    } else if (state === "Processing" && newState === "Complete") {
 
-    await sale.update({ state: "Complete" })
-    if (sale.get().state !== "Complete")
-      throw { status: 505, message: "no actualizo a Complete" }
+      await sale.update({ state: "Complete" })
+      if (sale.get().state !== "Complete")
+        throw { status: 505, message: "no actualizo a Complete" }
 
-  } else throw { status: 404, message: "actualizacion no permitida" }
+    } else throw { status: 404, message: "actualizacion no permitida" }
 
-  return res.json({
-    message: "successfully",
-    data: sale.get()
-  })
+    return res.json({
+      message: "successfully",
+      data: sale.get()
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(error.status || 500).json({
+      message: error.message || "uuups¡¡",
+      data: {}
+    });
+  }
+
+
 }
 
 interface item {

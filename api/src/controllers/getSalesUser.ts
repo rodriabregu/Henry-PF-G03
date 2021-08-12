@@ -8,26 +8,31 @@ import { Sale, SaleItem } from '../db'
  */
 
 export default async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+    const sales = await Sale.findAll({
+      where: { userId },
+      attributes: { exclude: ['updatedAt', 'createdAt'] },
+      include: [
+        {
+          model: SaleItem,
+          attributes: { exclude: ['updatedAt', 'createdAt'] }
+        }
+      ]
+    })
 
-  const { userId } = req.params
+    if (!sales || sales.length < 1)
+      throw Error("No se encontrason Sales")
 
-  const sales = await Sale.findAll({
-    where: { userId },
-    attributes: { exclude: ['updatedAt', 'createdAt'] },
-    include: [
-      {
-        model: SaleItem,
-        attributes: { exclude: ['updatedAt', 'createdAt'] }
-      }
-    ]
-  })
-
-  if (!sales || sales.length < 1)
-    throw { data: [], status: 404, message: "No se encontrason Sales" }
-
-  return res.json({
-    message: "successfully",
-    data: sales
-  })
-
+    return res.json({
+      message: "successfully",
+      data: sales
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(error.status || 500).json({
+      message: error.message || "uuups¡¡",
+      data: {}
+    });
+  }
 }
