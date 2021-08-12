@@ -1,5 +1,6 @@
 import { Response, Request } from 'express'
 import { Product, User, Sale, SaleItem } from '../db'
+import { sendEmail } from '../providers'
 
 /* 
  * Route : POST "api/sale/"
@@ -38,23 +39,27 @@ export default async (req: Request, res: Response) => {
     if (!Array.isArray(stokItems))
       throw Error("no hay stoy")
 
-    const saleId = (await Sale.create({
+    const newSale = await Sale.create({
       userId: userId,
       date: new Date(Date.now())
-    })).getDataValue("id")
+    })
+    if (!newSale) throw Error("no se creo la sale")
+
+    const { saleId } = newSale.get()
 
     const newItems = await Promise.all(items.map(
       item => { return addItem(item, saleId) }
     ))
-    if (!Array.isArray(newItems))
+    if (!Array.isArray(newItems)) {
+      newSale.destroy()
       throw Error("no se crearon los items")
+    }
 
-    const sale = await Sale.findByPk(saleId, { include: "items" })
-    if (!sale) throw Error("no se creo la sale")
+    sendEmail(user.get().id, "Created", saleId)
 
     return res.json({
       message: "successfully",
-      data: sale.get()
+      data: newSale.get()
     })
   } catch (error) {
     console.error(error)
