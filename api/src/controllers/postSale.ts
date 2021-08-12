@@ -20,39 +20,49 @@ import { Product, User, Sale, SaleItem } from '../db'
  */
 
 export default async (req: Request, res: Response) => {
+  try {
+    const { userId, items } = req.body
 
-  await User.create({ userName: "Esteban " }) // quitar esta line cuando user user este implementado y envien datos reales
+    if (!(userId && items && Array.isArray(items)))
+      return res.status(404).json({
+        message: "fallid",
+        data: {}
+      })
 
-  const { userId, items } = req.body
+    const user = await User.findByPk(userId)
+    if (!user) throw Error(" usuario no encontrado ")
 
-  if (!(userId && items && Array.isArray(items)))
-    return res.status(404).json({
-      message: "fallid",
-      data: {}
+    const stokItems = await Promise.all(items.map(item => {
+      return checkStok(item)
+    }))
+    if (!Array.isArray(stokItems))
+      throw Error("no hay stoy")
+
+    const saleId = (await Sale.create({
+      userId: userId,
+      date: new Date(Date.now())
+    })).getDataValue("id")
+
+    const newItems = await Promise.all(items.map(
+      item => { return addItem(item, saleId) }
+    ))
+    if (!Array.isArray(newItems))
+      throw Error("no se crearon los items")
+
+    const sale = await Sale.findByPk(saleId, { include: "items" })
+    if (!sale) throw Error("no se creo la sale")
+
+    return res.json({
+      message: "successfully",
+      data: sale.get()
     })
-
-  await Promise.all(items.map(item => {
-    return checkStok(item)
-  }))
-
-  const saleId = (await Sale.create({
-    userId: userId,
-    state: 'Created',
-    date: new Date(Date.now())
-  })).getDataValue("id")
-
-  await Promise.all(items.map(item => {
-    return addItem(item, saleId)
-  }))
-
-  const sale = await Sale.findByPk(saleId, { include: "items" })
-  if(!sale) throw { status: 404, message: "no se creo la sale" }
-
-  return res.json({
-    message: "successfully",
-    data: sale.get()
-  })
-
+  } catch (error) {
+    console.error(error)
+    return res.status(error.status || 500).json({
+      message: error.message || "uuups¡¡",
+      data: {}
+    });
+  }
 }
 
 interface item {
@@ -63,19 +73,16 @@ interface item {
 const checkStok = async (item: item) => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
-  if (!product)
-    throw { status: 404, message: "producto no existe" }
+  if (!product) throw Error("producto no existe")
   const { stock } = product.get()
-  if (stock - units < 0)
-    throw { status: 404, message: "no hay stock" }
-  return true;
+  if (stock - units < 0) throw Error("no hay stock")
+  return stock;
 }
 
 const addItem = async (item: item, saleId: number) => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
-  if (!product)
-    throw { status: 404, message: "producto no existe" }
+  if (!product) throw Error("producto no existe")
   const { stock, price, name } = product.get()
   await product.update({ stock: stock - units })
 

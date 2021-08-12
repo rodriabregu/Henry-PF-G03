@@ -5,9 +5,24 @@ import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredPro
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
+import AddCart from '../Cart';
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
+
+interface ProductsCart {
+    name: any;
+    id: number;
+    price: any;
+    size: any;
+    review: any;
+    img: any;
+    photos: any;
+    stock: any;
+    brand: any;
+    description: any;
+    categories: any;
+}
 
 const Pagination = () => {
     const dispatch = useDispatch();
@@ -116,7 +131,7 @@ const Pagination = () => {
                             )
                         })
                         :
-                        filterp?.map((e: IInfo, index: number) => {
+                        filterp?.map((e: ProductsCart, index: number) => {
                             return (
                                 <div className='imgproducts' key={index}>
                                     <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
@@ -124,6 +139,16 @@ const Pagination = () => {
                                         <div>${e.price}.00</div>
                                         <img src={e.photos?e.photos[0].url:''} alt={e.name} />
                                     </Link>
+                                    {/* <AddCart 
+                                    id={e.id}
+                                    name={e.name}
+                                    photo={e.photos} 
+                                    stock={e.stock} 
+                                    price={e.price}
+                                    brand={e.brand}
+                                    description={e.description}
+                                    categories={e.categories}
+                                    /> */}
                                 </div>
                             )
                         })

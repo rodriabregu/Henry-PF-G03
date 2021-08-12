@@ -7,23 +7,29 @@ import { Sale, SaleItem } from '../db'
  */
 
 export default async (_req: Request, res: Response) => {
+  try {
+    const sales = await Sale.findAll({
+      attributes: { exclude: ['updatedAt', 'createdAt'] },
+      include: [
+        {
+          model: SaleItem,
+          attributes: { exclude: ['updatedAt', 'createdAt'] }
+        }
+      ]
+    })
 
-  const sales = await Sale.findAll({
-    attributes: { exclude: ['updatedAt', 'createdAt'] },
-    include: [
-      {
-        model: SaleItem,
-        attributes: { exclude: ['updatedAt', 'createdAt'] }
-      }
-    ]
-  })
+    if (!sales || sales.length < 1)
+      throw Error("No se encontrason Sales")
 
-  if (!sales || sales.length < 1)
-    throw {data: [], status: 404, message: "No se encontrason Sales" }
-
-  return res.json({
-    message: "successfully",
-    data: sales
-  })
-
+    return res.json({
+      message: "successfully",
+      data: sales
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(error.status || 500).json({
+      message: error.message || "uuups¡¡",
+      data: {}
+    });
+  }
 }

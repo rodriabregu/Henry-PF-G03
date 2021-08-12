@@ -9,6 +9,7 @@ import getSales from '../controllers/getSales'
 import getSalesUser from '../controllers/getSalesUser'
 
 import products from './products';
+import productsUpdate from './productsUpdate';
 import category from './categories';
 import users from './users';
 import categoryTypes from './categoryTypes';
@@ -26,6 +27,7 @@ router.get('/sales/user/:userId', getSalesUser)
 
 router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);
+router.use('/productsUpdate', productsUpdate);
 router.use('/categories', category);
 router.use('/users', users);
 router.use('/brand', brand);
