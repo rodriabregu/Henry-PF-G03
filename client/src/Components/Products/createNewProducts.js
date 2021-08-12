@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import SelectCategory from "./SelectCategory";
 import './CreateProducts.css';
+import axios from 'axios'
 
 const notify = () => toast.success('Successfully created!');
 
@@ -71,7 +72,8 @@ const CreateProducts = () => {
     price: 0,
     stock: 0,
     brand:'',
-    categories: []
+    categories: [],
+    files:null
   });
 
   function handleInput(e) {
@@ -93,10 +95,18 @@ const CreateProducts = () => {
   };
 
   const handleChange = e => {
+    if(e.target.name==='files'){
+      console.log(e)
+      setInput({
+        ...input,
+        [e.target.name]:e.target.files
+      })
+    }else{
       setInput({
         ...input,
         [e.target.name]:e.target.value
-      })  
+      }) 
+    }       
   };
 
   const handleCategories=(e)=>{
@@ -136,14 +146,34 @@ const CreateProducts = () => {
   },
   "photos": input.photos,
   "categories": input.categories.map(c=>c.id),
-  "brand": input.brand
+  "brand": input.brand,
+  //"files":input.files
  };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log('creando product ',product)
-    dispatch(postProducts(product))
-    console.log(product)
+    
+    const f=new FormData();
+
+    f.append('files',input.files[0]);
+    axios({
+      method: "post",
+      url: "http://localhost:3001/photos",
+      data: f,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        
+        const foto=`${response.data}`
+        product.photos=[foto];
+        dispatch(postProducts(product))
+
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
+  
+    
     notify()
     setInput({
       name:'',
@@ -153,6 +183,7 @@ const CreateProducts = () => {
       stock: 0,
       brand:'',
       categories: [],
+      //files:null
     })
   };
 
@@ -175,12 +206,13 @@ const CreateProducts = () => {
           {errors.photos && <p className="danger">{errors.photos}</p>}
 
           <input
-          type="text"
-          name="photos"
+          multiple
+          type="file"
+          name="files"
           placeholder="Enter url photos here"
           required="required"
-          value={input.photos}
-          onChange={handlePhotos}/> 
+          /*value={input.photos}*/
+          onChange={handleChange}/> 
         </div>
         <div>
           <label for="descriptions">Description:</label>
