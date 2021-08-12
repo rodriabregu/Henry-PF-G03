@@ -10,7 +10,7 @@ const Cart = () => {
         const newAllCart = cartItems.filter(e => e.id !== cartId);
         saveToLocalStorage(newAllCart);
         window.location.reload();
-    }
+    };
 
     return (
         <div>

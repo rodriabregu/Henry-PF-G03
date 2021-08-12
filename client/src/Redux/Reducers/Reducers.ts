@@ -4,7 +4,7 @@ import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
 import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
 import { ADD_CART_PRODUCTS } from '../Actions/Products/addingCart';
-
+import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 const initialState = {
   products: [],//filtro o todos
   productsDetail: {},
@@ -43,6 +43,11 @@ function getProductReducer(state = initialState, action: any) {
         products: state.AllProducts
       }
     case POST_PRODUCTS:
+      return {
+        ...state,
+        products: [...state.products, action.payload]
+      }
+    case EDIT_PRODUCTS:
       return {
         ...state,
         products: [...state.products, action.payload]
