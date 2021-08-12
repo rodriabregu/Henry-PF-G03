@@ -18,6 +18,7 @@ import productName from './ProductName';
 import productId from './ProductId';
 import brand from './brand';
 import reviews from './reviews'
+import photos from './photo'
 
 router.post('/user', postUser)
 router.post('/sale', postSale)
@@ -35,5 +36,6 @@ router.use('/categoryTypes', categoryTypes);
 router.use('/product/name', productName);
 router.use('/product/id', productId);
 router.use('/reviews', reviews)
+router.use('/photos',photos)
 
 export default router;
