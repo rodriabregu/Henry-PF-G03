@@ -129,8 +129,10 @@ const ProductDetail = () => {
                         <h3>{detail.description}</h3>
                         <h3>Stock:{detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                         <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
-                        <AddCart 
+                        <AddCart
+                            id={detail.id}
                             name={detail.name} 
+                            photo={detail.photos}
                             stock={detail.stock} 
                             price={detail.price} 
                             description={detail.description} 
@@ -145,16 +147,6 @@ const ProductDetail = () => {
                                     )
                                 })
                             }
-                            <AddCart
-                            id={detail.id}
-                            name={detail.name} 
-                            photo={detail.photos}
-                            stock={detail.stock} 
-                            price={detail.price} 
-                            description={detail.description} 
-                            categories={detail.categories} 
-                            brand={detail.brand}
-                            />
                     <div className='form-review'>
                     <button className='btn-review' onClick={changeFlag}>Write review</button>
                     { show &&
