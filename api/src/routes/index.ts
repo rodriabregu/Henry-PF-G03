@@ -2,8 +2,11 @@ import { Router } from 'express';
 
 const router = Router();
 
-import controllers from '../controllers'
-controllers(router)
+import postUser from '../controllers/postUser'
+import postSale from '../controllers/postSale'
+import putSale from '../controllers/putSale'
+import getSales from '../controllers/getSales'
+import getSalesUser from '../controllers/getSalesUser'
 
 import products from './products';
 import productsUpdate from './productsUpdate';
@@ -15,6 +18,12 @@ import productName from './ProductName';
 import productId from './ProductId';
 import brand from './brand';
 import reviews from './reviews'
+
+router.post('/user', postUser)
+router.post('/sale', postSale)
+router.put('/sale', putSale)
+router.get('/sales', getSales)
+router.get('/sales/user/:userId', getSalesUser)
 
 router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);
