@@ -2,8 +2,9 @@ import error from "./error";
 import appRes from "./appRes";
 import appPhoto from "./appPhoto";
 import appProduct from "./appProduct";
-import { Op } from 'sequelize'
+import appUser from './appUser'
 import { sequelize } from '../db';
+
 const {
   Photo, Review, Category, Brand,
 } = sequelize.models;
@@ -25,6 +26,7 @@ const productOptions = {
 export {
   productOptions,
   error,
+  appUser,
   appRes,
   appPhoto,
   appProduct

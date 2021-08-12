@@ -18,6 +18,6 @@ export class Review extends Model {
   userId!: number
 
   @ForeignKey(() => Product)
-  productId!: number
+  ProductId!: number
 
 }

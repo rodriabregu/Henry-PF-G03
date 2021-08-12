@@ -1,6 +1,7 @@
-import { Response, Request } from 'express';
+import { Response, Request } from 'express'
 import { User } from '../db'
-
+import { appUser } from '../@app'
+import { sendEmail } from '../providers'
 /* 
  * Route : POST "/api/user/" 
  * 
@@ -10,36 +11,29 @@ import { User } from '../db'
  *  Ejemplo body
  * 
  * const body = {
-    "userName": "string",
-    "email": "string@algo.umm",
-    "hashPasword": "string",
-    "firstName": "string",
-    "lastName": "string"
+    "userName": "J-esteban.345",
+    "email": "esteban.345@yopmail.com",
+    "firstName": "Juan Esteban",
+    "lastName": "Quintero B",
+    "hashPasword": "gTw34wNs64ndr75rXr56uVz"
   }
 */
-
-interface user {
-  userName: string
-  email: string
-  hashPasword: string
-  firstName: string
-  lastName: string
-}
 
 export default async (req: Request, res: Response) => {
   try {
     const {
       userName, email, lastName,
       hashPasword, firstName
-    }: user = req.body
-    
+    }: appUser = req.body
+
     if (!(
-      userName && /^([\w\-]{4,20})$/.test(userName)
+      userName && /^([\-\w\.\_]{4,20})$/.test(userName)
       && email
       && /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
       && lastName && /[a-z]{5,}/i.test(lastName)
+      && firstName && /[a-z]{5,}/i.test(firstName)
       && hashPasword
-      && firstName
+
     ))
       return res.status(404).json({
         data: {},
@@ -60,8 +54,10 @@ export default async (req: Request, res: Response) => {
       message: `the user ${userName} alreadi exist`
     });
 
+    await sendEmail(newUser.get().id, "Welcome")
+
     return res.json({
-      message: "successfully",
+      message: `munsage de confirmacion enviado a ${email}`,
       data: newUser.get()
     })
   } catch (error) {

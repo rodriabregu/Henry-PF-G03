@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { VscError} from 'react-icons/vsc';
 import toast, { Toaster } from 'react-hot-toast';
-import postProducts from "../../Redux/Actions/Products/postProducts";
+import editProducts from "../../Redux/Actions/Products/editProducts";
 import './editComp.css';
 
 const notify = () => toast.success('Successfully created!');
@@ -11,12 +10,12 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
   const dispatch = useDispatch()  
 
   const [input, setInput] = useState({
-    name:'',
+    name: name,
     photos: [],
-    description:'',
-    price: 0,
-    stock: 0,
-    brand:'',
+    description: description,
+    price: price,
+    stock: stock,
+    brand: brand.name,
     categories: []
   });
 
@@ -32,7 +31,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
     photos:input.photos.concat(e.target.value) } )
   };
 
-  const handleChange = (e) => {
+/*   const handleChange = (e) => {
       setInput({
         ...input,
         [e.target.name]:e.target.value
@@ -45,33 +44,33 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
       ...input,
       categories:[...input.categories, e.target.value],
     })
-  };
+  }; */
 
-  const removeCategory= e => {
+/*   const removeCategory= e => {
     setInput({
       ...input,
       categories:input.categories.filter( c => c !== e.target.id ),
     })
-  };
+  }; */
 
-  const product = {"product": {
-    "id": id,
-    "price": input.price,
-    "name": input.name,
-    "stock": input.stock,
-    "description": input.description,
-    "brand": input.brand
-  },
-  "photos": input.photos,
-  "categories": input.categories,
-  "brand": input.brand
- };
+  const product = {
+    "product": {
+      "id": id,
+      "name": input.name,
+      "price": parseInt(input.price),
+      "stock": parseInt(input.stock),
+      "description": input.description,
+      "brand": input.brand
+    }
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(postProducts(product))
+    dispatch(editProducts(product.product))
     notify()
-    setInput({
+    window.location.reload();
+    console.log('aca',product)
+    /* setInput({
       name:'',
       photos: [],
       description:'',
@@ -79,7 +78,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
       stock: 0,
       brand:'',
       categories: [],
-    })
+    }) */
   };
 
   return (
@@ -92,19 +91,19 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
           name="name"
           placeholder="Name product here"
           required="required"
-          value={name}
+          defaultValue={name}
           onChange={handleInput}/> 
         </div>
-        <div>
+{/*         <div>
           <label for="photos">Photos:</label>
           <input
           type="text"
           name="photos"
           placeholder="Enter url photos here"
           required="required"
-          value={input.photos}
+          defaultValue={description}
           onChange={handlePhotos}/> 
-        </div>
+        </div> */}
         <div>
           <label for="descriptions">Description:</label>
           <input
@@ -112,7 +111,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
           name="description"
           placeholder="Enter the description"
           required="required"
-          value={description}
+          defaultValue={description}
           onChange={handleInput}/>
           </div>
         <div>
@@ -122,7 +121,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
           name="price"
           placeholder="Enter the price"
           required="required"
-          value={price}
+          defaultValue={price}
           onChange={handleInput}/>
           </div>
         <div>
@@ -132,7 +131,17 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
             name="stock"
             placeholder="Enter the stock"
             required="required"
-            value={stock}
+            defaultValue={stock}
+            onChange={handleInput}/>
+        </div>
+        <div>
+        <label for="brand">Brand:</label>
+          <input
+            type="text"
+            name="brand"
+            placeholder="Enter the brand"
+            required="required"
+            defaultValue={brand.name}
             onChange={handleInput}/>
         </div>
           <Toaster/>
