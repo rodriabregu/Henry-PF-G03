@@ -4,7 +4,7 @@ export const POST_PRODUCTS = 'POST_PRODUCTS';
 
 const postProducts = (dataProduct:any) => {
   return async (dispatch:any) => {
-    await axios.post(`http://${config.REACT_APP_API_URL}:3001/products`, dataProduct)
+    await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/products`, dataProduct)
     .then( res => {
       dispatch({
           type: POST_PRODUCTS,
