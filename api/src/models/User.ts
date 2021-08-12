@@ -3,15 +3,22 @@ import {
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
+import { Review } from './Review';
 
 @Table
 export class User extends Model<User> {
 
-  @Column(DataType.ENUM('User', 'Admin'))
+  @Column({
+    defaultValue: 'user',
+    ...DataType.ENUM('Guest', 'User', 'Admin')
+  })
   userType!: string;
 
-  @Column
-  userNane!: string; //userName
+  @Column({ defaultValue: true })
+  isActive!: boolean;
+
+  @Column({ unique: true })
+  userName!: string; //userName
 
   @Column
   email!: string;
@@ -26,6 +33,9 @@ export class User extends Model<User> {
   lastName!: string;
 
   @HasMany(() => Sale)
-  Sales!: Sale[];
+  sales!: Sale[];
+
+  @HasMany(() => Review)
+  reviews!: Review[];
 
 }
