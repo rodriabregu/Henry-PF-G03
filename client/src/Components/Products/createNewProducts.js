@@ -208,6 +208,7 @@ const CreateProducts = () => {
           </div>
         <div>
         <label for="stock">Stock:</label>
+        {errors.stock && <p className="danger">{errors.stock}</p>}
           <input
             type="number"
             name="stock"
@@ -215,7 +216,6 @@ const CreateProducts = () => {
             required="required"
             value={input.stock}
             onChange={handleInput}/>
-          {errors.stock && <p className="danger">{errors.stock}</p>}
         </div>
         <div className='brand-s'>
           <label for="brand">Brand:</label>
