@@ -49,6 +49,7 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
                 Add to cart <TiShoppingCart />
             </button>
                 <input type='number' min="1" max={stock} defaultValue='1' onChange={handleChange} />
+                <span>{value.value * price} </span>
             </form>
         </div>
     )
