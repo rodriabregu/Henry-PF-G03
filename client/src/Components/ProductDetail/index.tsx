@@ -30,15 +30,6 @@ const ProductDetail = () => {
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const stars = Array(5).fill(0)
-    const [editing, setEditing] = useState({
-        name:'',
-        photos: [],
-        description:'',
-        price: 0,
-        stock: 0,
-        brand:'',
-        categories: []
-    });
 
     const { handleSubmit } = useForm();
 
