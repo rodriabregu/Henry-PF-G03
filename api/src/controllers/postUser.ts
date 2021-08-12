@@ -1,7 +1,5 @@
 import { Response, Request } from 'express';
-import { defaultValueSchemable } from 'sequelize/types/lib/utils';
-import { User, Sale, Review, Product } from '../db'
-import { error } from '../@app'
+import { User } from '../db'
 
 /* 
  * Route : POST "/api/user/" 
@@ -34,14 +32,9 @@ export default async (req: Request, res: Response) => {
       userName, email, lastName,
       hashPasword, firstName
     }: user = req.body
-
-    console.table({
-      userName, email, lastName,
-      hashPasword, firstName
-    })
-
+    
     if (!(
-      userName && /^([\w\-]{4,20})$/.test(userName) 
+      userName && /^([\w\-]{4,20})$/.test(userName)
       && email
       && /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
       && lastName && /[a-z]{5,}/i.test(lastName)
