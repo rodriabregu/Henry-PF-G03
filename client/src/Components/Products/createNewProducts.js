@@ -172,8 +172,7 @@ const CreateProducts = () => {
       .catch(function (response) {
         console.log(response);
       });
-
-   
+  
     
     notify()
     setInput({
