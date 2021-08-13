@@ -47,12 +47,11 @@ const ProductDetail = () => {
         });
     };
 
-    const notify = () => toast.success('Successfully created!');
+    const notify = () => toast.success('Successfully review created!');
 
     const onSubmit = async () => {
         const rev = review;
         await axios.post('http://localhost:3001/reviews', rev);
-        alert('review enviada, gracias!');
         notify();
     };
 
@@ -92,7 +91,7 @@ const ProductDetail = () => {
 
     useEffect( () => {
         dispatch(getProductsDetail(parseInt(id)));
-        const res:any = axios.get<any>(`http://localhost:3001/reviews/${id}`)
+        axios.get<any>(`http://localhost:3001/reviews/${id}`)
         .then( res => {
             setContainer(res.data)
         })

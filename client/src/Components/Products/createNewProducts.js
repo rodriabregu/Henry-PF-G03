@@ -7,7 +7,7 @@ import SelectCategory from "./SelectCategory";
 import './CreateProducts.css';
 import axios from 'axios'
 
-const notify = () => toast.success('Successfully created!');
+const notify = () => toast.success('Successfully product created!');
 
 const validate = (input) => {
   let errors = {};
@@ -89,10 +89,10 @@ const CreateProducts = () => {
     );
   };
 
-  const handlePhotos = e => { setInput({
+/*   const handlePhotos = e => { setInput({
     ...input, 
     photos:input.photos.concat(e.target.value) } )
-  };
+  }; */
 
   const handleChange = e => {
     if(e.target.name==='files'){
@@ -111,18 +111,17 @@ const CreateProducts = () => {
 
   const handleCategories=(e)=>{
 
-    let opciones=document.querySelectorAll('.cboCategory option');
+    let opciones = document.querySelectorAll('.cboCategory option');
     let id;
     opciones.forEach(o=>{
-      if(o.innerText===e.target.value){
-        id=o.id;
+      if(o.innerText === e.target.value){
+        id = o.id;
       }
     })
-    let cat={
+    let cat = {
       name:e.target.value,
       id
     }
-    console.log(cat)
 
     setInput({
       ...input,
