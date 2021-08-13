@@ -11,7 +11,7 @@ const SelectCategory = (props:any) => {
             .then(resp=>{
                 setelements(resp.data);
             })
-    }, [])
+    }, [path])
     return(
         <select className={props.className} name={props.name} onChange={props.onChange}>
             {elements ? elements.map( (c:any) => <option id={c.id}>{c.name}</option>) : '' }

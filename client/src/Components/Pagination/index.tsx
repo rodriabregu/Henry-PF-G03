@@ -5,7 +5,7 @@ import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredPro
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
-import AddCart from '../Cart';
+/* import AddCart from '../Cart'; */
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
@@ -37,7 +37,7 @@ const Pagination = () => {
     const [pageNumberLimit, _setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
-    const [category,setCategory]=useState('');
+    /* const [category,setCategory] = useState(''); */
 
     const handleClick = (e: any) => {
         setcurrentPage(Number(e.target.id));
