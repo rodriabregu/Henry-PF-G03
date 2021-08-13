@@ -45,7 +45,7 @@ export default async (req: Request, res: Response) => {
     })
     if (!newSale) throw Error("no se creo la sale")
 
-    const { saleId } = newSale.get()
+    const saleId = newSale.getDataValue("id")
 
     const newItems = await Promise.all(items.map(
       async (item): Promise<appItem> => {

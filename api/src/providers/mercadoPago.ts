@@ -7,7 +7,7 @@ mercadopago.configure({
 });
 
 export default async (user: appUser, items: appItem[], saleId: number): Promise<{}> => {
-
+  
   const preference = {
     payer: {
       name: user.lastName,
@@ -24,8 +24,8 @@ export default async (user: appUser, items: appItem[], saleId: number): Promise<
     }),
     back_urls: {
       success: `http://localhost:3000/checkout/${saleId}/success/${Math.floor(Math.random() * Date.now())}`,
-      failure: `http://localhost:3000/checkout/${saleId}/failure`,
-      pending: `http://localhost:3000/checkout/${saleId}/pending`
+      failure: `http://localhost:3000/checkout/${saleId}/failure/${Math.floor(Math.random() * Date.now())}`,
+      pending: `http://localhost:3000/checkout/${saleId}/pending/${Math.floor(Math.random() * Date.now())}`
     }
   };
   const response = await mercadopago.preferences.create(preference)
