@@ -72,7 +72,7 @@ useEffect(() => {
                                         <h3>{p.name}, Actual stock: {p.stock}</h3>
                                     </div> 
                                     <div>
-                                        <h3>Price: ${p.price}.00 (total:${p.price * p.value.value}.00)</h3>
+                                        <h3>Price: ${p.price}.00 (total: ${p.price * p.value.value}.00)</h3>
                                     </div>
                                     <div>{ p.stock < p.value.value ? 
                                         <h4>There is not enough stock of this product. But you can buy {p.stock} if you want, or remove from the cart. 
