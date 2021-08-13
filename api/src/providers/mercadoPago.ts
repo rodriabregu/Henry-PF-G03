@@ -3,7 +3,7 @@ import { appUser, appItem } from '../@app';
 const mercadopago = require('mercadopago');
 
 mercadopago.configure({
-  access_token: 'TEST-4464086672923304-081215-73061cc2dfa5eaba45a4c8d198b51f32-103105516'
+  access_token: 'TEST-1770294031185575-081220-f524bb2e6ae9a5f60f9729aa0668dea3-158490590'
 });
 
 export default async (user: appUser, items: appItem[]): Promise<string> => {
