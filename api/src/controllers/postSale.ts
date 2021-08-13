@@ -11,6 +11,7 @@ import { appItem } from '../@app'
  * 
  * body = {
     "userId": 1,
+    "purchaseId": "volar",
     "items": [
       {
         "productId": 34,
