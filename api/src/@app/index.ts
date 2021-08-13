@@ -3,6 +3,8 @@ import appRes from "./appRes";
 import appPhoto from "./appPhoto";
 import appProduct from "./appProduct";
 import appUser from './appUser'
+import appItem from './appItem'
+
 import { sequelize } from '../db';
 
 const {
@@ -26,6 +28,7 @@ const productOptions = {
 export {
   productOptions,
   error,
+  appItem,
   appUser,
   appRes,
   appPhoto,

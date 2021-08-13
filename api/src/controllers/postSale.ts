@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
 import { Product, User, Sale, SaleItem } from '../db'
-import { sendEmail } from '../providers'
-
+import { sendEmail, mercadoPago } from '../providers'
+import { appItem } from '../@app'
 /* 
  * Route : POST "api/sale/"
  * Creara una nueva Sale con la 
@@ -26,7 +26,7 @@ export default async (req: Request, res: Response) => {
 
     if (!(userId && items && Array.isArray(items)))
       return res.status(404).json({
-        message: "fallid",
+        message: "dotos no validos",
         data: {}
       })
 
@@ -48,17 +48,23 @@ export default async (req: Request, res: Response) => {
     const { saleId } = newSale.get()
 
     const newItems = await Promise.all(items.map(
-      item => { return addItem(item, saleId) }
+      async (item): Promise<appItem> => {
+        return await addItem(item, saleId)
+      }
     ))
     if (!Array.isArray(newItems)) {
       newSale.destroy()
       throw Error("no se crearon los items")
     }
 
+    const urlPago = await mercadoPago(user.get(), newItems)
+    if (!urlPago || urlPago.length < 10)
+      throw Error("mercado pago no responde")
     sendEmail(user.get().id, "Created", saleId)
 
     return res.json({
       message: "successfully",
+      urlPago,
       data: newSale.get()
     })
   } catch (error) {
@@ -70,12 +76,7 @@ export default async (req: Request, res: Response) => {
   }
 }
 
-interface item {
-  productId: number
-  units: number
-}
-
-const checkStok = async (item: item) => {
+const checkStok = async (item: appItem) => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
   if (!product) throw Error("producto no existe")
@@ -84,18 +85,18 @@ const checkStok = async (item: item) => {
   return stock;
 }
 
-const addItem = async (item: item, saleId: number) => {
+const addItem = async (item: appItem, saleId: number): Promise<appItem> => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
   if (!product) throw Error("producto no existe")
   const { stock, price, name } = product.get()
   await product.update({ stock: stock - units })
 
-  return SaleItem.create({
+  return (await SaleItem.create({
     saleId,
     productId,
     productName: name,
     units,
     salePrice: price
-  })
+  })).get()
 }
