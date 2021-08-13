@@ -6,7 +6,7 @@ mercadopago.configure({
   access_token: 'TEST-4464086672923304-081215-73061cc2dfa5eaba45a4c8d198b51f32-103105516'
 });
 
-export default async (user: appUser, items: appItem[]): Promise<any> => {
+export default async (user: appUser, items: appItem[]): Promise<string> => {
 
   const preference = {
     payer: {
