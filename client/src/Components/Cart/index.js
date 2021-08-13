@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {IoTrashOutline} from 'react-icons/io5';
-import toast, { Toaster } from 'react-hot-toast';
 import { PostSale } from '../../Redux/Actions/Sales/postSale';
 import { getSales } from '../../Redux/Actions/Sales/getSale'
-import { v4 as uuidv4 } from 'uuid';
+import { IoTrashOutline } from 'react-icons/io5';
 import { useHistory } from "react-router-dom"
+import { v4 as uuidv4 } from 'uuid';
+import toast, { Toaster } from 'react-hot-toast';
+import  { NavLink as Link } from 'react-router-dom'
 import './Cart.css';
 
 const notify = () => toast.success('Successfully buy!');
 
-const id = uuidv4();
-
 const Cart = () => {
+    const history = useHistory()
     const dispatch = useDispatch();
     const allSales = useSelector(s => s.sales);
+    const [salePurchaseId, setSalePurchaseId] = useState('');
     const [items, setItems] = useState([]);
 
 	const saveToLocalStorage = items => {
@@ -41,21 +42,19 @@ const Cart = () => {
     const dispatchSale = {
         "userId": 1,
         "items": items,
-        /* "purchaseId": id */
+        "purchaseId": uuidv4()
     }
 
-    /* let history = useHistory() */
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(PostSale(dispatchSale))
-        const match = allSales?.map(s => s.data.data)
-        const matchFilter = match.filter(m => m.userId === 1)
-
-        /* history.push("/home") */
-        /* notify() */
+        setSalePurchaseId(dispatchSale)
+        const match = allSales?.map(s => s?.data?.data)
+        const matchFilter = match?.filter(m => m.sale?.purchaseId === salePurchaseId?.purchaseId)
+        const matchUrl = matchFilter[0]?.response?.body?.init_point;
+        /* browserHistory.push(matchUrl); */
+        /* notify() */ 
     }
-
-    console.log('allSales', allSales)
 
     useEffect(() => {
         const cartItems = JSON.parse(localStorage.getItem('products-cart'))?.map( c => {
