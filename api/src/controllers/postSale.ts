@@ -49,7 +49,7 @@ export default async (req: Request, res: Response) => {
 
     const newItems = await Promise.all(items.map(
       async (item): Promise<appItem> => {
-        return await addItem(item, saleId)
+        return (await addItem(item, saleId)).get()
       }
     ))
     if (!Array.isArray(newItems)) {
@@ -57,15 +57,16 @@ export default async (req: Request, res: Response) => {
       throw Error("no se crearon los items")
     }
 
-    const urlPago = await mercadoPago(user.get(), newItems)
-    if (!urlPago || urlPago.length < 10)
-      throw Error("mercado pago no responde")
+    const response = await mercadoPago(user.get(), newItems, saleId)
+    if (!response) throw Error("mercado pago no responde")
     sendEmail(user.get().id, "Created", saleId)
 
     return res.json({
       message: "successfully",
-      urlPago,
-      data: newSale.get()
+      data: {
+        sale: newSale.get(),
+        response
+      }
     })
   } catch (error) {
     console.error(error)
@@ -85,18 +86,18 @@ const checkStok = async (item: appItem) => {
   return stock;
 }
 
-const addItem = async (item: appItem, saleId: number): Promise<appItem> => {
+const addItem = async (item: appItem, saleId: number): Promise<any> => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
   if (!product) throw Error("producto no existe")
   const { stock, price, name } = product.get()
   await product.update({ stock: stock - units })
 
-  return (await SaleItem.create({
+  return await SaleItem.create({
     saleId,
     productId,
     productName: name,
     units,
     salePrice: price
-  })).get()
+  })
 }
