@@ -10,9 +10,9 @@ import { Destiny } from "./Destiny"
 export class Sale extends Model<Sale> {
 
   @Column({
-    defaultValue: 'Created',
+    defaultValue: 'Pending',
     ...DataType.ENUM(
-      'Created', 'Processing', 'Cancelled', 'Complete'
+      'Pending', 'Created', 'Processing', 'Cancelled', 'Complete'
     )
   })
   state!: string

@@ -3,19 +3,15 @@ import { appUser, appItem } from '../@app';
 const mercadopago = require('mercadopago');
 
 mercadopago.configure({
-  access_token: 'TEST-4464086672923304-081215-73061cc2dfa5eaba45a4c8d198b51f32-103105516'
+  access_token: 'TEST-1770294031185575-081220-f524bb2e6ae9a5f60f9729aa0668dea3-158490590'
 });
 
-export default async (user: appUser, items: appItem[]): Promise<string> => {
-
+export default async (user: appUser, items: appItem[], saleId: number): Promise<{}> => {
+  
   const preference = {
     payer: {
       name: user.lastName,
       email: user.email,
-      identification: {
-        type: "DNI",
-        number: "222222222"
-      }
     },
 
     items: items.map((item: appItem): {} => {
@@ -27,12 +23,12 @@ export default async (user: appUser, items: appItem[]): Promise<string> => {
       }
     }),
     back_urls: {
-      success: "https://www.google.com/",
-      failure: "http://www.tu-sitio/failure",
-      pending: "http://www.tu-sitio/pending"
+      success: `http://localhost:3000/checkout/${saleId}/success/${Math.floor(Math.random() * Date.now())}`,
+      failure: `http://localhost:3000/checkout/${saleId}/failure/${Math.floor(Math.random() * Date.now())}`,
+      pending: `http://localhost:3000/checkout/${saleId}/pending/${Math.floor(Math.random() * Date.now())}`
     }
   };
   const response = await mercadopago.preferences.create(preference)
-
-  return response.body.init_point
+  if(!response) throw Error("mercado pago no respondió")
+  return response
 }

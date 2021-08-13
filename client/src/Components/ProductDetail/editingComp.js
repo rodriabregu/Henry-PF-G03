@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import editProducts from "../../Redux/Actions/Products/editProducts";
 import './editComp.css';
 
-const notify = () => toast.success('Successfully created!');
+const notify = () => toast.success('Successfully editing created!');
 
 const EditingProduct = ({id, name, stock, price, description, categories, brand}) => {
   const dispatch = useDispatch()  
@@ -26,10 +26,10 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
     });
   };
 
-  const handlePhotos = (e) => { setInput({
+/*   const handlePhotos = (e) => { setInput({
     ...input, 
     photos:input.photos.concat(e.target.value) } )
-  };
+  }; */
 
 /*   const handleChange = (e) => {
       setInput({

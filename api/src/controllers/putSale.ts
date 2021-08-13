@@ -17,45 +17,47 @@ import { sendEmail } from '../providers'
 export default async (req: Request, res: Response) => {
   try {
     const { saleId, newState } = req.body
-    const states = ['Created', 'Processing', 'Cancelled', 'Complete']
+    const states = ['Pending', 'Created', 'Processing', 'Complete', 'Cancelled']
 
-    const sale = await Sale.findByPk(saleId, { include: "items" })
-    if (!(sale && states.includes(newState)))
+    if (!(typeof saleId === "number" && states.includes(newState)))
       throw { status: 404, message: "data is not validate" }
 
-    const { state, items, userId, id } = sale.get()
+    const sale = await Sale.findByPk(saleId, { include: "items" })
+    if (!sale) throw { status: 404, message: "sale is not" }
 
-    if (state === "Created" && newState === "Processing") {
+    const { state, items, userId, id } = sale.get()
+    if (state === 'Cancelled') {
+      throw { status: 405, message: "sale already is Cancelled" }
+    } else if (state === "Pending" && newState === "Created") {
+
+      await sale.update({ state: "Created" })
+      if (sale.get().state !== "Created")
+        throw { status: 504, message: "no actualizo a Created" }
+      sendEmail(userId, "Created", id)
+
+    } else if (state === "Created" && newState === "Processing") {
+
       await sale.update({ state: "Processing" })
       if (sale.get().state !== "Processing")
-        throw { status: 404, message: "no actualizo a Processing" }
-      await sendEmail(userId, "Processing", id)
-    } else if (state === "Created" && newState === "Cancelled") {
-
-      await Promise.all(items.map((item: item) => {
-        return deleteItem(item)
-      }))
-      await sale.update({ state: "Cancelled" })
-      if (sale.get().state !== "Cancelled")
-        throw { status: 505, message: "no actualizo a Cancelled" }
-      await sendEmail(userId, "Cancelled", id)
-
-    } else if (state === "Processing" && newState === "Cancelled") {
-
-      await Promise.all(items.map((item: item) => {
-        return deleteItem(item)
-      }))
-      await sale.update({ state: "Cancelled" })
-      if (sale.get().state !== "Cancelled")
-        throw { status: 505, message: "no actualizo a Cancelled" }
-      await sendEmail(userId, "Cancelled", id)
+        throw { status: 504, message: "no actualizo a Processing" }
+      sendEmail(userId, "Processing", id)
 
     } else if (state === "Processing" && newState === "Complete") {
 
       await sale.update({ state: "Complete" })
       if (sale.get().state !== "Complete")
         throw { status: 505, message: "no actualizo a Complete" }
-        await sendEmail(userId, "Complete", id)
+      sendEmail(userId, "Complete", id)
+
+    } else if (states.includes(state) && newState === "Cancelled") {
+
+      await Promise.all(items.map((item: item) => {
+        return deleteItem(item)
+      }))
+      await sale.update({ state: "Cancelled" })
+      if (sale.get().state !== "Cancelled")
+        throw { status: 505, message: "no actualizo a Cancelled" }
+      sendEmail(userId, "Cancelled", id)
 
     } else throw { status: 404, message: "actualizacion no permitida" }
 
@@ -70,11 +72,10 @@ export default async (req: Request, res: Response) => {
       data: {}
     });
   }
-
-
 }
 
 interface item {
+  get: Function
   update: Function
   productId: number
   units: number
@@ -85,7 +86,7 @@ const deleteItem = async (item: item) => {
   const { units, productId } = item
   const product = await Product.findByPk(productId)
   if (!product)
-    throw { status: 404, message: "producto no existe" }
+    throw { status: 504, message: "producto no existe" }
   const { stock } = product.get()
   return product.update({ stock: stock + units })
 

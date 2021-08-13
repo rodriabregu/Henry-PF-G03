@@ -42,14 +42,14 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
     }
 
     return (
-        <div>
+        <div className='add-cart'>
             <form onSubmit={handleSubmit} >
             <button className='btn-cart'
                 onClick={() => addCart()}>
                 Add to cart <TiShoppingCart />
             </button>
                 <input type='number' min="1" max={stock} defaultValue='1' onChange={handleChange} />
-                <span>{value.value * price} </span>
+                <span>$ {value.value * price} </span>
             </form>
         </div>
     )

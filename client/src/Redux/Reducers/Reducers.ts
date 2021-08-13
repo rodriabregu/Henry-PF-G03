@@ -5,14 +5,17 @@ import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
 import { ADD_CART_PRODUCTS } from '../Actions/Products/addingCart';
 import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
+import { POST_SALE } from '../Actions/Sales/postSale';
+
 const initialState = {
   products: [],//filtro o todos
   productsDetail: {},
   AllProducts: [],//no tocar!
   cartProducts: [],
+  sales: []
 };
 
-function getProductReducer(state = initialState, action: any) {
+function getProductReducer(state:any = initialState, action: any) {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -28,15 +31,14 @@ function getProductReducer(state = initialState, action: any) {
     case GET_FILTERED_PRODUCTS:
       return {
         ...state,
-        products:state.AllProducts.filter((p:any)=>p.categories.find((c:any)=>c.name===action.payload))
+        products: state.AllProducts.filter((p: any) => p.categories.find((c: any) => c.name === action.payload))
       }
-
-      /*
-      return {
-        ...state,
-        products: state.AllProducts.filter((p: any) => p.category === action.payload)
-      }
-      */
+    /*
+    return {
+      ...state,
+      products: state.AllProducts.filter((p: any) => p.category === action.payload)
+    }
+    */
     case CLEAR_FILTERS:
       return {
         ...state,
@@ -57,6 +59,11 @@ function getProductReducer(state = initialState, action: any) {
         ...state,
         cartProducts: state.cartProducts.concat(action.payload)
       }
+      case POST_SALE:
+        return {
+          ...state,
+          sales: [...state.sales, action.payload]
+        }
     default:
       return state;
   };
