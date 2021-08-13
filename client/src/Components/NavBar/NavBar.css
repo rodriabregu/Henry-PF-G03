@@ -1,67 +1,112 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-.nav-container{
-    /* display: grid;
-    grid-template-columns: 0.5fr 0.5fr 0.2fr;
-    background-color: rgb(21, 21, 75); */
-    height: 50px;
+.nav-container{   
     background-color: #2E2E48 ;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: space-between;
     font-family: 'Montserrat', sans-serif;   
     font-size: 15px; 
+    flex-direction: row;
+    padding: 5px;
 }
 
-.link-home button {
+.link-home button, .links-login a {
     color: white;
-    background-color: #2E2E48;
-    height: 100%;
-    padding: 6px 10px;
+    background-color: transparent;
+    height: 50px;
+    padding: 0px 10px;
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
     border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;   
-    margin-left: 20px;
+    font-family: 'Montserrat', sans-serif;  
+    align-items: center;
+    display: inline-flex;
+    column-gap: 3px;
 }
 
 .link-home button:hover,
-.link-home button.active {
+.link-home button.active, 
+.links-login a:hover,
+.links-login a.active {
     background-color:  #bcbdf1;
     color:  #2E2E48;
 }
 
-.links-compra a {
-    color: white;
-    height: 100%;
-    padding: 6px 5px;
-    border-bottom: 4px solid transparent;
-    border-radius: 3px;
+.btn-menu{
+    display: none;
 }
 
-.links-compra a:hover,
-.links-compra a.active {
-background-color:  #bcbdf1;
-color:  #2E2E48;
+@media screen and (max-width: 768px){
+    .nav-container{
+        flex-direction: column;
+    }
+
+    .link-home {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .links-login {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow: hidden;
+        height: 256px;
+        transition: height .5s ease-out;
+    }
+
+    .links-login.collapsed {
+        height: 0;
+    }
+
+    .btn-menu{
+        color:white;
+        cursor: pointer;
+        font-size: 22px;
+        margin-right: 20px;
+        display: inherit;
+    }
 }
 
-.links-login a {
-    color: white;
-    height: 100%;
-    padding: 6px 5px;
-    border-bottom: 4px solid transparent;
-    border-radius: 3px;
-    margin-right: 20px;
-}
 
-.links-login a:hover,
-.links-login a.active {
-background-color:  #bcbdf1;
-color:  #2E2E48;
-}
+/*
 
 .searchbar {
     padding-right: 15px;
 }
+
+
+
+.links-login.show{
+    top: 65px;
+}
+
+@media screen and (max-width: 952px){
+    .links-login a{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 858px){
+    .nav-container{
+        height: 65px;
+    }
+
+    .btn-menu{
+        display: inline-flex;
+    }
+
+    .links-login{
+        position:fixed;
+        width: 100vw;
+        height: calc(100% - 65px);
+        background: blue;
+        top:-100vh;
+        text-align: center;
+      
+    }
+}*/
