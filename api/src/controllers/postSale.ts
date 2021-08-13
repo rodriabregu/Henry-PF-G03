@@ -22,9 +22,9 @@ import { appItem } from '../@app'
 
 export default async (req: Request, res: Response) => {
   try {
-    const { userId, items } = req.body
+    const { userId, purchaseId, items } = req.body
 
-    if (!(userId && items && Array.isArray(items)))
+    if (!(purchaseId && userId && items && Array.isArray(items)))
       return res.status(404).json({
         message: "dotos no validos",
         data: {}
@@ -40,6 +40,7 @@ export default async (req: Request, res: Response) => {
       throw Error("no hay stoy")
 
     const newSale = await Sale.create({
+      purchaseId,
       userId: userId,
       date: new Date(Date.now())
     })

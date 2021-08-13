@@ -23,6 +23,9 @@ export class Sale extends Model<Sale> {
   @ForeignKey(() => User)
   userId!: number
 
+  @Column(DataType.STRING)
+  purchaseId!: string
+
   @ForeignKey(() => Destiny)
   destinyId!: number
 
