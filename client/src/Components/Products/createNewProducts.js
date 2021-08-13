@@ -218,7 +218,7 @@ const CreateProducts = () => {
           <label for="descriptions">Description:</label>
           {errors.description && <p className="danger">{errors.description}</p>}
 
-          <input
+          <input 
           type="text"
           name="description"
           placeholder="Enter the description"
