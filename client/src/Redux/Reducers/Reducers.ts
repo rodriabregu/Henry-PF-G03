@@ -13,7 +13,8 @@ const initialState = {
   productsDetail: {},
   AllProducts: [],//no tocar!
   cartProducts: [],
-  sales: []
+  sales: [],
+  url_pago: null
 };
 
 function getProductReducer(state:any = initialState, action: any) {
@@ -62,7 +63,7 @@ function getProductReducer(state:any = initialState, action: any) {
       }
       case POST_SALE:
         return {
-          ...state,
+          ...state, url_pago: action.payload.data.data.url_pago,
           sales: [...state.sales, action.payload]
         }
       case GET_SALES:

@@ -13,6 +13,8 @@ const Cart = () => {
     const allSales = useSelector(s => s.sales);
     const [salePurchaseId, setSalePurchaseId] = useState('');
     const [items, setItems] = useState([]);
+const url_pago = useSelector(s => s.url_pago);
+console.log('url_pago s: ',url_pago)
 
 	const saveToLocalStorage = items => {
 		localStorage.setItem('products-cart', JSON.stringify(items));
@@ -71,6 +73,8 @@ const Cart = () => {
         setItems(cartItems)
         getSales()
     }, [])
+    
+    console.log('url_pago r: ',url_pago)
 
     return (
         <div className='cart'>
@@ -108,6 +112,7 @@ const Cart = () => {
                     <form onSubmit={handleSubmit}>
                         <button className='btn-buy'>Buy</button>
                     </form>
+                    {url_pago && <a href={url_pago}><button>ir a pagar </button></a>}
                 </div>
             </div>
         </div>
