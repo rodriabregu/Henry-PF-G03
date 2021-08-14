@@ -73,25 +73,25 @@ const Cart = () => {
     }, [])
 
     return (
-        <div className='cart'>
+          <div className='cart'>
             <div>
             { items &&
                 items?.map( p => {
                     return (
                         <div className='item'>
                             <form>
-                                <div> <img src={p.photo && p.photo[0]?.url} alt='img not found' width='90px' height='90px' /></div>
-                                <div className='detalle'>
-                                    <div>
-                                        <h3>{p.name}</h3>
-                                        <h4>Actual stock: {p.stock}</h4>
+                            <div className='detalle'>
+                                 <img src={p.photo && p.photo[0]?.url} alt='img not found' width='90px' height='90px' />
+                                    <div className='name-prod'>
+                                        <h5>Price: ${p.price}.00 </h5>
+                                        <h5>{p.name}</h5>
+                                        <h5>Actual stock: {p.stock}</h5>
                                     </div> 
-                                    <div>
-                                        <h3>Price: ${p.price}.00 (total: ${p.price * p.value.value}.00)</h3>
-                                    </div>
-                                    <div>{ p.stock < p.value.value ? 
-                                        <h4>There is not enough stock of this product. But you can buy {p.stock} if you want, or remove from the cart. 
-                                        {<input type='number' max='{p.stock}' value={p.stock} />} </h4>
+                                    <div className='price-prod'>
+                                        <h5>(total: ${p.price * p.value.value}.00)</h5>
+                                    { p.stock < p.value.value ? 
+                                        <h5>There is not enough stock of this product. But you can buy {p.stock} if you want, or remove from the cart. 
+                                        {<input type='number' max='{p.stock}' value={p.stock} />} </h5>
                                         : <input onChange={onChangeInput} type='number' min="1" max={p.stock} value={p.value.value} name={p.id} />
                                     }
                                         <button className='btn-remove' onClick={() => removeCart(p.id)}>Remove <IoTrashOutline/></button>
@@ -102,12 +102,13 @@ const Cart = () => {
                     )
                 })
             }
-                <div>
+                <div className='buy'>
                     <h3>Subtotal to pay: ${sumAll}.00</h3>
+                
+                    <form onSubmit={handleSubmit}>
+                        <button className='btn-buy'>Buy</button>
+                    </form>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <button>Buy</button>
-                </form>
             </div>
         </div>
     )
