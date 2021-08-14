@@ -16,16 +16,27 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
         brand,
         description,
         categories,
-        value,
+        value
     };
+
+    const updateStorage = (item) => {
+        localStorage.removeItem('products-cart')
+        localStorage.setItem('products-cart', JSON.stringify(item));
+    }
 
     const addProduct = () => {
         let products = [];
         if(localStorage.getItem('products-cart')){
             products = JSON.parse(localStorage.getItem('products-cart'));
         }
-        products.push(product);
-        localStorage.setItem('products-cart', JSON.stringify(products));
+        const allReadingList = products.find(p => p.id ===  product.id)
+        if(allReadingList) {
+            allReadingList.value.value += parseInt(value.value)
+            updateStorage(products)
+        } else {
+            products.push(product);
+            localStorage.setItem('products-cart', JSON.stringify(products));
+        }
     };
 
     const addCart = product => {
@@ -34,11 +45,11 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
     };
 
     const handleChange = (e) => {
-        setValue({value: e.target.value});
+        setValue({value: parseInt(e.target.value)});
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        window.location.reload();
     }
 
     return (

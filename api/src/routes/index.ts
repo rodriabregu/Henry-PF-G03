@@ -19,7 +19,6 @@ import productId from './ProductId';
 import brand from './brand';
 import reviews from './reviews'
 import photos from './photo'
-import mercadopago from './mercadopago'
 
 router.post('/user', postUser)
 router.post('/sale', postSale)
@@ -38,6 +37,5 @@ router.use('/product/name', productName);
 router.use('/product/id', productId);
 router.use('/reviews', reviews)
 router.use('/photos',photos)
-router.use('/mercadopago',mercadopago)
 
 export default router;
