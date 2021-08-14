@@ -23,9 +23,9 @@ export default async (user: appUser, items: appItem[], saleId: number): Promise<
       }
     }),
     back_urls: {
-      success: "http://191.89.96.186:3000/login",//`http://localhost:3000/checkout/${saleId}/success/${Math.floor(Math.random() * Date.now())}`,
-      failure: "http://191.89.96.186:3000/login",//`http://localhost:3000/checkout/${saleId}/failure/${Math.floor(Math.random() * Date.now())}`,
-      pending: "http://191.89.96.186:3000/login",//`http://localhost:3000/checkout/${saleId}/pending/${Math.floor(Math.random() * Date.now())}`
+      success: `http://localhost:3000/checkout/${saleId}/success`,
+      failure: `http://localhost:3000/checkout/${saleId}/failure`,
+      pending: `http://localhost:3000/checkout/${saleId}/pending`
     }
   };
   const response = await mercadopago.preferences.create(preference)
