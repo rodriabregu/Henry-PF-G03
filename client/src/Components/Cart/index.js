@@ -5,11 +5,7 @@ import { getSales } from '../../Redux/Actions/Sales/getSale'
 import { IoTrashOutline } from 'react-icons/io5';
 import { useHistory } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
-import toast, { Toaster } from 'react-hot-toast';
-import  { NavLink as Link } from 'react-router-dom'
 import './Cart.css';
-
-const notify = () => toast.success('Successfully buy!');
 
 const Cart = () => {
     const history = useHistory()
@@ -52,8 +48,8 @@ const Cart = () => {
         const match = allSales?.map(s => s?.data?.data)
         const matchFilter = match?.filter(m => m.sale?.purchaseId === salePurchaseId?.purchaseId)
         const matchUrl = matchFilter[0]?.response?.body?.init_point;
-        /* browserHistory.push(matchUrl); */
-        /* notify() */ 
+        console.log('matchUrl',matchUrl)
+        /* history.push(matchUrl); */ 
     }
 
     useEffect(() => {
@@ -111,7 +107,6 @@ const Cart = () => {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <button>Buy</button>
-                    <Toaster />
                 </form>
             </div>
         </div>
