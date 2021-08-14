@@ -26,16 +26,19 @@ function App() {
           <Route exact path='/create' component={CreateProducts} />
           <Route exact path='/createCategory' component={CreateCategory}/>
           <Route path="/" component={Footer} />
-          <Route path="/checkout/:saleId/**" component={(props: any)=>{
+          <Route path="/checkout/:saleId/:accion" component={(props: any)=>{
             const {saleId} = props.match.params
             const {search} = props.location
 
-            let status = /status=[a-z]+&/ig.exec(search)
+            let status = /&status=[a-z]+&/ig.exec(search)
             let newState: string = ""
             if(status){
               newState = status[0]
-              .replace("status=","")
+              .replace("&status=","")
               .replace("&","")
+              
+              if(newState === "approved") newState = "Create"
+              else newState = "Cancelled"
             }
 
             let preference = /preference_id=[\w\-]+&/ig.exec(search)
@@ -44,15 +47,14 @@ function App() {
               preference_id = preference[0]
               .replace("preference_id=","")
               .replace("&","")
-            }
-
-            
+            }   
             
 
-            console.log("query: ",status)
+            console.log("query: ",props)
             return(<div>
-                <h1>saleid: {saleId}</h1>
-                <h1>status: {newState}</h1>
+                <h1>saleId: {saleId}</h1>
+                <h1>status: {status}</h1>
+                <h1>newState: {newState}</h1>
                 <h1>preference_id: {preference_id}</h1>
                 <p>search: {search}</p>
             </div>)
