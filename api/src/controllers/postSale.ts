@@ -66,8 +66,8 @@ export default async (req: Request, res: Response) => {
     return res.json({
       message: "successfully",
       data: {
+        ...newSale.get(),
         url_pago: response.body.init_point,
-        sale: newSale.get(),
         response
       }
     })
