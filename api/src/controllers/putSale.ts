@@ -19,12 +19,9 @@ export default async (req: Request, res: Response) => {
     let { saleId, newState } = req.body
     saleId = parseInt(saleId);
     if (!newState) newState = req.query.status
-console.log("query: ",req.query)
-console.log("newState: ",newState)
     if (newState === "approved") newState = "Created"
     else newState = "Cancelled"
-    console.log("newState: ",newState)
-
+    
     const states = ['Pending', 'Created', 'Processing', 'Complete', 'Cancelled']
 
     if (!(typeof saleId === "number" && states.includes(newState)))

@@ -7,10 +7,11 @@ mercadopago.configure({
 });
 
 export default async (user: appUser, items: appItem[], saleId: number): Promise<any> => {
-  
+
   const preference = {
     payer: {
-      name: user.lastName,
+      name: user.firstName,
+      surname: user.lastName,
       email: user.email,
     },
 
@@ -19,16 +20,19 @@ export default async (user: appUser, items: appItem[], saleId: number): Promise<
         title: item.productName,
         id: item.productId,
         quantity: item.units,
-        unit_price: item.salePrice 
+        category_id: 'others',
+        //currency_id: 'COP',
+        unit_price: item.salePrice
       }
     }),
     back_urls: {
       success: `http://localhost:3000/checkout/${saleId}/success`,
       failure: `http://localhost:3000/checkout/${saleId}/failure`,
       pending: `http://localhost:3000/checkout/${saleId}/pending`
-    }
+    },
+    auto_return: "approved",
   };
   const response = await mercadopago.preferences.create(preference)
-  if(!response) throw Error("mercado pago no respondió")
+  if (!response) throw Error("mercado pago no respondió")
   return response
 }
