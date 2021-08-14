@@ -204,7 +204,7 @@ const CreateProducts = () => {
           <label for="photos">Photos:</label>
           {errors.photos && <p className="danger">{errors.photos}</p>}
 
-          <input
+          <input className='input-photos'
           multiple
           type="file"
           name="files"
