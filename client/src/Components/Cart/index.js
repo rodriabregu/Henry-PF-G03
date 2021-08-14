@@ -73,7 +73,7 @@ const Cart = () => {
     }, [])
 
     return (
-          <div className='cart'>
+        <div className='cart'>
             <div>
             { items &&
                 items?.map( p => {
@@ -81,7 +81,7 @@ const Cart = () => {
                         <div className='item'>
                             <form>
                             <div className='detalle'>
-                                 <img src={p.photo && p.photo[0]?.url} alt='img not found' width='90px' height='90px' />
+                                <img src={p.photo && p.photo[0]?.url} alt='img not found' width='90px' height='90px' />
                                     <div className='name-prod'>
                                         <h5>Price: ${p.price}.00 </h5>
                                         <h5>{p.name}</h5>

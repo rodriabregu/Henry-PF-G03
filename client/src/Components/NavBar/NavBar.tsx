@@ -1,16 +1,43 @@
+import { useState, useEffect } from 'react';
 import { NavLink as Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
-import { useState } from 'react';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line } from 'react-icons/ri';
 import './NavBar.css';
+
+export interface Ee {
+  "name": "<anystring>",
+  "price": "<anystring>",
+  "stock": "<anystring>",
+  "id": "<anystring>",
+  "brand": "<anystring>",
+  "photo": "<anystring>",
+  "description": "<anystring>",
+  "value": "<anystring>",
+  "categories": "<anystring>",
+  "productId": "<anystring>",
+  "units": "<anystring>",
+}
 
 
 export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
+  const [renderCart, setRenderCart] = useState<any>(0);
+
+  let countCart = 0;
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
-  }
+  };
+
+  useEffect(() => {
+    const allCartNoJson:any = localStorage.getItem('products-cart');
+    const allCart = JSON.parse(allCartNoJson)
+    allCart?.forEach((e:any) => {
+      countCart += e.value.value
+      setRenderCart(countCart)
+    });
+  });
+
 
   return (
     <header>
@@ -23,7 +50,7 @@ export const NavBar = () => {
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
             <Link style={{ textDecoration: 'none' }} to='/create'>CREATE PRODUCT</Link>
             <Link style={{ textDecoration: 'none' }} to='/createCategory'>CREATE CATEGORY</Link>
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <RiShoppingCartLine /></Link>
+            <Link style={{ textDecoration: 'none' }} to='/cart'> CART {renderCart} <RiShoppingCartLine /></Link>
             <Link style={{ textDecoration: 'none' }} to='/register'> REGISTER </Link>
             <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN <RiAccountCircleLine /> </Link>
           </div>
