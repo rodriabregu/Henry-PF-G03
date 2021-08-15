@@ -16,7 +16,12 @@ import { sendEmail } from '../providers'
 
 export default async (req: Request, res: Response) => {
   try {
-    const { saleId, newState } = req.body
+    let { saleId, newState } = req.body
+    saleId = parseInt(saleId);
+    if (!newState) newState = req.query.status
+    if (newState === "approved") newState = "Created"
+    else newState = "Cancelled"
+    
     const states = ['Pending', 'Created', 'Processing', 'Complete', 'Cancelled']
 
     if (!(typeof saleId === "number" && states.includes(newState)))
