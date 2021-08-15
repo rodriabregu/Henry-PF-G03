@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react';
 import { useLocation, useParams } from 'react-router'
+import config from '../../config'
 
 export default function PostSale() {
 
@@ -12,7 +13,7 @@ export default function PostSale() {
 
     let saleState: string = ""
 
-    axios.put(`http://localhost:3001/sale`+search, {saleId})
+    axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/sale`+search, {saleId})
             .then(res => {
               saleState = res?.data?.data?.state
               setSales(saleState)
