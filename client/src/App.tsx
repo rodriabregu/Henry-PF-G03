@@ -28,9 +28,9 @@ function App() {
           <Route exact path='/create' component={CreateProducts} />
           <Route exact path='/createCategory' component={CreateCategory}/>
           <Route path="/" component={Footer} />
-          <Route path="/checkout/:saleId/" component={(props: any)=>{
+          <Route path="/checkout/:saleId/:esta" component={(props: any)=>{
             
-            const {saleId} = props.match.params
+            const {saleId,esta} = props.match.params
             const {search} = props.location
             
             let saleState: string = ""
