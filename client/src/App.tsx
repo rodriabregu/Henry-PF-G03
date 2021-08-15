@@ -31,8 +31,8 @@ function App() {
           <Route exact path='/createCategory' component={CreateCategory}/>
           <Route exact path='/allSales' component={SalesList}/>
           <Route exact path='/sales/:id' component={SaleDetail2}/>
-          <Route path="/" component={Footer} />
           <Route path="/checkout/:saleId/:esta" component={(props: any)=>{
+          <Route path="/" component={Footer} />
             
             const {saleId,esta} = props.match.params
             const {search} = props.location
@@ -44,7 +44,7 @@ function App() {
               saleState = res.data.data.state
               console.log(saleState)
           })     
-           return(<div>
+          return(<div>
                 <h1>saleId: {saleId}</h1>
                 <h1>saleState: {saleState}</h1>
                 <p>search: {search}</p>
