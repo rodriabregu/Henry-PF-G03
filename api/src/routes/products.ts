@@ -49,18 +49,9 @@ router.post('/', (req: Request, res: Response) => {
     product, photos, categories, comments, brand
   } = req.body
 
-  console.log(categories)
+  console.log('fotos ',photos)
 
-  /*
-  let categories=[];
-  categoriesString.forEach(async(c:any,i:number)=>{
-    let category=await Category.findOne({where:{name:c},attributes:['id']})
-    let id=await category?.getDataValue('id');
-    categories.push(id)    
-  })
-
-  console.log(categories)
-  */
+  
 
 
   if (!(

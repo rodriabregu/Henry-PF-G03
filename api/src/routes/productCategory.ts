@@ -19,7 +19,7 @@ router.get('/', async (req: Request, res: Response) => {
     const relations: any[] = await ProductCategory.findAll({
       where: { categoryId: { [Op.or]: categories } }
     })
-//    console.log('relations', relations)
+
     const { productIds } = relations.reduce(
       (acum, relation) => {
         const { productId } = relation

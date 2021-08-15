@@ -1,17 +1,28 @@
 import {
-  Model, Column, Table, HasMany, DataType
+  Model, Column, Table, HasMany, DataType, BelongsToMany
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
+import { Review } from './Review';
+//import { Product } from '../db';
+import {Product} from './Product'
+import ProductUser from './ProductUser';
+
 
 @Table
-export class User extends Model<User> {
+export class User extends Model {
 
-  @Column(DataType.ENUM('User', 'Admin'))
+  @Column({
+    defaultValue: 'user',
+    ...DataType.ENUM('Guest', 'User', 'Admin')
+  })
   userType!: string;
 
-  @Column
-  userNane!: string; //userName
+  @Column({ defaultValue: true })
+  isActive!: boolean;
+
+  @Column({ unique: true })
+  userName!: string; //userName
 
   @Column
   email!: string;
@@ -26,6 +37,13 @@ export class User extends Model<User> {
   lastName!: string;
 
   @HasMany(() => Sale)
-  Sales!: Sale[];
+  sales!: Sale[];
+
+  @HasMany(() => Review)
+  reviews!: Review[];
+
+  @BelongsToMany(()=>Product,()=>ProductUser)
+  products!:Product[];
+
 
 }

@@ -2,10 +2,14 @@ import { Router } from 'express';
 
 const router = Router();
 
-import controllers from '../controllers'
-controllers(router)
+import postUser from '../controllers/postUser'
+import postSale from '../controllers/postSale'
+import putSale from '../controllers/putSale'
+import getSales from '../controllers/getSales'
+import getSalesUser from '../controllers/getSalesUser'
 
 import products from './products';
+import productsUpdate from './productsUpdate';
 import category from './categories';
 import users from './users';
 import categoryTypes from './categoryTypes';
@@ -14,15 +18,26 @@ import productName from './ProductName';
 import productId from './ProductId';
 import brand from './brand';
 import reviews from './reviews'
+import photos from './photo'
+import favs from './favourites'
 
-router.use('/api/products/category', ProductCategoryRoute);
-router.use('/api/products', products);
-router.use('/api/categories', category);
-router.use('/api/users', users);
-router.use('/api/brand', brand);
-router.use('/api/categoryTypes', categoryTypes);
-router.use('/api/product/name', productName);
-router.use('/api/product/id', productId);
-router.use('/api/reviews', reviews)
+router.post('/user', postUser)
+router.post('/sale', postSale)
+router.put('/sale', putSale)
+router.get('/sales', getSales)
+router.get('/sales/user/:userId', getSalesUser)
+
+router.use('/products/category', ProductCategoryRoute);
+router.use('/products', products);
+router.use('/productsUpdate', productsUpdate);
+router.use('/categories', category);
+router.use('/users', users);
+router.use('/brand', brand);
+router.use('/categoryTypes', categoryTypes);
+router.use('/product/name', productName);
+router.use('/product/id', productId);
+router.use('/reviews', reviews)
+router.use('/photos',photos)
+router.use('/favs',favs)
 
 export default router;

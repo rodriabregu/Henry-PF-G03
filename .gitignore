@@ -1,6 +1,9 @@
 # compiled output
 /dist
 
+# public dir
+api/public
+
 # Logs
 logs
 *.log

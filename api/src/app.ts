@@ -29,6 +29,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static('public'))
+
 app.use((err: error, _req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;
