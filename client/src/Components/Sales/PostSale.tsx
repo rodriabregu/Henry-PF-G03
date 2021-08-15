@@ -13,7 +13,7 @@ export default function PostSale() {
 
     let saleState: string = ""
 
-    axios.put(`${config.REACT_APP_API_URL}:${config.port}/sale`+search, {saleId})
+    axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/sale`+search, {saleId})
             .then(res => {
               saleState = res?.data?.data?.state
               setSales(saleState)

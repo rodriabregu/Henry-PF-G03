@@ -20,7 +20,7 @@ const upload = multer({ storage: storage })
 router.post('/',upload.single('files'),(req:any,res:any)=>{
 
   console.log('foto: ',req.file)
-  const path=`${config.host}:${config.port}${req.file.filename}`
+  const path=`http://${config.host}:${config.port}/${req.file.filename}`
   res.json(path);
 
 })
