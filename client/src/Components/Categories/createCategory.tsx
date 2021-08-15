@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import axios from 'axios'
 import './createCategory.css';
+import config from '../../../src/config';
 
 const CreateCategory = () => {
     
@@ -14,7 +15,7 @@ const CreateCategory = () => {
   
   const handleSubmit=(e:any)=>{
     e.preventDefault();
-    axios.post('http://localhost:3001/categories/new',{name:category})
+    axios.post(`http://${config.REACT_APP_API_URL}:3001/api/categories/new',{name:category}`)
       .then(resp=>{
         //console.log(resp.data)
         setMessage(resp.data)

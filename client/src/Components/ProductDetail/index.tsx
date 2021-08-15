@@ -9,6 +9,7 @@ import EditingProduct from './editingComp';
 import AddCart from '../Products/addCart';
 import toast, { Toaster } from 'react-hot-toast';
 import './productDetail.css';
+import config from '../../../src/config';
 
 const colors = {
     orange: "#FFBA5A",
@@ -51,7 +52,12 @@ const ProductDetail = () => {
 
     const onSubmit = async () => {
         const rev = review;
-        await axios.post('http://localhost:3001/reviews', rev);
+        
+      //deploy
+        await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, rev);
+
+      //development
+         // await axios.post('http://localhost:3001/reviews', rev); 
         notify();
     };
 
@@ -91,7 +97,10 @@ const ProductDetail = () => {
 
     useEffect( () => {
         dispatch(getProductsDetail(parseInt(id)));
-        axios.get<any>(`http://localhost:3001/reviews/${id}`)
+        // deploy
+        const res:any = axios.get<any>(`http://${config.REACT_APP_API_URL}:3001/api/reviews/${id}`)
+        //development
+        //axios.get<any>(`http://localhost:3001/reviews/${id}`)
         .then( res => {
             setContainer(res.data)
         })
