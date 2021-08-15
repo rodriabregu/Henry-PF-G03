@@ -9,7 +9,11 @@ import Cart from './Components/Cart';
 import Login from './Components/LogIn';
 import Register from './Components/Register';
 import CreateCategory from './Components/Categories/createCategory'
+import SalesList from './Components/Sales';
+import SaleDetail2 from './Components/Sales/saleDetail2';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import axios from 'axios'
 
 function App() {
   return (
@@ -25,7 +29,27 @@ function App() {
           <Route exact path='/register' component={Register} />
           <Route exact path='/create' component={CreateProducts} />
           <Route exact path='/createCategory' component={CreateCategory}/>
+          <Route exact path='/allSales' component={SalesList}/>
+          <Route exact path='/sales/:id' component={SaleDetail2}/>
+          <Route path="/checkout/:saleId/:esta" component={(props: any)=>{
           <Route path="/" component={Footer} />
+            
+            const {saleId,esta} = props.match.params
+            const {search} = props.location
+            
+            let saleState: string = ""
+
+            axios.put(`http://localhost:3001/sale`+search, {saleId})
+            .then(res => {
+              saleState = res.data.data.state
+              console.log(saleState)
+          })     
+          return(<div>
+                <h1>saleId: {saleId}</h1>
+                <h1>saleState: {saleState}</h1>
+                <p>search: {search}</p>
+            </div>)
+          }} />
         </div>
       </Switch>
     </Router>
