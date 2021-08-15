@@ -46,7 +46,7 @@ const Cart = () => {
         dispatch(PostSale(dispatchSale))
         setSalePurchaseId(dispatchSale)
         const match = allSales?.map(s => s?.data?.data)
-        const matchFilter = match?.filter(m => m.sale?.purchaseId === salePurchaseId?.purchaseId)
+        const matchFilter = match?.filter(m => m?.sale?.purchaseId === salePurchaseId?.purchaseId)
         const matchUrl = matchFilter[0]?.response?.body?.init_point;
         console.log('matchUrl',matchUrl)
         /* history.push(matchUrl); */ 
