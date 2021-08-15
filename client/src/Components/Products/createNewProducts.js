@@ -6,6 +6,7 @@ import postProducts from "../../Redux/Actions/Products/postProducts";
 import SelectCategory from "./SelectCategory";
 import './CreateProducts.css';
 import axios from 'axios'
+import config from '../../config'
 
 const notify = () => toast.success('Successfully product created!');
 
@@ -157,7 +158,7 @@ const CreateProducts = () => {
     f.append('files',input.files[0]);
     axios({
       method: "post",
-      url: "http://localhost:3001/photos",
+      url: `${config.REACT_APP_API_URL}:${config.port}/photos`,
       data: f,
       headers: { "Content-Type": "multipart/form-data" },
     })
