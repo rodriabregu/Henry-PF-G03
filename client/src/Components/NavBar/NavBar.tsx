@@ -3,6 +3,7 @@ import { NavLink as Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line } from 'react-icons/ri';
 import './NavBar.css';
+import { getAllByPlaceholderText } from '@testing-library/react';
 
 export interface Ee {
   "name": "<anystring>",
