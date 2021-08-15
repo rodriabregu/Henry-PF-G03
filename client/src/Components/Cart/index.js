@@ -114,8 +114,8 @@ const Cart = () => {
                     {url_pago && <a href={url_pago}><button>ir a pagar </button></a>}
                 </div>
             </div>
+
         </div>
     )
 };
-
 export default Cart;
