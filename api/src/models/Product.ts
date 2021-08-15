@@ -8,6 +8,8 @@ import { Category } from './Category';
 import { ProductCategory } from './ProductCategory';
 import { Brand } from './Brand';
 import {Review} from './Review'
+import ProductUser from './ProductUser';
+import {User} from './User'
 
 @Table
 export class Product extends Model {
@@ -15,7 +17,7 @@ export class Product extends Model {
   @Column({ unique: true })
   name!: string;
 
-  @Column
+  @Column({defaultValue: true})
   isActive!: boolean;
 
   @Column(DataType.TEXT)
@@ -47,6 +49,9 @@ export class Product extends Model {
 
   @BelongsToMany(() => Category, () => ProductCategory)
   categories!: Category[];
+
+  @BelongsToMany(()=>User,()=>ProductUser)
+  users!:User[];
 
 }
 

@@ -1,6 +1,7 @@
 import { Response, Request } from 'express'
 import { Product, User, Sale, SaleItem } from '../db'
-
+import { sendEmail, mercadoPago } from '../providers'
+import { appItem } from '../@app'
 /* 
  * Route : POST "api/sale/"
  * Creara una nueva Sale con la 
@@ -10,6 +11,7 @@ import { Product, User, Sale, SaleItem } from '../db'
  * 
  * body = {
     "userId": 1,
+    "purchaseId": "volar",
     "items": [
       {
         "productId": 34,
@@ -20,66 +22,81 @@ import { Product, User, Sale, SaleItem } from '../db'
  */
 
 export default async (req: Request, res: Response) => {
+  try {
+    const { userId, purchaseId, items } = req.body
 
-  await User.create({ userName: "Esteban " }) // quitar esta line cuando user user este implementado y envien datos reales
+    if (!(purchaseId && userId && items && Array.isArray(items)))
+      return res.status(404).json({
+        message: "dotos no validos",
+        data: {}
+      })
 
-  const { userId, items } = req.body
+    const user = await User.findByPk(userId)
+    if (!user) throw Error(" usuario no encontrado ")
 
-  if (!(userId && items && Array.isArray(items)))
-    return res.status(404).json({
-      message: "fallid",
-      data: {}
+    const stokItems = await Promise.all(items.map(item => {
+      return checkStok(item)
+    }))
+    if (!Array.isArray(stokItems))
+      throw Error("no hay stoy")
+
+    const newSale = await Sale.create({
+      purchaseId,
+      userId: userId,
+      date: new Date(Date.now())
     })
+    if (!newSale) throw Error("no se creo la sale")
 
-  await Promise.all(items.map(item => {
-    return checkStok(item)
-  }))
+    const saleId = newSale.getDataValue("id")
 
-  const saleId = (await Sale.create({
-    userId: userId,
-    state: 'Created',
-    date: new Date(Date.now())
-  })).getDataValue("id")
+    const newItems = await Promise.all(items.map(
+      async (item): Promise<appItem> => {
+        return (await addItem(item, saleId)).get()
+      }
+    ))
+    if (!Array.isArray(newItems)) {
+      newSale.destroy()
+      throw Error("no se crearon los items")
+    }
 
-  await Promise.all(items.map(item => {
-    return addItem(item, saleId)
-  }))
+    const response = await mercadoPago(user.get(), newItems, saleId)
+    if (!response) throw Error("mercado pago no responde")
+    sendEmail(user.get().id, "Created", saleId)
 
-  const sale = await Sale.findByPk(saleId, { include: "items" })
-  if(!sale) throw { status: 404, message: "no se creo la sale" }
-
-  return res.json({
-    message: "successfully",
-    data: sale.get()
-  })
-
+    return res.json({
+      message: "successfully",
+      data: {
+        ...newSale.get(),
+        url_pago: response.body.init_point,
+        response
+      }
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(error.status || 500).json({
+      message: error.message || "uuups¡¡",
+      data: {}
+    });
+  }
 }
 
-interface item {
-  productId: number
-  units: number
-}
-
-const checkStok = async (item: item) => {
+const checkStok = async (item: appItem) => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
-  if (!product)
-    throw { status: 404, message: "producto no existe" }
+  if (!product) throw Error("producto no existe")
   const { stock } = product.get()
-  if (stock - units < 0)
-    throw { status: 404, message: "no hay stock" }
-  return true;
+  if (stock - units < 0) throw Error("no hay stock")
+  return stock;
 }
 
-const addItem = async (item: item, saleId: number) => {
+const addItem = async (item: appItem, saleId: number): Promise<any> => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
-  if (!product)
-    throw { status: 404, message: "producto no existe" }
+  if (!product) throw Error("producto no existe")
   const { stock, price, name } = product.get()
   await product.update({ stock: stock - units })
 
-  return SaleItem.create({
+  return await SaleItem.create({
     saleId,
     productId,
     productName: name,

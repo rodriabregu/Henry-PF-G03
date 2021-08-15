@@ -30,15 +30,6 @@ const ProductDetail = () => {
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const stars = Array(5).fill(0)
-    const [editing, setEditing] = useState({
-        name:'',
-        photos: [],
-        description:'',
-        price: 0,
-        stock: 0,
-        brand:'',
-        categories: []
-    });
 
     const { handleSubmit } = useForm();
 
@@ -56,12 +47,11 @@ const ProductDetail = () => {
         });
     };
 
-    const notify = () => toast.success('Successfully created!');
+    const notify = () => toast.success('Successfully review created!');
 
     const onSubmit = async () => {
         const rev = review;
         await axios.post('http://localhost:3001/reviews', rev);
-        alert('review enviada, gracias!');
         notify();
     };
 
@@ -101,7 +91,7 @@ const ProductDetail = () => {
 
     useEffect( () => {
         dispatch(getProductsDetail(parseInt(id)));
-        const res:any = axios.get<any>(`http://localhost:3001/reviews/${id}`)
+        axios.get<any>(`http://localhost:3001/reviews/${id}`)
         .then( res => {
             setContainer(res.data)
         })
@@ -121,7 +111,7 @@ const ProductDetail = () => {
                 </div>
                 </div>
                 <div className='detail'>
-                    <button onClick={changeEditing}>Editing product</button>
+                    <button className='btn-edit' onClick={changeEditing}>Edit product</button>
                 { show2 ?
                     <div>
                         <h1>{detail.name}</h1>
@@ -129,6 +119,16 @@ const ProductDetail = () => {
                         <h3>{detail.description}</h3>
                         <h3>Stock:{detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
                         <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
+                        <AddCart
+                            id={detail.id}
+                            name={detail.name} 
+                            photo={detail.photos}
+                            stock={detail.stock} 
+                            price={detail.price} 
+                            description={detail.description} 
+                            categories={detail.categories} 
+                            brand={detail.brand}
+                            />
                         <h3>Review: {detail.review}</h3>
                             {
                                 container?.map((r:any)=> {
@@ -137,16 +137,8 @@ const ProductDetail = () => {
                                     )
                                 })
                             }
-                            <AddCart 
-                            name={detail.name} 
-                            stock={detail.stock} 
-                            price={detail.price} 
-                            description={detail.description} 
-                            categories={detail.categories} 
-                            brand={detail.brand}
-                            />
                     <div className='form-review'>
-                    <button className='btn-add' onClick={changeFlag}>Write review</button>
+                    <button className='btn-review' onClick={changeFlag}>Write review</button>
                     { show &&
                     <div>
                         <h3> Write a review and rating </h3>
@@ -165,15 +157,15 @@ const ProductDetail = () => {
                                     )
                                 })}
                             </div>
-                            <input
-                                type="text"
-                                name="review"
-                                placeholder="Enter the description review..."
-                                onChange={handleInput} />
-                            
-                            <button onClick={handleSubmit(onSubmit)} >
-                                Submit
-                            </button>
+                            <div className='add-review'>
+                                <textarea className='text-add'
+                                    name="review"
+                                    placeholder="Enter the description review..."
+                                    onChange={handleInput} />
+                                <button className='btn-addreview' onClick={handleSubmit(onSubmit)} >
+                                    Submit
+                                </button>
+                            </div>
                             <Toaster />
                         </form>
                     </div>

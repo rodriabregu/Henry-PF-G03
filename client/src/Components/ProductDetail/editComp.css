@@ -1,39 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-.form-create{
+.form-edit{
     display: flex;
     justify-content: center;
-    margin-bottom: 80px;
-    margin-top: 60px;
+    /* margin-top: -30px; */
     font-family: 'Montserrat', sans-serif;
 }
  
-.form-create div{
-    margin-bottom: 30px;
-    margin-top: 30px;
+.form-edit div{
+    margin-bottom: 20px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.form-create input{
+.form-edit input{
     border-radius: 5px;
     border: none;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
     padding: 5px;
 }
 
-.input-photos{
-width: 200px;
-font-size: 10px;
-}
-
-
-.danger{
-    color: red;
-    font-size: 12px;
-}
-
-.btn-submit{
+.btnEdit{
     color:  #7b7bc2;
     background-color:white;
     border-bottom: 1px solid transparent;
@@ -43,15 +31,15 @@ font-size: 10px;
     border-radius: 10px;
     border: solid 1px;
     cursor: pointer;
-    padding: 6px;
+    padding: 4px 4px 4px 4px;
     margin-left: 260px;
 }
 
-.btn-submit:hover{
+.btnEdit:hover{
     background-color:  #bcbdf1;
     color:  #2E2E48;
 }
-
+/* 
 .brand-s select, .categ-s select{
     border-radius: 5px;
     border: none;
@@ -81,4 +69,4 @@ font-size: 10px;
     border: solid 1px;
     cursor: pointer;
     padding: 6px;   
-}
+} */

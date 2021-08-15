@@ -1,7 +1,7 @@
 import axios from 'axios';
 export const POST_PRODUCTS = 'POST_PRODUCTS';
 
-const postProducts = (dataProduct:any) => {
+const postSale = (dataProduct:any) => {
   return async (dispatch:any) => {
     await axios.post(`http://localhost:3001/products`, dataProduct)
     .then( res => {
@@ -13,4 +13,4 @@ const postProducts = (dataProduct:any) => {
   };
 };
 
-export default postProducts;
+export default postSale;

@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+
+.cart{
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.item{
+    border-bottom: 1px solid rgb(128, 128, 128);
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.item img{
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    align-self: center;
+}
+
+.detalle{
+    display: flex;
+    justify-content: space-between;  
+    width: 100vh;  
+}
+
+.name-prod{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detalle input{
+    border-radius: 5px;
+    border: black solid 1px;
+    /* box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+     */padding: 5px;
+    margin-bottom: 20px;
+    width: 50px;
+    align-self: flex-end
+}
+
+.price-prod{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-remove, .btn-buy{
+    color:  #e90e0e;
+    background-color:white;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 10px;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 4px 4px 4px 4px;
+}
+
+.btn-remove:hover{
+    background-color:  #92112d;
+    color:  #dfdfe6;
+}
+
+.buy{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.btn-buy{
+    color: #7b7bc2;
+    padding: 5px 10px 5px 10px;
+}
+
+.btn-buy:hover{
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
+}
+
+@media screen and (max-width: 768px){
+ 
+    .detalle{
+        display: flex;
+        justify-content: space-between;  
+        width: 100%;  
+    }  
+    
+}

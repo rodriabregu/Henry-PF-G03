@@ -6,7 +6,7 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-    const notify = () => toast.success('Successfully created!');
+    const notify = () => toast.success('Successfully log in!');
 
     const onSubmit = (data: any) => (console.log(data), notify(), reset())
 

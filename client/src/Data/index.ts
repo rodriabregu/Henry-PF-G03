@@ -1,11 +1,15 @@
 export interface IInfo {
-  name: string;
-  id: string;
-  price: number;
-  size: string;
-  review: string;
-  img: string;
+  name: any;
+  id: any;
+  price: any;
+  size: any;
+  review: any;
+  img: any;
   photos: any;
+  stock: any;
+  brand: any;
+  description: any;
+  categories: any;
 }
 
 /* export const info: Array<IInfo> = [
