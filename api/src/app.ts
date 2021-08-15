@@ -39,6 +39,6 @@ app.use((err: error, _req: Request, res: Response, next: NextFunction) => {
   res.status(status).send(message);
 });
 
-app.use(routes);
+app.use('/api',routes);
 
 export default app;
