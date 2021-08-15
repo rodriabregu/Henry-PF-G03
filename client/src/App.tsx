@@ -9,6 +9,8 @@ import Cart from './Components/Cart';
 import Login from './Components/LogIn';
 import Register from './Components/Register';
 import CreateCategory from './Components/Categories/createCategory'
+import SalesList from './Components/Sales';
+import SaleDetail2 from './Components/Sales/saleDetail2';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import axios from 'axios'
@@ -27,6 +29,8 @@ function App() {
           <Route exact path='/register' component={Register} />
           <Route exact path='/create' component={CreateProducts} />
           <Route exact path='/createCategory' component={CreateCategory}/>
+          <Route exact path='/allSales' component={SalesList}/>
+          <Route exact path='/sales/:id' component={SaleDetail2}/>
           <Route path="/" component={Footer} />
           <Route path="/checkout/:saleId/:esta" component={(props: any)=>{
             
