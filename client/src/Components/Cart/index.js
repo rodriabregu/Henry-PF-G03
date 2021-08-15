@@ -13,8 +13,7 @@ const Cart = () => {
     const allSales = useSelector(s => s.sales);
     const [salePurchaseId, setSalePurchaseId] = useState('');
     const [items, setItems] = useState([]);
-const url_pago = useSelector(s => s.url_pago);
-console.log('url_pago s: ',url_pago)
+    const url_pago = useSelector(s => s.url_pago);
 
 	const saveToLocalStorage = items => {
 		localStorage.setItem('products-cart', JSON.stringify(items));
@@ -50,7 +49,7 @@ console.log('url_pago s: ',url_pago)
         const match = allSales?.map(s => s?.data?.data)
         const matchFilter = match?.filter(m => m?.sale?.purchaseId === salePurchaseId?.purchaseId)
         const matchUrl = matchFilter[0]?.response?.body?.init_point;
-        console.log('matchUrl',matchUrl)
+        console.log('matchUrl',allSales)
         /* history.push(matchUrl); */ 
     }
 
