@@ -4,7 +4,7 @@ dotenv.config();
 
 const config = {
   dbUser: process.env.DB_USER || 'postgres',
-  dbPassword: process.env.DB_PASSWORD || 'password',
+  dbPassword: process.env.DB_PASSWORD || 'postgres',
   dbHost: process.env.DB_HOST || 'localhost',
   dbName: process.env.DB_NAME || 'clubdb',
   dbPort: process.env.DB_PORT || '5432',

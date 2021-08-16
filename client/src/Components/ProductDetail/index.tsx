@@ -53,11 +53,8 @@ const ProductDetail = () => {
     const onSubmit = async () => {
         const rev = review;
         
-      //deploy
         await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, rev);
 
-      //development
-         // await axios.post('http://localhost:3001/reviews', rev); 
         notify();
     };
 
@@ -97,10 +94,9 @@ const ProductDetail = () => {
 
     useEffect( () => {
         dispatch(getProductsDetail(parseInt(id)));
-        // deploy
+      
         const res:any = axios.get<any>(`http://${config.REACT_APP_API_URL}:3001/api/reviews/${id}`)
-        //development
-        //axios.get<any>(`http://localhost:3001/reviews/${id}`)
+   
         .then( res => {
             setContainer(res.data)
         })
