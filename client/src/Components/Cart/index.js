@@ -111,7 +111,7 @@ const Cart = () => {
                     <form onSubmit={handleSubmit}>
                         <button className='btn-buy'>Buy</button>
                     </form>
-                    {url_pago && <a href={url_pago}><button>ir a pagar </button></a>}
+                    {url_pago && <a href={url_pago}><button className='btn-confirm'>Confirm Purchase</button></a>}
                 </div>
             </div>
 

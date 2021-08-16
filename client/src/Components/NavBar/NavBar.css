@@ -11,10 +11,11 @@
     padding: 5px;
 }
 
+
 .link-home button, .links-login a {
     color: white;
     background-color: transparent;
-    height: 50px;
+    height: 35px;
     padding: 0px 10px;
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
