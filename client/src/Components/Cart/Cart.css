@@ -51,7 +51,7 @@
     flex-direction: column;
 }
 
-.btn-remove, .btn-buy{
+.btn-remove, .btn-buy, .btn-confirm{
     color:  #e90e0e;
     background-color:white;
     border-bottom: 1px solid transparent;
@@ -80,10 +80,18 @@
     padding: 5px 10px 5px 10px;
 }
 
-.btn-buy:hover{
+.btn-confirm{
+    background-color:  #3c3c5e;
+    color:  #bcbdf1;
+    margin-top: 20px;
+}
+
+.btn-buy:hover, .btn-confirm:hover{
     background-color:  #bcbdf1;
     color:  #2E2E48;
 }
+
+
 
 @media screen and (max-width: 768px){
  
