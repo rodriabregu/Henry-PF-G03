@@ -43,7 +43,6 @@ export default async () => {
       promiseC.push(
         Category.create({ name: category, categoryTypeId: id })
       );
-      return "";
     })
   })
 
