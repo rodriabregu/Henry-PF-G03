@@ -1,4 +1,5 @@
 import { appUser, appItem } from '../@app';
+import config from '../lib/config'
 
 const mercadopago = require('mercadopago');
 
@@ -26,9 +27,9 @@ export default async (user: appUser, items: appItem[], saleId: number): Promise<
       }
     }),
     back_urls: {
-      success: `http://localhost:3000/checkout/${saleId}/success`,
-      failure: `http://localhost:3000/checkout/${saleId}/failure`,
-      pending: `http://localhost:3000/checkout/${saleId}/pending`
+      success: `http://${config.host}:${config.clientPort}/checkout/${saleId}/success`,
+      failure: `http://${config.host}:${config.clientPort}/checkout/${saleId}/failure`,
+      pending: `http://${config.host}:${config.clientPort}/checkout/${saleId}/pending`
     },
     auto_return: "approved",
   };
