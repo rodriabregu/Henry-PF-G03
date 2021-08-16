@@ -1,12 +1,20 @@
 import { readFileSync } from 'fs'
+import { IndexKind } from 'typescript'
 
 import {
-  Product, Photo, Brand, User, ProductCategory
+  Product, Photo, Brand, User,
+  Category, ProductCategory, CategoryType
 } from '../db'
 
 export default async () => {
   let count = await Product.count()
   if (count > 0) return `they already exist ${count} products in db!`
+
+  const products = await JSON.parse(
+    readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8')
+  )
+  console.log("prooducts in fil: ", products.length);
+
   User.create({
     userType: "Admin",
     "userName": "user001",
@@ -15,11 +23,32 @@ export default async () => {
     "lastName": "user002",
     "hashPasword": "gTw34wNs64ndr75rXr56uVz"
   })
-  const products = await JSON.parse(
-    readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8')
-  )
-  console.log("prooducts in fil: ", products.length);
 
+  const categoryTypes = ['Gender', 'Garmen', 'Sport']
+
+  const categories = [
+    //Gender
+    ['Women', 'Men', 'Kids'],
+    //Garment
+    ['T-shirt', 'Short', 'Trousers', 'Hoody', 'Accesories'],
+    //Sport
+    ['Soccer', 'Hockey', 'Basketball', 'Tennis', 'Rugby', 'Running', 'Other']
+  ]
+
+  const promiseC: Promise<any>[] = [];
+
+  categoryTypes.map(async (cType: string, idx: number) => {
+    const { id } = (await CategoryType.create({ name: cType })).get()
+    categories[idx].map((category: string) => {
+      promiseC.push(
+        Category.create({ name: category, categoryTypeId: id })
+      );
+      return "";
+    })
+  })
+
+  await Promise.all(promiseC)
+  
   const AddProduct = async (product: any) => {
 
     const [brand] = await Brand.findOrCreate(
