@@ -1,31 +1,24 @@
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
-import {NavLink as Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSales } from '../../Redux/Actions/Sales/getSale';
 
-type KeyParams = {
-    id: string;
-};
-interface IsaleDetail {
-    id: number,
-    purchaseId: string,
-    userId: number,
-    state: string,
-    date: string,
-    items: any 
-}
-
-const SaleDetail = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => {
+const SaleDetail = () => {
+    /* const [local, setLocal] = useState<any>([]) */
+    const { id } = useParams<any>();
+    const dispatch = useDispatch()
+    const allSales:any = useSelector<any>(s => s?.sales)
+    /* setLocal(allSales) */
+    const renderSale = allSales?.find((r:any) => r?.id == id); //Preguntar a Angel, types no funcan
     
+    useEffect(() => {
+        dispatch(getSales())
+    }, [])
 
     return (
         <div>
-            <Link to={`/sales/${id}`}>
-            <span>{id}{<br/>}</span>
-            </Link>
-            <span>{purchaseId}{<br/>}</span>
-            <span>{userId}{<br/>}</span>
-            <span>{state}{<br/>}</span>
-            <span>{date}{<br/>}</span>
+            <span>{renderSale?.id}</span>
+            <span>{renderSale?.state}</span>
         </div>
     )
 }

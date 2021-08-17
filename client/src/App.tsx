@@ -10,7 +10,7 @@ import Login from './Components/LogIn';
 import Register from './Components/Register';
 import CreateCategory from './Components/Categories/createCategory'
 import SalesList from './Components/Sales';
-import SaleDetail2 from './Components/Sales/saleDetail2';
+import SaleDetail from './Components/Sales/saleDetail';
 import PostSale from './Components/Sales/PostSale';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ function App() {
           <Route exact path='/create' component={CreateProducts} />
           <Route exact path='/createCategory' component={CreateCategory}/>
           <Route exact path='/allSales' component={SalesList}/>
-          <Route exact path='/sales/:id' component={SaleDetail2}/>
+          <Route exact path='/sales/:id' component={SaleDetail}/>
           <Route path="/checkout/:saleId/:esta" component={PostSale} />
           <Route path="/" component={Footer} />
         </div>

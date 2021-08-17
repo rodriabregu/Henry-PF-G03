@@ -1,21 +1,24 @@
 import { useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux';
 import { getSales } from '../../Redux/Actions/Sales/getSale';
-import { NavLink as Link } from 'react-router-dom';
-import SaleDetail from './saleDetail';
+import CardSale from './CardSale';
 
 const SalesList = () => {
     const allSales = useSelector(s => s.sales)
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(getSales())
-    }, [dispatch])
+    }, [dispatch]);
+
     return (
         <div>
-            <h1>{allSales?.map((e) => {
+            <h1>
+            { 
+            allSales?.map((e) => {
                 return  (
                     <>
-                    <SaleDetail
+                    <CardSale
                     key={e.id}
                     id={e.id}
                     purchaseId={e.purchaseId}
@@ -26,7 +29,10 @@ const SalesList = () => {
                     />
                     </>
                 )
-            })}</h1>
+            })
+            }
+            {/* <h3>No se</h3> */}
+            </h1>
         </div>
     )
 };
