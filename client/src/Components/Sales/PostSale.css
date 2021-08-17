@@ -1,0 +1,8 @@
+.sheet {
+    margin: 20px;
+    font-family: system-ui;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

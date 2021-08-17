@@ -12,8 +12,8 @@ import CreateCategory from './Components/Categories/createCategory'
 import SalesList from './Components/Sales';
 import SaleDetail from './Components/Sales/saleDetail';
 import PostSale from './Components/Sales/PostSale';
+import AdminDash from './Components/Dashboard/';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <div className="App">
           <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
+          <Route exact path="/adashboard" component={AdminDash} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/product/:id" component={ProductDetail} />

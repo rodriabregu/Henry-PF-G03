@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux';
 import { getSales } from '../../Redux/Actions/Sales/getSale';
 import CardSale from './CardSale';
+import './allSales.css';
 
 const SalesList = () => {
     const allSales = useSelector(s => s.sales)
@@ -18,6 +19,7 @@ const SalesList = () => {
             allSales?.map((e) => {
                 return  (
                     <>
+                    <div className='allSheet'>
                     <CardSale
                     key={e.id}
                     id={e.id}
@@ -27,11 +29,11 @@ const SalesList = () => {
                     date={e.date}
                     items={e.items}
                     />
+                    </div>
                     </>
                 )
             })
             }
-            {/* <h3>No se</h3> */}
             </h1>
         </div>
     )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { getSales } from '../../Redux/Actions/Sales/getSale';
 import { putSale } from '../../Redux/Actions/Sales/putSale';
 
@@ -10,12 +10,11 @@ const SaleDetail = () => {
     const dispatch = useDispatch()
     const allSales:any = useSelector<any>(s => s?.sales)
     const renderSale = allSales?.find((r:any) => r?.id == id); //Preguntar a Angel, types no funcan
-    console.log(renderSale,'hola')
 
     const objetito = {
         saleId: id,
         newState: select
-    }
+    };
 
     const handleChange = (e:any) => {
         if(e.target.name === 'selec') {
@@ -49,6 +48,6 @@ const SaleDetail = () => {
         </div>
         </>
     )
-}
+};
 
 export default SaleDetail;

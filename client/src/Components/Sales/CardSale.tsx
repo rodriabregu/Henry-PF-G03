@@ -1,9 +1,6 @@
 import {NavLink as Link } from 'react-router-dom';
 import './CardSale.css';
 
-type KeyParams = {
-    id: string;
-};
 interface IsaleDetail {
     id: number,
     purchaseId: string,
@@ -15,15 +12,14 @@ interface IsaleDetail {
 
 const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => {
     return (
+    <Link style={{ textDecoration: 'none', color: 'white' }} to={`/sales/${id}`}>
         <div className='cardSale'>
-            <Link to={`/sales/${id}`}>
-            <span>{id}{<br/>}</span>
-            </Link>
-            <span>{purchaseId}{<br/>}</span>
-            <span>{userId}{<br/>}</span>
-            <span>{state}{<br/>}</span>
-            <span>{date}{<br/>}</span>
+            <span>Sell id: {id}{<br/>}</span>
+            <span>User id: {userId}{<br/>}</span>
+            <span>State: {state}{<br/>}</span>
+            <span>Date: {date}{<br/>}</span>
         </div>
+    </Link>
     )
 }
 

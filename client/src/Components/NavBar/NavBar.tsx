@@ -49,8 +49,9 @@ export const NavBar = () => {
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            <Link style={{ textDecoration: 'none' }} to='/create'>CREATE PRODUCT</Link>
-            <Link style={{ textDecoration: 'none' }} to='/createCategory'>CREATE CATEGORY</Link>
+            {/* <Link style={{ textDecoration: 'none' }} to='/create'>CREATE PRODUCT</Link> */}
+            {/* <Link style={{ textDecoration: 'none' }} to='/createCategory'>CREATE CATEGORY</Link> */}
+            <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
             <Link style={{ textDecoration: 'none' }} to='/cart'> CART {renderCart} <RiShoppingCartLine /></Link>
             <Link style={{ textDecoration: 'none' }} to='/register'> REGISTER </Link>
             <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN <RiAccountCircleLine /> </Link>

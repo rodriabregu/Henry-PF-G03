@@ -1,0 +1,25 @@
+.sheet {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+    grid-template-rows: 15rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    margin: 10px;
+    font-family: system-ui;
+}
+
+.diva {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    border-radius: 6px;
+    box-sizing: content-box;
+    padding: 30px;
+    color: white;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

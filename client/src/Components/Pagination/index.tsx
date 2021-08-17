@@ -64,7 +64,7 @@ const Pagination = () => {
 
     if (Array.isArray(products)) {
         currentItems = filterp.slice(indexOfFirstItem, indexOfLastItem); //0-8
-    }
+    };
 
     const renderPageNumbers = pages.map((number: any) => {
         if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
@@ -87,7 +87,7 @@ const Pagination = () => {
             (p: any) => p.name ? p.name.toLowerCase().includes(value) : '' || p.brand ? p.brand.name.toLowerCase().includes(value) : '');
             setcurrentPage(1)
             setFilterp(filtrados);
-    }
+    };
 
     const handleNextbtn = () => {
         setcurrentPage(currentPage + 1);
@@ -108,12 +108,12 @@ const Pagination = () => {
     let pageIncrementBtn = null;
     if (pages.length > maxPageNumberLimit) {
         pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
-    }
+    };
 
     let pageDecrementBtn = null;
     if (minPageNumberLimit >= 1) {
         pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
-    }
+    };
 
     const renderProduct = (filterp: any) => {
         return (
@@ -157,7 +157,7 @@ const Pagination = () => {
                 </div>
             </div>
         )
-    }
+    };
 
     useEffect(() => {
         dispatch(getProducts());
@@ -174,32 +174,27 @@ const Pagination = () => {
             </div>
                 <div className='filters'>
                     <SelectCategory onChange={selectChange} path='categories'/>
-                    
-                        {/* <select onChange={selectChange}>
-                            <option>Accesories</option>
-                            <option>Kids</option>
-                            <option>Men</option>
-                            <option>Women</option>
-                        </select> */}
                         <button onClick={handleFilter}>Set Filters</button>
                 </div>  
             <div className='pageNumbers'>
                 {currentPage > 1 ? <button onClick={handlePrevbtn}>Prev</button> : ""}
-{/*                 <button
-                    onClick={handlePrevbtn}
-                    disabled={currentPage === pages[0] ? true : false}>
-                        Prev
-                </button> */}
                     {pageDecrementBtn}
                     {renderPageNumbers}
                     {pageIncrementBtn}
-                <button
-                    onClick={handleNextbtn}
-                    disabled={currentPage === pages[pages.length - 1] ? true : false}>
-                        Next
+                <button onClick={handleNextbtn} disabled={currentPage === pages[pages.length - 1] ? true : false}>
+                    Next
                 </button>
             </div>
             {renderProduct(currentItems)}
+            <div className='pageNumbers'>
+                {currentPage > 1 ? <button onClick={handlePrevbtn}>Prev</button> : ""}
+                    {pageDecrementBtn}
+                    {renderPageNumbers}
+                    {pageIncrementBtn}
+                <button onClick={handleNextbtn} disabled={currentPage === pages[pages.length - 1] ? true : false}>
+                    Next
+                </button>
+            </div>
         </div>
     );
 };
