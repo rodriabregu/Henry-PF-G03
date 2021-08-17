@@ -12,6 +12,9 @@ import CreateCategory from './Components/Categories/createCategory'
 import SalesList from './Components/Sales';
 import SaleDetail from './Components/Sales/saleDetail';
 import PostSale from './Components/Sales/PostSale';
+import Faq from './Components/FAQ/faq';
+import ContactUs from './Components/ContactUs/ContactUs';
+import AboutUs from './Components/AboutUs/AboutUs';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -31,6 +34,9 @@ function App() {
           <Route exact path='/createCategory' component={CreateCategory}/>
           <Route exact path='/allSales' component={SalesList}/>
           <Route exact path='/sales/:id' component={SaleDetail}/>
+          <Route exact path='/FAQ' component={Faq}/>
+          <Route exact path='/ContactUs' component={ContactUs}/>
+          <Route exact path='/AboutUs' component={AboutUs}/>
           <Route path="/checkout/:saleId/:esta" component={PostSale} />
           <Route path="/" component={Footer} />
         </div>
