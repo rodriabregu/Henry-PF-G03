@@ -24,7 +24,7 @@ export class User extends Model {
   @Column({ unique: true })
   userName!: string; //userName
 
-  @Column
+  @Column({ unique: true })
   email!: string;
 
   @Column

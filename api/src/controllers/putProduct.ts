@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Product } from '../db'
+import { Product, Brand } from '../db'
 /*
 const body = {
   "product": {
@@ -9,11 +9,10 @@ const body = {
     "price": 45,
     "stock": 15,
     "description": "zeuscalabria",
-    "brand": "NIKE"
   },
   "photos": ["https://www.zeuscalabria.it/32939-home_default/nike-hairbands-3-pack-bianco-e-nero-njn04983os.jpg", "photoN"],
   "descriptions": ["description1", "descriptionN"],
-  "brand": "brand1",
+  "brand": 3,
   "categories": [2, 4]
 }
 */

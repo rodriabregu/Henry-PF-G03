@@ -15,13 +15,19 @@ export default async () => {
   )
   console.log("prooducts in fil: ", products.length);
 
-  User.create({
-    userType: "Admin",
-    "userName": "user001",
-    "email": "user001@yopmail.com",
-    "firstName": "user001",
-    "lastName": "user002",
-    "hashPasword": "gTw34wNs64ndr75rXr56uVz"
+  User.findOrCreate({
+    where: {
+      userName: "user001",
+      email: "user001@yopmail.com"
+    },
+    defaults: {
+      userType: "Admin",
+      userName: "user001",
+      email: "user001@yopmail.com",
+      firstName: "user001",
+      lastName: "user002",
+      hashPasword: "gTw34wNs64ndr75rXr56uVz"
+    }
   })
 
   const categoryTypes = ['Gender', 'Garmen', 'Sport']
@@ -41,13 +47,13 @@ export default async () => {
     const { id } = (await CategoryType.create({ name: cType })).get()
     categories[idx].map((category: string) => {
       promiseC.push(
-        Category.create({ name: category, categoryTypeId: id })
+        Category.findOrCreate({ where: { name: category, categoryTypeId: id } })
       );
     })
   })
 
   await Promise.all(promiseC)
-  
+
   const AddProduct = async (product: any) => {
 
     const [brand] = await Brand.findOrCreate(
@@ -58,12 +64,9 @@ export default async () => {
     const [newPoduct] = await Product.findOrCreate({
       where: { name: product.name },
       defaults: {
-        isActive: true,
         name: product.name,
-        photo: product.photo,
         brandId,
         price: product.price,
-        //category: product.category,
         description: product.name + product.brand + product.category,
         stock: product.name.length
       }

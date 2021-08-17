@@ -29,12 +29,6 @@ export class Product extends Model {
   @Column(DataType.INTEGER)
   stock!: number;
 
-  @Column
-  photo!: string;
-
-  @Column
-  category!: string;
-
   @BelongsTo(() => Brand)
   brand!: Brand;
 
