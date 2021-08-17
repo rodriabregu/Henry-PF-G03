@@ -85,7 +85,8 @@ const Pagination = () => {
     function onSearch(value: any) {
         const filtrados = products.filter(
             (p: any) => p.name ? p.name.toLowerCase().includes(value) : '' || p.brand ? p.brand.name.toLowerCase().includes(value) : '');
-        setFilterp(filtrados);
+            setcurrentPage(1)
+            setFilterp(filtrados);
     }
 
     const handleNextbtn = () => {
