@@ -8,17 +8,17 @@ export const Footer = () => {
       <footer>
         <div className='footer'>
         <div className='links'>
-          <NavLink to="/cart">About us</NavLink>
+          <NavLink to="/AboutUs">About us</NavLink>
           <br></br>
-          <NavLink to="/cart">Contact us</NavLink>
+          <NavLink to="/ContactUs">Contact us</NavLink>
           <br></br>
-          <NavLink to="/cart">F.A.Q</NavLink>
+          <NavLink to="/faq">F.A.Q</NavLink>
         </div>
         <div>
           <div className='social-icons'>
-              <NavLink to="/cart"><RiInstagramLine/></NavLink>
-              <NavLink to="/cart"><RiFacebookFill/></NavLink>
-              <NavLink to="/cart"><RiTwitterLine/></NavLink>
+              <NavLink to="/ContactUs"><RiInstagramLine/></NavLink>
+              <NavLink to="/ContactUs"><RiFacebookFill/></NavLink>
+              <NavLink to="/ContactUs"><RiTwitterLine/></NavLink>
             </div>
         </div>
         </div>
