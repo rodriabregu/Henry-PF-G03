@@ -4,7 +4,7 @@ export const EDIT_PRODUCTS = 'EDIT_PRODUCTS';
 
 const editProducts = (dataProduct: any) => {
     return async (dispatch: any) => {
-        await axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/productsUpdate`, dataProduct)
+        await axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/product`, dataProduct)
             .then(res => {
                 dispatch({
                     type: EDIT_PRODUCTS,

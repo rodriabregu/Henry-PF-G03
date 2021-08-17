@@ -7,6 +7,7 @@ import postSale from '../controllers/postSale'
 import putSale from '../controllers/putSale'
 import getSales from '../controllers/getSales'
 import getSalesUser from '../controllers/getSalesUser'
+import putProduct from '../controllers/putProduct';
 
 import products from './products';
 import productsUpdate from './productsUpdate';
@@ -21,6 +22,7 @@ import reviews from './reviews'
 import photos from './photo'
 import favs from './favourites'
 
+router.put('/product',putProduct)
 router.post('/user', postUser)
 router.post('/sale', postSale)
 router.put('/sale', putSale)
