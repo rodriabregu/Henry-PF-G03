@@ -45,7 +45,7 @@ export const NavBar = () => {
       <nav>
         <div className='nav-container'>
           <div className='link-home'>
-            <Link to='/home'> <button className='button-home' > HOME <RiHome2Line /> </button></Link>
+            <Link to='/home'> <button className='button-home' style={{textDecoration: 'none'}} > HOME <RiHome2Line /> </button></Link>
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>

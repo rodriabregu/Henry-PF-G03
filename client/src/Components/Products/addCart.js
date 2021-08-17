@@ -1,6 +1,7 @@
 import { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
+import toast, { Toaster } from 'react-hot-toast';
 import { addActionCart } from '../../Redux/Actions/Products/addingCart'
 import '../ProductDetail/productDetail.css';
 
@@ -48,8 +49,11 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
         setValue({value: parseInt(e.target.value)});
     }
 
-    const handleSubmit = (e) => {
-        window.location.reload();
+    const notify = () => toast.success('Successfully review created!');
+
+    const handleSubmit = () => {
+        /* window.location.reload(); */
+        notify()
     }
 
     return (
@@ -58,6 +62,7 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
             <button className='btn-cart'
                 onClick={() => addCart()}>
                 Add to cart <TiShoppingCart />
+                <Toaster/>
             </button>
                 <input type='number' min="1" max={stock} defaultValue='1' onChange={handleChange} />
                 <span> ${value.value * price}.00 </span>

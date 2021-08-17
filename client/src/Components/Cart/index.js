@@ -5,6 +5,7 @@ import { getSales } from '../../Redux/Actions/Sales/getSale'
 import { IoTrashOutline } from 'react-icons/io5';
 import { useHistory } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
+import toast, { Toaster } from 'react-hot-toast';
 import './Cart.css';
 
 const Cart = () => {
@@ -42,8 +43,11 @@ const Cart = () => {
         "purchaseId": uuidv4()
     }
 
+    const notify = () =>toast.error("The cart is empty.");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(items.length <= 0) return notify();
         dispatch(PostSale(dispatchSale))
         setSalePurchaseId(dispatchSale)
         const match = allSales?.map(s => s?.data?.data)
@@ -107,11 +111,13 @@ const Cart = () => {
             }
                 <div className='buy'>
                     <h3>Subtotal to pay: ${sumAll}.00</h3>
-                
                     <form onSubmit={handleSubmit}>
-                        <button className='btn-buy'>Buy</button>
-                    </form>
-                    {url_pago && <a href={url_pago}><button className='btn-confirm'>Confirm Purchase</button></a>}
+                        {   !url_pago ?
+                            <button className='btn-buy'>Confirm payment</button> : ''
+                        }
+                        <Toaster/>
+                        </form>
+                    {url_pago && <a href={url_pago}><button className='btn-confirm'>Confirm purchase</button></a>}
                 </div>
             </div>
 
