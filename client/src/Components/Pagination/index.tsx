@@ -139,7 +139,7 @@ const Pagination = () => {
                                         <div>${e.price}.00</div>
                                         <img src={e.photos?e.photos[0].url:''} alt={e.name} />
                                     </Link>
-                                    {/* <AddCart 
+                                    {/*  <AddCart 
                                     id={e.id}
                                     name={e.name}
                                     photo={e.photos} 

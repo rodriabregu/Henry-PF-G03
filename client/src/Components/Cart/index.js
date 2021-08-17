@@ -43,7 +43,7 @@ const Cart = () => {
         "purchaseId": uuidv4()
     }
 
-    const notify = () =>toast.error("The cart is empty.");
+    const notify = () => toast.error("The cart is empty.");
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -2,7 +2,8 @@ import {useState} from 'react'
 import axios from 'axios'
 import './createCategory.css';
 import config from '../../../src/config';
-
+import toast, { Toaster } from 'react-hot-toast';
+const notify = () => toast.success('Successfully category created!');
 const CreateCategory = () => {
     
   const [category,setCategory]=useState('')
@@ -18,7 +19,7 @@ const CreateCategory = () => {
     axios.post(`http://${config.REACT_APP_API_URL}:3001/api/categories/new`,{name:category})
       .then(resp=>{
         //console.log(resp.data)
-        setMessage(resp.data)
+        notify()
       })
       .catch(err=>{
         //console.log(err.response.data)
@@ -42,6 +43,7 @@ const CreateCategory = () => {
             <div>
               <input className='btn-c' type="submit" value="Submit"/>
             </div>
+            <Toaster/>
             <div><h4>{message}</h4></div>
       </form>
     </div>
