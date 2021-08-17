@@ -72,7 +72,7 @@ const CreateProducts = () => {
     description:'',
     price: 0,
     stock: 0,
-    brand:'',
+    brand: 'ADIDAS',
     categories: [],
     files:null
   });

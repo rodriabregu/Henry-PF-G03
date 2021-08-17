@@ -7,6 +7,7 @@ import { ADD_CART_PRODUCTS } from '../Actions/Products/addingCart';
 import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
+import { PUT_SALE } from '../Actions/Sales/putSale'
 
 const initialState = {
   products: [],//filtro o todos
@@ -71,6 +72,11 @@ function getProductReducer(state:any = initialState, action: any) {
         return {
           ...state,
           sales: action.payload,
+        };
+      case PUT_SALE:
+        return {
+          ...state,
+          sales: state.sales.filter((p: any) => p.id !== action.payload.id).concat(action.payload)
         };
     default:
       return state;
