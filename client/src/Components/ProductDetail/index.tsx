@@ -106,9 +106,9 @@ const ProductDetail = () => {
                     <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
                 </div>
                 <div className='subdetail'>
-                        <button name='prev' onClick={changePhoto}>{`🡄`}</button>
+                        <button name='prev' onClick={changePhoto}>{`<`}</button>
                         {detail.photos ? detail.photos.map((f: any) => <img src={f.url} width='50px' height='50px' alt='not found'></img>) : ''}
-                        <button name='next' onClick={changePhoto}>{`🡆`}</button>
+                        <button name='next' onClick={changePhoto}>{`>`}</button>
                 </div>
                 </div>
                 <div className='detail'>
