@@ -1,12 +1,10 @@
-import { Request, Response } from 'express';
-import { productOptions } from "../@app"
+import { Request, Response } from 'express'
 import {
   Product, Brand, ProductCategory, Photo
 } from '../db'
 
 /**
- * 
- * 
+ * agrega un nuevo producto con los datos recividso por body 
  * 
  * body = {
     "product": {
