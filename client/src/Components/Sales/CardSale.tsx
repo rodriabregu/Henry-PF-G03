@@ -21,6 +21,6 @@ const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => 
         </div>
     </Link>
     )
-}
+};
 
 export default CardSale;

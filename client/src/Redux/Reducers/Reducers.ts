@@ -10,9 +10,9 @@ import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale'
 
 const initialState = {
-  products: [],//filtro o todos
+  products: [], //filtro o todos
   productsDetail: {},
-  AllProducts: [],//no tocar!
+  AllProducts: [],
   cartProducts: [],
   sales: [],
   url_pago: null
@@ -36,12 +36,6 @@ function getProductReducer(state:any = initialState, action: any) {
         ...state,
         products: state.AllProducts.filter((p: any) => p.categories.find((c: any) => c.name === action.payload))
       }
-    /*
-    return {
-      ...state,
-      products: state.AllProducts.filter((p: any) => p.category === action.payload)
-    }
-    */
     case CLEAR_FILTERS:
       return {
         ...state,
