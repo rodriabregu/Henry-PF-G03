@@ -3,7 +3,7 @@ import {
 } from 'sequelize-typescript'
 
 import { User } from "./User"
-import { SaleItem } from "./SaleItem"
+import { Item } from "./Item"
 import { Destiny } from "./Destiny"
 
 @Table
@@ -29,7 +29,7 @@ export class Sale extends Model<Sale> {
   @ForeignKey(() => Destiny)
   destinyId!: number
 
-  @HasMany(() => SaleItem)
-  items!: SaleItem[];
+  @HasMany(() => Item)
+  items!: Item[];
 
 }
