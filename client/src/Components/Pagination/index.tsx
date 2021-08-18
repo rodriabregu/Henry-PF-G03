@@ -9,6 +9,7 @@ import { NavLink as Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
+import axios from 'axios'
 
 interface ProductsCart {
     name: any;
@@ -104,6 +105,10 @@ const Pagination = () => {
         }
     };
 
+    const addFav=async(productId:any)=>{
+        await axios.post(`http://localhost:3001/api/favs`,{productId,userId:1})
+    }
+
     let pageIncrementBtn = null;
     if (pages.length > maxPageNumberLimit) {
         pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
@@ -137,8 +142,9 @@ const Pagination = () => {
                                     <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
                                         <div className='name'>{e.name}</div>
                                         <div>${e.price}.00</div>
-                                        <img src={e.photos?e.photos[0].url:''} alt={e.name} />
+                                        <img src={e.photos?e.photos[0].url:''} alt={e.name} />                                        
                                     </Link>
+                                    <button id={`${e.id}`} onClick={(e:any)=>addFav(e.target.id)}>Add to favs</button>
                                     {/*  <AddCart 
                                     id={e.id}
                                     name={e.name}
