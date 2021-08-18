@@ -5,6 +5,8 @@ import {
 import { Sale } from './Sale';
 import { Review } from './Review';
 import { Product } from './Product';
+import { Purchase } from './Purchase'
+
 import ProductUser from './ProductUser';
 
 @Table
@@ -33,6 +35,9 @@ export class User extends Model {
 
   @Column
   lastName!: string;
+
+  @HasMany(() => Purchase)
+  bought!: Purchase[]; 
 
   @HasMany(() => Sale)
   sales!: Sale[];

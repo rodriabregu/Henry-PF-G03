@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { Product, Sale } from '../db';
+import { Product, Sale, Purchase } from '../db';
 import { sendEmail } from '../providers'
 /* 
  * Route : PUT "api/sale/"
@@ -21,8 +21,8 @@ export default async (req: Request, res: Response) => {
     if (!newState) {
       newState = req.query.status
       if (newState === "approved") newState = "Created"
-      else if (newState === "rejected") newState = "Cancelled"
-      else newState = "Cancelled"
+      if (newState === "rejected") newState = "Cancelled"
+      if (newState === "pending") newState = "Pending"
     }
 
     const states = ['Pending', 'Created', 'Processing', 'Complete', 'Cancelled']
@@ -36,14 +36,24 @@ export default async (req: Request, res: Response) => {
     const { state, items, userId, id } = sale.get()
     if (state === 'Cancelled') {
       throw { status: 405, message: "sale already is Cancelled" }
-    } else if (state === "Pending" && newState === "Created") {
+    }
+    if (state === "Pending" && newState === "Created") {
+
+      const { items, userId } = await sale.get()
+
+      await Promise.all(items.map(async (item: item) => {
+
+        const { productId, units } = item.get()
+        const product = await Product.findByPk(productId)
+        if (!product) throw Error("product not found")
+        const { stock } = product.get()
+        await Purchase.findOrCreate({ where: { userId, productId } })
+        await product.update({ stock: stock - units })
+        return productId
+
+      }))
 
       await sale.update({ state: "Created" })
-      const { items } = await sale.get()
-      await Promise.all(items.map((item: item) => {
-        const { productId, units } = item.get()
-        lowerStock(productId, units)
-      }))
       sendEmail(userId, "Created", id)
 
     } else if (state === "Created" && newState === "Processing") {
@@ -58,8 +68,13 @@ export default async (req: Request, res: Response) => {
 
     } else if (states.includes(state) && newState === "Cancelled") {
 
-      await Promise.all(items.map((item: item) => {
-        return deleteItem(item)
+      await Promise.all(items.map(async (item: item) => {
+        const { units, productId } = item
+        const product = await Product.findByPk(productId)
+        if (!product) throw Error("product not found")
+        const { stock } = product.get()
+        await product.update({ stock: stock + units })
+        return productId
       }))
       await sale.update({ state: "Cancelled" })
       sendEmail(userId, "Cancelled", id)
@@ -94,14 +109,5 @@ const deleteItem = async (item: item) => {
   if (!product) throw Error("product not found")
   const { stock } = product.get()
   return product.update({ stock: stock + units })
-
-}
-
-const lowerStock = async (productId: number, units: number): Promise<any> => {
-
-  const product = await Product.findByPk(productId)
-  if (!product) throw Error("product not found")
-  const { stock } = product.get()
-  return product.update({ stock: stock - units })
 
 }
