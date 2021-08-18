@@ -15,7 +15,7 @@ export const sequelize = new Sequelize({
 export const {
   Product, User, Photo, Category, Brand,
   Sale, CategoryType, ProductCategory,
-  Destiny, Review, SaleItem
+  Destiny, Review, Item, Cart
 } = sequelize.models;
 
 /*

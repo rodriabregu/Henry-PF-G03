@@ -3,12 +3,16 @@ import {
 } from 'sequelize-typescript'
 
 import { Sale } from './Sale';
+import { Cart } from './Cart';
 
 @Table
-export class SaleItem extends Model<SaleItem> {
+export class Item extends Model<Item> {
   
   @ForeignKey(() => Sale)
   saleId!: number;
+
+  @ForeignKey(() => Cart)
+  cartId!: number;
 
   @Column(DataType.INTEGER)
   productId!: number;
