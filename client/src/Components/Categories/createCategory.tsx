@@ -1,36 +1,32 @@
-import {useState} from 'react'
-import axios from 'axios'
-import './createCategory.css';
+import { useState } from 'react';
+import axios from 'axios';
 import config from '../../../src/config';
 import toast, { Toaster } from 'react-hot-toast';
+import './createCategory.css';
+
 const notify = () => toast.success('Successfully category created!');
+
 const CreateCategory = () => {
-    
   const [category,setCategory]=useState('')
   const [message,setMessage]=useState('');
 
   const handleChange=(e:any)=>{
     setCategory(e.target.value)
-  }
+  };
 
-  
-  const handleSubmit=(e:any)=>{
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     axios.post(`http://${config.REACT_APP_API_URL}:3001/api/categories/new`,{name:category})
       .then(resp=>{
-        //console.log(resp.data)
         notify()
       })
       .catch(err=>{
-        //console.log(err.response.data)
         setMessage(err.response.data)
       })
-
       setTimeout(()=>{
         setMessage('')
       },10000)
-  }
-
+  };
 
   return (
     <div className='form-c'>
@@ -50,5 +46,4 @@ const CreateCategory = () => {
     );
   };
 
-
-  export default CreateCategory;
+export default CreateCategory;

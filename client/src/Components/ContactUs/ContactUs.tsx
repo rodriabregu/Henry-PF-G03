@@ -4,7 +4,6 @@ export const ContactUs = () => {
     return(
         <div>
             <Loading/>
-      
         </div>
     )
 }
