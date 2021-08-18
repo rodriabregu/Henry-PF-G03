@@ -14,6 +14,10 @@
     margin-bottom: 70px;
     margin-top: 40px;
     font-family: 'Montserrat', sans-serif;
+    background-color: #b2b2f356;
+    width: 500px;
+    border-radius: 20px;
+    align-self: center;
 }
 
 .form-register div{
@@ -52,4 +56,11 @@
 .button-r:hover{
     background-color:  #bcbdf1;
     color:  #2E2E48;
+}
+
+@media screen and (max-width: 768px){
+ 
+    .form-register{
+        width: 370px;
+    }
 }
