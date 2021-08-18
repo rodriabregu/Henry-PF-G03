@@ -1,5 +1,4 @@
 import { transporter } from '../lib/transporter'
-import { appUser } from '../@app'
 import { User } from '../db'
 
 const html = (accion: string): string => {
@@ -20,7 +19,7 @@ export default async (userId: number, accion: string, saleId: number = 0) => {
   const user = await User.findByPk(userId)
   if (!user) throw Error(`sent imail - user ${userId} is not`)
   const { email, firstName, userName } = user.get()
-  /* await transporter.sendMail({
+   await transporter.sendMail({
     from: '"club crotones" <clubcrotones@gmail.com>', // sender address
     to: email, // list of receivers
     subject: accion,  // Subject line
@@ -30,5 +29,5 @@ export default async (userId: number, accion: string, saleId: number = 0) => {
       .replace(/\{userName\}/g, userName)
       .replace(/\{saleId\}/g, `${saleId}`)
       .replace(/\{state\}/g, accion)
-  }); */
+  });
 }
