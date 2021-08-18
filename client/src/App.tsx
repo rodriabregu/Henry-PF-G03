@@ -1,4 +1,3 @@
-import './App.css';
 import Landing from './Components/LandingPage/LandingPage';
 import Home from './Components/Home/Home';
 import NavBar from './Components/NavBar/NavBar';
@@ -17,6 +16,7 @@ import Faq from './Components/FAQ/faq';
 import ContactUs from './Components/ContactUs/ContactUs';
 import AboutUs from './Components/AboutUs/AboutUs';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (

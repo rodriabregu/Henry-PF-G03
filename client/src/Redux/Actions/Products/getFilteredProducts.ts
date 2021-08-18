@@ -6,4 +6,3 @@ export function getFilteredProducts(category:string) {
         payload:category
     };
 };
-

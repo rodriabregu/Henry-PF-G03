@@ -5,7 +5,6 @@ import './PostSale';
 import config from '../../config'
 
 export default function PostSale() {
-
     const { id, saleId, esta } = useParams<any>();
 
     const [ sales, setSales ] = useState<any>('')
@@ -29,4 +28,4 @@ export default function PostSale() {
             <p>search: {search}</p>
         </div>
     )
-}
+};
