@@ -28,7 +28,8 @@ const SalesList = () => {
             <h1>
             <div>
                 <select onChange={handleChange}>
-                    <option value='---'>State by:</option>
+                    <option value='---'>Filter state by:</option>
+                    <option value='All'>All</option>
                     <option value='Pending'> Pending </option>
                     <option value='Created'> Created </option>
                     <option value='Processing'> Processing </option>
@@ -47,7 +48,7 @@ const SalesList = () => {
                         <th>Total</th>
                         <th>Detalles</th>
                     </tr>
-                {
+                { filter.length >= 1 ?
                 filter?.map( e => {
                     return (
                     <>
@@ -59,13 +60,14 @@ const SalesList = () => {
                         state={e.state}
                         date={e.date}
                         items={e.items}
-                        />
-                    </>
+                    /></>
                     )
                 })
+                    : <h2>No sales 😥</h2>
                 }
                 </table>
                 </div>
+
             </h1>
         </div>
     )

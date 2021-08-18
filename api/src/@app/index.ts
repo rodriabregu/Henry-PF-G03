@@ -5,11 +5,9 @@ import appProduct from "./appProduct";
 import appUser from './appUser'
 import appItem from './appItem'
 
-import { sequelize } from '../db';
-
-const {
+import {
   Photo, Review, Category, Brand,
-} = sequelize.models;
+} from '../db';
 
 const productOptions = {
   attributes: { exclude: ['updatedAt', 'createdAt'] },

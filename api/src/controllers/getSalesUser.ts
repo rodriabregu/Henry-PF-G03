@@ -22,7 +22,7 @@ export default async (req: Request, res: Response) => {
     })
 
     if (!sales || sales.length < 1)
-      throw Error("No se encontrason Sales")
+      throw {status: 405, message:"No sales found"}
 
     return res.json({
       message: "successfully",

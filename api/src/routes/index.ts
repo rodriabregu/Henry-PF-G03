@@ -5,6 +5,7 @@ const router = Router();
 import getProducts from '../controllers/getProducts'
 import getSales from '../controllers/getSales'
 import getSalesUser from '../controllers/getSalesUser'
+import getUsers from '../controllers/getUsers'
 import postProduct from '../controllers/postProduct'
 import postSale from '../controllers/postSale'
 import postUser from '../controllers/postUser'
@@ -27,6 +28,7 @@ import favs from './favourites'
 router.get('/products', getProducts)
 router.get('/sales', getSales)
 router.get('/sales/user/:userId', getSalesUser)
+router.get('/users', getUsers)
 router.post('/product', postProduct)
 router.post('/sale', postSale)
 router.post('/user', postUser)

@@ -20,6 +20,7 @@ const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => 
     })
 
     return (
+
                 
         <tr>
                 {/* <td>{id}</td>
@@ -30,6 +31,8 @@ const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => 
                 <td>${total}</td>
                 <td><Link to={`/sales/${id}`}>Ver más</Link></td>
     </tr>
+
+
     )
 };
 
