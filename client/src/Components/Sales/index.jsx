@@ -13,7 +13,7 @@ const SalesList = () => {
         let filterState = []
         if (e.target.value === '---') return setFilter(allSales)
         if (['Pending', 'Created', 'Processing', 'Complete', 'Cancelled'].indexOf(e.target.value) !== -1) {
-        filterState = allSales.filter( c => c.state === e.target.value)
+        filterState = allSales.filter( c => c.state === e.target.value )
             return setFilter(filterState)
         }
     };
@@ -29,7 +29,6 @@ const SalesList = () => {
             <div>
                 <select onChange={handleChange}>
                     <option value='---'>Filter state by:</option>
-                    <option value='All'>All</option>
                     <option value='Pending'> Pending </option>
                     <option value='Created'> Created </option>
                     <option value='Processing'> Processing </option>
@@ -63,11 +62,10 @@ const SalesList = () => {
                     /></>
                     )
                 })
-                    : <h2>No sales 😥</h2>
+                    : <h4>No sales 😥</h4>
                 }
                 </table>
                 </div>
-
             </h1>
         </div>
     )
