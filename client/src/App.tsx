@@ -16,6 +16,7 @@ import Faq from './Components/FAQ/faq';
 import ContactUs from './Components/ContactUs/ContactUs';
 import AboutUs from './Components/AboutUs/AboutUs';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Favs from './Components/Favs/Favs'
 import './App.css';
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
           <Route exact path='/FAQ' component={Faq}/>
           <Route exact path='/ContactUs' component={ContactUs}/>
           <Route exact path='/AboutUs' component={AboutUs}/>
-          <Route path="/checkout/:saleId/:esta" component={PostSale} />
+          <Route exact path='/favs' component={Favs}/>
+          <Route path="/checkout/:saleId/:esta" component={PostSale} />          
           <Route path="/" component={Footer} />
         </div>
       </Switch>
