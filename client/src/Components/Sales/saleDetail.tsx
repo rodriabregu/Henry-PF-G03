@@ -17,7 +17,7 @@ const SaleDetail = () => {
     };
 
     const handleChange = (e:any) => {
-        if(e.target.name === 'selec') {
+        if(e.target.name === 'select') {
             setSelect(e.target.value)
         } else {
             dispatch(putSale(objetito))
@@ -29,6 +29,15 @@ const SaleDetail = () => {
         dispatch(getSales())
     }, []);
 
+
+    <select onChange={e => handleChange(e)} name='select'>
+    <option value='Pending'>Pending</option>
+    <option value='Created'>Created</option>
+    <option value='Processing'>Processing</option>
+    <option value='Complete'>Complete</option>
+    <option value='Cancelled'>Cancelled</option>
+    </select>
+
     return (
         <>
         <div>
@@ -36,13 +45,24 @@ const SaleDetail = () => {
             <span>{renderSale?.state}</span>
             <span>{renderSale?.userId}</span>
             <div>
-            <select onChange={e => handleChange(e)} name='selec'>
-                <option value='Pending'>Pending</option>
+            {
+            renderSale.state === 'Pending' ?
+            <select onChange={e => handleChange(e)} name='select'>
                 <option value='Created'>Created</option>
+                <option value='Cancelled'>Cancelled</option>
+            </select>
+            : renderSale.state === 'Created' ?
+            <select onChange={e => handleChange(e)} name='select'>
                 <option value='Processing'>Processing</option>
+                <option value='Cancelled'>Cancelled</option>
+            </select>
+            : renderSale.state === 'Processing' ?
+            <select onChange={e => handleChange(e)} name='select'>
                 <option value='Complete'>Complete</option>
                 <option value='Cancelled'>Cancelled</option>
             </select>
+            : ''
+            }
             </div>
             <button onClick={handleChange}>Aprobada</button>
         </div>

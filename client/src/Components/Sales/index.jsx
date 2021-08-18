@@ -13,11 +13,11 @@ const SalesList = () => {
         let filterState = []
         if (e.target.value === '---') return setFilter(allSales)
         if (e.target.value === 'Pending' ||
-        e.target.value === 'Created' ||
-        e.target.value === 'Processing' ||
-        e.target.value === 'Complete' ||
-        e.target.value === 'Cancelled') {
-            filterState = allSales.filter( c => c.state === e.target.value)
+            e.target.value === 'Created' ||
+            e.target.value === 'Processing' ||
+            e.target.value === 'Complete' ||
+            e.target.value === 'Cancelled') {
+        filterState = allSales.filter( c => c.state === e.target.value)
             return setFilter(filterState)
         }
     };
