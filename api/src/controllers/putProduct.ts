@@ -19,8 +19,6 @@ const body = {
 export default async (req: Request, res: Response) => {
   try {
 
-    console.log(req.body)
-
     let {
       id, price, name, stock, description, categories
     } = req.body
