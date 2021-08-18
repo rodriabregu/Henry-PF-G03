@@ -11,7 +11,8 @@ const SalesList = () => {
 
     const handleChange = e => {
         let filterState = []
-        if (e.target.value === '---') return setFilter(allSales)
+        if (e.target.value === '---') return setFilter([])
+        if (e.target.value === 'All') return setFilter(allSales)
         if (e.target.value === 'Pending' ||
             e.target.value === 'Created' ||
             e.target.value === 'Processing' ||
@@ -31,7 +32,8 @@ const SalesList = () => {
             <h1>
             <div>
                 <select onChange={handleChange}>
-                    <option value='---'>State by:</option>
+                    <option value='---'>Filter state by:</option>
+                    <option value='All'>All</option>
                     <option value='Pending'> Pending </option>
                     <option value='Created'> Created </option>
                     <option value='Processing'> Processing </option>
@@ -39,7 +41,8 @@ const SalesList = () => {
                     <option value='Cancelled'> Cancelled </option>
                 </select>
             </div>
-                { filter.length >= 1 ?
+            <div>
+            { filter.length >= 1 ?
                     filter?.map( e => {
                     return  (
                     <>
@@ -57,25 +60,9 @@ const SalesList = () => {
                     </>
                     )
                     })
-                    : 
-                    allSales?.map( e => {
-                        return (
-                        <>
-                        <div className='allSheet'>
-                            <CardSale
-                            key={e.id}
-                            id={e.id}
-                            purchaseId={e.purchaseId}
-                            userId={e.userId}
-                            state={e.state}
-                            date={e.date}
-                            items={e.items}
-                            />
-                        </div>
-                        </>
-                        )
-                    })
-                }
+                    : <h2>No sales 😥</h2>
+            }
+            </div>
             </h1>
         </div>
     )
