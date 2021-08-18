@@ -17,15 +17,15 @@ export default async () => {
 
   User.findOrCreate({
     where: {
-      userName: "user001",
-      email: "user001@yopmail.com"
+      userName: "Admin",
+      email: "admincrotones@yopmail.com"
     },
     defaults: {
       userType: "Admin",
-      userName: "user001",
-      email: "user001@yopmail.com",
-      firstName: "user001",
-      lastName: "user002",
+      userName: "Admin",
+      email: "admincrotones@yopmail.com",
+      firstName: "Admin",
+      lastName: "Admin",
       hashPasword: "gTw34wNs64ndr75rXr56uVz"
     }
   })
