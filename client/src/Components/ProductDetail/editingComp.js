@@ -26,33 +26,6 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
     });
   };
 
-/*   const handlePhotos = (e) => { setInput({
-    ...input, 
-    photos:input.photos.concat(e.target.value) } )
-  }; */
-
-/*   const handleChange = (e) => {
-      setInput({
-        ...input,
-        [e.target.name]:e.target.value
-      })  
-  };
-
-  const handleCategories=(e)=>{
-    console.log(e)
-    setInput({
-      ...input,
-      categories:[...input.categories, e.target.value],
-    })
-  }; */
-
-/*   const removeCategory= e => {
-    setInput({
-      ...input,
-      categories:input.categories.filter( c => c !== e.target.id ),
-    })
-  }; */
-
   const product = {
     "product": {
       "id": id,
@@ -62,23 +35,13 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
       "description": input.description,
       "brand": input.brand
     }
-  }
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
     dispatch(editProducts(product.product))
     notify()
     window.location.reload();
-    console.log('aca',product)
-    /* setInput({
-      name:'',
-      photos: [],
-      description:'',
-      price: 0,
-      stock: 0,
-      brand:'',
-      categories: [],
-    }) */
   };
 
   return (
@@ -94,16 +57,6 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
           defaultValue={name}
           onChange={handleInput}/> 
         </div>
-{/*         <div>
-          <label for="photos">Photos:</label>
-          <input
-          type="text"
-          name="photos"
-          placeholder="Enter url photos here"
-          required="required"
-          defaultValue={description}
-          onChange={handlePhotos}/> 
-        </div> */}
         <div>
           <label for="descriptions">Description:</label>
           <input

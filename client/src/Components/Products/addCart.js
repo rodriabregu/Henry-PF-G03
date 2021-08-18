@@ -1,8 +1,8 @@
 import { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
-import toast, { Toaster } from 'react-hot-toast';
 import { addActionCart } from '../../Redux/Actions/Products/addingCart'
+import toast, { Toaster } from 'react-hot-toast';
 import '../ProductDetail/productDetail.css';
 
 const AddCart = ({id, name, photo, stock, price, brand, description, categories}) => {
@@ -47,14 +47,13 @@ const AddCart = ({id, name, photo, stock, price, brand, description, categories}
 
     const handleChange = (e) => {
         setValue({value: parseInt(e.target.value)});
-    }
+    };
 
     const notify = () => toast.success('Successfully review created!');
 
     const handleSubmit = () => {
-        /* window.location.reload(); */
         notify()
-    }
+    };
 
     return (
         <div className='add-cart'>

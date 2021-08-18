@@ -8,8 +8,8 @@ import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetai
 import EditingProduct from './editingComp';
 import AddCart from '../Products/addCart';
 import toast, { Toaster } from 'react-hot-toast';
-import './productDetail.css';
 import config from '../../../src/config';
+import './productDetail.css';
 
 const colors = {
     orange: "#FFBA5A",

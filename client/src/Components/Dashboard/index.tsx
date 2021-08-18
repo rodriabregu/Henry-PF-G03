@@ -1,6 +1,6 @@
-import React from 'react';
 import { NavLink as Link } from 'react-router-dom';
 import './dashboard.css'
+
 const AdminDash = () => {
     return (
         <div className='sheet'>
@@ -24,6 +24,6 @@ const AdminDash = () => {
             </Link>
         </div>
     )
-}
+};
 
 export default AdminDash;

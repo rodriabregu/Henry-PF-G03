@@ -4,9 +4,9 @@ import { VscError} from 'react-icons/vsc';
 import toast, { Toaster } from 'react-hot-toast';
 import postProducts from "../../Redux/Actions/Products/postProducts";
 import SelectCategory from "./SelectCategory";
-import './CreateProducts.css';
 import axios from 'axios'
 import config from '../../config'
+import './CreateProducts.css';
 
 const notify = () => toast.success('Successfully product created!');
 
@@ -90,11 +90,6 @@ const CreateProducts = () => {
     );
   };
 
-/*   const handlePhotos = e => { setInput({
-    ...input, 
-    photos:input.photos.concat(e.target.value) } )
-  }; */
-
   const handleChange = e => {
     if(e.target.name==='files'){
       console.log(e)
@@ -110,8 +105,7 @@ const CreateProducts = () => {
     }       
   };
 
-  const handleCategories=(e)=>{
-
+  const handleCategories = (e) => {
     let opciones = document.querySelectorAll('.cboCategory option');
     let id;
     opciones.forEach(o=>{
@@ -123,7 +117,6 @@ const CreateProducts = () => {
       name:e.target.value,
       id
     }
-
     setInput({
       ...input,
       categories:[...input.categories,cat],
@@ -147,18 +140,16 @@ const CreateProducts = () => {
   "photos": input.photos,
   "categories": input.categories.map(c=>c.id),
   "brand": input.brand,
-  //"files":input.files
  };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    
+
     const f=new FormData();
 
     f.append('files',input.files[0]);
     axios({
       method: "post",
-      //url: "http://localhost:3001/api/photos",
       url: `http://${config.REACT_APP_API_URL}:${config.port}/api/photos`,
       data: f,
       headers: { "Content-Type": "multipart/form-data" },
@@ -168,13 +159,10 @@ const CreateProducts = () => {
         const foto=`${response.data}`
         product.photos=[foto];
         dispatch(postProducts(product))
-
       })
       .catch(function (response) {
         console.log(response);
       });
-  
-    
     notify()
     setInput({
       name:'',
@@ -184,7 +172,6 @@ const CreateProducts = () => {
       stock: 0,
       brand:'',
       categories: [],
-      //files:null
     })
   };
 

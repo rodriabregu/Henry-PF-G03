@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink as Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line } from 'react-icons/ri';
+import { FaBars } from 'react-icons/fa';
 import './NavBar.css';
-import { getAllByPlaceholderText } from '@testing-library/react';
 
 export interface Ee {
   "name": "<anystring>",
@@ -18,7 +17,6 @@ export interface Ee {
   "productId": "<anystring>",
   "units": "<anystring>",
 }
-
 
 export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
@@ -39,18 +37,15 @@ export const NavBar = () => {
     });
   });
 
-
   return (
     <header>
       <nav>
         <div className='nav-container'>
           <div className='link-home'>
-            <Link to='/home'> <button className='button-home' /* style={{textDecoration: 'none'}} */ > HOME <RiHome2Line /> </button></Link>
+            <Link to='/home'> <button className='button-home'> HOME <RiHome2Line /> </button></Link>
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            {/* <Link style={{ textDecoration: 'none' }} to='/create'>CREATE PRODUCT</Link> */}
-            {/* <Link style={{ textDecoration: 'none' }} to='/createCategory'>CREATE CATEGORY</Link> */}
             <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
             <Link style={{ textDecoration: 'none' }} to='/cart'> CART {renderCart} <RiShoppingCartLine /></Link>
             <Link style={{ textDecoration: 'none' }} to='/register'> REGISTER </Link>

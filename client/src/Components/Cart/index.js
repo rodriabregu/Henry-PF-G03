@@ -50,11 +50,10 @@ const Cart = () => {
         if(items.length <= 0) return notify();
         dispatch(PostSale(dispatchSale))
         setSalePurchaseId(dispatchSale)
-        const match = allSales?.map(s => s?.data?.data)
-        const matchFilter = match?.filter(m => m?.sale?.purchaseId === salePurchaseId?.purchaseId)
-        const matchUrl = matchFilter[0]?.response?.body?.init_point;
-        console.log('matchUrl',allSales)
-        /* history.push(matchUrl); */ 
+        /* const match = allSales?.map(s => s?.data?.data) */
+        /* const matchFilter = match?.filter(m => m?.sale?.purchaseId === salePurchaseId?.purchaseId) */
+        /* const matchUrl = matchFilter[0]?.response?.body?.init_point;
+        console.log('matchUrl',allSales) */
     }
 
     useEffect(() => {
@@ -75,9 +74,9 @@ const Cart = () => {
         });
         setItems(cartItems)
         getSales()
-    }, [])
+    }, []);
     
-    console.log('url_pago r: ',url_pago)
+    /* console.log('url_pago r: ',url_pago) */
 
     return (
         <div className='cart'>
@@ -120,8 +119,8 @@ const Cart = () => {
                     {url_pago && <a href={url_pago}><button className='btn-confirm'>Confirm purchase</button></a>}
                 </div>
             </div>
-
         </div>
     )
 };
+
 export default Cart;
