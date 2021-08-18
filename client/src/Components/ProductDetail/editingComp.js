@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import SelectCategory from "../Products/SelectCategory";
 import toast, { Toaster } from 'react-hot-toast';
 import editProducts from "../../Redux/Actions/Products/editProducts";
 import './editComp.css';
@@ -16,7 +17,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
     price: price,
     stock: stock,
     brand: brand.name,
-    categories: []
+    categories: categories
   });
 
   function handleInput(e) {
@@ -33,15 +34,44 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
       "price": parseInt(input.price),
       "stock": parseInt(input.stock),
       "description": input.description,
-      "brand": input.brand
+      "brand": input.brand,
+      "categories": input.categories,
     }
   };
+
+  console.log('product',product)
+
+  const handleCategories = (e) => {
+    let opciones = document.querySelectorAll('.cboCategory option');
+    let id;
+    opciones.forEach(o=>{
+      if ( o.innerText === e.target.value ){
+        id = parseInt(o.id);
+      }
+    })
+    let cat = {
+      name: e.target.value,
+      id
+    }
+    setInput({
+      ...input,
+      categories:[...input.categories, cat],
+    })
+  };
+
+  const removeCategory= e => {
+    setInput({
+      ...input,
+      categories: input.categories.filter( c => c.id !== e.target.id ),
+    })
+  };
+
 
   const handleSubmit = async e => {
     e.preventDefault();
     dispatch(editProducts(product.product))
     notify()
-    window.location.reload();
+    /* window.location.reload(); */
   };
 
   return (
@@ -97,11 +127,26 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
             defaultValue={brand.name}
             onChange={handleInput}/>
         </div>
+        <div>
+        <div className='categ-s'>
+          <label for="categories">Category: </label>
+          <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
+        </div>
+        </div>
           <Toaster/>
         <div>
           <button className='btnEdit'>Submit</button>
         </div>
       </form>
+            {
+              input.categories.map(c => {
+                return ( 
+                  <>
+                  <button id={c.id} onClick={removeCategory}>{c.name} X</button>
+                  </>
+                )
+              })
+            }
     </div>
   )
 };
