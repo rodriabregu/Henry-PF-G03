@@ -39,7 +39,7 @@ const SalesList = () => {
                     <option value='Cancelled'> Cancelled </option>
                 </select>
             </div>
-                { filter &&
+                { filter.length >= 1 ?
                     filter?.map( e => {
                     return  (
                     <>
@@ -57,25 +57,24 @@ const SalesList = () => {
                     </>
                     )
                     })
-                }
-                {
-                allSales?.map( e => {
-                    return (
-                    <>
-                    <div className='allSheet'>
-                        <CardSale
-                        key={e.id}
-                        id={e.id}
-                        purchaseId={e.purchaseId}
-                        userId={e.userId}
-                        state={e.state}
-                        date={e.date}
-                        items={e.items}
-                        />
-                    </div>
-                    </>
-                    )
-                })
+                    : 
+                    allSales?.map( e => {
+                        return (
+                        <>
+                        <div className='allSheet'>
+                            <CardSale
+                            key={e.id}
+                            id={e.id}
+                            purchaseId={e.purchaseId}
+                            userId={e.userId}
+                            state={e.state}
+                            date={e.date}
+                            items={e.items}
+                            />
+                        </div>
+                        </>
+                        )
+                    })
                 }
             </h1>
         </div>
