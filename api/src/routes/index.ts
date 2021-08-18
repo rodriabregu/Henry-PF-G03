@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 const router = Router();
 
+import getCart from '../controllers/getCart'
 import getProducts from '../controllers/getProducts'
 import getSales from '../controllers/getSales'
 import getSalesUser from '../controllers/getSalesUser'
@@ -25,6 +26,7 @@ import reviews from './reviews'
 import photos from './photo'
 import favs from './favourites'
 
+router.get('/cart/:userId',getCart)
 router.get('/products', getProducts)
 router.get('/sales', getSales)
 router.get('/sales/user/:userId', getSalesUser)
