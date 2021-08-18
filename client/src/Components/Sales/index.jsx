@@ -6,25 +6,22 @@ import './allSales.css';
 
 const SalesList = () => {
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState([]);
     const allSales = useSelector(s => s.sales);
+    const [filter, setFilter] = useState(allSales);
 
     const handleChange = e => {
         let filterState = []
         if (e.target.value === '---') return setFilter(allSales)
-        if (e.target.value === 'Pending' ||
-            e.target.value === 'Created' ||
-            e.target.value === 'Processing' ||
-            e.target.value === 'Complete' ||
-            e.target.value === 'Cancelled') {
+        if (['Pending', 'Created', 'Processing', 'Complete', 'Cancelled'].indexOf(e.target.value) !== -1) {
         filterState = allSales.filter( c => c.state === e.target.value)
             return setFilter(filterState)
         }
     };
 
     useEffect(() => {
-        dispatch(getSales())
-    }, [dispatch]);
+        dispatch(getSales());
+        setFilter(allSales);
+    }, [allSales.length]);
 
     return (
         <div>
@@ -39,30 +36,21 @@ const SalesList = () => {
                     <option value='Cancelled'> Cancelled </option>
                 </select>
             </div>
-                { filter &&
-                    filter?.map( e => {
-                    return  (
-                    <>
-                    <div className='allSheet'>
-                        <CardSale
-                        key={e.id}
-                        id={e.id}
-                        purchaseId={e.purchaseId}
-                        userId={e.userId}
-                        state={e.state}
-                        date={e.date}
-                        items={e.items}
-                        />
-                    </div>
-                    </>
-                    )
-                    })
-                }
+                <div className='cardSale'>
+                <table>
+                    <tr>
+                        {/* <th>Sell ID</th>
+                        <th>User ID</th> */}
+                        <th>State</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Detalles</th>
+                    </tr>
                 {
-                allSales?.map( e => {
+                filter?.map( e => {
                     return (
                     <>
-                    <div className='allSheet'>
                         <CardSale
                         key={e.id}
                         id={e.id}
@@ -72,11 +60,12 @@ const SalesList = () => {
                         date={e.date}
                         items={e.items}
                         />
-                    </div>
                     </>
                     )
                 })
                 }
+                </table>
+                </div>
             </h1>
         </div>
     )
