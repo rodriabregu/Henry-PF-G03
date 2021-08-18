@@ -1,5 +1,6 @@
 import { NavLink as Link } from 'react-router-dom';
 import './CardSale.css';
+import moment from 'moment';
 
 interface IsaleDetail {
     id: number,
@@ -11,16 +12,27 @@ interface IsaleDetail {
 }
 
 const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => {
+    let itemCount = 0;
+    let total = 0;
+    items.forEach((item:any) => {
+        itemCount += item.units;
+        total += item.units * item.salePrice;
+    })
+
     return (
-    <Link style={{ textDecoration: 'none', color: 'white' }} to={`/sales/${id}`}>
-        <div className='cardSale'>
-            <span>Sell id: {id}{<br/>}</span>
-            <span>User id: {userId}{<br/>}</span>
-            <span>State: {state}{<br/>}</span>
-            <span>Date: {date}{<br/>}</span>
-            {/* <span>Items: {items.map((i:any) => <span>{...i}</span>)}</span> */}
-        </div>
-    </Link>
+
+                
+        <tr>
+                {/* <td>{id}</td>
+                <td>{userId}</td> */}
+                <td>{state}</td>
+                <td>{moment(date).format("DD-MM-YYYY HH:mm")}</td>
+                <td>{itemCount}</td>
+                <td>${total}</td>
+                <td><Link to={`/sales/${id}`}>Ver más</Link></td>
+    </tr>
+
+
     )
 };
 

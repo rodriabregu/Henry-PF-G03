@@ -6,26 +6,22 @@ import './allSales.css';
 
 const SalesList = () => {
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState([]);
     const allSales = useSelector(s => s.sales);
+    const [filter, setFilter] = useState(allSales);
 
     const handleChange = e => {
         let filterState = []
-        if (e.target.value === '---') return setFilter([])
-        if (e.target.value === 'All') return setFilter(allSales)
-        if (e.target.value === 'Pending' ||
-            e.target.value === 'Created' ||
-            e.target.value === 'Processing' ||
-            e.target.value === 'Complete' ||
-            e.target.value === 'Cancelled') {
+        if (e.target.value === '---') return setFilter(allSales)
+        if (['Pending', 'Created', 'Processing', 'Complete', 'Cancelled'].indexOf(e.target.value) !== -1) {
         filterState = allSales.filter( c => c.state === e.target.value)
             return setFilter(filterState)
         }
     };
 
     useEffect(() => {
-        dispatch(getSales())
-    }, [dispatch]);
+        dispatch(getSales());
+        setFilter(allSales);
+    }, [allSales.length]);
 
     return (
         <div>
@@ -41,12 +37,21 @@ const SalesList = () => {
                     <option value='Cancelled'> Cancelled </option>
                 </select>
             </div>
-            <div>
-            { filter.length >= 1 ?
-                    filter?.map( e => {
-                    return  (
+                <div className='cardSale'>
+                <table>
+                    <tr>
+                        {/* <th>Sell ID</th>
+                        <th>User ID</th> */}
+                        <th>State</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Detalles</th>
+                    </tr>
+                { filter.length >= 1 ?
+                filter?.map( e => {
+                    return (
                     <>
-                    <div className='allSheet'>
                         <CardSale
                         key={e.id}
                         id={e.id}
@@ -55,14 +60,14 @@ const SalesList = () => {
                         state={e.state}
                         date={e.date}
                         items={e.items}
-                        />
-                    </div>
-                    </>
+                    /></>
                     )
-                    })
+                })
                     : <h2>No sales 😥</h2>
-            }
-            </div>
+                }
+                </table>
+                </div>
+
             </h1>
         </div>
     )
