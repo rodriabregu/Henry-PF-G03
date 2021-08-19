@@ -54,15 +54,19 @@ export const NavBar = () => {
             <RiShoppingCartLine />
             </Link>
             { isAuthenticated ? 
-              (<div>
-                <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
-                <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-                <Link style={{ textDecoration: 'none' }} to='/favs'>FAVORITES</Link>
-                <div className='boxUser'><img src={user?.picture} className='navimg' />  {user?.name}</div> 
-              </div>) 
-              : (<div>
-                    <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
-                  </div>
+              (
+                <div>
+                  <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
+                  <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+                  <Link style={{ textDecoration: 'none' }} to='/favs'>FAVORITES</Link>
+                  <div className='boxUser'><img src={user?.picture} className='navimg' />  {user?.name}</div> 
+                </div>
+              ) 
+              : 
+              (
+                <div>
+                  <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
+                </div>
               )
             }
           </div>
