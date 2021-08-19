@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { Product, Sale, Purchase } from '../db';
+import { Product, Sale, Purchase, Item } from '../db';
 import { sendEmail } from '../providers'
 /* 
  * Route : PUT "api/sale/"
@@ -30,7 +30,7 @@ export default async (req: Request, res: Response) => {
     if (!(typeof saleId === "number" && states.includes(newState)))
       throw { status: 404, message: "data is not validate" }
 
-    const sale = await Sale.findByPk(saleId, { include: "items" })
+    const sale = await Sale.findByPk(saleId, { include: { model: Item } })
     if (!sale) throw { status: 404, message: "sale is not" }
 
     const { state, items, userId, id } = sale.get()
@@ -39,11 +39,13 @@ export default async (req: Request, res: Response) => {
     }
     if (state === "Pending" && newState === "Created") {
 
+      await sale.update({ state: "Created" })
       const { items, userId } = await sale.get()
-
+      
       await Promise.all(items.map(async (item: item) => {
 
-        const { productId, units } = item.get()
+        const { productId, units } = item.get()        
+console.log("put ", " units: ", units)
         const product = await Product.findByPk(productId)
         if (!product) throw Error("product not found")
         const { stock } = product.get()
@@ -53,7 +55,6 @@ export default async (req: Request, res: Response) => {
 
       }))
 
-      await sale.update({ state: "Created" })
       sendEmail(userId, "Created", id)
 
     } else if (state === "Created" && newState === "Processing") {
@@ -87,7 +88,7 @@ export default async (req: Request, res: Response) => {
     })
 
   } catch (error) {
-    console.error(error)
+    console.error(error.message || error)
     return res.status(error.status || 500).json({
       message: error.message || "uuups¡¡",
       data: {}

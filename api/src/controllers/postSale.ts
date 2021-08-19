@@ -83,6 +83,7 @@ const checkStok = async (item: appItem) => {
   const product = await Product.findByPk(productId)
   if (!product) throw Error("product not found")
   const { stock } = product.get()
+console.log("check post ", " units: ", units)
 
   if (stock - units < 0) throw Error("no stock")
   return stock;
@@ -92,7 +93,8 @@ const addItem = async (item: appItem, saleId: number): Promise<any> => {
   const { productId, units } = item
   const product = await Product.findByPk(productId)
   if (!product) throw Error("product not found")
-  const { stock, price, name } = product.get()
+  const { price, name } = product.get()
+console.log("add post ", " units: ", units)
 
   return await Item.create({
     saleId,
