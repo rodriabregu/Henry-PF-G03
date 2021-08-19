@@ -2,17 +2,27 @@ import './login.css';
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Login = () => {
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { loginWithRedirect} = useAuth0();
+
+    const { user } = useAuth0<{ name: string }>();
+
+/*    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const notify = () => toast.success('Successfully log in!');
 
     const onSubmit = (data: any) => (console.log(data), notify(), reset())
+*/
+
+    loginWithRedirect()
 
     return (
         <div className='form-register'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+            <div><h1>Login in process...</h1></div>
+        {/* <form onSubmit={handleSubmit(onSubmit)}>
         <div><h1>Login an account</h1></div>
             <div>
             <label htmlFor="username">Username</label>
@@ -52,7 +62,7 @@ const Login = () => {
             </div>
             <input className='button-r' type="submit" />
             <Toaster />
-        </form>
+        </form> */}
         </div>
     );
 };
