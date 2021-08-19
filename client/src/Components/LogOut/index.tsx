@@ -7,13 +7,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Logout = () => {
 
 const { logout } = useAuth0();
-const { user } = useAuth0<{ name: string }>();  
+
+const { user } = useAuth0();
+
+//const { user } = useAuth0<{ name: string }>();
+
+console.log(user);
+
 logout();
 
-    return (
-        <div className='form-register'>
-            <div><h1>Come back soon {user?.name}!!!</h1></div>
-        </div> );
+return (
+    <div className='form-register'>
+        <div><h2>Come back soon {user?.name}!!!</h2></div>
+    </div> );
 };
 
 export default Logout;
