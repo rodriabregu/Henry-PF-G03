@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useLocation, useParams } from 'react-router'
 import './PostSale';
 import config from '../../config'
+import PaySuccessful from './PaySuccesful';
+import ErrorPay from './ErrorPay';
 
 export default function PostSale() {
     const { id, saleId, esta } = useParams<any>();
@@ -22,10 +24,17 @@ export default function PostSale() {
             })
 
     return (
-        <div className='sheet'>
-            <h1>saleId: {saleId}</h1>
-            <h1>saleState: {sales?sales:''}</h1>
-            <p>search: {search}</p>
-        </div>
+        <div>{
+            sales === "Created" ? 
+            <div>
+                {/* En caso de que el producto haya sido pagado satisfactoriamente */}
+                <PaySuccessful />
+            </div> : 
+            
+            <div>
+                {/* En caso de estar pendiente o cancelado */}
+                <ErrorPay />
+            </div>
+        }</div>
     )
 };

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSales } from '../../Redux/Actions/Sales/getSale';
 import { putSale } from '../../Redux/Actions/Sales/putSale';
+import './CardSale.css';
 
 const SaleDetail = () => {
     const [select, setSelect] = useState<any>([])
@@ -32,11 +33,16 @@ const SaleDetail = () => {
 
     return (
         <>
-        <div>
-            <span>{renderSale?.id}</span>
-            <span>{renderSale?.state}</span>
-            <span>{renderSale?.userId}</span>
-            <div>
+        <div className='sale-detail'>
+            
+            <div className='s-details'>
+                <span className='first-id'>Sale ID: {renderSale?.id}</span>
+                <span>State: {renderSale?.state}</span>
+                <span>User ID: {renderSale?.userId}</span>
+                <span>Items: {renderSale?.items.map((i:any) =>
+                <li>{i.productName}</li>)}</span>
+            </div>
+            <div className='change-state'>
             {
             renderSale?.state === 'Pending' ?
             <select onChange={e => handleChange(e)} name='select'>
@@ -64,7 +70,7 @@ const SaleDetail = () => {
             : ''
             }
             </div>
-            <button onClick={handleChange}>Change state</button>
+            <button className='btn-change' onClick={handleChange}>Change state</button>
         </div>
         </>
     )

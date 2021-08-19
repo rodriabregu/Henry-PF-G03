@@ -1,0 +1,46 @@
+.errorpay, .pay{
+    display: flex;
+    justify-content: center;
+
+}
+
+.card-error, .card-s{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(206, 64, 64, 0.288);
+    width: 300px;
+    border-radius: 20px;
+    align-self: center;
+    font-weight: 600;
+}
+
+.card-s{
+    background-color: rgba(64, 206, 123, 0.288);
+}
+
+.text-error1, .text-error2{
+    color: rgb(197, 31, 31);
+}
+
+.text-s1, .text-s2{
+    color: rgb(49, 155, 93);
+}
+
+.text-error2, .text-s2 {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.icon-x, .icon-s{
+    font-size: 60px;
+    color: rgb(197, 31, 31);
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.icon-s{
+    color: rgb(39, 128, 76);
+}
