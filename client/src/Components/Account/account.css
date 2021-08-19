@@ -1,0 +1,14 @@
+.sheetGrid {
+    display: grid;
+    gap: 5rem 1rem;
+    grid-auto-flow: dense;
+    grid-template-rows: 18rem 18rem /* 18rem */;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 17rem));
+    justify-content: space-around;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(29, 41, 109);
+}
