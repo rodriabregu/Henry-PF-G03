@@ -8,7 +8,7 @@ const Login = () => {
 
     const { loginWithRedirect} = useAuth0();
 
-    const { user } = useAuth0<{ name: string }>();
+    /* const { user } = useAuth0<{ name: string }>(); */
 
 /*    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 

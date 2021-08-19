@@ -44,15 +44,15 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
   const handleCategories = (e) => {
     let opciones = document.querySelectorAll('.cboCategory option');
     let id;
-    opciones.forEach(o=>{
-      if ( o.innerText === e.target.value ){
-        id = parseInt(o.id);
+      opciones.forEach(o=>{
+        if ( o.innerText === e.target.value ){
+          id = parseInt(o.id);
+        }
+      })
+      let cat = {
+        name: e.target.value,
+        id
       }
-    })
-    let cat = {
-      name: e.target.value,
-      id
-    }
     setInput({
       ...input,
       categories:[...input.categories, cat],
@@ -62,7 +62,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
   const removeCategory= e => {
     setInput({
       ...input,
-      categories: input.categories.filter( c => c.id !== e.target.id ),
+      categories: input.categories.filter( c => c.id != e.target.id ),
     })
   };
 
@@ -142,7 +142,7 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
               input.categories.map(c => {
                 return ( 
                   <>
-                  <button id={c.id} onClick={removeCategory}>{c.name} X</button>
+                    <button id={c.id} onClick={removeCategory}>{c.name} X</button>
                   </>
                 )
               })

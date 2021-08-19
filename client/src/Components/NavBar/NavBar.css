@@ -40,6 +40,20 @@
     display: none;
 }
 
+.navimg {
+    height:1.3em;
+}
+
+.backg-cart {
+    background-color: rgb(143, 27, 27);
+    padding: 3px 16px 3px 0;
+    border-radius: 10px 10px 10px 0;
+    margin: 3px;
+    color: white;
+    /* display: flex;
+    align-items: center; */
+}
+
 @media screen and (max-width: 768px){
     .nav-container{
         flex-direction: column;
@@ -56,7 +70,7 @@
         display: flex;
         flex-direction: column-reverse;
         overflow: hidden;
-        height: 150px;
+        height: 100px;
         transition: height .3s ease-out;
     }
 
@@ -72,16 +86,9 @@
         display: inherit;
     }
 
-    .boxUser {
-        display: flex;
-        overflow: hidden;
-        width: 15px;
-        height: auto;
-
-    }
     .boxUser img {
-        width: 5px;
-        height: auto;
+        width: 1.2rem;
+        height: 1.2rem;
     }
 }
 
@@ -91,7 +98,6 @@
 .searchbar {
     padding-right: 15px;
 }
-
 
 
 .links-login.show{
@@ -120,6 +126,5 @@
         background: blue;
         top:-100vh;
         text-align: center;
-      
     }
 }*/
