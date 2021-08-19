@@ -3,7 +3,9 @@ import './logout.css';
 
 const Logout = () => {
 const { logout } = useAuth0();
-const { user } = useAuth0<{ name: string }>();  
+const { user } = useAuth0();
+console.log(user);
+//const { user } = useAuth0<{ name: string }>();  
     logout();
 
     return (
