@@ -6,6 +6,8 @@ import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredPro
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import toast, { Toaster } from 'react-hot-toast';
 /* import AddCart from '../Cart'; */
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
@@ -27,6 +29,7 @@ interface ProductsCart {
 
 const Pagination = () => {
     const dispatch = useDispatch();
+    const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>(); 
 
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
@@ -149,7 +152,16 @@ const Pagination = () => {
                                         <div>${e.price}.00</div>
                                         <img src={e.photos?e.photos[0].url:''} alt={e.name} />                                        
                                     </Link>
-                                    <button id={`${e.id}`} onClick={(e:any)=>addFav(e.target.id)}>Add to favs</button>
+                                    <div> 
+                                    {
+                                        isAuthenticated ? 
+                                        <button id={`${e.id}`} onClick={(e:any )=> addFav(e.target.id)}>Add to favs</button>
+                                        :
+                                        <Link to='/login'>
+                                            <button id={`${e.id}`} onClick={(e:any) => addFav(e.target.id)}>Add to favs</button>
+                                        </Link>
+                                    }
+                                    </div>
                                     {/*  <AddCart 
                                     id={e.id}
                                     name={e.name}
