@@ -23,7 +23,7 @@ const Cart = () => {
     const removeCart = cartId => {
         const newAllCart = items.filter(e => e.id !== cartId);
         saveToLocalStorage(newAllCart);
-        window.location.reload();
+        //window.location.reload();
     };
 
     const sumAll = items?.map(item => item.price * item.value.value).reduce((prev, curr) => prev + curr, 0);

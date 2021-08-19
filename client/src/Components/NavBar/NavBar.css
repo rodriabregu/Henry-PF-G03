@@ -72,6 +72,18 @@
         margin-right: 20px;
         display: inherit;
     }
+
+    .boxUser {
+        display: flex;
+        overflow: hidden;
+        width: 15px;
+        height: auto;
+
+    }
+    .boxUser img {
+        width: 5px;
+        height: auto;
+    }
 }
 
 

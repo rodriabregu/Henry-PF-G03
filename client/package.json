@@ -5,6 +5,7 @@
   "author": "FT-14a Grupo 03",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^1.6.0",
     "@hookform/error-message": "^2.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
