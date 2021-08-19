@@ -151,7 +151,7 @@ const Pagination = () => {
                                         <div>${e.price}.00</div>
                                         <img src={e.photos?e.photos[0].url:''} alt={e.name} />                                        
                                     </Link>
-                                    <button id={`${e.id}`} onClick={(e:any)=>addFav(e.target.id)}>Add to favs {e.id}</button>
+                                    <button id={`${e.id}`} onClick={(e:any)=>addFav(e.target.id)}>Add to favs</button>
                                     {/*  <AddCart 
                                     id={e.id}
                                     name={e.name}
