@@ -1,10 +1,57 @@
-/* .cardSale {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+.cardSale {
+    display: flex;
+    justify-content: center;
+}
+ 
+.sale-detail{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: system-ui;
+}
+
+.s-details{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    color: white;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);;
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
-    border-radius: 6px;
-    box-sizing: content-box;
-    padding: 30px;
-    color: white;
+    width: 300px;
+    font-weight: 600;
 }
- */
+
+.sale-detail span{
+    margin-bottom: 20px;
+    margin-left: 5px;
+  }
+
+.first-id{
+    margin-top: 20px;
+}
+
+.change-state select{
+    border-radius: 8px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.btn-change{
+    border-radius: 15px;
+    background-color:  #bcbdf1;
+    color:  #3c3c5e;
+    padding: 5px 10px 5px 10px;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn-change:hover{
+    background-color:  #3c3c5e;
+    color:  #bcbdf1;
+    
+}

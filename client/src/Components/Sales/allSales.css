@@ -35,3 +35,15 @@ td{
     width: 600px;
     border-collapse: collapse;   
     }
+
+  .filtro-sales {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+      margin-top: -90px;
+  }
+
+  .filtro-sales select{
+    border-radius: 8px;
+  }
+   

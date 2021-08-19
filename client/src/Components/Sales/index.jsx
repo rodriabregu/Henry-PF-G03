@@ -26,7 +26,7 @@ const SalesList = () => {
     return (
         <div>
             <h1>
-            <div>
+            <div className='filtro-sales'>
                 <select onChange={handleChange}>
                     <option value='---'>Filter state by:</option>
                     <option value='Pending'> Pending </option>
@@ -45,7 +45,7 @@ const SalesList = () => {
                         <th>Date</th>
                         <th>Items</th>
                         <th>Total</th>
-                        <th>Detalles</th>
+                        <th>Details</th>
                     </tr>
                 { filter.length >= 1 ?
                 filter?.map( e => {

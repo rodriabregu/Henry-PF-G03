@@ -27,7 +27,7 @@ const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => 
                 <td>{moment(date).format("DD-MM-YYYY HH:mm")}</td>
                 <td>{itemCount}</td>
                 <td>${total}</td>
-                <td><Link to={`/sales/${id}`}>Ver más</Link></td>
+                <td><Link to={`/sales/${id}`}>More info</Link></td>
     </tr>
     )
 };
