@@ -1,11 +1,13 @@
 import {
-  Model, Column, Table, HasMany, DataType, BelongsToMany
+  Model, Column, Table, HasMany, BelongsTo,
+  DataType, BelongsToMany, ForeignKey
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
 import { Review } from './Review';
 import { Product } from './Product';
-import { Purchase } from './Purchase'
+import { Purchase } from './Purchase';
+import { CartItem } from './CartItem';
 
 import ProductUser from './ProductUser';
 
@@ -36,8 +38,11 @@ export class User extends Model {
   @Column
   lastName!: string;
 
+  @HasMany(() => CartItem)
+  cartItems!: CartItem[];
+
   @HasMany(() => Purchase)
-  bought!: Purchase[]; 
+  bought!: Purchase[];
 
   @HasMany(() => Sale)
   sales!: Sale[];

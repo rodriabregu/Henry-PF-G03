@@ -12,8 +12,4 @@ export default class ProductUser extends Model{
     @ForeignKey(()=>Product)
     productId!:number
 
-    @Column({defaultValue:true})
-    isActive!:boolean
-
-
 }

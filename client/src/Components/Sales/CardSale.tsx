@@ -9,19 +9,17 @@ interface IsaleDetail {
     state: string,
     date: string,
     items: any 
-}
+};
 
 const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => {
     let itemCount = 0;
     let total = 0;
-    items.forEach((item:any) => {
+    items?.forEach((item:any) => {
         itemCount += item.units;
         total += item.units * item.salePrice;
     })
 
     return (
-
-                
         <tr>
                 {/* <td>{id}</td>
                 <td>{userId}</td> */}
@@ -31,8 +29,6 @@ const CardSale = ({ id, purchaseId, userId, state, date, items}:IsaleDetail) => 
                 <td>${total}</td>
                 <td><Link to={`/sales/${id}`}>More info</Link></td>
     </tr>
-
-
     )
 };
 

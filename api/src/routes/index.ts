@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 const router = Router();
 
+import getCart from '../controllers/getCart'
 import getProducts from '../controllers/getProducts'
 import getSales from '../controllers/getSales'
 import getSalesUser from '../controllers/getSalesUser'
@@ -9,6 +10,7 @@ import getUsers from '../controllers/getUsers'
 import postProduct from '../controllers/postProduct'
 import postSale from '../controllers/postSale'
 import postUser from '../controllers/postUser'
+import putCart from '../controllers/putCart'
 import putProduct from '../controllers/putProduct'
 import putSale from '../controllers/putSale'
 
@@ -25,6 +27,7 @@ import reviews from './reviews'
 import photos from './photo'
 import favs from './favourites'
 
+router.get('/cart/:userId', getCart)
 router.get('/products', getProducts)
 router.get('/sales', getSales)
 router.get('/sales/user/:userId', getSalesUser)
@@ -32,6 +35,7 @@ router.get('/users', getUsers)
 router.post('/product', postProduct)
 router.post('/sale', postSale)
 router.post('/user', postUser)
+router.put('/cart/:userId', putCart)
 router.put('/product', putProduct)
 router.put('/sale', putSale)
 

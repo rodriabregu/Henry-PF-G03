@@ -46,18 +46,19 @@ const SaleDetail = () => {
             {
             renderSale?.state === 'Pending' ?
             <select onChange={e => handleChange(e)} name='select'>
+                <option value='---'>State...</option>
                 <option value='Created'>Created</option>
                 <option value='Cancelled'>Cancelled</option>
             </select>
             : renderSale?.state === 'Created' ?
             <select onChange={e => handleChange(e)} name='select'>
-                <option value='---'>State:</option>
+                <option value='---'>State...</option>
                 <option value='Processing'>Processing</option>
                 <option value='Cancelled'>Cancelled</option>
             </select>
             : renderSale?.state === 'Processing' ?
             <select onChange={e => handleChange(e)} name='select'>
-                <option value='---'>State:</option>
+                <option value='---'>State...</option>
                 <option value='Complete'>Complete</option>
                 <option value='Cancelled'>Cancelled</option>
             </select>
@@ -70,7 +71,12 @@ const SaleDetail = () => {
             : ''
             }
             </div>
-            <button className='btn-change' onClick={handleChange}>Change state</button>
+
+            <div>
+            {   renderSale?.state === 'Cancelled' ?
+                <h4>You cannot modify the canceled status.</h4> : <button className='btn-change' onClick={handleChange}>Change state</button>
+            }
+            </div>
         </div>
         </>
     )
