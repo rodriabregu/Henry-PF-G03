@@ -38,7 +38,7 @@ router.get('/:id', async (req: Request, res: Response) => {
                     model:User,
                     attributes:['userName','email','firstName','lastName'],
                     where:{id:id},
-                    through:{attributes:[],where:{isActive:true}}
+                    through:{attributes:[]}
                 },
                 {
                     model:Photo,
@@ -56,13 +56,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 })
 
 
-router.put('/',async(req:Request,res:Response)=>{
+router.delete('/',async(req:Request,res:Response)=>{
     const {userId,productId}=req.body; 
     try{
-        await ProductUser.update({isActive:false},{where:{
-            userId,
-            productId
-        }})
+        await ProductUser.destroy({where:{userId,productId}})
     }catch(e){
         return res.status(400);
     }

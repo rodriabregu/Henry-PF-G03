@@ -14,18 +14,30 @@ const Favs=()=>{
                 setFavs(resp.data);
             })
 
-    },[favs])
+    },[])
 
-    const removeFav=async(productId)=>{
-        await axios.put(`http://localhost:3001/api/favs`,{productId,userId:1})
+    const removeFav=async(productId)=>{        
+
+        await axios(`http://localhost:3001/api/favs`,{
+            method:'delete',
+            data:{
+                userId:1,
+                productId
+            }
+        }).then(()=>{
+            setFavs(favs.filter(f=>f.id!=productId))
+        })
+
+
+          
     }
 
     return(        
             favs?(
-                favs.map(p=>
+                favs?.map(p=>
                     <div>
                         <h4>{p.name}</h4>
-                        <img src={p.photos[0].url}/>
+                        <img src={p.photos[0].url} alt={p.name}/>
                         <p>Price: {p.price}</p>
                         <button id={p.id} onClick={(e)=>removeFav(e.target.id)}>Quitar</button>                        
                     </div>
