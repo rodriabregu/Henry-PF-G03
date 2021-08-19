@@ -40,7 +40,7 @@ export const NavBar = () => {
       setRenderCart(countCart)
     });
   });
-
+  console.log('user',user)
   return (
     <header>
       <nav>
@@ -50,18 +50,20 @@ export const NavBar = () => {
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART {renderCart} <RiShoppingCartLine /></Link>
-            
+            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
+            <RiShoppingCartLine />
+            </Link>
             { isAuthenticated ? 
               (<div>
-              <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
-              <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-              <div className='boxUser'><img src={user?.picture} />  {user?.name}</div> 
+                <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
+                <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+                <div className='boxUser'><img src={user?.picture} className='navimg' />  {user?.name}</div> 
               </div>) 
-              : 
-              (<div><Link style={{ textDecoration: 'none' }} to='/register'> REGISTER </Link>  
-              <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN <RiAccountCircleLine /> </Link>
-              </div>)}
+              : (<div>
+                    <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
+                  </div>
+              )
+            }
           </div>
         </div>
       </nav>

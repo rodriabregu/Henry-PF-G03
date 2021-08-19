@@ -44,15 +44,15 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
   const handleCategories = (e) => {
     let opciones = document.querySelectorAll('.cboCategory option');
     let id;
-    opciones.forEach(o=>{
-      if ( o.innerText === e.target.value ){
-        id = parseInt(o.id);
+      opciones.forEach(o=>{
+        if ( o.innerText === e.target.value ){
+          id = parseInt(o.id);
+        }
+      })
+      let cat = {
+        name: e.target.value,
+        id
       }
-    })
-    let cat = {
-      name: e.target.value,
-      id
-    }
     setInput({
       ...input,
       categories:[...input.categories, cat],
