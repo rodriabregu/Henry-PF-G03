@@ -22,8 +22,8 @@ export const Footer = () => {
             </div>
         </div>
         </div>
-          <div className='copyrigth'>
-              © Copyrigth 2021 - Grupo 03/ FT 14a. For PG HenryLabs.
+          <div className='copyright'>
+              © Copyright 2021 - Grupo 03/ FT 14a. For PG HenryLabs.
           </div>
       </footer>
     </div>
