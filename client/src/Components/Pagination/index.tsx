@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
@@ -9,7 +10,6 @@ import { NavLink as Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
-import axios from 'axios'
 
 interface ProductsCart {
     name: any;
@@ -105,16 +105,14 @@ const Pagination = () => {
         }
     };
 
-    const addFav=async(productId:any)=>{
-        try{
-            let resp=await axios.post(`http://localhost:3001/api/favs`,{productId,userId:1})
+    const addFav = async (productId:any) => {
+        try {
+            let resp = await axios.post(`http://localhost:3001/api/favs`, {productId,userId:1})
             console.log(`agregando prod ${productId} - ${resp.data}`)
-        }catch(e){
+        } catch (e) {
             console.log(e.response)
         }
-        
-        
-    }
+    };
 
     let pageIncrementBtn = null;
     if (pages.length > maxPageNumberLimit) {
