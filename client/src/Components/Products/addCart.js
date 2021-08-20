@@ -80,6 +80,7 @@ const AddCart = ({ id, stock, price, name, photo, brand, description, categories
     dispatch(updateCart(newItems)); */
     let value = parseInt(event.target.value);
     if (value > stock) value = stock;
+    if (value <= 0) value = 1;
     current.units = value;
     const newItems = items.filter((item) => item.productId !== current.productId);
     newItems.push(current);

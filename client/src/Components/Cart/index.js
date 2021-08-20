@@ -66,6 +66,7 @@ const Cart = () => {
     const newItems = items.map((item) => {
       if (item.productId === id) {
         if (value > stock) value = stock;
+        if (value <= 0) value = 1;
         item.units = value;
       }
       return item;
