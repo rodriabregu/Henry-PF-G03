@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink as Link } from 'react-router-dom';
-import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line } from 'react-icons/ri';
+import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line, RiLogoutBoxRLine } from 'react-icons/ri';
 import { FaBars } from 'react-icons/fa';
 import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -49,28 +49,34 @@ export const NavBar = () => {
             <Link to='/home' style={{ textDecoration: 'none' }}> <button className='button-home'> HOME <RiHome2Line /> </button></Link>
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
+          { isAuthenticated ? (
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
             <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
               <RiShoppingCartLine />
             </Link>
-            { isAuthenticated ? 
-              (
-                <div>
-                  <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
+               
                   <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-                  <Link style={{ textDecoration: 'none' }} to='/favs'>FAVORITES</Link>
-                  <Link style={{ textDecoration: 'none' }} to='/account'>ACCOUNT <img src={user?.picture} className='navimg' />{user?.name}</Link>
+                  <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
+                  <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine/> </Link>
+                  <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' />{user?.name}</Link>
+                
                 </div>
               ) 
               : 
               (
-                <div>
+                <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
+            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
+              <RiShoppingCartLine />
+            </Link>
+                
+                
                   <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
+                
                 </div>
               )
             }
           </div>
-        </div>
+        
       </nav>
     </header>
   );

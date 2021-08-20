@@ -46,6 +46,7 @@
     border-radius: 3px;
 }
 
+
 .backg-cart {
     background-color: rgb(143, 27, 27);
     padding: 3px 3px 3px 0;
@@ -58,7 +59,7 @@
     
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 875px){
     .nav-container{
         flex-direction: column;
     }
@@ -74,7 +75,8 @@
         display: flex;
         flex-direction: column-reverse;
         overflow: hidden;
-        height: 120px;
+        height: 150px;
+        font-size: 14px;
         transition: height .3s ease-out;
     }
 

@@ -58,7 +58,7 @@
     color:  #2E2E48;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 875px){
  
     .form-register{
         width: 370px;

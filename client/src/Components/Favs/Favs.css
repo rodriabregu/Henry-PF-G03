@@ -88,7 +88,7 @@
     color: #5f161cfb;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 875px){
     .cards-container{
     grid-template-columns: repeat(auto-fill, minmax(18rem, 20rem));
 }

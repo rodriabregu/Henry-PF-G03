@@ -8,11 +8,16 @@ const Account = () => {
     return (
         <>
         {   isAuthenticated ?
-        <div className='sheetGridAccount'>
-            <span><img src={user?.picture} alt='image profile' /></span>
+        <div className='card-account'>
+            <h2>My Account</h2>
+            <div className='user-profile'>
+            <div><img src={user?.picture} alt='image profile' /></div>
+            <div className='user-data'>
             <span>Name: {user?.name}</span>
             <span>Email: {user?.email}</span>
             <span>Nickname: {user?.nickname}</span>
+            </div>
+            </div>
         </div>
         :
         <div>

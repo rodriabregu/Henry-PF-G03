@@ -33,7 +33,7 @@ const Favs=()=>{
 
     return(     
         <div className='wishlist' >   
-            <h1>My wishlist <AiFillStar/></h1>
+            <h1>My wishlist <AiFillStar/> My favs</h1>
             <div className='cards-container'>
                     
            { favs?(
