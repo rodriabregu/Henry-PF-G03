@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../Redux/Actions/Products/getProducts';
+//import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
@@ -170,11 +170,11 @@ const Pagination = () => {
       </div>
     )
   };
-
+/* 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-
+ */
   useEffect(() => {
     setFilterp(products);
   }, [products]);

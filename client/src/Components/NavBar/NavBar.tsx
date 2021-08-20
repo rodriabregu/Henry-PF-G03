@@ -7,6 +7,8 @@ import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { getCart } from '../../Redux/Actions/Cart/getCart'
 import { state } from '../../Redux/Reducers/Reducers'
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
+
 export interface Ee {
   "name": "<anystring>",
   "price": "<anystring>",
@@ -23,9 +25,10 @@ export interface Ee {
 
 export const NavBar = () => {
   const dispatch: Function = useDispatch()
-  const countItems = useSelector((state: state ) => state.cart.length)
+  const countCart = useSelector((state: state) => state.cart.length)
+  //const countProducts = useSelector((state: state) => state.AllProducts.length)
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
-  const [renderCart, setRenderCart] = useState<number>(0);
+  //const [renderCart, setRenderCart] = useState<number>(0);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string }>();  //const {user} = useAuth0()
 
@@ -36,9 +39,10 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
+    dispatch(getProducts());
     dispatch(getCart());
-    setRenderCart(countItems)
-  })
+  }, [dispatch]);
+
   /* 
     useEffect(() => {
       const allCartNoJson:any = localStorage.getItem('products-cart');
@@ -58,7 +62,7 @@ export const NavBar = () => {
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART {renderCart} <RiShoppingCartLine /></Link>
+            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <RiShoppingCartLine /> {countCart} </Link>
 
             {isAuthenticated ?
               (<div>
