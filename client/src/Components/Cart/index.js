@@ -203,7 +203,9 @@ const Cart = () => {
 
           {url_pago ? (
             <a href={url_pago}>
-              <button className='btn-confirm'>Confirm purchase</button>
+              <button onClick={() => dispatch(updateCart([]))} className='btn-confirm'>
+                Confirm purchase
+              </button>
             </a>
           ) : (
             items.length > 0 && (
@@ -213,7 +215,9 @@ const Cart = () => {
               </form>
             )
           )}
-          <Link to='/home'><button>Back</button></Link>
+          <Link to='/home'>
+            <button>Back</button>
+          </Link>
         </div>
       </div>
     </div>
