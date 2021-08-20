@@ -57,7 +57,8 @@ function App() {
           <Route exact path='/AboutUs' component={AboutUs}/>
           <Route exact path='/favs' component={Favs}/>
           <Route exact path='/account' component={Account}/>
-          <Route path="/checkout/:saleId/:esta" component={PostSale} />          
+          <Route path="/checkout/:saleId/:esta" component={PostSale} />
+          <Route path='/destiny/:id' component={Destiny}/>          
           <Route path="/" component={Footer} />
           
         </div>
@@ -86,8 +87,9 @@ function App() {
             <Route exact path='/ContactUs' component={ContactUs}/>
             <Route exact path='/AboutUs' component={AboutUs}/>
             <Route exact path='/account' component={Login}/>
+            <Route path='/destiny/:id' component={NoAuth}/>  
             <Route path="/checkout/:saleId/:esta" component={NoAuth} />
-            <Route path='/destiny' component={Destiny}/>
+
             <Route path="/" component={Footer} />
           </div>
         </Switch>
