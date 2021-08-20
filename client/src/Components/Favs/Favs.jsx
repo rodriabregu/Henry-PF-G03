@@ -2,7 +2,6 @@ import axios from 'axios'
 import { useEffect ,useState } from 'react';
 import { NavLink as Link } from 'react-router-dom';
 import {AiFillStar} from 'react-icons/ai'
-import { Link } from 'react-router-dom';
 import './Favs.css'
 
 const Favs=()=>{
