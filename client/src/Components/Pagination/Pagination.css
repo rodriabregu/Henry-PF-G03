@@ -120,6 +120,11 @@
   text-decoration: none;
 }
 
+.btn-fav:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
 .filters button:hover,
 .filters button.active {
     background-color:  #bcbdf1;

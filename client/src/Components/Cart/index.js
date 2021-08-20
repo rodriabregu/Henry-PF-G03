@@ -75,8 +75,7 @@ const Cart = () => {
         setItems(cartItems)
         getSales()
     }, []);
-    
-    /* console.log('url_pago r: ',url_pago) */
+
 
     return (
         <div className='cart'>
