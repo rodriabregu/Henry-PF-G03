@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { Product, CartItem } from '../db'
+import { CartItem } from '../db'
 
 /* 
  * Route : GET "/api/cart/:userId"
@@ -10,17 +10,11 @@ import { Product, CartItem } from '../db'
 export default async (req: Request, res: Response) => {
   try {
 
-    const userId: number = parseInt(req.params.userId)
+    const { userId } = req.params
 
     const items = await CartItem.findAll({
       where: { userId },
-      attributes: { exclude: ['updatedAt', 'createdAt'] },
-      include: [
-        {
-          model: Product,
-          attributes: { exclude: ['updatedAt', 'createdAt'] }
-        }
-      ]
+      attributes: { exclude: ['updatedAt', 'createdAt'] },      
     })
 
     return res.json({

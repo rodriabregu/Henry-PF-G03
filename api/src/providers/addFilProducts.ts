@@ -16,11 +16,9 @@ export default async () => {
   console.log("prooducts in fil: ", products.length);
 
   User.findOrCreate({
-    where: {
-      userName: "Admin",
-      email: "admincrotones@yopmail.com"
-    },
+    where: { id: "gitHub|23423kj34234k34k2" },
     defaults: {
+      id: "gitHub|23423kj34234k34k2",
       userType: "Admin",
       userName: "Admin",
       email: "admincrotones@yopmail.com",
