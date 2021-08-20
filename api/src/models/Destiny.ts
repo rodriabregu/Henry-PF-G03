@@ -9,12 +9,28 @@ import { User } from "./User"
 
 
 @Table
-export class Destiny extends Model<Destiny> {
+export class Destiny extends Model {
 
   @Column
-  name!: string;
+  localAddress!: string;
 
-  @Column(DataType.TEXT)
-  dato1!: string;
+  @Column
+  mapAddress!: string;
+
+  @Column
+  description!:string;
+
+  @Column
+  fullName!:string
+
+  @Column
+  dni!:string
+
+  @ForeignKey(()=>Sale)
+  @Column
+  saleId!:number
+
+  @BelongsTo(()=>Sale)
+  sale!:Sale
 
 }

@@ -1,5 +1,5 @@
 import {
-  Model, Column, Table, DataType, HasMany, ForeignKey
+  Model, Column, Table, DataType, HasMany, ForeignKey, HasOne
 } from 'sequelize-typescript'
 
 import { User } from "./User"
@@ -26,8 +26,8 @@ export class Sale extends Model<Sale> {
   @Column(DataType.STRING)
   purchaseId!: string
 
-  @ForeignKey(() => Destiny)
-  destinyId!: number
+  @HasOne(() => Destiny)
+  destiny!: Destiny
 
   @HasMany(() => Item)
   items!: Item[];
