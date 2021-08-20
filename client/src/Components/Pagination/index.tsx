@@ -1,17 +1,15 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-//import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import {AiFillStar} from 'react-icons/ai'
-import toast, { Toaster } from 'react-hot-toast';
-/* import AddCart from '../Cart'; */
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
+/* import AddCart from '../Cart'; -- Pendiente por props en TS -- */
 import './Pagination.css';
 
 interface ProductsCart {
@@ -38,9 +36,9 @@ const Pagination = () => {
     const [favs, setFavs] = useState<any>([]);
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, _setitemsPerPage] = useState(12);
+    const [itemsPerPage, /* _setitemsPerPage */] = useState(12);
 
-    const [pageNumberLimit, _setpageNumberLimit] = useState(8);
+    const [pageNumberLimit, /* _setpageNumberLimit */] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
@@ -183,11 +181,7 @@ const Pagination = () => {
             </div>
         )
     };
-/* 
-    useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch]);
- */
+
     useEffect(() => {
         setFilterp(products);
     }, [products]);
