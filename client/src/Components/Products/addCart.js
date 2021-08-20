@@ -15,6 +15,7 @@ const AddCart = ({ id, stock, price, name, photo, brand, description, categories
   //const [units, setUnits] = useState(1);
   //const [isInCart, setIsInCart] = useState(items.some((item) => item.productId === id));
 
+  /* 
   const product = {
     id,
     //name,
@@ -27,7 +28,6 @@ const AddCart = ({ id, stock, price, name, photo, brand, description, categories
     //value,
   };
 
-  /* 
   const updateStorage = (item) => {
     localStorage.removeItem('products-cart');
     localStorage.setItem('products-cart', JSON.stringify(item));

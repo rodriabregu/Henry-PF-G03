@@ -6,20 +6,17 @@ import { IoTrashOutline } from 'react-icons/io5';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import './Cart.css';
 
 import { updateCart } from '../../Redux/Actions/Cart/updateCart';
 
 const Cart = () => {
-  //const history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart);
-  //const products = useSelector((state) => state.AllProducts);
   //const allSales = useSelector((state) => state.sales);
   //const [salePurchaseId, setSalePurchaseId] = useState('');
-  //const [items, setItems] = useState([]);
-  //const [total, setTotal] = useState(0);
-  //const [items, setItems] = useState(cart);
   const url_pago = useSelector((state) => state.url_pago);
 
   let total = 0;
@@ -42,9 +39,9 @@ const Cart = () => {
     //const newAllCart = items.filter((event) => event.id !== cartId);
     //saveToLocalStorage(newAllCart);
     //window.location.reload();
-    console.log('items ', items);
+    //console.log('items ', items);
     const newItems = items.filter((item) => item.productId !== removeId);
-    console.log('newItems ', newItems);
+    //console.log('newItems ', newItems);
     //setItems(newItems);
     dispatch(updateCart(newItems));
   };
@@ -85,10 +82,10 @@ const Cart = () => {
   const notify = () => toast.error('The cart is empty.');
 
  */
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (items.length > 0) dispatch(PostSale({userId: 1, items}));
+    if (items.length > 0) dispatch(PostSale({ userId: 1, items }));
   };
 
   /* 
@@ -132,28 +129,29 @@ const Cart = () => {
   return (
     <div className='cart'>
       <div>
-        { items &&
+        {items &&
           items.map((item) => {
             const product = products.find((product) => product.id === item.productId);
 
-            if( product ) return (
-              <div className='item'>
-                <form>
-                  <div className='detalle'>
-                    <img
-                      src={product.photos[0].url}
-                      alt='img not found'
-                      width='90px'
-                      height='90px'
-                    />
-                    <div className='name-prod'>
-                      <h5>Price: ${product.price}.00 </h5>
-                      <h5>{product.name}</h5>
-                      <h5>Actual stock: {product.stock}</h5>
-                    </div>
-                    <div className='price-prod'>
-                      <h5>(total: ${product.price * item.units}.00)</h5>
-                      {/*  product.stock < item.units ? (
+            if (product)
+              return (
+                <div className='item'>
+                  <form>
+                    <div className='detalle'>
+                      <img
+                        src={product.photos[0].url}
+                        alt='img not found'
+                        width='90px'
+                        height='90px'
+                      />
+                      <div className='name-prod'>
+                        <h5>Price: ${product.price}.00 </h5>
+                        <h5>{product.name}</h5>
+                        <h5>Actual stock: {product.stock}</h5>
+                      </div>
+                      <div className='price-prod'>
+                        <h5>(total: ${product.price * item.units}.00)</h5>
+                        {/*  product.stock < item.units ? (
                         <h5>
                           There is not enough stock of this product. But you can buy{' '}
                           {product.stock} if you want, or remove from the cart.
@@ -175,41 +173,43 @@ const Cart = () => {
                           name={product.id}
                         />
                       ) */}
-                      <input
-                        onChange={(event) => {
-                          onChangeUnits(event, product.stock);
-                        }}
-                        type='number'
-                        min={1}
-                        max={product.stock}
-                        value={item.units}
-                        name={product.id}
-                      />
-                      <button
-                        className='btn-remove'
-                        onClick={(event) => {
-                          event.preventDefault();
-                          removeCart(product.id);
-                        }}>
-                        Remove <IoTrashOutline />
-                      </button>
+                        <input
+                          onChange={(event) => {
+                            onChangeUnits(event, product.stock);
+                          }}
+                          type='number'
+                          min={1}
+                          max={product.stock}
+                          value={item.units}
+                          name={product.id}
+                        />
+                        <button
+                          className='btn-remove'
+                          onClick={(event) => {
+                            event.preventDefault();
+                            removeCart(product.id);
+                          }}>
+                          Remove <IoTrashOutline />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </form>
-              </div>
-            );
+                  </form>
+                </div>
+              );
           })}
         <div className='buy'>
           <h3>Subtotal to pay: ${total}.00</h3>
           <form onSubmit={handleSubmit}>
-            {!url_pago ? <button className='btn-buy'>Confirm payment</button> : ''}
+            {url_pago ? (
+              <a href={url_pago}>
+                <button className='btn-confirm'>Confirm purchase</button>
+              </a>
+            ) : (
+              items.length > 0 && <button className='btn-buy'>Confirm payment</button>
+            )}
             <Toaster />
           </form>
-          {url_pago && (
-            <a href={url_pago}>
-              <button className='btn-confirm'>Confirm purchase</button>
-            </a>
-          )}
+          <Link to='/home'>Back</Link>
         </div>
       </div>
     </div>
