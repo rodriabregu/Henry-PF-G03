@@ -5,7 +5,6 @@ import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredPro
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
-import { getCart } from '../../Redux/Actions/Cart/getCart'
 /* import AddCart from '../Cart'; */
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
@@ -174,7 +173,6 @@ const Pagination = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getCart());
   }, [dispatch]);
 
   useEffect(() => {

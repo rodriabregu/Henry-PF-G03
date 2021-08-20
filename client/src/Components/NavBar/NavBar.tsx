@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink as Link } from 'react-router-dom';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line } from 'react-icons/ri';
 import { FaBars } from 'react-icons/fa';
 import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
+import { getCart } from '../../Redux/Actions/Cart/getCart'
 
 export interface Ee {
   "name": "<anystring>",
@@ -22,15 +24,19 @@ export interface Ee {
 export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const [renderCart, setRenderCart] = useState<any>(0);
-
+  const dispatch: Function = useDispatch()
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string }>();  //const {user} = useAuth0()
 
-  let countCart = 0;
+  //let countCart = 0;
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
   };
+
+  useEffect(() => {
+    dispatch(getCart());
+  })
 /* 
   useEffect(() => {
     const allCartNoJson:any = localStorage.getItem('products-cart');

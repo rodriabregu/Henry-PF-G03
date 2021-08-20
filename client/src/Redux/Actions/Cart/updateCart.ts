@@ -10,27 +10,20 @@ export interface item {
 
 export const updateCart = (items: item[]) => {
   let isLogin: boolean = true
+  const userId: number = 1
   return async (dispatch: Function) => {
-    try {
+    try {      
+      localStorage.setItem('products-cart', JSON.stringify(items));
       if (isLogin) {
-        console.log("items dis: ", items)
-        const userId: number = 1
-        /* dispatch({
-          type: UPDATE_CART,
-          payload: items
-        }) */
-        const res = await axios.put(
+        await axios.put(
           `http://${config.REACT_APP_API_URL}:${config.port}/api/cart/${userId}`
           , { userId, items }
         )
-        return dispatch({
-          type: UPDATE_CART,
-          payload: res.data.data.items
-        })
       }
-
-      //localStorage.setItem('products-cart', JSON.stringify(items));
-
+      dispatch({
+        type: UPDATE_CART,
+        payload: items
+      })
     } catch (error) {
       console.error(error.message || error)
     }
