@@ -19,6 +19,7 @@ import ContactUs from './Components/ContactUs/ContactUs';
 import AboutUs from './Components/AboutUs/AboutUs';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Favs from './Components/Favs/Favs'
+import Destiny from './Components/Destiny/Destiny'
 import './App.css';
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -53,6 +54,7 @@ function App() {
           <Route exact path='/favs' component={Favs}/>
           <Route path="/checkout/:saleId/:esta" component={PostSale} />          
           <Route path="/" component={Footer} />
+          
         </div>
       </Switch>
     </Router>
@@ -79,6 +81,7 @@ function App() {
             <Route exact path='/ContactUs' component={ContactUs}/>
             <Route exact path='/AboutUs' component={AboutUs}/>
             <Route path="/checkout/:saleId/:esta" component={NoAuth} />
+            <Route path='/destiny' component={Destiny}/>
             <Route path="/" component={Footer} />
           </div>
         </Switch>
