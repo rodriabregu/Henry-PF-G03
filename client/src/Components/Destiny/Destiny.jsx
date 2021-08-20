@@ -55,7 +55,7 @@ function Destiny() {
                 </div>
                 <div>
                     <label>Especifications:</label>
-                    <textarea onChange={handleChange} name='especifications'></textarea>
+                    <textarea onChange={handleChange} required name='especifications'></textarea>
                 </div>
                 <div>
                     <input type="submit" required value="Ok"></input>
@@ -67,7 +67,6 @@ function Destiny() {
                     <>
                         <Map lat={input.lat} lng={input.lng} />
                         <h3>Data</h3>
-
                         <p>{input.formatted_address}</p>
                         <p>Is this information correct?</p>
                         <button onClick={sendData}>YES</button>
