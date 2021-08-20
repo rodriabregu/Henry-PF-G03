@@ -8,7 +8,7 @@ import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
-import { UPDATE_CART } from '../Actions/Cart/updateCart'
+import { UPDATE_CART, item } from '../Actions/Cart/updateCart'
 
 const initialState = {
   products: [], //filtro o todos
@@ -16,13 +16,22 @@ const initialState = {
   AllProducts: [],
   cartProducts: [],
   sales: [],
-  url_pago: null,
+  url_pago: "",
   cart: []
 };
 
+export interface state {
+  products: {}[], //filtro o todos
+  productsDetail: {},
+  AllProducts: {}[],
+  cartProducts: {}[],
+  sales: {}[],
+  url_pago: string,
+  cart: item[]
+};
 
 
-function getProductReducer(state: any = initialState, action: any) {
+function getProductReducer(state: state = initialState, action: any): state {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -79,7 +88,7 @@ function getProductReducer(state: any = initialState, action: any) {
     case UPDATE_CART:
       return { ...state, cart: action.payload }
     default:
-      return state;
+      return initialState;
   };
 };
 

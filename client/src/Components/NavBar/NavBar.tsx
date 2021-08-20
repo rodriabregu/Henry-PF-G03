@@ -6,7 +6,7 @@ import { FaBars } from 'react-icons/fa';
 import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { getCart } from '../../Redux/Actions/Cart/getCart'
-
+import { state } from '../../Redux/Reducers/Reducers'
 export interface Ee {
   "name": "<anystring>",
   "price": "<anystring>",
@@ -22,9 +22,10 @@ export interface Ee {
 }
 
 export const NavBar = () => {
+  const dispatch: Function = useDispatch()
+  const countItems = useSelector((state: state ) => state.cart.length)
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const [renderCart, setRenderCart] = useState<any>(0);
-  const dispatch: Function = useDispatch()
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string }>();  //const {user} = useAuth0()
 
@@ -36,17 +37,18 @@ export const NavBar = () => {
 
   useEffect(() => {
     dispatch(getCart());
+    setRenderCart(countItems)
   })
-/* 
-  useEffect(() => {
-    const allCartNoJson:any = localStorage.getItem('products-cart');
-    const allCart = JSON.parse(allCartNoJson)
-    allCart?.forEach((e:any) => {
-      countCart += e.value.value
-      setRenderCart(countCart)
+  /* 
+    useEffect(() => {
+      const allCartNoJson:any = localStorage.getItem('products-cart');
+      const allCart = JSON.parse(allCartNoJson)
+      allCart?.forEach((e:any) => {
+        countCart += e.value.value
+        setRenderCart(countCart)
+      });
     });
-  });
- */
+   */
   return (
     <header>
       <nav>
@@ -57,16 +59,16 @@ export const NavBar = () => {
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
             <Link style={{ textDecoration: 'none' }} to='/cart'> CART {renderCart} <RiShoppingCartLine /></Link>
-            
-            { isAuthenticated ? 
+
+            {isAuthenticated ?
               (<div>
-              <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
-              <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-              <div className='boxUser'><img src={user?.picture} />  {user?.name}</div> 
-              </div>) 
-              : 
-              (<div><Link style={{ textDecoration: 'none' }} to='/register'> REGISTER </Link>  
-              <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN <RiAccountCircleLine /> </Link>
+                <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
+                <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+                <div className='boxUser'><img src={user?.picture} />  {user?.name}</div>
+              </div>)
+              :
+              (<div><Link style={{ textDecoration: 'none' }} to='/register'> REGISTER </Link>
+                <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN <RiAccountCircleLine /> </Link>
               </div>)}
           </div>
         </div>
