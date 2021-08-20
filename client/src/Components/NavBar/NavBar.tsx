@@ -25,7 +25,7 @@ export const NavBar = () => {
   const dispatch: Function = useDispatch()
   const countItems = useSelector((state: state ) => state.cart.length)
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
-  const [renderCart, setRenderCart] = useState<any>(0);
+  const [renderCart, setRenderCart] = useState<number>(0);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string }>();  //const {user} = useAuth0()
 
