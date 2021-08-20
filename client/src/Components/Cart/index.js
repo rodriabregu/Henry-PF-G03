@@ -213,7 +213,7 @@ const Cart = () => {
               </form>
             )
           )}
-          <Link to='/home'>Back</Link>
+          <Link to='/home'><button>Back</button></Link>
         </div>
       </div>
     </div>
