@@ -5,29 +5,18 @@ const Account = () => {
     const { isAuthenticated } = useAuth0();
     const { user } = useAuth0<{ name: string, picture?: string, email: string, nickname: string }>();  //const {user} = useAuth0()
 
-
-/*  email: "rodrigo_alcino@hotmail.com"
-    email_verified: true
-    family_name: "Abregu"
-    given_name: "Rodrigo"
-    locale: "en"
-    name: "Rodrigo Abregu"
-    nickname: "rodrigo_alcino"
-    picture: "https://lh3.googleusercontent.com/a/AATXAJy9VzH8K5FsFDSAajCaoR8Iq6M1j-KDao4_Ns4e=s96-c"
-    sub: "google-oauth2|114419829152049596306" */
-
     return (
         <>
         {   isAuthenticated ?
-        <div className='sheetGrid'>
-            <img src={user?.picture} alt='image profile' />
+        <div className='sheetGridAccount'>
+            <span><img src={user?.picture} alt='image profile' /></span>
             <span>Name: {user?.name}</span>
             <span>Email: {user?.email}</span>
             <span>Nickname: {user?.nickname}</span>
         </div>
         :
         <div>
-            <h1>Redirectin...</h1>
+            <h1>Redirecting...</h1>
         </div>
         }
         </>

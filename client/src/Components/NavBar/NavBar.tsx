@@ -51,7 +51,7 @@ export const NavBar = () => {
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
             <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
-            <RiShoppingCartLine />
+              <RiShoppingCartLine />
             </Link>
             { isAuthenticated ? 
               (
@@ -59,8 +59,7 @@ export const NavBar = () => {
                   <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
                   <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
                   <Link style={{ textDecoration: 'none' }} to='/favs'>FAVORITES</Link>
-                  <Link style={{ textDecoration: 'none' }} to='/account'>ACCOUNT</Link>
-                  <div className='boxUser'><img src={user?.picture} className='navimg' />  {user?.name}</div> 
+                  <Link style={{ textDecoration: 'none' }} to='/account'>ACCOUNT <img src={user?.picture} className='navimg' />{user?.name}</Link>
                 </div>
               ) 
               : 

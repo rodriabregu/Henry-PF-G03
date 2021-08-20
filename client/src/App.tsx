@@ -72,7 +72,7 @@ function App() {
             <Route exact path="/product/:id" component={ProductDetail} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/logout' component={Home} />
-            <Route exact path='/register' component={Register} />
+            <Route exact path='/register' component={Login} />
             <Route exact path='/create' component={NoAuth} />
             <Route exact path='/createCategory' component={NoAuth}/>
             <Route exact path='/allSales' component={NoAuth}/>
@@ -80,6 +80,7 @@ function App() {
             <Route exact path='/FAQ' component={Faq}/>
             <Route exact path='/ContactUs' component={ContactUs}/>
             <Route exact path='/AboutUs' component={AboutUs}/>
+            <Route exact path='/account' component={Login}/>
             <Route path="/checkout/:saleId/:esta" component={NoAuth} />
             <Route path="/" component={Footer} />
           </div>
