@@ -1,5 +1,6 @@
-import React,{useEffect,useState} from 'react';
 import axios from 'axios'
+import { useEffect ,useState } from 'react';
+import { NavLink as Link } from 'react-router-dom';
 import {AiFillStar} from 'react-icons/ai'
 import './Favs.css'
 
@@ -29,7 +30,7 @@ const Favs=()=>{
     },[]);
 
     return(     
-        <div className='wishlist' >   
+        <div className='wishlist'>   
             <h1>My wishlist <AiFillStar/> My favs</h1>
             <div className='cards-container'>
         { favs ? 
@@ -47,9 +48,15 @@ const Favs=()=>{
                     </div>
                     
                 )
-            ) : (<h3>Loading...</h3>) 
+            ) : <h3>Loading...</h3>
+        }
+        {
+        favs <= 0 &&
+            <div className='emptyfavs'>
+                <h2>Your favorites list is empty, stop by and <Link to='/home'>see the latest news</Link>!</h2>
+            </div>
         }     
-            </div> 
+        </div> 
         </div> 
     )
 }

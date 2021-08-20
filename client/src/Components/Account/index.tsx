@@ -11,13 +11,14 @@ const Account = () => {
         <div className='card-account'>
             <h2>My Account</h2>
             <div className='user-profile'>
-            <div><img src={user?.picture} alt='image profile' width='96px' height='96px'/></div>
-            <div className='user-data'>
-            <span>Name: {user?.name}</span>
-            <span>Email: {user?.email}</span>
-            <span>Nickname: {user?.nickname}</span>
+                <div><img src={user?.picture} alt='image profile' width='96px' height='96px'/></div>
+                <div className='user-data'>
+                    <span>Name: {user?.name}</span>
+                    <span>Email: {user?.email}</span>
+                    <span>Nickname: {user?.nickname}</span>
+                </div>
             </div>
-            </div>
+            {console.log(user)}
         </div>
         :
         <div>
@@ -26,6 +27,6 @@ const Account = () => {
         }
         </>
     )
-}
+};
 
 export default Account;

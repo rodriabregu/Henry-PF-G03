@@ -179,7 +179,7 @@ const CreateProducts = () => {
     <div className='form-create'>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div><h1>Add a new product</h1></div>
-        <div><label for="name">Product name:</label>
+        <div><label forhtml="name">Product name:</label>
           {errors.name && <p className="danger">{errors.name}</p>}
           <input
           type="text"
@@ -190,7 +190,7 @@ const CreateProducts = () => {
           onChange={handleInput}/> 
         </div>
         <div>
-          <label for="photos">Photos:</label>
+          <label forhtml="photos">Photos:</label>
           {errors.photos && <p className="danger">{errors.photos}</p>}
 
           <input className='input-photos'
@@ -203,7 +203,7 @@ const CreateProducts = () => {
           onChange={handleChange}/> 
         </div>
         <div>
-          <label for="descriptions">Description:</label>
+          <label forhtml="descriptions">Description:</label>
           {errors.description && <p className="danger">{errors.description}</p>}
 
           <input 
@@ -215,7 +215,7 @@ const CreateProducts = () => {
           onChange={handleInput}/>
           </div>
         <div>
-          <label for="price">Price:</label>
+          <label forhtml="price">Price:</label>
           {errors.price && <p className="danger">{errors.price}</p>}
 
           <input
@@ -227,7 +227,7 @@ const CreateProducts = () => {
           onChange={handleInput}/>
           </div>
         <div>
-        <label for="stock">Stock:</label>
+        <label forhtml="stock">Stock:</label>
         {errors.stock && <p className="danger">{errors.stock}</p>}
           <input
             type="number"
@@ -238,11 +238,11 @@ const CreateProducts = () => {
             onChange={handleInput}/>
         </div>
         <div className='brand-s'>
-          <label for="brand">Brand:</label>
+          <label forhtml="brand">Brand:</label>
           <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
         </div>
         <div className='categ-s'>
-          <label for="categories">Category</label>
+          <label forhtml="categories">Category</label>
           <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
         </div>
           <div className='categ-btn'>
