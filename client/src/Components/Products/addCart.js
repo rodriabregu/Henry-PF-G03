@@ -78,7 +78,9 @@ const AddCart = ({ id, stock, price, name, photo, brand, description, categories
       return item;
     });
     dispatch(updateCart(newItems)); */
-    current.units = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    if (value > stock) value = stock;
+    current.units = value;
     const newItems = items.filter((item) => item.productId !== current.productId);
     newItems.push(current);
     dispatch(updateCart(newItems));

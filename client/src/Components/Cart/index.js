@@ -21,7 +21,7 @@ const Cart = () => {
   //const [total, setTotal] = useState(0);
   //const [items, setItems] = useState(cart);
   const url_pago = useSelector((state) => state.url_pago);
-  
+
   let total = 0;
   const products = useSelector((state) => {
     return state.AllProducts.filter((product) => {
@@ -55,10 +55,10 @@ const Cart = () => {
     .reduce((prev, curr) => prev + curr, 0);
   */
 
-  const onChangeUnits = (event) => {
+  const onChangeUnits = (event, stock) => {
     //const { value, name } = event.target;
     const id = parseInt(event.target.name);
-    const value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
     /* 
     const copiaItems = [...items];
     const findItem = copiaItems.find((c) => c.id === parseInt(name));
@@ -67,7 +67,10 @@ const Cart = () => {
     saveToLocalStorage(copiaItems);
      */
     const newItems = items.map((item) => {
-      if (item.productId === id) item.units = value;
+      if (item.productId === id) {
+        if (value > stock) value = stock;
+        item.units = value;
+      }
       return item;
     });
     //setItems(newItems);
@@ -79,9 +82,9 @@ const Cart = () => {
     items: items,
     purchaseId: uuidv4(),
   };
- */
   const notify = () => toast.error('The cart is empty.');
 
+ */
   const handleSubmit = async (event) => {
     event.preventDefault();
   };
@@ -130,7 +133,6 @@ const Cart = () => {
         {items &&
           items.map((item) => {
             const product = products.find((product) => product.id === item.productId);
-            //setTotal((total) => (total += item.units * product.price));
 
             return (
               <div className='item'>
@@ -172,7 +174,9 @@ const Cart = () => {
                         />
                       ) */}
                       <input
-                        onChange={onChangeUnits}
+                        onChange={(event) => {
+                          onChangeUnits(event, product.stock);
+                        }}
                         type='number'
                         min={1}
                         max={product.stock}
