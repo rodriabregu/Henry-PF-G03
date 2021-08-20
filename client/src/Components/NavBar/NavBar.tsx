@@ -31,7 +31,7 @@ export const NavBar = () => {
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
   };
-
+/* 
   useEffect(() => {
     const allCartNoJson:any = localStorage.getItem('products-cart');
     const allCart = JSON.parse(allCartNoJson)
@@ -40,7 +40,7 @@ export const NavBar = () => {
       setRenderCart(countCart)
     });
   });
-
+ */
   return (
     <header>
       <nav>

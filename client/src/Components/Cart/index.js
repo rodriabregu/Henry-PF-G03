@@ -14,24 +14,25 @@ const Cart = () => {
   //const history = useHistory();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart);
-  const products = useSelector((state) => state.AllProducts);
+  //const products = useSelector((state) => state.AllProducts);
   //const allSales = useSelector((state) => state.sales);
   //const [salePurchaseId, setSalePurchaseId] = useState('');
   //const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  //const [total, setTotal] = useState(0);
   //const [items, setItems] = useState(cart);
   const url_pago = useSelector((state) => state.url_pago);
-  /* 
-  const products = useSelector((state) =>{
+  
+  let total = 0;
+  const products = useSelector((state) => {
     return state.AllProducts.filter((product) => {
       return items.some((item) => {
         if (item.productId === product.id) {
+          total += product.price * item.units;
           return true;
         } else return false;
       });
     });
   });
- */
 
   /* const saveToLocalStorage = items => {
 		localStorage.setItem('products-cart', JSON.stringify(items));
