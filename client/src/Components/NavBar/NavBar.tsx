@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink as Link } from 'react-router-dom';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line, RiLogoutBoxRLine } from 'react-icons/ri';
 import { FaBars } from 'react-icons/fa';
 import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
+import { getCart } from '../../Redux/Actions/Cart/getCart'
+import { state } from '../../Redux/Reducers/Reducers'
+import { getProducts } from '../../Redux/Actions/Products/getProducts';
 
 export interface Ee {
   "name": "<anystring>",
@@ -20,27 +24,36 @@ export interface Ee {
 }
 
 export const NavBar = () => {
+  const dispatch: Function = useDispatch()
+  const countCart = useSelector((state: state) => state.cart.length)
+  //const countProducts = useSelector((state: state) => state.AllProducts.length)
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
-  const [renderCart, setRenderCart] = useState<any>(0);
-
+  //const [renderCart, setRenderCart] = useState<number>(0);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string }>();  //const {user} = useAuth0()
 
-  let countCart = 0;
+  //let countCart = 0;
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
   };
 
   useEffect(() => {
-    const allCartNoJson:any = localStorage.getItem('products-cart');
-    const allCart = JSON.parse(allCartNoJson)
-    allCart?.forEach((e:any) => {
-      countCart += e.value.value
-      setRenderCart(countCart)
+    dispatch(getProducts());
+    dispatch(getCart());
+  }, [dispatch]);
+
+  /* 
+    useEffect(() => {
+      const allCartNoJson:any = localStorage.getItem('products-cart');
+      const allCart = JSON.parse(allCartNoJson)
+      allCart?.forEach((e:any) => {
+        countCart += e.value.value
+        setRenderCart(countCart)
+      });
     });
-  });
-  console.log('user',user)
+   */
+
   return (
     <header>
       <nav>
@@ -51,7 +64,8 @@ export const NavBar = () => {
           </div>
           { isAuthenticated ? (
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
+
+            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div> 
               <RiShoppingCartLine />
             </Link>
                
@@ -65,7 +79,7 @@ export const NavBar = () => {
               : 
               (
                 <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
+            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div> 
               <RiShoppingCartLine />
             </Link>
                 

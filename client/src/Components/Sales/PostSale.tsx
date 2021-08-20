@@ -9,9 +9,9 @@ import ErrorPay from './ErrorPay';
 export default function PostSale() {
     const { id, saleId, esta } = useParams<any>();
 
-    const [ sales, setSales ] = useState<any>('')
+    const [sales, setSales] = useState<any>('')
 
-    const {search} = useLocation()
+    const { search } = useLocation()
 
     let saleState: string = ""
 
@@ -21,7 +21,7 @@ export default function PostSale() {
                 setSales(saleState)
                 localStorage.removeItem('products-cart')
                 console.log('saleState', res)
-            })
+            });
 
     return (
         <div>{
