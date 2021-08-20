@@ -127,26 +127,26 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
             defaultValue={brand.name}
             onChange={handleInput}/>
         </div>
-        <div>
         <div className='categ-s'>
           <label for="categories">Category: </label>
           <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
-        </div>
-        </div>
+          </div>
+            <div className='remove-categ'>
+              {
+                  input.categories.map(c => {
+                    return ( 
+                      <>
+                        <button id={c.id} onClick={removeCategory}>{c.name} X</button>
+                      </>
+                    )
+                  })
+                }
+            </div>
           <Toaster/>
         <div>
           <button className='btnEdit'>Submit</button>
         </div>
       </form>
-            {
-              input.categories.map(c => {
-                return ( 
-                  <>
-                    <button id={c.id} onClick={removeCategory}>{c.name} X</button>
-                  </>
-                )
-              })
-            }
     </div>
   )
 };

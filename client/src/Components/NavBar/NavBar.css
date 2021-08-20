@@ -26,6 +26,7 @@
     display: inline-flex;
     column-gap: 3px;
     text-decoration: none;
+    cursor:pointer;
 }
 
 .link-home button:hover,
