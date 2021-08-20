@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Geocode from 'react-geocode'
 import Map from './Map'
+import axios from 'axios'
 
 Geocode.setApiKey("AIzaSyBeDbO4AKXkxGq42frll9RTIKIYZCj-TEA");
 Geocode.setLanguage("en");
@@ -14,7 +15,9 @@ function Destiny() {
         lng: 0,
         view: false,
         especifications: '',
-        formatted_address: ''
+        formatted_address: '',
+        fullName: '',
+        dni: ''
     })
 
     const handleChange = (e) => {
@@ -42,20 +45,39 @@ function Destiny() {
     }
 
     const sendData = (e) => {
-        console.log(`Enviando data ${input.lat} ${input.lng} ${input.especifications}`)
+        const body = {
+            localAddress: input.address,
+            mapAddress: input.formatted_address,
+            description: input.especifications,
+            fullName:input.fullName,
+            dni:input.dni,
+            saleId:1
+        }
+       // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
+        axios.post('http://localhost:3001/api/destiny',body)
+            .then(resp=>console.log(resp))
+            .catch(err=>console.log(err))
     }
 
     return (
         <div>
-            <h1>Add your address!</h1>
+            <h1>Address and addessee </h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Address</label>
                     <input type="text" required onChange={handleChange} name="address" />
                 </div>
                 <div>
-                    <label>Especifications:</label>
+                    <label>Especifications: (floor, departament)</label>
                     <textarea onChange={handleChange} required name='especifications'></textarea>
+                </div>
+                <div>
+                    <label>Full Name:</label>
+                    <input type="text" required onChange={handleChange} name="fullName" />
+                </div>
+                <div>
+                    <label>ID/Passport:</label>
+                    <input type="text" required onChange={handleChange} name="dni" />
                 </div>
                 <div>
                     <input type="submit" required value="Ok"></input>
@@ -70,8 +92,8 @@ function Destiny() {
                         <p>{input.formatted_address}</p>
                         <p>Is this information correct?</p>
                         <button onClick={sendData}>YES</button>
-                        <button>NO</button>
-                        
+                        {/* <button>NO</button> */}
+
                     </>
                 )
             }

@@ -26,6 +26,7 @@ import brand from './brand';
 import reviews from './reviews'
 import photos from './photo'
 import favs from './favourites'
+import destiny from './destiny'
 
 router.get('/cart/:userId', getCart)
 router.get('/products', getProducts)
@@ -51,5 +52,6 @@ router.use('/product/id', productId);
 router.use('/reviews', reviews)
 router.use('/photos', photos)
 router.use('/favs', favs)
+router.use('/destiny',destiny)
 
 export default router;
