@@ -67,9 +67,7 @@
 }
 
 .imgproducts img {  
-    max-width: 90%;  
-    height: auto; 
-    width: auto; 
+    max-width: 90%;   
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
 }
@@ -99,7 +97,7 @@
     width: 30vh;
 }
 
-.filters button{
+.btn-fav, .filters button{
     color:  #7b7bc2;
     background-color:white;
     border-bottom: 1px solid transparent;
@@ -108,7 +106,28 @@
     border-right: 1px solid transparent;
     border-radius: 10px;
     border: solid 1px;
-    cursor: pointer;   
+    cursor: pointer; 
+}
+
+
+.btn-fav{
+  display: inline-flex;
+  align-items: center;
+  grid-column-gap: 3px;
+  color:#2E2E48;
+  margin-top: 10px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.btn-fav:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-fav path{
+  color: rgb(255, 174, 0);
+  
 }
 
 .filters button:hover,

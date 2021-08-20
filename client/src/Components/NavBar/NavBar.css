@@ -26,6 +26,7 @@
     display: inline-flex;
     column-gap: 3px;
     text-decoration: none;
+    cursor:pointer;
 }
 
 .link-home button:hover,
@@ -40,7 +41,26 @@
     display: none;
 }
 
-@media screen and (max-width: 768px){
+.navimg {
+    height:1.3em;
+    margin: 6px;
+    border-radius: 3px;
+}
+
+
+.backg-cart {
+    background-color: rgb(143, 27, 27);
+    padding: 3px 3px 3px 0;
+    border-radius: 10px 10px 10px 0;
+    color: white;
+    height: 18px;
+    width: 18px;
+    text-align: center;
+    line-height: 18px;
+    
+}
+
+@media screen and (max-width: 875px){
     .nav-container{
         flex-direction: column;
     }
@@ -57,6 +77,7 @@
         flex-direction: column-reverse;
         overflow: hidden;
         height: 150px;
+        font-size: 14px;
         transition: height .3s ease-out;
     }
 
@@ -71,18 +92,6 @@
         margin-right: 20px;
         display: inherit;
     }
-
-    .boxUser {
-        display: flex;
-        overflow: hidden;
-        width: 15px;
-        height: auto;
-
-    }
-    .boxUser img {
-        width: 5px;
-        height: auto;
-    }
 }
 
 
@@ -91,7 +100,6 @@
 .searchbar {
     padding-right: 15px;
 }
-
 
 
 .links-login.show{
@@ -120,6 +128,5 @@
         background: blue;
         top:-100vh;
         text-align: center;
-      
     }
 }*/

@@ -39,26 +39,9 @@
     background-color:  #bcbdf1;
     color:  #2E2E48;
 }
-/* 
-.brand-s select, .categ-s select{
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
-    padding: 4px;
-    width:150px;
-    background-color: #ffffff;
-    color:#2E2E48;
-}
-  
-.brand-s select option:hover, .categ-s select option:hover{
-    padding: 10px;
-}
 
-.categ-btn{
-    max-width: 300px;
-}
 
-.categ-btn button{
+.remove-categ button{
     color:  #7b7bc2;
     background-color:white;
     border-bottom: 1px solid transparent;
@@ -68,5 +51,5 @@
     border-radius: 10px;
     border: solid 1px;
     cursor: pointer;
-    padding: 6px;   
-} */
+    font-size: 12px;
+}
