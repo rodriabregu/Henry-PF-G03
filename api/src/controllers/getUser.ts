@@ -2,14 +2,17 @@ import { Response, Request } from 'express'
 import { User, Purchase } from '../db'
 
 /* 
- * Route : GET "api/user/"
- * Responde con todas los usuarios almacenadas en db 
+ * Route : GET "api/user/userId"
+ * Responde la informacion almacenada en db
+ * para un usuario cuyo ID se envia por parametro 
  */
 
-export default async (_req: Request, res: Response) => {
+export default async (req: Request, res: Response) => {
   try {
-    
-    const users = await User.findAll({
+
+    const { userId } = req.params
+
+    const user = await User.findByPk(userId, {
       attributes: { exclude: ['updatedAt', 'createdAt'] },
       include: [
         {
@@ -18,10 +21,12 @@ export default async (_req: Request, res: Response) => {
         }
       ]
     })
-    
+
+    if (!user) throw { status: 404, message: " user not found" }
+
     return res.json({
       message: "successfully",
-      data: users
+      data: user.get()
     })
   } catch (error) {
     console.error(error)

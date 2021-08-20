@@ -8,7 +8,7 @@ import { Product } from './Product'
 export class Purchase extends Model<Purchase>{
 
   @ForeignKey(() => User)
-  userId!: number
+  userId!: string
 
   @Column(DataType.INTEGER)
   productId!: number

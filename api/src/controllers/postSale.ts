@@ -23,7 +23,6 @@ import { appItem } from '../@app'
 
 export default async (req: Request, res: Response) => {
   try {
-    console.log(req.body)
     const { userId, purchaseId, items } = req.body
 
     if (!( userId && items && Array.isArray(items)))

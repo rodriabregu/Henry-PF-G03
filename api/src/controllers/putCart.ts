@@ -14,16 +14,14 @@ interface item {
 }
 export default async (req: Request, res: Response) => {
   try {
-    const userId: number = parseInt(req.params.userId)
+    const { userId } = req.params
     const newItems: item[] = req.body.items
 
     const user = await User.findByPk(userId)
     if (!user) throw { status: 404, message: "user not fund" }
 
 
-    const items = await CartItem.findAll(
-      { where: { userId } }
-    )
+    const items = await CartItem.findAll({ where: { userId } })
 
     await Promise.all(items.map(
       async (item) => item.destroy()

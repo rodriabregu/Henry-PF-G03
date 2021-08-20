@@ -1,11 +1,11 @@
 import {
-  Model, Column, Table
+  Model, Column, Table, DataType
 } from 'sequelize-typescript';
 
 @Table
 export class Brand extends Model {
   
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
 }

@@ -6,6 +6,7 @@ import getCart from '../controllers/getCart'
 import getProducts from '../controllers/getProducts'
 import getSales from '../controllers/getSales'
 import getSalesUser from '../controllers/getSalesUser'
+import getUser from '../controllers/getUser'
 import getUsers from '../controllers/getUsers'
 import postProduct from '../controllers/postProduct'
 import postSale from '../controllers/postSale'
@@ -15,9 +16,7 @@ import putProduct from '../controllers/putProduct'
 import putSale from '../controllers/putSale'
 
 import products from './products';
-import productsUpdate from './productsUpdate';
 import category from './categories';
-import users from './users';
 import categoryTypes from './categoryTypes';
 import ProductCategoryRoute from './productCategory';
 import productName from './ProductName';
@@ -32,6 +31,7 @@ router.get('/cart/:userId', getCart)
 router.get('/products', getProducts)
 router.get('/sales', getSales)
 router.get('/sales/user/:userId', getSalesUser)
+router.get('/user/:userId', getUser)
 router.get('/users', getUsers)
 router.post('/product', postProduct)
 router.post('/sale', postSale)
@@ -42,9 +42,7 @@ router.put('/sale', putSale)
 
 router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);
-router.use('/productsUpdate', productsUpdate);
 router.use('/categories', category);
-router.use('/users', users);
 router.use('/brand', brand);
 router.use('/categoryTypes', categoryTypes);
 router.use('/product/name', productName);
@@ -52,6 +50,6 @@ router.use('/product/id', productId);
 router.use('/reviews', reviews)
 router.use('/photos', photos)
 router.use('/favs', favs)
-router.use('/destiny',destiny)
+router.use('/destiny', destiny)
 
 export default router;

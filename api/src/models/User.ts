@@ -1,6 +1,6 @@
 import {
-  Model, Column, Table, HasMany, BelongsTo,
-  DataType, BelongsToMany, ForeignKey
+  Model, Column, Table, HasMany, PrimaryKey,
+  DataType, BelongsToMany, Unique, AllowNull
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
@@ -13,6 +13,12 @@ import ProductUser from './ProductUser';
 
 @Table
 export class User extends Model {
+
+  @PrimaryKey
+  @Unique(true)
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  id!: string;
 
   @Column({
     defaultValue: 'Guest',
@@ -29,13 +35,13 @@ export class User extends Model {
   @Column({ unique: true })
   email!: string;
 
-  @Column
+  @Column(DataType.STRING)
   hashPasword!: string;
 
-  @Column
+  @Column(DataType.STRING)
   firstName!: string;
 
-  @Column
+  @Column(DataType.STRING)
   lastName!: string;
 
   @HasMany(() => CartItem)

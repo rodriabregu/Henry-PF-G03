@@ -16,7 +16,7 @@ const SelectCategory = (props:any) => {
 
     return(
         <select className={props.className} name={props.name} onChange={props.onChange}>
-            {elements ? [{id:0, name:""}, ...elements].map( (c:any) => <option id={c.id}>{c.name}</option>) : '' }
+            {elements ? [{id:0, name:""}, ...elements].map( (c:any, index:any) => <option key={index} id={c.id}>{c.name}</option>) : '' }
         </select>
     )
 };

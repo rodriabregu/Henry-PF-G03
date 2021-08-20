@@ -18,26 +18,19 @@ import Faq from './Components/FAQ/faq';
 import ContactUs from './Components/ContactUs/ContactUs';
 import AboutUs from './Components/AboutUs/AboutUs';
 import Favs from './Components/Favs/Favs'
-
 import Destiny from './Components/Destiny/Destiny'
-
 import Account from './Components/Account';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 
-import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-  
   const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>(); 
-  
 
   if(isAuthenticated) {
-
   return (
-    <Router>
-      <Switch>
+      <Router>
         <div className="App">
           <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
@@ -62,13 +55,11 @@ function App() {
           <Route path="/" component={Footer} />
           
         </div>
-      </Switch>
-    </Router>
+      </Router>
   );
   } else {
     return (
-      <Router>
-        <Switch>
+        <Router>
           <div className="App">
             <Route path="/" component={NavBar} />
             <Route exact path="/" component={Landing} />
@@ -92,8 +83,7 @@ function App() {
 
             <Route path="/" component={Footer} />
           </div>
-        </Switch>
-      </Router>
+        </Router>
     )
   };
 };

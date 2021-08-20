@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink as Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
@@ -102,6 +102,7 @@ const ProductDetail = () => {
         <div>
             <div className='product-detail'>
                 <div className='imgs'>
+                    <Link to='/home'><button className='btn-back'>Back to page</button></Link>
                 <div className='product-img'>
                     <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
                 </div>

@@ -27,7 +27,6 @@ export class Destiny extends Model {
   dni!:string
 
   @ForeignKey(()=>Sale)
-  @Column
   saleId!:number
 
   @BelongsTo(()=>Sale)
