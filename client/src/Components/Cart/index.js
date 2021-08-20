@@ -85,8 +85,10 @@ const Cart = () => {
   const notify = () => toast.error('The cart is empty.');
 
  */
-  const handleSubmit = async (event) => {
+  
+  const handleSubmit = (event) => {
     event.preventDefault();
+    if (items.length > 0) dispatch(PostSale({userId: 1, items}));
   };
 
   /* 
@@ -130,11 +132,11 @@ const Cart = () => {
   return (
     <div className='cart'>
       <div>
-        {items &&
+        { items &&
           items.map((item) => {
             const product = products.find((product) => product.id === item.productId);
 
-            return (
+            if( product ) return (
               <div className='item'>
                 <form>
                   <div className='detalle'>

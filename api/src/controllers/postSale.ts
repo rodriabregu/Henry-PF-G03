@@ -23,9 +23,10 @@ import { appItem } from '../@app'
 
 export default async (req: Request, res: Response) => {
   try {
+    console.log(req.body)
     const { userId, purchaseId, items } = req.body
 
-    if (!(purchaseId && userId && items && Array.isArray(items)))
+    if (!( userId && items && Array.isArray(items)))
       return res.status(404).json({
         message: "data is novalidate",
         data: {}
@@ -41,7 +42,7 @@ export default async (req: Request, res: Response) => {
       throw { status: 404, message: "no Stock" }
 
     const newSale = await Sale.create({
-      purchaseId,
+      purchaseId: purchaseId || "nada",
       userId: userId,
       date: new Date(Date.now())
     })
@@ -83,8 +84,6 @@ const checkStok = async (item: appItem) => {
   const product = await Product.findByPk(productId)
   if (!product) throw Error("product not found")
   const { stock } = product.get()
-console.log("check post ", " units: ", units)
-
   if (stock - units < 0) throw Error("no stock")
   return stock;
 }
@@ -94,8 +93,6 @@ const addItem = async (item: appItem, saleId: number): Promise<any> => {
   const product = await Product.findByPk(productId)
   if (!product) throw Error("product not found")
   const { price, name } = product.get()
-console.log("add post ", " units: ", units)
-
   return await Item.create({
     saleId,
     productId,
