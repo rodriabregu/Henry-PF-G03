@@ -51,17 +51,22 @@ export const NavBar = () => {
           </div>
           <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
             <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{renderCart}</div> 
-            <RiShoppingCartLine />
+              <RiShoppingCartLine />
             </Link>
             { isAuthenticated ? 
-              (<div>
-                <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
-                <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-                <div className='boxUser'><img src={user?.picture} className='navimg' />  {user?.name}</div> 
-              </div>) 
-              : (<div>
-                    <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
-                  </div>
+              (
+                <div>
+                  <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiAccountCircleLine /> </Link>
+                  <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+                  <Link style={{ textDecoration: 'none' }} to='/favs'>FAVORITES</Link>
+                  <Link style={{ textDecoration: 'none' }} to='/account'>ACCOUNT <img src={user?.picture} className='navimg' />{user?.name}</Link>
+                </div>
+              ) 
+              : 
+              (
+                <div>
+                  <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
+                </div>
               )
             }
           </div>

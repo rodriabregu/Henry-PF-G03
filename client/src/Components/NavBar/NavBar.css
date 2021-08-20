@@ -42,16 +42,20 @@
 
 .navimg {
     height:1.3em;
+    margin: 6px;
+    border-radius: 3px;
 }
 
 .backg-cart {
     background-color: rgb(143, 27, 27);
-    padding: 3px 16px 3px 0;
+    padding: 3px 3px 3px 0;
     border-radius: 10px 10px 10px 0;
-    margin: 3px;
     color: white;
-    /* display: flex;
-    align-items: center; */
+    height: 18px;
+    width: 18px;
+    text-align: center;
+    line-height: 18px;
+    
 }
 
 @media screen and (max-width: 768px){
@@ -70,7 +74,7 @@
         display: flex;
         flex-direction: column-reverse;
         overflow: hidden;
-        height: 100px;
+        height: 120px;
         transition: height .3s ease-out;
     }
 
@@ -84,11 +88,6 @@
         font-size: 22px;
         margin-right: 20px;
         display: inherit;
-    }
-
-    .boxUser img {
-        width: 1.2rem;
-        height: 1.2rem;
     }
 }
 

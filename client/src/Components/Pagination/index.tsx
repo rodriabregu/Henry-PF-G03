@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
@@ -5,12 +6,13 @@ import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredPro
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import {AiFillStar} from 'react-icons/ai'
+import toast, { Toaster } from 'react-hot-toast';
 /* import AddCart from '../Cart'; */
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 import './Pagination.css';
-import axios from 'axios'
-import {AiFillStar} from 'react-icons/ai'
 
 interface ProductsCart {
     name: any;
@@ -28,6 +30,7 @@ interface ProductsCart {
 
 const Pagination = () => {
     const dispatch = useDispatch();
+    const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>(); 
 
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
@@ -106,16 +109,14 @@ const Pagination = () => {
         }
     };
 
-    const addFav=async(productId:any)=>{
-        try{
-            let resp=await axios.post(`http://localhost:3001/api/favs`,{productId,userId:1})
+    const addFav = async (productId:any) => {
+        try {
+            let resp = await axios.post(`http://localhost:3001/api/favs`, {productId,userId:1})
             console.log(`agregando prod ${productId} - ${resp.data}`)
-        }catch(e){
+        } catch (e) {
             console.log(e.response)
         }
-        
-        
-    }
+    };
 
     let pageIncrementBtn = null;
     if (pages.length > maxPageNumberLimit) {
@@ -152,7 +153,16 @@ const Pagination = () => {
                                         <div>${e.price}.00</div>
                                         <img src={e.photos?e.photos[0].url:''}  height='200px' width= '200px' alt={e.name} />                                        
                                     </Link>
-                                    <button className='btn-fav' id={`${e.id}`} onClick={(e:any)=>addFav(e.target.id)}>Add to favs <AiFillStar/></button>
+                                    <div> 
+                                    {
+                                        isAuthenticated ? 
+                                        <button className='btn-fav' id={`${e.id}`} onClick={(e:any ) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
+                                        :
+                                        <Link to='/login'>
+                                            <button className='btn-fav' id={`${e.id}`} onClick={(e:any) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
+                                        </Link>
+                                    }
+                                    </div>
                                     {/*  <AddCart 
                                     id={e.id}
                                     name={e.name}
