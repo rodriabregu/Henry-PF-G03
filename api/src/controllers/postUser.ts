@@ -11,6 +11,7 @@ import { sendEmail } from '../providers'
  *  Ejemplo body
  * 
  * const body = {
+    "id": "gitHub|23423kj34234k34k2",
     "userName": "J-esteban.345",
     "email": "esteban.345@yopmail.com",
     "firstName": "Juan Esteban",
@@ -23,12 +24,12 @@ export default async (req: Request, res: Response) => {
   try {
     const {
       userName, email, lastName,
-      hashPasword, firstName
+      hashPasword, firstName, id
     }: appUser = req.body
 
     if (!(
       userName && /^([\-\w\.\_]{4,20})$/.test(userName)
-      && email
+      && id && id.length > 6 && email 
       && /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
       && lastName && /[a-z]{5,}/i.test(lastName)
       && firstName && /[a-z]{5,}/i.test(firstName)
@@ -42,23 +43,24 @@ export default async (req: Request, res: Response) => {
       });
 
     const [newUser, isNew] = await User.findOrCreate({
-      where: { userName },
+      where: { id },
       defaults: {
-        email, lastName,
-        hashPasword, firstName
+        email, lastName, userName,
+        hashPasword, firstName, id
       }
     })
-
+/* 
     if (!isNew) return res.status(404).json({
       status: 404,
       message: `the user ${userName} alreadi exist`
     });
-
+ */
     sendEmail(newUser.get().id, "Welcome")
 
     return res.json({
       message: `munsage de confirmacion enviado a ${email}`,
-      data: newUser.get()
+      isNew,
+      user: newUser.get()
     })
   } catch (error) {
     console.error(error)

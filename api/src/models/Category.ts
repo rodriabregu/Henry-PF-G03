@@ -1,5 +1,5 @@
 import {
-  Model, Column, Table, BelongsToMany, ForeignKey
+  Model, Column, Table, BelongsToMany, ForeignKey, DataType
 } from 'sequelize-typescript';
 
 import { CategoryType } from './CategoryType';
@@ -13,7 +13,7 @@ export class Category extends Model {
   @ForeignKey(() => CategoryType)
   categoryTypeId!: number;
 
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @BelongsToMany(() => Product, () => ProductCategory)

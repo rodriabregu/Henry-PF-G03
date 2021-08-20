@@ -21,7 +21,7 @@ export class Sale extends Model<Sale> {
   date!: Date
 
   @ForeignKey(() => User)
-  userId!: number
+  userId!: string
 
   @Column(DataType.STRING)
   purchaseId!: string

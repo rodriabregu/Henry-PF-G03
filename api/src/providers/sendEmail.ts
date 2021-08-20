@@ -15,7 +15,7 @@ const html = (accion: string): string => {
  * user
  * accion
  */
-export default async (userId: number, accion: string, saleId: number = 0) => {
+export default async (userId: string, accion: string, saleId: number = 0) => {
   const user = await User.findByPk(userId)
   if (!user) throw Error(`sent imail - user ${userId} is not`)
   const { email, firstName, userName } = user.get()

@@ -8,7 +8,7 @@ import { User } from './User'
 export class CartItem extends Model<CartItem> {
 
   @ForeignKey(() => User)
-  userId!: number  
+  userId!: string  
 
   @ForeignKey(() => Product)
   productId!: number;
