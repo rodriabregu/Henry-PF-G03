@@ -6,7 +6,7 @@ import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
-import {AiFillStar} from 'react-icons/ai'
+import { AiFillStar } from 'react-icons/ai'
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 /* import AddCart from '../Cart'; -- Pendiente por props en TS -- */
@@ -29,7 +29,7 @@ interface ProductsCart {
 const Pagination = () => {
     const dispatch = useDispatch();
     const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>(); 
-
+    const { user } = useAuth0<{ name: string, picture?: string, email: string, nickname: string, sub: string }>();
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
     const [filterp, setFilterp] = useState([]);
@@ -109,8 +109,9 @@ const Pagination = () => {
     };
 
     const addFav = async (productId:any) => {
+        console.log('user?.sub',user?.sub)
         try {
-            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId:1 })
+            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: gitHub23423kj34234k34k2 })
             console.log(`agregando ${productId} - ${resp.data}`)
             setFavs({ ...favs, productId })
         } catch (e) {
