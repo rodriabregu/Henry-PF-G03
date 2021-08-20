@@ -200,16 +200,19 @@ const Cart = () => {
           })}
         <div className='buy'>
           <h3>Subtotal to pay: ${total}.00</h3>
-          <form onSubmit={handleSubmit}>
-            {url_pago ? (
-              <a href={url_pago}>
-                <button className='btn-confirm'>Confirm purchase</button>
-              </a>
-            ) : (
-              items.length > 0 && <button className='btn-buy'>Confirm payment</button>
-            )}
-            <Toaster />
-          </form>
+
+          {url_pago ? (
+            <a href={url_pago}>
+              <button className='btn-confirm'>Confirm purchase</button>
+            </a>
+          ) : (
+            items.length > 0 && (
+              <form onSubmit={handleSubmit}>
+                <button className='btn-buy'>Confirm payment</button>
+                <Toaster />
+              </form>
+            )
+          )}
           <Link to='/home'>Back</Link>
         </div>
       </div>
