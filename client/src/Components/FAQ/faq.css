@@ -47,7 +47,7 @@
     height: 0;
 }
 
-@media screen and (max-width: 768px){ 
+@media screen and (max-width: 875px){ 
 
     .faq{
         margin-top: 0px;

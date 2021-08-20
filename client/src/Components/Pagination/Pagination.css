@@ -117,6 +117,7 @@
   color:rgb(207, 19, 66);
   margin-top: 10px;
   font-size: 12px;
+  text-decoration: none;
 }
 
 .filters button:hover,
