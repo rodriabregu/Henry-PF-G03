@@ -35,6 +35,7 @@ const Pagination = () => {
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
     const [filterp, setFilterp] = useState([]);
+    const [favs, setFavs] = useState<any>([]);
 
     const [currentPage, setcurrentPage] = useState(1);
     const [itemsPerPage, _setitemsPerPage] = useState(12);
@@ -111,8 +112,9 @@ const Pagination = () => {
 
     const addFav = async (productId:any) => {
         try {
-            let resp = await axios.post(`http://localhost:3001/api/favs`, {productId,userId:1})
-            console.log(`agregando prod ${productId} - ${resp.data}`)
+            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId:1 })
+            console.log(`agregando ${productId} - ${resp.data}`)
+            setFavs({ ...favs, productId })
         } catch (e) {
             console.log(e.response)
         }
@@ -156,10 +158,10 @@ const Pagination = () => {
                                     <div> 
                                     {
                                         isAuthenticated ? 
-                                        <button className='btn-fav' id={`${e.id}`} onClick={(e:any ) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
+                                        <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e:any ) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
                                         :
                                         <Link to='/login'>
-                                            <button className='btn-fav' id={`${e.id}`} onClick={(e:any) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
+                                            <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e:any) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
                                         </Link>
                                     }
                                     </div>

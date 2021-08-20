@@ -55,7 +55,7 @@
 
 .btn-div img{
     margin-left: 10px;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .price-btn{
@@ -69,7 +69,7 @@
 }
 
 .remove-fav{
-	background-color: #d4344170;
+	background-color: #d434412a;
 	text-align: center;
     border-radius: 10px;
     font-weight: 500;
@@ -85,7 +85,7 @@
 
 .remove-fav:hover{
     background-color: #d40722b2;
-    color: #5f161cfb;
+    color: #130506fb;
 }
 
 @media screen and (max-width: 768px){
