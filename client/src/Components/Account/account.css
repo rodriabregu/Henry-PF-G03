@@ -1,0 +1,14 @@
+.sheetGridAccount {
+    display: grid;
+    gap: 0.5rem 1rem;
+    grid-auto-flow: dense;
+    grid-template-rows: 6rem;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 17rem));
+    font-family: system-ui;
+    color: black;
+    margin: 0;
+}
+
+.sheetGridAccount img {
+    border-radius: 5px;
+}

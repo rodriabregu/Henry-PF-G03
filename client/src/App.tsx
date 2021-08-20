@@ -17,8 +17,9 @@ import AdminDash from './Components/Dashboard/';
 import Faq from './Components/FAQ/faq';
 import ContactUs from './Components/ContactUs/ContactUs';
 import AboutUs from './Components/AboutUs/AboutUs';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Favs from './Components/Favs/Favs'
+import Account from './Components/Account';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -51,6 +52,7 @@ function App() {
           <Route exact path='/ContactUs' component={ContactUs}/>
           <Route exact path='/AboutUs' component={AboutUs}/>
           <Route exact path='/favs' component={Favs}/>
+          <Route exact path='/account' component={Account}/>
           <Route path="/checkout/:saleId/:esta" component={PostSale} />          
           <Route path="/" component={Footer} />
         </div>
@@ -70,7 +72,7 @@ function App() {
             <Route exact path="/product/:id" component={ProductDetail} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/logout' component={Home} />
-            <Route exact path='/register' component={Register} />
+            <Route exact path='/register' component={Login} />
             <Route exact path='/create' component={NoAuth} />
             <Route exact path='/createCategory' component={NoAuth}/>
             <Route exact path='/allSales' component={NoAuth}/>
@@ -78,6 +80,7 @@ function App() {
             <Route exact path='/FAQ' component={Faq}/>
             <Route exact path='/ContactUs' component={ContactUs}/>
             <Route exact path='/AboutUs' component={AboutUs}/>
+            <Route exact path='/account' component={Login}/>
             <Route path="/checkout/:saleId/:esta" component={NoAuth} />
             <Route path="/" component={Footer} />
           </div>
