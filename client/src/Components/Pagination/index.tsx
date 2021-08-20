@@ -7,6 +7,7 @@ import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
+import {AiFillStar} from 'react-icons/ai'
 import toast, { Toaster } from 'react-hot-toast';
 /* import AddCart from '../Cart'; */
 import SearchBar from '../SearchBar/SearchBar';
@@ -36,7 +37,7 @@ const Pagination = () => {
     const [filterp, setFilterp] = useState([]);
 
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, _setitemsPerPage] = useState(10);
+    const [itemsPerPage, _setitemsPerPage] = useState(12);
 
     const [pageNumberLimit, _setpageNumberLimit] = useState(8);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
@@ -148,17 +149,17 @@ const Pagination = () => {
                             return (
                                 <div className='imgproducts' key={index}>
                                     <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
-                                        <div className='name'>{e.name}</div>
+                                        <div className='name' >{e.name}</div>
                                         <div>${e.price}.00</div>
-                                        <img src={e.photos?e.photos[0].url:''} alt={e.name} />                                        
+                                        <img src={e.photos?e.photos[0].url:''}  height='200px' width= '200px' alt={e.name} />                                        
                                     </Link>
                                     <div> 
                                     {
                                         isAuthenticated ? 
-                                        <button id={`${e.id}`} onClick={(e:any )=> addFav(e.target.id)}>Add to favs</button>
+                                        <button className='btn-fav' id={`${e.id}`} onClick={(e:any ) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
                                         :
                                         <Link to='/login'>
-                                            <button id={`${e.id}`} onClick={(e:any) => addFav(e.target.id)}>Add to favs</button>
+                                            <button className='btn-fav' id={`${e.id}`} onClick={(e:any) => addFav(e.target.id)}>Add to favs <AiFillStar/></button>
                                         </Link>
                                     }
                                     </div>

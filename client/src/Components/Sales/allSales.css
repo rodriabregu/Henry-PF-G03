@@ -41,9 +41,15 @@ td{
       justify-content: center;
       margin-bottom: 50px;
       margin-top: -90px;
+      background-color: white;
   }
 
   .filtro-sales select{
     border-radius: 8px;
   }
    
+
+  .cardSale h4{
+    display: flex;
+    justify-content: flex-end;
+  }
