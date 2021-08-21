@@ -111,7 +111,7 @@ const Pagination = () => {
     const addFav = async (productId:any) => {
         console.log('user?.sub',user?.sub)
         try {
-            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: gitHub23423kj34234k34k2 })
+            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: "gitHub|23423kj34234k34k2" })
             console.log(`agregando ${productId} - ${resp.data}`)
             setFavs({ ...favs, productId })
         } catch (e) {
