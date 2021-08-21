@@ -22,10 +22,36 @@ const initialState = {
   users: [],
 };
 
+interface brand {
+  name: string
+  id: number
+}
+
+interface photo {
+  url: string
+  id: number
+}
+
+interface category {
+  name: string
+  id: number
+}
+
+export interface product {
+  id: number
+  name: string
+  description: string
+  price: number
+  stock: number
+  brand: brand
+  photos: photo[]
+  categories: category[]
+}
+
 export interface state {
-  products: {}[], //filtro o todos
+  products: product [], //filtro o todos
   productsDetail: {},
-  AllProducts: {}[],
+  AllProducts: product[],
   cartProducts: {}[],
   sales: {}[],
   url_pago: string,
