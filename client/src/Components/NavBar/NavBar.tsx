@@ -30,7 +30,7 @@ export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   //const [renderCart, setRenderCart] = useState<number>(0);
   const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0<{ name: string, picture?: string }>();  //const {user} = useAuth0()
+  const { user } = useAuth0<{ sub: string, name: string, picture?: string }>();  //const {user} = useAuth0()
 
   //let countCart = 0;
 
@@ -40,7 +40,7 @@ export const NavBar = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getCart());
+    dispatch(getCart(user?.sub))
   }, [dispatch]);
 
   /* 
@@ -62,35 +62,35 @@ export const NavBar = () => {
             <Link to='/home' style={{ textDecoration: 'none' }}> <button className='button-home'> HOME <RiHome2Line /> </button></Link>
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
-          { isAuthenticated ? (
-          <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
+          {isAuthenticated ? (
+            <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
 
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div> 
-              <RiShoppingCartLine />
-            </Link>
-               
-                  <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-                  <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
-                  <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine/> </Link>
-                  <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' />{user?.name}</Link>
-                
-                </div>
-              ) 
-              : 
-              (
-                <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-            <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div> 
-              <RiShoppingCartLine />
-            </Link>
-                
-                
-                  <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
-                
-                </div>
-              )
-            }
-          </div>
-        
+              <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div>
+                <RiShoppingCartLine />
+              </Link>
+
+              <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+              <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
+              <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine /> </Link>
+              <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' />{user?.name}</Link>
+
+            </div>
+          )
+            :
+            (
+              <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
+                <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div>
+                  <RiShoppingCartLine />
+                </Link>
+
+
+                <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
+
+              </div>
+            )
+          }
+        </div>
+
       </nav>
     </header>
   );

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import config from '../../../../src/config';
-
 export const UPDATE_CART = "UPDATE_CART"
 
 export interface item {
@@ -8,14 +7,16 @@ export interface item {
   units: number
 }
 
-export const updateCart = (items: item[]) => {
-  let isLogin: boolean = true
-  const userId: number = 1
+export const updateCart = (items: item[], userId: string | undefined) => {
+
   return async (dispatch: Function) => {
-    try {      
-      localStorage.setItem('products-cart', JSON.stringify(items));
-      if (isLogin) {
-        await axios.put(
+    try {
+      localStorage.setItem(
+        'products-cart', JSON.stringify(items)
+      );
+
+      if (userId) {
+        axios.put(
           `http://${config.REACT_APP_API_URL}:${config.port}/api/cart/${userId}`
           , { userId, items }
         )

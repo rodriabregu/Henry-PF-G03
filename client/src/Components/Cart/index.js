@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PostSale } from '../../Redux/Actions/Sales/postSale';
 import { IoTrashOutline } from 'react-icons/io5';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
 
@@ -28,7 +28,7 @@ const Cart = () => {
 
   const removeCart = (removeId) => {
     const newItems = items.filter((item) => item.productId !== removeId);
-    dispatch(updateCart(newItems));
+    dispatch(updateCart(newItems, user?.sub));
   };
 
   const onChangeUnits = (event, stock) => {
@@ -43,12 +43,12 @@ const Cart = () => {
       }
       return item;
     });
-    dispatch(updateCart(newItems));
+    dispatch(updateCart(newItems, user?.sub));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (items.length > 0) dispatch(PostSale({ userId: user.sub, items }));
+    if (items.length > 0) dispatch(PostSale({ userId: user?.sub, items }));
   };
 
   return (
@@ -102,11 +102,12 @@ const Cart = () => {
           })}
         <div className='buy'>
           <h3>Subtotal to pay: ${total}.00</h3>
-          {
-            isAuthenticated ?
+          {isAuthenticated ? (
             url_pago ? (
               <a href={url_pago}>
-                <button onClick={() => dispatch(updateCart([]))} className='btn-confirm'>
+                <button
+                  onClick={() => dispatch(updateCart([], user?.sub))}
+                  className='btn-confirm'>
                   Confirm purchase
                 </button>
               </a>
@@ -117,16 +118,16 @@ const Cart = () => {
                 </form>
               )
             )
-            :
-            items.length > 0 ?
-              <>
+          ) : items.length > 0 ? (
+            <>
               <label>Login to buy!</label>
-                <Link to='/login'> 
-                  <button>LogIn</button>
-                </Link>
-              </>
-            : ''
-          }
+              <Link to='/login'>
+                <button>LogIn</button>
+              </Link>
+            </>
+          ) : (
+            ''
+          )}
           <Link to='/home'>
             <button>Back</button>
           </Link>
