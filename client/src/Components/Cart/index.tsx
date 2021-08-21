@@ -1,23 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PostSale } from '../../Redux/Actions/Sales/postSale';
+import { updateCart, item } from '../../Redux/Actions/Cart/updateCart';
 import { IoTrashOutline } from 'react-icons/io5';
+import { state, product } from '../../Redux/Reducers/Reducers'
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
 
-import { updateCart } from '../../Redux/Actions/Cart/updateCart';
-
 const Cart = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart);
-  const url_pago = useSelector((state) => state.url_pago);
-  const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0();
+  const items = useSelector((state: state) => state.cart);
+  const url_pago = useSelector((state: state) => state.url_pago);
+  const { user, isAuthenticated } = useAuth0();
 
   let total = 0;
-  const products = useSelector((state) => {
-    return state.AllProducts.filter((product) => {
-      return items.some((item) => {
+  const products: product[] = useSelector((state: state) => {
+    return state.AllProducts.filter((product: product) => {
+      return items.some((item: item) => {
         if (item.productId === product.id) {
           total += product.price * item.units;
           return true;
@@ -26,12 +25,12 @@ const Cart = () => {
     });
   });
 
-  const removeCart = (removeId) => {
-    const newItems = items.filter((item) => item.productId !== removeId);
+  const removeCart = (removeId: number) => {
+    const newItems = items.filter((item: item) => item.productId !== removeId);
     dispatch(updateCart(newItems, user?.sub));
   };
 
-  const onChangeUnits = (event, stock) => {
+  const onChangeUnits = (event: any, stock: number) => {
     const id = parseInt(event.target.name);
     let value = parseInt(event.target.value);
 
@@ -46,7 +45,7 @@ const Cart = () => {
     dispatch(updateCart(newItems, user?.sub));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     if (items.length > 0) dispatch(PostSale({ userId: user?.sub, items }));
   };
@@ -84,7 +83,7 @@ const Cart = () => {
                           min={1}
                           max={product.stock}
                           value={item.units}
-                          name={product.id}
+                          name={`${product.id}`}
                         />
                         <button
                           className='btn-remove'

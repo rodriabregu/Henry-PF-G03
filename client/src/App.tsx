@@ -4,7 +4,7 @@ import NavBar from './Components/NavBar/NavBar';
 import Footer from './Components/Footer/Footer';
 import ProductDetail from './Components/ProductDetail';
 import CreateProducts from './Components/Products/createNewProducts';
-import Cart from './Components/Cart';
+import Cart from './Components/Cart/index';
 import Login from './Components/LogIn';
 import Logout from './Components/LogOut';
 import NoAuth from './Components/NoAuth'
