@@ -55,7 +55,7 @@ export default async (req: Request, res: Response) => {
       message: `the user ${userName} alreadi exist`
     });
  */
-    sendEmail(newUser.get().id, "Welcome")
+    if (isNew) sendEmail(newUser.get().id, "Welcome")
 
     return res.json({
       message: `munsage de confirmacion enviado a ${email}`,
