@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
 import { updateCart, item } from '../../Redux/Actions/Cart/updateCart';
-import toast, { Toaster } from 'react-hot-toast';
 import { state, product, brand, photo, category } from '../../Redux/Reducers/Reducers'
 import { useAuth0 } from '@auth0/auth0-react';
 import '../ProductDetail/productDetail.css';
@@ -53,7 +52,6 @@ const AddCart = (props: {
         <button className='btn-cart' onClick={addCart}>
           Add to cart
           <TiShoppingCart />
-          <Toaster />
         </button>
         {current.units > 0 && (
           <input
