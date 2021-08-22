@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
     margin: 10px;
     font-family: system-ui;
 }
@@ -21,4 +22,15 @@
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+@media screen and (max-width: 875px){
+    .sheet{
+        display: flex;
+        flex-direction: column;
+    }   
+
+    .diva{
+        width: 250px;
+    }
 }
