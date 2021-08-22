@@ -119,16 +119,16 @@ const Cart = () => {
             )
           ) : items.length > 0 ? (
             <>
-              <label>Login to buy!</label>
+              
               <Link to='/login'>
-                <button>LogIn</button>
+              Login here to buy!
               </Link>
             </>
           ) : (
             ''
           )}
           <Link to='/home'>
-            <button>Back</button>
+            <button className='btn-backhome'>Back to home</button>
           </Link>
         </div>
       </div>

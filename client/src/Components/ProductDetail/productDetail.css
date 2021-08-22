@@ -114,7 +114,7 @@
   margin-top: 10px;
 }
 
-.btn-addreview:hover {
+.btn-addreview:hover, .btn-back:hover {
   background-color: #bcbdf1;
   color: #2e2e48;
 }
@@ -141,6 +141,8 @@
   margin-bottom: 0.5rem;
   background-color: transparent;
   font-family: system-ui;
+  border: 1px solid #2e2e48;
+  color: #2e2e48;
 }
 
 .btn-back:active {
