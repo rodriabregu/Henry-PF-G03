@@ -11,7 +11,10 @@ const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: state) => state.cart);
   const url_pago = useSelector((state: state) => state.url_pago);
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0<{
+    name: string, email: string, nickname: string, sub: string
+  }>();
 
   let total = 0;
   const products: product[] = useSelector((state: state) => {
@@ -42,12 +45,12 @@ const Cart = () => {
       }
       return item;
     });
-    dispatch(updateCart(newItems, 'gitHub|23423kj34234k34k2'));
+    dispatch(updateCart(newItems, user?.sub));
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    if (items.length > 0) dispatch(PostSale({ userId: 'gitHub|23423kj34234k34k2', items }));
+    if (items.length > 0) dispatch(PostSale({ userId: user?.sub, items }));
   };
 
   return (
@@ -118,9 +121,9 @@ const Cart = () => {
             )
           ) : items.length > 0 ? (
             <>
-              
+
               <Link to='/login'>
-              Login here to buy!
+                Login here to buy!
               </Link>
             </>
           ) : (

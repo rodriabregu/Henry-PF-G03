@@ -28,7 +28,7 @@ export const NavBar = () => {
   const countCart = useSelector((state: state) => state.cart.length)
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0<{ sub: string, name: string, picture?: string }>();
+  const { user } = useAuth0<{ name: string, picture?: string, sub: string }>();  //const {user} = useAuth0()
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);

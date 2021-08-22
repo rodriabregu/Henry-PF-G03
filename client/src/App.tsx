@@ -31,6 +31,7 @@ function App() {
   return (
       <Router>
         <div className="App">
+          <Route exact path='/account' component={Account}/>
           <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/adashboard" component={AdminDash} />
@@ -46,7 +47,6 @@ function App() {
           <Route exact path='/ContactUs' component={ContactUs}/>
           <Route exact path='/AboutUs' component={AboutUs}/>
           <Route exact path='/favs' component={Favs}/>
-          <Route exact path='/account' component={Account}/>
           <Route path="/checkout/:saleId/:esta" component={PostSale} />          
           <Route path="/" component={Footer} />
           

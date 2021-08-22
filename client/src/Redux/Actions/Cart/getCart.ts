@@ -25,7 +25,7 @@ export const getCart = (userId: string | undefined) => {
           return items
         }, items)
       }
-        return dispatch({
+      return dispatch({
         type: UPDATE_CART,
         payload: items
       })
