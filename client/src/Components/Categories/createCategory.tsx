@@ -44,6 +44,6 @@ const CreateCategory = () => {
       </form>
     </div>
     );
-  };
+};
 
 export default CreateCategory;
