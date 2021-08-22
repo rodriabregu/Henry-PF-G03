@@ -27,7 +27,6 @@ const AddCart = (props: {
     || { productId: product.id, units: 0 }
 
   const addCart = (/* event */) => {
-
     if (current.units < product.stock) {
       const newItems: item[] = items.filter(
         (item: item) => item.productId !== current.productId
