@@ -56,7 +56,6 @@ const Cart = () => {
         {items &&
           items.map((item) => {
             const product = products.find((product) => product.id === item.productId);
-
             if (product)
               return (
                 <div className='item'>
