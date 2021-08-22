@@ -42,12 +42,12 @@ const Cart = () => {
       }
       return item;
     });
-    dispatch(updateCart(newItems, user?.sub));
+    dispatch(updateCart(newItems, 'gitHub|23423kj34234k34k2'));
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    if (items.length > 0) dispatch(PostSale({ userId: user?.sub, items }));
+    if (items.length > 0) dispatch(PostSale({ userId: 'gitHub|23423kj34234k34k2', items }));
   };
 
   return (
