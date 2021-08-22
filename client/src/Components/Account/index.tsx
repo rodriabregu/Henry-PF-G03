@@ -18,7 +18,7 @@ const Account = () => {
                     <span>Nickname: {user?.nickname}</span>
                 </div>
             </div>
-            {console.log(user)}
+            {/* {console.log(user)} */}
         </div>
         :
         <div>

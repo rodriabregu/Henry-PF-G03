@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Offers = () => {
     return (
@@ -6,6 +5,6 @@ const Offers = () => {
             
         </div>
     )
-}
+};
 
 export default Offers;

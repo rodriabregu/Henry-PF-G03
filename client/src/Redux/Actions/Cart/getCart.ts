@@ -9,7 +9,6 @@ export const getCart = (userId: string | undefined) => {
       let items: item[] = JSON.parse(
         localStorage.getItem('products-cart') || "[]"
       )
-
       if (userId) {
         const res = await axios.get(
           `http://${config.REACT_APP_API_URL}:${config.port}/api/cart/${userId}`
@@ -29,10 +28,8 @@ export const getCart = (userId: string | undefined) => {
         type: UPDATE_CART,
         payload: items
       })
-
     } catch (error) {
       console.error(error.message || error)
     }
-  }
-
-}
+  };
+};
