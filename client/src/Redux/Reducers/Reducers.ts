@@ -8,7 +8,7 @@ import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
-import { UPDATE_CART, item } from '../Actions/Cart/updateCart'
+import { UPDATE_CART, item } from '../Actions/Cart/updateCart';
 import { POST_USER } from '../Actions/Users/postUser';
 
 const initialState: state = {
