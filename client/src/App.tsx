@@ -8,7 +8,6 @@ import Cart from './Components/Cart';
 import Login from './Components/LogIn';
 import Logout from './Components/LogOut';
 import NoAuth from './Components/NoAuth'
-import Register from './Components/Register';
 import CreateCategory from './Components/Categories/createCategory'
 import SalesList from './Components/Sales';
 import SaleDetail from './Components/Sales/saleDetail';
@@ -38,9 +37,7 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/product/:id" component={ProductDetail} />
-          {/* <Route exact path='/login' component={Login} /> */}
           <Route exact path='/logout' component={Logout} />
-          {/* <Route exact path='/register' component={Register} /> */}
           <Route exact path='/create' component={CreateProducts} />
           <Route exact path='/createCategory' component={CreateCategory}/>
           <Route exact path='/allSales' component={SalesList}/>

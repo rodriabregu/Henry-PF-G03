@@ -7,7 +7,7 @@ import PaySuccessful from './PaySuccesful';
 import ErrorPay from './ErrorPay';
 
 export default function PostSale() {
-    const { id, saleId, esta } = useParams<any>();
+    const { saleId } = useParams<any>();
 
     const [sales, setSales] = useState<any>('')
 
