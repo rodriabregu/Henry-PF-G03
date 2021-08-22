@@ -121,7 +121,6 @@ const Cart = () => {
             )
           ) : items.length > 0 ? (
             <>
-
               <Link to='/login'>
                 Login here to buy!
               </Link>

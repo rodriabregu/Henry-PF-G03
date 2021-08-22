@@ -3,10 +3,9 @@ import Loading from "../Loading/Loading";
 export const AboutUs = () => {
     return(
         <div>
-            <Loading/>
-      
+            <Loading />
         </div>
     )
-}
+};
 
 export default AboutUs;
