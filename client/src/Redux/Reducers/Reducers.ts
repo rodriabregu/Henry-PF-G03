@@ -26,6 +26,7 @@ const initialState: state = {
     hashPasword: '',
     firstName: '',
     lastName: '',
+    userType:''
   }
 };
 
