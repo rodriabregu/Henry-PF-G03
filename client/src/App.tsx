@@ -19,6 +19,7 @@ import AboutUs from './Components/AboutUs/AboutUs';
 import Favs from './Components/Favs/Favs'
 import Destiny from './Components/Destiny/Destiny'
 import Account from './Components/Account';
+import SalesAccount from './Components/Account/salesAccount';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
@@ -31,8 +32,8 @@ function App() {
   return (
       <Router>
         <div className="App">
-          <Route exact path='/account' component={Account}/>
           <Route path="/" component={NavBar} />
+          <Route exact path='/account' component={Account}/>
           <Route exact path="/" component={Landing} />
           <Route exact path="/adashboard" component={AdminDash} />
           <Route exact path="/cart" component={Cart} />
@@ -47,9 +48,9 @@ function App() {
           <Route exact path='/ContactUs' component={ContactUs}/>
           <Route exact path='/AboutUs' component={AboutUs}/>
           <Route exact path='/favs' component={Favs}/>
+          <Route exact path='/account/sales' component={SalesAccount}/>
           <Route path="/checkout/:saleId/:esta" component={PostSale} />          
           <Route path="/" component={Footer} />
-          
         </div>
       </Router>
   );
