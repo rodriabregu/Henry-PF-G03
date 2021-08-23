@@ -32,8 +32,8 @@ function App() {
   return (
       <Router>
         <div className="App">
-          <Route path="/" component={NavBar} />
           <Route exact path='/account' component={Account}/>
+          <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/adashboard" component={AdminDash} />
           <Route exact path="/cart" component={Cart} />
