@@ -33,6 +33,9 @@ function App() {
       <Router>
         <div className="App">
           <Route exact path='/account' component={Account}/>
+          {/* por favor no cambiar el orden, Account
+           se tiene que renderizar antes que NavBar paraque
+            el carrito fncione bien con la info del back */}
           <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/adashboard" component={AdminDash} />
