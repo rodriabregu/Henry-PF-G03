@@ -21,7 +21,7 @@ export class User extends Model {
   id!: string;
 
   @Column({
-    defaultValue: 'Guest',
+    defaultValue: 'User',
     ...DataType.ENUM('Guest', 'User', 'Admin')
   })
   userType!: string;

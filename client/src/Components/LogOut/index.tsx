@@ -7,6 +7,8 @@ const { user } = useAuth0();
 
 logout();
 
+    localStorage.clear();
+
     return (
         <div className='form-register'>
             <h1>Come back soon {user?.name}!</h1>

@@ -9,6 +9,7 @@ export interface user {
   hashPasword: string
   firstName: string
   lastName: string
+  userType:string
 }
 
 export const postUser = (dataUser: user) => {
