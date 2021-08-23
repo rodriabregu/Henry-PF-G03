@@ -11,7 +11,10 @@ const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: state) => state.cart);
   const url_pago = useSelector((state: state) => state.url_pago);
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0<{
+    name: string, email: string, nickname: string, sub: string
+  }>();
 
   let total = 0;
   const products: product[] = useSelector((state: state) => {
@@ -56,7 +59,6 @@ const Cart = () => {
         {items &&
           items.map((item) => {
             const product = products.find((product) => product.id === item.productId);
-
             if (product)
               return (
                 <div className='item'>
@@ -119,16 +121,15 @@ const Cart = () => {
             )
           ) : items.length > 0 ? (
             <>
-              <label>Login to buy!</label>
               <Link to='/login'>
-                <button>LogIn</button>
+                Login here to buy!
               </Link>
             </>
           ) : (
             ''
           )}
           <Link to='/home'>
-            <button>Back</button>
+            <button className='btn-backhome'>Back to home</button>
           </Link>
         </div>
       </div>

@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { AiFillStar } from 'react-icons/ai'
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
-/* import AddCart from '../Cart'; -- Pendiente por props en TS -- */
+/* import AddCart from '../Cart'; PENDIENTE DE SOLVENTAR IMPLEMENTACION TS*/
 import './Pagination.css';
 
 interface ProductsCart {
@@ -167,7 +167,7 @@ const Pagination = () => {
                                         </Link>
                                     }
                                     </div>
-                                    {/*  <AddCart 
+                                    {/* <AddCart
                                     id={e.id}
                                     name={e.name}
                                     photo={e.photos} 

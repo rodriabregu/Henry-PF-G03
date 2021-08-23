@@ -32,11 +32,11 @@ const Favs=()=>{
     return(     
         <div className='wishlist'>   
             <h1>My wishlist <AiFillStar/> My favs</h1>
-            <div className='cards-container'>
+            
         { favs ? 
             (
                 favs?.map( p =>
-                    
+                    <div className='cards-container'>        
                     <div className='card-fav'>
                         <Link to={`/product/${p.id}`}><h4>{p.name}</h4></Link>
                         <div className='btn-div'>
@@ -47,17 +47,19 @@ const Favs=()=>{
                             </div>
                         </div>
                     </div>           
-                    
+                    </div>             
                 )
             ) : <h3>Loading...</h3>
         }
         {
         favs <= 0 &&
-            <div className='emptyfavs'>
-                <h2>Your favorites list is empty, stop by and <Link to='/home'>see the latest news</Link>!</h2>
+            <div className='cardempty'>
+                <div className='emptyfavs'>
+                    <h3>Your favorites list is empty, stop by & <Link to='/home'>see the latest news</Link>!</h3>
+                </div>
             </div>
         }     
-        </div> 
+        
         </div> 
     )
 }

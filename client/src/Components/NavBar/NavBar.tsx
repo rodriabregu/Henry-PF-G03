@@ -27,13 +27,9 @@ export interface Ee {
 export const NavBar = () => {
   const dispatch: Function = useDispatch()
   const countCart = useSelector((state: state) => state.cart.length)
-  //const countProducts = useSelector((state: state) => state.AllProducts.length)
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
-  //const [renderCart, setRenderCart] = useState<number>(0);
   const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0<{ sub: string, name: string, picture?: string }>();  //const {user} = useAuth0()
-
-  //let countCart = 0;
+  const { user } = useAuth0<{ name: string, picture?: string, sub: string }>();  //const {user} = useAuth0()
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
@@ -43,7 +39,6 @@ export const NavBar = () => {
     dispatch(getProducts());
     dispatch(getCart(user?.sub))
   }, [dispatch]);
-
 
   const [admin, setAdmin] = useState(false);
 
@@ -76,7 +71,6 @@ export const NavBar = () => {
       .then(resp => console.log(resp))
   }
 
-
   return (
 
     <header>
@@ -99,7 +93,9 @@ export const NavBar = () => {
 
               <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
               <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine /> </Link>
-              <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' />{user?.name}</Link>
+
+              <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' alt='profile' />{user?.name}</Link>
+
             </div>
           )
             :

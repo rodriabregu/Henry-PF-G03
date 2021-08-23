@@ -4,11 +4,10 @@ import NavBar from './Components/NavBar/NavBar';
 import Footer from './Components/Footer/Footer';
 import ProductDetail from './Components/ProductDetail';
 import CreateProducts from './Components/Products/createNewProducts';
-import Cart from './Components/Cart/index';
+import Cart from './Components/Cart';
 import Login from './Components/LogIn';
 import Logout from './Components/LogOut';
 import NoAuth from './Components/NoAuth'
-import Register from './Components/Register';
 import CreateCategory from './Components/Categories/createCategory'
 import SalesList from './Components/Sales';
 import SaleDetail from './Components/Sales/saleDetail';
@@ -20,6 +19,7 @@ import AboutUs from './Components/AboutUs/AboutUs';
 import Favs from './Components/Favs/Favs'
 import Destiny from './Components/Destiny/Destiny'
 import Account from './Components/Account';
+import SalesAccount from './Components/Account/salesAccount';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
@@ -113,6 +113,10 @@ function App() {
     return (
       <Router>
         <div className="App">
+          <Route exact path='/account' component={Account}/>
+          {/* por favor no cambiar el orden, Account
+           se tiene que renderizar antes que NavBar paraque
+            el carrito fncione bien con la info del back */}
           <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/adashboard" component={NoAuth} />
@@ -132,7 +136,6 @@ function App() {
           <Route exact path='/account' component={Login} />
           <Route path='/destiny/:id' component={NoAuth} />
           <Route path="/checkout/:saleId/:esta" component={NoAuth} />
-
           <Route path="/" component={Footer} />
         </div>
       </Router>

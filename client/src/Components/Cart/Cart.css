@@ -9,6 +9,21 @@
     margin-bottom: 40px;
 }
 
+.cart label{
+    color:rgb(201, 46, 46);
+    border-radius: 5px;
+}
+
+.cart a{
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.cart a:hover{
+    color: white;
+    background-color: #3c3c5ee5;
+}
+
 .item{
     border-bottom: 1px solid rgb(128, 128, 128);
     border-top: 1px solid transparent;
@@ -51,7 +66,7 @@
     flex-direction: column;
 }
 
-.btn-remove, .btn-buy, .btn-confirm{
+.btn-remove, .btn-buy, .btn-confirm, .btn-backhome{
     color:  #e90e0e;
     background-color:white;
     border-bottom: 1px solid transparent;
@@ -94,13 +109,18 @@
     padding: 5px 10px 5px 10px;
 }
 
+.btn-backhome{
+    background-color:  #3c3c5e;
+    color:  #bcbdf1;
+}
+
 .btn-confirm:active {
     transform: translateY(1px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 
-.btn-buy:hover, .btn-confirm:hover{
+.btn-buy:hover, .btn-confirm:hover, .btn-backhome:hover{
     background-color:  #bcbdf1;
     color:  #2E2E48;
 }

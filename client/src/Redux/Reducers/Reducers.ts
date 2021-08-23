@@ -8,10 +8,10 @@ import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
-import { UPDATE_CART, item } from '../Actions/Cart/updateCart'
+import { UPDATE_CART, item } from '../Actions/Cart/updateCart';
 import { POST_USER } from '../Actions/Users/postUser';
 
-const initialState = {
+const initialState: state = {
   products: [], //filtro o todos
   productsDetail: {},
   AllProducts: [],
@@ -22,17 +22,17 @@ const initialState = {
   users: [],
 };
 
-interface brand {
+export interface brand {
   name: string
   id: number
 }
 
-interface photo {
+export interface photo {
   url: string
   id: number
 }
 
-interface category {
+export interface category {
   name: string
   id: number
 }
@@ -49,18 +49,23 @@ export interface product {
 }
 
 export interface state {
-  products: product [], //filtro o todos
+  products: product[], //filtro o todos
   productsDetail: {},
   AllProducts: product[],
-  cartProducts: {}[],
+  cartProducts: product[],
   sales: {}[],
   url_pago: string,
   cart: item[],
   users: any[],
 };
 
+export interface action {
+  type: string
+  payload: any;
+}
 
-function getProductReducer(state: state = initialState, action: any): state {
+
+function getProductReducer(state: state = initialState, action: action): state {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -122,7 +127,7 @@ function getProductReducer(state: state = initialState, action: any): state {
         users: [...state.users, action.payload]
       };
     default:
-      return initialState;
+      return state;
   };
 };
 

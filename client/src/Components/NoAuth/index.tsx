@@ -1,6 +1,6 @@
+import imageRedCar from './NoAuthRedCar.png';
 import './NoAuth.css';
-import imageRedCar from './NoAuthRedCar.png'
-  
+
 const Noauth = () => {
 
 return (

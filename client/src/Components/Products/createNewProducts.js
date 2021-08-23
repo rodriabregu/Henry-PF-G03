@@ -7,6 +7,8 @@ import SelectCategory from "./SelectCategory";
 import axios from 'axios'
 import config from '../../config'
 import './CreateProducts.css';
+import { NavLink as Link } from 'react-router-dom';
+import {FiArrowLeftCircle} from 'react-icons/fi';
 
 const notify = () => toast.success('Successfully product created!');
 
@@ -176,91 +178,96 @@ const CreateProducts = () => {
   };
 
   return (
-    <div className='form-create'>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div><h1>Add a new product</h1></div>
-        <div><label forhtml="name">Product name:</label>
-          {errors.name && <p className="danger">{errors.name}</p>}
-          <input
-          type="text"
-          name="name"
-          placeholder="Name product here"
-          required="required"
-          value={input.name}
-          onChange={handleInput}/> 
-        </div>
-        <div>
-          <label forhtml="photos">Photos:</label>
-          {errors.photos && <p className="danger">{errors.photos}</p>}
+    <div className='all-create'>
+      <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+            <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
+          </Link>
+          <div  className='form-create'>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div><h1>Add a new product</h1></div>
+            <div><label forhtml="name">Product name:</label>
+              {errors.name && <p className="danger">{errors.name}</p>}
+              <input
+              type="text"
+              name="name"
+              placeholder="Name product here"
+              required="required"
+              value={input.name}
+              onChange={handleInput}/> 
+            </div>
+            <div>
+              <label forhtml="photos">Photos:</label>
+              {errors.photos && <p className="danger">{errors.photos}</p>}
 
-          <input className='input-photos'
-          multiple
-          type="file"
-          name="files"
-          placeholder="Enter url photos here"
-          required="required"
-          /*value={input.photos}*/
-          onChange={handleChange}/> 
-        </div>
-        <div>
-          <label forhtml="descriptions">Description:</label>
-          {errors.description && <p className="danger">{errors.description}</p>}
+              <input className='input-photos'
+              multiple
+              type="file"
+              name="files"
+              placeholder="Enter url photos here"
+              required="required"
+              /*value={input.photos}*/
+              onChange={handleChange}/> 
+            </div>
+            <div>
+              <label forhtml="descriptions">Description:</label>
+              {errors.description && <p className="danger">{errors.description}</p>}
 
-          <input 
-          type="text"
-          name="description"
-          placeholder="Enter the description"
-          required="required"
-          value={input.description}
-          onChange={handleInput}/>
-          </div>
-        <div>
-          <label forhtml="price">Price:</label>
-          {errors.price && <p className="danger">{errors.price}</p>}
+              <input 
+              type="text"
+              name="description"
+              placeholder="Enter the description"
+              required="required"
+              value={input.description}
+              onChange={handleInput}/>
+              </div>
+            <div>
+              <label forhtml="price">Price:</label>
+              {errors.price && <p className="danger">{errors.price}</p>}
 
-          <input
-          type="number"
-          name="price"
-          placeholder="Enter the price"
-          required="required"
-          value={input.price}
-          onChange={handleInput}/>
-          </div>
-        <div>
-        <label forhtml="stock">Stock:</label>
-        {errors.stock && <p className="danger">{errors.stock}</p>}
-          <input
-            type="number"
-            name="stock"
-            placeholder="Enter the stock"
-            required="required"
-            value={input.stock}
-            onChange={handleInput}/>
-        </div>
-        <div className='brand-s'>
-          <label forhtml="brand">Brand:</label>
-          <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
-        </div>
-        <div className='categ-s'>
-          <label forhtml="categories">Category</label>
-          <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
-        </div>
-          <div className='categ-btn'>
-            {
-              input.categories.map(c => {
-                return ( 
-                  <>
-                  <button id={c.id} onClick={removeCategory}>{c.name} X</button>
-                  </>
-                )
-              })
-            }
-          </div>
-          <Toaster/>
-        <div>
-          <button className='btn-submit'>Submit</button>
-        </div>
-      </form>
+              <input
+              type="number"
+              name="price"
+              placeholder="Enter the price"
+              required="required"
+              value={input.price}
+              onChange={handleInput}/>
+              </div>
+            <div>
+            <label forhtml="stock">Stock:</label>
+            {errors.stock && <p className="danger">{errors.stock}</p>}
+              <input
+                type="number"
+                name="stock"
+                placeholder="Enter the stock"
+                required="required"
+                value={input.stock}
+                onChange={handleInput}/>
+            </div>
+            <div className='brand-s'>
+              <label forhtml="brand">Brand:</label>
+              <SelectCategory value='Crotone' name="brand" path='brand' onChange={handleChange}/>
+            </div>
+            <div className='categ-s'>
+              <label forhtml="categories">Category</label>
+              <SelectCategory name="categories" className='cboCategory' path='categories' onChange={handleCategories}/>
+            </div>
+              <div className='categ-btn'>
+                {
+                  input.categories.map(c => {
+                    return ( 
+                      <>
+                      <button id={c.id} onClick={removeCategory}>{c.name} X</button>
+                      </>
+                    )
+                  })
+                }
+              </div>
+              <Toaster/>
+            <div>
+              <button className='btn-submit'>Submit</button>
+            </div>
+          </form>
+      </div>
     </div>
   )
 };

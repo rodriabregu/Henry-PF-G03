@@ -3,6 +3,11 @@
     justify-content: center;
 }
  
+.back-sales{
+    align-self: center;
+  }
+  
+
 .sale-detail{
     display: flex;
     justify-content: center;
