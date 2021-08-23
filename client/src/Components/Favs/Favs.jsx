@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect ,useState } from 'react';
 import { NavLink as Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux';
 import './Favs.css'
 
 const Favs=()=>{
@@ -9,11 +10,14 @@ const Favs=()=>{
     /* const [user,setUser]=useState();
     const [idProduct,setIdProduct]=useState(); */
 
+    const user=useSelector(s=>s.user)
+
+
     const removeFav=async(productId)=>{        
         await axios(`http://localhost:3001/api/favs`, {
             method:'delete',
             data: {
-                userId:'gitHub|23423kj34234k34k2',
+                userId:user.id,
                 productId
             }
         })
@@ -23,7 +27,8 @@ const Favs=()=>{
     };
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/api/favs/gitHub|23423kj34234k34k2`)
+        console.log('trayendo datos del usuario con id ',user.id)
+        axios.get(`http://localhost:3001/api/favs/${user.id}`)
             .then(resp=>{
                 setFavs(resp.data);
             })
@@ -55,7 +60,7 @@ const Favs=()=>{
         favs <= 0 &&
             <div className='cardempty'>
                 <div className='emptyfavs'>
-                    <h3>Your favorites list is empty, stop by & <Link to='/home'>see the latest news</Link>!</h3>
+                    <h3>Your favorites list is empty, stop by && <Link to='/home'>see the latest news</Link>!</h3>
                 </div>
             </div>
         }     
