@@ -3,6 +3,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import { getSales } from '../../Redux/Actions/Sales/getSale';
 import CardSale from './CardSale';
 import './allSales.css';
+import { NavLink as Link } from 'react-router-dom';
+import {FiArrowLeftCircle} from 'react-icons/fi';
 
 const SalesList = () => {
     const dispatch = useDispatch();
@@ -25,7 +27,11 @@ const SalesList = () => {
 
     return (
         <div>
-            <h1>
+            <div className='back-sales'>
+            <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+            <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
+          </Link>
+          </div>
             <div className='filtro-sales'>
                 <select onChange={handleChange}>
                     <option value='---'>Filter state by:</option>
@@ -66,7 +72,6 @@ const SalesList = () => {
                 }
                 </table>
                 </div>
-            </h1>
         </div>
     )
 };

@@ -3,6 +3,8 @@ import axios from 'axios';
 import config from '../../../src/config';
 import toast, { Toaster } from 'react-hot-toast';
 import './createCategory.css';
+import { NavLink as Link } from 'react-router-dom';
+import {FiArrowLeftCircle} from 'react-icons/fi';
 
 const notify = () => toast.success('Successfully category created!');
 
@@ -29,7 +31,11 @@ const CreateCategory = () => {
   };
 
   return (
-    <div className='form-c'>
+    <div className='all-container'>
+      <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+            <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
+          </Link>
+      <div className='form-c'>
       <form onSubmit={handleSubmit}>
           <div><h1>Add a new category</h1></div>
             <div>
@@ -42,6 +48,7 @@ const CreateCategory = () => {
             <Toaster/>
             <div><h4>{message}</h4></div>
       </form>
+      </div>
     </div>
     );
 };
