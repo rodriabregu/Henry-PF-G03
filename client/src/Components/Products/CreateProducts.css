@@ -1,10 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+.all-create{
+    align-self: center;
+}
+
+.btn-dash{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #343692b7;
+    border-radius: 20px;
+    text-align: center;
+    color: #eaeaf1;
+    font-family: system-ui;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    grid-column-gap: 3px;
+    height: 30px;
+    margin-top: 30px;
+}
+
+.btn-dash:hover{
+    background-color: #343692e1;
+    color:  #bebeda;
+}
+
 .form-create{
     display: flex;
     justify-content: center;
     margin-bottom: 80px;
-    margin-top: 60px;
+    margin-top: 30px;
     font-family: 'Montserrat', sans-serif;
     background-color: #b2b2f356;
     width: 500px;
