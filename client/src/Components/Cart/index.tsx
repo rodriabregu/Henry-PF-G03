@@ -10,11 +10,12 @@ import './Cart.css';
 const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: state) => state.cart);
+  const user:any=useSelector<any>(s=>s.user)
   const url_pago = useSelector((state: state) => state.url_pago);
   const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0<{
-    name: string, email: string, nickname: string, sub: string
-  }>();
+  // const { user } = useAuth0<{
+  //   name: string, email: string, nickname: string, sub: string
+  // }>();
 
   let total = 0;
   const products: product[] = useSelector((state: state) => {
@@ -30,7 +31,7 @@ const Cart = () => {
 
   const removeCart = (removeId: number) => {
     const newItems = items.filter((item: item) => item.productId !== removeId);
-    dispatch(updateCart(newItems, user?.sub));
+    dispatch(updateCart(newItems, user.id));
   };
 
   const onChangeUnits = (event: any, stock: number) => {
@@ -45,12 +46,12 @@ const Cart = () => {
       }
       return item;
     });
-    dispatch(updateCart(newItems, user?.sub));
+    dispatch(updateCart(newItems, user.id));
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    if (items.length > 0) dispatch(PostSale({ userId: user?.sub, items }));
+    if (items.length > 0) dispatch(PostSale({ userId: user.id, items }));
   };
 
   return (
@@ -107,7 +108,7 @@ const Cart = () => {
             url_pago ? (
               <a href={url_pago}>
                 <button
-                  onClick={() => dispatch(updateCart([], user?.sub))}
+                  onClick={() => dispatch(updateCart([], user.id))}
                   className='btn-confirm'>
                   Confirm purchase
                 </button>
