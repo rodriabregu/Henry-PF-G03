@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { getSales } from '../../Redux/Actions/Sales/getSale';
 import { useAuth0 } from "@auth0/auth0-react";
 

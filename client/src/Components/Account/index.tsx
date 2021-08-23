@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { NavLink as Link } from "react-router-dom";
 import './account.css';
 
 const Account = () => {
@@ -18,7 +19,10 @@ const Account = () => {
                     <span>Nickname: {user?.nickname}</span>
                 </div>
             </div>
-            {/* {console.log(user)} */}
+            <div>
+                <h3>My purchases</h3>
+                <Link to='/account/sales'>Here!</Link>
+            </div>
         </div>
         :
         <div>
