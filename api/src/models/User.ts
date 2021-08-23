@@ -29,10 +29,10 @@ export class User extends Model {
   @Column({ defaultValue: true })
   isActive!: boolean;
 
-  @Column({ unique: true })
+  @Column(DataType.STRING)
   userName!: string;
 
-  @Column({ unique: true })
+  @Column(DataType.STRING)
   email!: string;
 
   @Column(DataType.STRING)

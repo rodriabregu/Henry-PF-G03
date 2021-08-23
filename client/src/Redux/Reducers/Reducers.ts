@@ -9,7 +9,7 @@ import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART, item } from '../Actions/Cart/updateCart';
-import { POST_USER } from '../Actions/Users/postUser';
+import { POST_USER, user } from '../Actions/Users/postUser';
 
 const initialState: state = {
   products: [], //filtro o todos
@@ -19,7 +19,14 @@ const initialState: state = {
   sales: [],
   url_pago: "",
   cart: [],
-  users: [],
+  user: {
+    id: '',
+    userName: '',
+    email: '',
+    hashPasword: '',
+    firstName: '',
+    lastName: '',
+  }
 };
 
 export interface brand {
@@ -56,7 +63,7 @@ export interface state {
   sales: {}[],
   url_pago: string,
   cart: item[],
-  users: any[],
+  user: user,
 };
 
 export interface action {
@@ -123,8 +130,7 @@ function getProductReducer(state: state = initialState, action: action): state {
       return { ...state, cart: action.payload }
     case POST_USER:
       return {
-        ...state,
-        users: [...state.users, action.payload]
+        ...state, user: action.payload
       };
     default:
       return state;

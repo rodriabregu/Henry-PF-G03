@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { User } from '../db'
+import { User, Purchase } from '../db'
 import { appUser } from '../@app'
 import { sendEmail } from '../providers'
 /* 
@@ -28,37 +28,44 @@ export default async (req: Request, res: Response) => {
     }: appUser = req.body
 
     if (!(
-      userName && /^([\-\w\.\_]{4,20})$/.test(userName)
-      && id && id.length > 6 && email 
-      && /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
-      && lastName && /[a-z]{5,}/i.test(lastName)
-      && firstName && /[a-z]{5,}/i.test(firstName)
-      && hashPasword
-
+      id && typeof id === 'string' && id.length > 6
+      //&& userName && /^([\-\w\.\_]{4,20})$/.test(userName)
+      //&& /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
+      //&& lastName && /[a-z]{5,}/i.test(lastName)
+      //&& firstName && /[a-z]{5,}/i.test(firstName)
+      //&& hashPasword && email
     ))
-      return res.status(404).json({
-        data: {},
+      throw {
         status: 404,
-        message: "datos no validos"
-      });
+        message: "data is not validate"
+      }
 
     const [newUser, isNew] = await User.findOrCreate({
       where: { id },
       defaults: {
-        email, lastName, userName,
-        hashPasword, firstName, id
-      }
+        email: email || "user.crotones@yopmail.com",
+        lastName: lastName || "user crotones",
+        userName: userName || "user crotones",
+        hashPasword: hashPasword || "user crotones",
+        firstName: firstName || "user crotones",
+      },
+      include: [
+        {
+          model: Purchase,
+          attributes: ["productId"]
+        }
+      ]
     })
-/* 
-    if (!isNew) return res.status(404).json({
-      status: 404,
-      message: `the user ${userName} alreadi exist`
-    });
- */
+    /* 
+        if (!isNew) return res.status(404).json({
+          status: 404,
+          message: `the user ${userName} alreadi exist`
+        });
+     */
     if (isNew) sendEmail(newUser.get().id, "Welcome")
 
     return res.json({
-      message: `munsage de confirmacion enviado a ${email}`,
+      message: 'successfully',
       isNew,
       user: newUser.get()
     })

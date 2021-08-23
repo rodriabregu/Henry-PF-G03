@@ -23,6 +23,7 @@ type KeyParams = {
 const ProductDetail = () => {
     const dispatch = useDispatch();
     const detail = useSelector((s: any) => s.productsDetail);
+    const user = useSelector((s: any) => s.user);
     const { id } = useParams<KeyParams>();
     const [container, setContainer] = useState<any>()
     const [photo, setPhoto] = useState(0);
@@ -31,6 +32,8 @@ const ProductDetail = () => {
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const stars = Array(5).fill(0)
+
+    console.log(user)
 
     const { handleSubmit } = useForm();
 

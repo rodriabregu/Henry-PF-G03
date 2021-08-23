@@ -19,20 +19,26 @@ import AboutUs from './Components/AboutUs/AboutUs';
 import Favs from './Components/Favs/Favs'
 import Destiny from './Components/Destiny/Destiny'
 import Account from './Components/Account';
-import SalesAccount from './Components/Account/salesAccount';
+//import SalesAccount from './Components/Account/salesAccount';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { postUser, user } from './Redux/Actions/Users/postUser';
+import { getCart } from './Redux/Actions/Cart/getCart'
 import jwt_decode from 'jwt-decode';
-import { getTokenSourceMapRange, setSyntheticLeadingComments } from 'typescript';
-import { useState } from 'react';
-
-
+//import { getTokenSourceMapRange, setSyntheticLeadingComments } from 'typescript';
 
 function App() {
   const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>();
-
-  const [admin,setAdmin]=useState(false);
+  const [admin, setAdmin] = useState(false);
+  const dispatch: Function = useDispatch()
+  const { user } = useAuth0<{
+    name: string, email: string,
+    password_hash: string,
+    nickname: string, sub: string
+  }>();
 
   async function GetToken() {
     const { getAccessTokenSilently } = useAuth0();
@@ -47,9 +53,25 @@ function App() {
     }
   }
 
-  if (isAuthenticated) {  
+  useEffect(() => {
+    if (user && isAuthenticated) {
+      const dataUser: user = {
+        id: user.sub,
+        userName: user.nickname,
+        email: user.email,
+        firstName: user.name,
+        lastName: user.nickname,
+        hashPasword: user.password_hash,
+      };
+      dispatch(postUser(dataUser))
+      dispatch(getCart(user.sub))
+    } else dispatch(getCart(""))
+  });
+
+
+  if (isAuthenticated) {
     GetToken()
-      .then(resp=>console.log(resp))  
+      .then(resp => console.log(resp))
     return (
       <Router>
         {
@@ -102,23 +124,13 @@ function App() {
         }
       </Router >
     )
-  } else if (isAuthenticated) {
-    return (
-      <Router>
-
-      </Router>
-
-    )
   } else {
     return (
       <Router>
         <div className="App">
-          <Route exact path='/account' component={Account}/>
-          {/* por favor no cambiar el orden, Account
-           se tiene que renderizar antes que NavBar paraque
-            el carrito fncione bien con la info del back */}
           <Route path="/" component={NavBar} />
           <Route exact path="/" component={Landing} />
+          <Route exact path='/account' component={Account} />
           <Route exact path="/adashboard" component={NoAuth} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/home" component={Home} />

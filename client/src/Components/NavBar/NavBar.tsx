@@ -5,7 +5,6 @@ import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line, RiLogoutBoxRLine 
 import { FaBars } from 'react-icons/fa';
 import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
-import { getCart } from '../../Redux/Actions/Cart/getCart'
 import { state } from '../../Redux/Reducers/Reducers'
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import jwt_decode from 'jwt-decode';
@@ -37,7 +36,6 @@ export const NavBar = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getCart(user?.sub))
   }, [dispatch]);
 
   const [admin, setAdmin] = useState(false);
