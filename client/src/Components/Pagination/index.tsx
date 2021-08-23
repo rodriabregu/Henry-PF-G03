@@ -29,9 +29,10 @@ interface ProductsCart {
 const Pagination = () => {
     const dispatch = useDispatch();
     const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>(); 
-    const { user } = useAuth0<{ name: string, picture?: string, email: string, nickname: string, sub: string }>();
+    //const { user } = useAuth0<{ name: string, picture?: string, email: string, nickname: string, sub: string }>();
     const products: any = useSelector<any>(s => s.products);
     const productDetail: any = useSelector<any>(s => s.productsDetail);
+    const user:any=useSelector<any>(s=>s.user)
     const [filterp, setFilterp] = useState([]);
     const [favs, setFavs] = useState<any>([]);
 
@@ -43,7 +44,7 @@ const Pagination = () => {
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
 
-
+    
 
     const handleClick = (e: any) => {
         setcurrentPage(Number(e.target.id));
@@ -114,8 +115,8 @@ const Pagination = () => {
     const addFav = async (productId:any) => {
         console.log('user?.sub',user?.sub)
         try {
-            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: "gitHub|23423kj34234k34k2" })
-            console.log(`agregando ${productId} - ${resp.data}`)
+            let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: user.id })
+            //console.log(`agregando ${productId} - ${resp.data}`)
             setFavs({ ...favs, productId })
         } catch (e) {
             console.log(e.response)
