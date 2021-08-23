@@ -42,6 +42,9 @@ const Pagination = () => {
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(8);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
+
+
+
     const handleClick = (e: any) => {
         setcurrentPage(Number(e.target.id));
     };

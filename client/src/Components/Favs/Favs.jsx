@@ -13,7 +13,7 @@ const Favs=()=>{
         await axios(`http://localhost:3001/api/favs`, {
             method:'delete',
             data: {
-                userId:1,
+                userId:'gitHub|23423kj34234k34k2',
                 productId
             }
         })
@@ -23,7 +23,7 @@ const Favs=()=>{
     };
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/api/favs/1`)
+        axios.get(`http://localhost:3001/api/favs/gitHub|23423kj34234k34k2`)
             .then(resp=>{
                 setFavs(resp.data);
             })

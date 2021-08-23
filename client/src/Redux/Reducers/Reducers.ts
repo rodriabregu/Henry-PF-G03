@@ -56,7 +56,7 @@ export interface state {
   sales: {}[],
   url_pago: string,
   cart: item[],
-  users: any[]
+  users: any[],
 };
 
 export interface action {

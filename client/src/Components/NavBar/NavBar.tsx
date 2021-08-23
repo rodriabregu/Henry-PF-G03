@@ -8,6 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { getCart } from '../../Redux/Actions/Cart/getCart'
 import { state } from '../../Redux/Reducers/Reducers'
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import jwt_decode from 'jwt-decode';
 
 export interface Ee {
   "name": "<anystring>",
@@ -39,7 +40,39 @@ export const NavBar = () => {
     dispatch(getCart(user?.sub))
   }, [dispatch]);
 
+  const [admin, setAdmin] = useState(false);
+
+  async function GetToken() {
+    const { getAccessTokenSilently } = useAuth0();
+    const token = await getAccessTokenSilently();
+    var aux: any = await jwt_decode(token);
+    if (aux.permissions[0] === "admin") {
+      setAdmin(true)
+      return 'es admin'
+    } else {
+      setAdmin(false)
+      return 'no es admin'
+    }
+  }
+
+
+  /* 
+    useEffect(() => {
+      const allCartNoJson:any = localStorage.getItem('products-cart');
+      const allCart = JSON.parse(allCartNoJson)
+      allCart?.forEach((e:any) => {
+        countCart += e.value.value
+        setRenderCart(countCart)
+      });
+    });
+   */
+  if (isAuthenticated) {
+    GetToken()
+      .then(resp => console.log(resp))
+  }
+
   return (
+
     <header>
       <nav>
         <div className='nav-container'>
@@ -54,9 +87,13 @@ export const NavBar = () => {
                 <RiShoppingCartLine />
               </Link>
 
-              <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+              {
+                admin && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+              }
+
               <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
               <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine /> </Link>
+
               <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' alt='profile' />{user?.name}</Link>
 
             </div>
