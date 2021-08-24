@@ -10,7 +10,7 @@ export function getProductsDetail(productId: number) {
     )
     dispatch({
       type: GET_PRODUCTS_DETAIL,
-      payload: res.product
+      payload: res.data.product
     })
   };
 };
