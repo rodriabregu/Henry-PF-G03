@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
-import { updateCart, item } from '../../Redux/Actions/Cart/updateCart';
-import { state, product, brand, photo, category } from '../../Redux/Reducers/Reducers'
+import { updateCart, } from '../../Redux/Actions/Cart/updateCart';
+import { state, item, product, brand, photo, category } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import '../ProductDetail/productDetail.css';
 
@@ -14,9 +14,9 @@ const AddCart = (props: {
   brand: brand
   photos: photo[]
   categories: category[]
-}) => { 
+}) => {
 
-  const product: product = props 
+  const product: product = props
 
   const dispatch = useDispatch();
   const { user } = useAuth0<{ sub: string }>();

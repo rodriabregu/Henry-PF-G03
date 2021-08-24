@@ -5,7 +5,7 @@ import { useParams, NavLink as Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
-import { state } from "../../Redux/Reducers/Reducers"
+import { state, product, user } from '../../typesApp'
 import EditingProduct from './editingComp';
 import AddCart from '../Products/addCart';
 import toast, { Toaster } from 'react-hot-toast';

@@ -25,8 +25,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { postUser, user } from './Redux/Actions/Users/postUser';
+import { postUser } from './Redux/Actions/Users/postUser';
 import { getCart } from './Redux/Actions/Cart/getCart'
+import { user } from './typesApp'
 import jwt_decode from 'jwt-decode';
 import SalesAccount from './Components/Account/salesAccount';
 //import { getTokenSourceMapRange, setSyntheticLeadingComments } from 'typescript';
