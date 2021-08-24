@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { state, product, user } from '../../typesApp'
 import EditingProduct from './editingComp';
-import AddCart from '../Products/addCart';
+import AddCart from '../Cart/addCart';
 import toast, { Toaster } from 'react-hot-toast';
 import config from '../../../src/config';
 import './productDetail.css';
@@ -19,7 +19,7 @@ const colors = {
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
-  const detail = useSelector((s: any) => s.productsDetail);
+  const detail: product = useSelector((s: state) => s.productsDetail);
   const user = useSelector((state: state) => state.user);
   const { id } = useParams<{ id: string }>();
   const [container, setContainer] = useState<any>()
@@ -104,7 +104,7 @@ const ProductDetail = () => {
         <div className='imgs'>
           <Link to='/home'><button className='btn-back'>Back to page</button></Link>
           <div className='product-img'>
-            <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
+            <img src={detail.photos[photo]?.url} alt='img not found' width='380px' height='380px' />
           </div>
           <div className='subdetail'>
             <button name='prev' onClick={changePhoto}>{`<`}</button>
@@ -121,17 +121,8 @@ const ProductDetail = () => {
               <h3>{detail.description}</h3>
               <h3>Stock:{detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
               <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
-              <AddCart
-                id={detail.id}
-                name={detail.name}
-                photos={detail.photos}
-                stock={detail.stock}
-                price={detail.price}
-                description={detail.description}
-                categories={detail.categories}
-                brand={detail.brand}
-              />
-              <h3>Review: {detail.review}</h3>
+              <AddCart product={detail} />
+              <h3>Review: {detail.reviews}</h3>
               {
                 container?.map((r: any) => {
                   return (

@@ -1,28 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
 import { updateCart, } from '../../Redux/Actions/Cart/updateCart';
-import { state, item, product, brand, photo, category } from '../../typesApp'
+import { state, item, brand, photo, category, product } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import '../ProductDetail/productDetail.css';
 
-const AddCart = (props: {
-  id: number
-  name: string
-  description: string
-  price: number
-  stock: number
-  brand: brand
-  photos: photo[]
-  categories: category[]
-}) => {
+const AddCart = (props: { product: product }) => {
 
-  const product: product = props
-
+  const { product } = props
   const dispatch = useDispatch();
   const { user } = useAuth0<{ sub: string }>();
   const items: item[] = useSelector((state: state): item[] => state.cart);
   const current: item =
-    items.find((item: item): boolean => item.productId === product.id)
+    items.find((item: item) => item.productId === product.id)
     || { productId: product.id, units: 0 }
 
   const addCart = (/* event */) => {

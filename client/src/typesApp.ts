@@ -4,6 +4,13 @@ export interface brand {
   id: number
 }
 
+export interface review {
+  text: string
+  id: number
+  stars: number
+  ProductId: number
+}
+
 export interface item {
   productId: number
   units: number
@@ -36,13 +43,14 @@ export interface product {
   price: number
   stock: number
   brand: brand
+  reviews: review[]
   photos: photo[]
   categories: category[]
 }
 
 export interface state {
   products: product[], 
-  productsDetail: {},
+  productsDetail: product,
   AllProducts: product[],
   sales: {}[],
   url_pago: string,

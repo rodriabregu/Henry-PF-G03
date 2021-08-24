@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { AiFillStar } from 'react-icons/ai'
 import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
-/* import AddCart from '../Cart'; PENDIENTE DE SOLVENTAR IMPLEMENTACION TS*/
+//import AddCart from '../Cart'; // PENDIENTE DE SOLVENTAR IMPLEMENTACION TS*/
 import './Pagination.css';
 
 const Pagination = () => {

@@ -13,7 +13,17 @@ import { state } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
-  productsDetail: {},
+  productsDetail: {
+    id: 0,
+    name: '',
+    description: '',
+    price: 0,
+    stock: 0,
+    reviews: [],
+    brand: { name: '', id: 0 },
+    photos: [],
+    categories: []
+  },
   AllProducts: [],
   sales: [],
   url_pago: "",
