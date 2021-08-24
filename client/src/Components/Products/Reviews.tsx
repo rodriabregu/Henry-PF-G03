@@ -17,7 +17,7 @@ export const Reviews = (props: { productId: number }) => {
   const { productId } = props
   const user = useSelector((state: state) => state.user);
   const [show, setShow] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState(0);
+  const [currentValue, setCurrentValue] = useState(1);
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0)
   const product: product = useSelector(
@@ -28,7 +28,7 @@ export const Reviews = (props: { productId: number }) => {
   const [review, setReview] = useState({
     id: 0,
     text: '',
-    stars: 0,
+    stars: 1,
     ProductId: 0,
   });
 
