@@ -72,7 +72,7 @@ function App() {
       dispatch(postUser(dataUser))
       dispatch(getCart(user.sub))
     } else dispatch(getCart(""))
-  });
+  },[]);
 
 
   if (isAuthenticated) {
