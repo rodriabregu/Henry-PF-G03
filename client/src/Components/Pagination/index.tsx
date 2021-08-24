@@ -140,7 +140,7 @@ const Pagination = () => {
                     <div>${e.price}.00</div>
                     <img src={e.photos ? e.photos[0].url : ''} height='200px' width='200px' alt={e.name} />
                   </Link>
-                  <div>
+                  <div className='btns-add'>
                     {
                       isAuthenticated ?
                         <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e: any) => addFav(e.target.id)}>Add to favs <AiFillStar /></button>
@@ -149,8 +149,8 @@ const Pagination = () => {
                           <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e: any) => addFav(e.target.id)}>Add to favs <AiFillStar /></button>
                         </Link>
                     }
-                  </div>
                   <AddDropCart product={e} />
+                  </div>
                 </div>
               )
             })

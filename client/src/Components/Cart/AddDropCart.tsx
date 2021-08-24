@@ -5,7 +5,7 @@ import { updateCart, } from '../../Redux/Actions/Cart/updateCart';
 import { state, item, product } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import { IoTrashOutline } from 'react-icons/io5';
-import '../ProductDetail/productDetail.css';
+import '../Pagination/index';
 import './Cart.css';
 
 export const AddDropCart = (props: { product: product }) => {
@@ -35,10 +35,10 @@ export const AddDropCart = (props: { product: product }) => {
 
   return (
     current.units > 0 ?
-      <button className='btn-remove' onClick={handleCart}>
-        Remove to cart <IoTrashOutline />
+      <button className='btn-removecart' onClick={handleCart}>
+        Remove <TiShoppingCart />
       </button>
-      : <button className='btn-cart' onClick={handleCart}>
+      : <button className='btn-addc' onClick={handleCart}>
         Add to cart <TiShoppingCart />
       </button>
 

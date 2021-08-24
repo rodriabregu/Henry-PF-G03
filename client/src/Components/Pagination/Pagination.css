@@ -97,7 +97,12 @@
     width: 30vh;
 }
 
-.btn-fav, .filters button{
+.btns-add{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn-fav, .btn-addc, .filters button{
     color:  #7b7bc2;
     background-color:white;
     border-bottom: 1px solid transparent;
@@ -110,7 +115,7 @@
 }
 
 
-.btn-fav{
+.btn-fav, .btn-addc{
   display: inline-flex;
   align-items: center;
   grid-column-gap: 3px;
@@ -120,7 +125,7 @@
   text-decoration: none;
 }
 
-.btn-fav:active {
+.btn-fav:active, .btn-addc:active {
   transform: translateY(1px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
