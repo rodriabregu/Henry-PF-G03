@@ -107,7 +107,7 @@ const Cart = () => {
           <h3>Subtotal to pay: ${total}.00</h3>
           {isAuthenticated ? (
             url_pago ? (
-              <a href={url_pago}>
+              <a style={{textDecoration:'none'}} href={url_pago}>
                 <button
                   onClick={() => dispatch(updateCart([], user.id))}
                   className='btn-confirm'>
