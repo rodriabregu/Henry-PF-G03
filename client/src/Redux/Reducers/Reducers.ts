@@ -8,7 +8,7 @@ import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART } from '../Actions/Cart/updateCart';
-import { POST_USER } from '../Actions/Users/postUser';
+import { UDATE_USER } from '../Actions/Users/postUser';
 import { UPDATE_PRODUCT } from '../Actions/Products/addReview'
 import { state, product,userNull, productNull } from '../../typesApp'
 
@@ -87,7 +87,7 @@ function getProductReducer(state: state = initialState, action: action): state {
       }
     case UPDATE_CART:
       return { ...state, cart: action.payload }
-    case POST_USER:
+    case UDATE_USER:
       return {
         ...state, user: action.payload
       };
