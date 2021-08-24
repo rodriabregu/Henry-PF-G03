@@ -47,7 +47,7 @@ function App() {
     const { getAccessTokenSilently } = useAuth0();
     const token = await getAccessTokenSilently();
     var aux: any = await jwt_decode(token);
-    if (aux.permissions[0] === "admin") {
+    if (aux.permissions[0] === "Admin") {
       setAdmin(true)
       return 'es admin'
     } else {
