@@ -76,7 +76,7 @@ const CreateProducts = () => {
     stock: 0,
     brand: 'ADIDAS',
     categories: [],
-    files:null
+    files:[]
   });
 
   function handleInput(e) {
@@ -97,7 +97,7 @@ const CreateProducts = () => {
       console.log(e)
       setInput({
         ...input,
-        [e.target.name]:e.target.files
+        [e.target.name]:[...input.files,e.target.files]
       })
     }else{
       setInput({
@@ -139,7 +139,7 @@ const CreateProducts = () => {
     "description": input.description,
     "brand": input.brand
   },
-  "photos": input.photos,
+  "photos": [],
   "categories": input.categories.map(c=>c.id),
   "brand": input.brand,
  };
@@ -148,8 +148,11 @@ const CreateProducts = () => {
     e.preventDefault();
 
     const f=new FormData();
+    
+    input.files.forEach(pic=>{
+      f.append('files',pic[0])
+    })
 
-    f.append('files',input.files[0]);
     axios({
       method: "post",
       url: `http://${config.REACT_APP_API_URL}:${config.port}/api/photos`,
@@ -158,8 +161,9 @@ const CreateProducts = () => {
     })
       .then(function (response) {
         
-        const foto=`${response.data}`
-        product.photos=[foto];
+        product.photos=response.data;
+        //console.log('fotos del producto',product.photos)
+        console.log('despachando producto ',product)
         dispatch(postProducts(product))
       })
       .catch(function (response) {
@@ -174,6 +178,7 @@ const CreateProducts = () => {
       stock: 0,
       brand:'',
       categories: [],
+      files:[]
     })
   };
 
