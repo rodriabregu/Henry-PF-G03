@@ -9,21 +9,11 @@ import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART } from '../Actions/Cart/updateCart';
 import { POST_USER } from '../Actions/Users/postUser';
-import { state } from '../../typesApp'
+import { state, productNull } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
-  productsDetail: {
-    id: 0,
-    name: '',
-    description: '',
-    price: 0,
-    stock: 0,
-    reviews: [],
-    brand: { name: '', id: 0 },
-    photos: [],
-    categories: []
-  },
+  productsDetail: productNull,
   AllProducts: [],
   sales: [],
   url_pago: "",

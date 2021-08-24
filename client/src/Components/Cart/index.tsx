@@ -27,7 +27,9 @@ const Cart = () => {
   });
 
   const removeCart = (removeId: number) => {
-    const newItems = items.filter((item: item) => item.productId !== removeId);
+    const newItems = items.filter(
+      (item: item) => item.productId !== removeId
+    );
     dispatch(updateCart(newItems, user.id));
   };
 

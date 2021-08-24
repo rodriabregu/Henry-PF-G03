@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { product, state, user } from '../../typesApp'
-import { AddDropCart } from '../Cart/AddDropCart'
+import { UpdateCart } from '../Cart/UpdateCart'
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -149,7 +149,7 @@ const Pagination = () => {
                           <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e: any) => addFav(e.target.id)}>Add to favs <AiFillStar /></button>
                         </Link>
                     }
-                  <AddDropCart product={e} />
+                    <UpdateCart product={e} showUnits={false} />
                   </div>
                 </div>
               )

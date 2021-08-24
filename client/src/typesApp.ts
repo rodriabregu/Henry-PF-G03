@@ -57,3 +57,16 @@ export interface state {
   cart: item[],
   user: user,
 };
+
+
+export const productNull = {
+  id: 0,
+  name: '',
+  description: '',
+  price: 0,
+  stock: 0,
+  reviews: [],
+  brand: { name: '', id: 0 },
+  photos: [],
+  categories: []
+}

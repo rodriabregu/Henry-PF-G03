@@ -5,7 +5,7 @@ import { state, item, product } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import '../ProductDetail/productDetail.css';
 
-export const UnitsCart = (props: { product: product }) => {
+export const AddCart = (props: { product: product }) => {
 
   const { product } = props
   const dispatch = useDispatch();
@@ -15,6 +15,16 @@ export const UnitsCart = (props: { product: product }) => {
     items.find((item: item) => item.productId === product.id)
     || { productId: product.id, units: 0 }
 
+  const addCart = (/* event */) => {
+    if (current.units < product.stock) {
+      const newItems: item[] = items.filter(
+        (item: item) => item.productId !== current.productId
+      );
+      current.units += 1;
+      newItems.push(current);
+      dispatch(updateCart(newItems, user?.sub));
+    }
+  };
 
   const handleUnits = (event: any) => {
     let value = parseInt(event.target.value);
@@ -28,15 +38,24 @@ export const UnitsCart = (props: { product: product }) => {
     dispatch(updateCart(newItems, user?.sub));
   };
 
-  return (current.units > 0 ?
+  return (
     <div className='add-cart'>
-      <input
-        type='number'
-        value={current.units}
-        onChange={handleUnits}
-      />
-      <span> ${current.units * product.price}.00 </span>
+      <div>
+        <button className='btn-cart' onClick={addCart}>
+          Add to cart
+          <TiShoppingCart />
+        </button>
+        {current.units > 0 && (
+          <input
+            type='number'
+            min={1}
+            max={product.stock}
+            value={current.units}
+            onChange={handleUnits}
+          />
+        )}
+        {current.units > 0 && <span> ${current.units * product.price}.00 </span>}
+      </div>
     </div>
-    : <></>
   );
 };

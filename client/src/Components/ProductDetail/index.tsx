@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { state, product, photo } from '../../typesApp'
 import EditingProduct from './editingComp';
-import { AddCart } from '../Cart/CartAdd'
+import { AddCart } from '../Cart/AddCart'
 import toast, { Toaster } from 'react-hot-toast';
 import config from '../../../src/config';
 import './productDetail.css';
@@ -29,8 +29,6 @@ const ProductDetail = () => {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0)
-
-  console.log(user)
 
   const { handleSubmit } = useForm();
 
