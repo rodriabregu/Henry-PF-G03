@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { TiShoppingCart } from 'react-icons/ti';
 import { updateCart, } from '../../Redux/Actions/Cart/updateCart';
-import { state, item, brand, photo, category, product } from '../../typesApp'
+import { state, item, product } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import '../ProductDetail/productDetail.css';
 
-const AddCart = (props: { product: product }) => {
+export const AddCart = (props: { product: product }) => {
 
   const { product } = props
   const dispatch = useDispatch();
@@ -57,5 +57,3 @@ const AddCart = (props: { product: product }) => {
     </div>
   );
 };
-
-export default AddCart;

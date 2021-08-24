@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
 import { state, product, photo } from '../../typesApp'
 import EditingProduct from './editingComp';
-import AddCart from '../Cart/addCart';
+import { AddCart } from '../Cart/CartAdd'
 import toast, { Toaster } from 'react-hot-toast';
 import config from '../../../src/config';
 import './productDetail.css';

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { product, state, user } from '../../typesApp'
-import AddCart from '../Cart/addCart';
+import { AddDropCart } from '../Cart/AddDropCart'
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -150,7 +150,7 @@ const Pagination = () => {
                         </Link>
                     }
                   </div>
-                  <AddCart product={e} />
+                  <AddDropCart product={e} />
                 </div>
               )
             })

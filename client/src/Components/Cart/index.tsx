@@ -13,9 +13,6 @@ const Cart = () => {
   const user: any = useSelector<any>(s => s.user)
   const url_pago = useSelector((state: state) => state.url_pago);
   const { isAuthenticated } = useAuth0();
-  // const { user } = useAuth0<{
-  //   name: string, email: string, nickname: string, sub: string
-  // }>();
 
   let total = 0;
   const products: product[] = useSelector((state: state) => {
@@ -59,7 +56,9 @@ const Cart = () => {
       <div>
         {items &&
           items.map((item) => {
-            const product = products.find((product) => product.id === item.productId);
+            const product = products.find(
+              (product) => product.id === item.productId
+            );
             if (product)
               return (
                 <div className='item'>
