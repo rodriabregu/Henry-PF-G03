@@ -123,7 +123,10 @@ const Pagination = () => {
             productDetail?.map((e: IInfo, index: number) => {
               return (
                 <div className='imgproducts' key={index}>
-                  <Link style={{ textDecoration: 'none', color: '#000000' }} to={`/product/${e.id}`}>
+                  <Link
+                    style={{ textDecoration: 'none', color: '#000000' }}
+                    to={`/product/${e.id}`}
+                  >
                     <h2>{e.name.toUpperCase()}</h2>
                     <h3>${e.price}.00</h3>
                     <img src={e.img} alt={e.name} />

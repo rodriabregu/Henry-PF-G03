@@ -16,7 +16,7 @@ export default async (req: Request, res: Response) => {
 
     return res.json({
       message: "successfully ",
-      data: product.get()
+      product: product.get()
     })
 
   } catch (error) {
