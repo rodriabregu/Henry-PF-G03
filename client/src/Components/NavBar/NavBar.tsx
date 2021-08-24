@@ -15,7 +15,9 @@ export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string, sub: string }>();  //const {user} = useAuth0()
+
   const userLog: user = useSelector((s: state) => s.user)
+
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
@@ -60,7 +62,11 @@ export const NavBar = () => {
                 <RiShoppingCartLine />
               </Link>
               {
+
+                //admin && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+
                 userLog?.userType === 'Admin' && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+
               }
               <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
               <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine /> </Link>
