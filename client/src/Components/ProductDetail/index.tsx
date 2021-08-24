@@ -5,7 +5,7 @@ import { useParams, NavLink as Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
-import { state, product, user } from '../../typesApp'
+import { state, product, photo } from '../../typesApp'
 import EditingProduct from './editingComp';
 import AddCart from '../Cart/addCart';
 import toast, { Toaster } from 'react-hot-toast';
@@ -51,8 +51,7 @@ const ProductDetail = () => {
   const notify = () => toast.success('Successfully review created!');
 
   const onSubmit = async () => {
-    const rev = review;
-    await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, rev);
+    await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, review);
     notify();
   };
 
@@ -108,7 +107,9 @@ const ProductDetail = () => {
           </div>
           <div className='subdetail'>
             <button name='prev' onClick={changePhoto}>{`<`}</button>
-            {detail.photos ? detail.photos.map((f: any) => <img src={f.url} width='50px' height='50px' alt='not found'></img>) : ''}
+            {detail.photos.map((f: photo) =>
+              <img src={f.url} width='50px' height='50px' alt='not found' />
+            )}
             <button name='next' onClick={changePhoto}>{`>`}</button>
           </div>
         </div>
@@ -119,10 +120,10 @@ const ProductDetail = () => {
               <h1>{detail.name}</h1>
               <h2>${detail.price}.00</h2>
               <h3>{detail.description}</h3>
-              <h3>Stock:{detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
-              <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
+              <h3>Stock:{detail.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
+              <h3>Brand: {detail.brand.name}</h3>
               <AddCart product={detail} />
-              <h3>Review: {detail.reviews}</h3>
+              <h3>Review: {review.text}</h3>
               {
                 container?.map((r: any) => {
                   return (
