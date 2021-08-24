@@ -16,6 +16,8 @@ import putCart from '../controllers/putCart'
 import putProduct from '../controllers/putProduct'
 import putSale from '../controllers/putSale'
 import getUsersInfo from '../controllers/getUsersInfo'
+import putUserRol from '../controllers/putUserRol';
+import deleteUser from '../controllers/deleteUser';
 
 import products from './products';
 import category from './categories';
@@ -43,6 +45,8 @@ router.put('/cart/:userId', putCart)
 router.put('/product', putProduct)
 router.put('/sale', putSale)
 router.get('/getUsersInfo',getUsersInfo)
+router.put('/putRol',putUserRol)
+router.put('/deleteUser',deleteUser)
 
 router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);

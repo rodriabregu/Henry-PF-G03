@@ -24,7 +24,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postUser } from './Redux/Actions/Users/postUser';
 import { getCart } from './Redux/Actions/Cart/getCart'
 import { user } from './typesApp'
@@ -43,18 +43,20 @@ function App() {
     nickname: string, sub: string
   }>();
 
-  async function GetToken() {
+  const userLog:any=useSelector<any>(s=>s.user)
+
+  /*async function GetToken() {
     const { getAccessTokenSilently } = useAuth0();
     const token = await getAccessTokenSilently();
     var aux: any = await jwt_decode(token);
-    if (aux.permissions[0] === "admin") {
+    if (aux.permissions[0] === "Admin") {
       setAdmin(true)
       return 'es admin'
     } else {
       setAdmin(false)
       return 'no es admin'
     }
-  }
+  }*/
 
   useEffect(() => {
     if (user && isAuthenticated) {
@@ -74,12 +76,12 @@ function App() {
 
 
   if (isAuthenticated) {
-    GetToken()
-      .then(resp => console.log(resp))
+    /*GetToken()
+      .then(resp => console.log(resp))*/
     return (
       <Router>
         {
-          admin ? (
+          userLog.userType==="Admin" ? (
             <div className="App">
               <Route path="/" component={NavBar} />
               <Route exact path="/" component={Landing} />
