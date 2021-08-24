@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink as Link } from 'react-router-dom';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line, RiLogoutBoxRLine } from 'react-icons/ri';
 import { FaBars } from 'react-icons/fa';
-import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { state } from '../../Redux/Reducers/Reducers'
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import jwt_decode from 'jwt-decode';
+import './NavBar.css';
 
 export interface Ee {
   "name": "<anystring>",

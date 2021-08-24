@@ -28,6 +28,7 @@ import { useDispatch } from 'react-redux';
 import { postUser, user } from './Redux/Actions/Users/postUser';
 import { getCart } from './Redux/Actions/Cart/getCart'
 import jwt_decode from 'jwt-decode';
+import SalesAccount from './Components/Account/salesAccount';
 //import { getTokenSourceMapRange, setSyntheticLeadingComments } from 'typescript';
 
 function App() {
@@ -117,6 +118,7 @@ function App() {
               <Route exact path='/AboutUs' component={AboutUs} />
               <Route exact path='/favs' component={Favs} />
               <Route exact path='/account' component={Account} />
+              <Route exact path='/account/sales' component={SalesAccount}/>
               <Route path="/checkout/:saleId/:esta" component={PostSale} />
               <Route path='/destiny/:id' component={Destiny} />
               <Route path="/" component={Footer} />
