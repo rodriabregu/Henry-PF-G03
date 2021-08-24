@@ -3,7 +3,6 @@ import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
 import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
-import { ADD_CART_PRODUCTS } from '../Actions/Products/addingCart';
 import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
@@ -15,7 +14,6 @@ const initialState: state = {
   products: [], //filtro o todos
   productsDetail: {},
   AllProducts: [],
-  cartProducts: [],
   sales: [],
   url_pago: "",
   cart: [],
@@ -26,7 +24,7 @@ const initialState: state = {
     hashPasword: '',
     firstName: '',
     lastName: '',
-    userType:''
+    userType: ''
   }
 };
 
@@ -60,7 +58,6 @@ export interface state {
   products: product[], //filtro o todos
   productsDetail: {},
   AllProducts: product[],
-  cartProducts: product[],
   sales: {}[],
   url_pago: string,
   cart: item[],
@@ -105,11 +102,6 @@ function getProductReducer(state: state = initialState, action: action): state {
       return {
         ...state,
         products: [...state.products, action.payload]
-      }
-    case ADD_CART_PRODUCTS:
-      return {
-        ...state,
-        cartProducts: state.cartProducts.concat(action.payload)
       }
     case POST_SALE:
       return {
