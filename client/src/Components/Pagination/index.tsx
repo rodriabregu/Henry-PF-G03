@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFilteredProducts } from '../../Redux/Actions/Products/getFilteredProducts';
 import { clearFilters } from '../../Redux/Actions/Products/clearFilters';
 import { product, state, user } from '../../typesApp'
-import AddCart from '../Cart/addCart';
+import { AddDropCart } from '../Cart/AddDropCart'
 import { IInfo } from "../../Data/index";
 import { NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -140,7 +140,7 @@ const Pagination = () => {
                     <div>${e.price}.00</div>
                     <img src={e.photos ? e.photos[0].url : ''} height='200px' width='200px' alt={e.name} />
                   </Link>
-                  <div>
+                  <div className='btns-add'>
                     {
                       isAuthenticated ?
                         <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e: any) => addFav(e.target.id)}>Add to favs <AiFillStar /></button>
@@ -149,8 +149,8 @@ const Pagination = () => {
                           <button style={{ textDecoration: 'none' }} className='btn-fav' id={`${e.id}`} onClick={(e: any) => addFav(e.target.id)}>Add to favs <AiFillStar /></button>
                         </Link>
                     }
+                  <AddDropCart product={e} />
                   </div>
-                  <AddCart product={e} />
                 </div>
               )
             })

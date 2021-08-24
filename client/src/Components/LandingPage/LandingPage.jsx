@@ -18,7 +18,7 @@ export const Landing = () => {
 
     return (
     <div className='landing'>
-        <Slide />
+        {/* <Slide /> */}
         {/* <div><img className="loading" src="https://images6.alphacoders.com/115/thumb-1920-1158225.png" alt="Enter" /></div> */}
        {/*  <Offers filterProducts={filterProducts}/> */}
     </div>
