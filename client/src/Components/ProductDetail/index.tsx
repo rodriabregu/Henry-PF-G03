@@ -8,6 +8,7 @@ import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetai
 import { state, product, photo } from '../../typesApp'
 import EditingProduct from './editingComp';
 import { AddCart } from '../Cart/AddCart'
+import { Reviews } from '../Products/Reviews'
 import toast, { Toaster } from 'react-hot-toast';
 import config from '../../../src/config';
 import './productDetail.css';
@@ -121,7 +122,8 @@ const ProductDetail = () => {
               <h3>Stock:{detail.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
               <h3>Brand: {detail.brand.name}</h3>
               <AddCart product={detail} />
-              <h3>Review: {review.text}</h3>
+              <Reviews productId={detail.id} />
+              {/* <h3>Review: {review.text}</h3>
               {
                 container?.map((r: any) => {
                   return (
@@ -162,7 +164,7 @@ const ProductDetail = () => {
                     </form>
                   </div>
                 }
-              </div>
+              </div> */}
             </div>
             :
             <div>
