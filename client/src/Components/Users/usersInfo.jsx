@@ -50,7 +50,6 @@ const UsersInfo = () => {
             */
     }
 
-
     return (
         <div>
             <table>
