@@ -8,8 +8,9 @@ import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART } from '../Actions/Cart/updateCart';
-import { POST_USER } from '../Actions/Users/postUser';
-import { state, productNull } from '../../typesApp'
+import { UDATE_USER } from '../Actions/Users/postUser';
+import { UPDATE_PRODUCT } from '../Actions/Products/addReview'
+import { state, product,userNull, productNull } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
@@ -18,15 +19,7 @@ const initialState: state = {
   sales: [],
   url_pago: "",
   cart: [],
-  user: {
-    id: '',
-    userName: '',
-    email: '',
-    hashPasword: '',
-    firstName: '',
-    lastName: '',
-    userType: ''
-  }
+  user: userNull
 };
 
 export interface action {
@@ -83,9 +76,18 @@ function getProductReducer(state: state = initialState, action: action): state {
         ...state,
         sales: state.sales.filter((p: any) => p.id !== action.payload.id).concat(action.payload)
       };
+    case UPDATE_PRODUCT:
+      return {
+        ...state, products: state.products.map<product>(
+          (product: product): product => {
+            if (product.id === action.payload.id)
+              return action.payload
+            else return product
+          })
+      }
     case UPDATE_CART:
       return { ...state, cart: action.payload }
-    case POST_USER:
+    case UDATE_USER:
       return {
         ...state, user: action.payload
       };
