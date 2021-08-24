@@ -51,7 +51,10 @@ export default async (req: Request, res: Response) => {
       where: { name: product.name },
       defaults: { ...product, brandId }
     }))
-    if (!isNew) throw { status: 404, mesage: 'already exist a product to this name' }
+    if (!isNew) throw {
+      status: 404,
+      mesage: 'already exist a product to this name'
+    }
     const productId = await neWProduct.getDataValue('id');
 
     await Promise.all(
