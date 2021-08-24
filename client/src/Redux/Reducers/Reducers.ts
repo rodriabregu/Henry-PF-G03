@@ -10,7 +10,7 @@ import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART } from '../Actions/Cart/updateCart';
 import { POST_USER } from '../Actions/Users/postUser';
 import { UPDATE_PRODUCT } from '../Actions/Products/addReview'
-import { state, product, productNull } from '../../typesApp'
+import { state, product,userNull, productNull } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
@@ -19,15 +19,7 @@ const initialState: state = {
   sales: [],
   url_pago: "",
   cart: [],
-  user: {
-    id: '',
-    userName: '',
-    email: '',
-    hashPasword: '',
-    firstName: '',
-    lastName: '',
-    userType: ''
-  }
+  user: userNull
 };
 
 export interface action {

@@ -65,7 +65,8 @@ function App() {
         firstName: user.name,
         lastName: user.nickname,
         hashPasword: user.password_hash,
-        userType:'User'
+        userType:'User',
+        bought: []
       };
       dispatch(postUser(dataUser))
       dispatch(getCart(user.sub))

@@ -16,6 +16,10 @@ export interface item {
   units: number
 };
 
+interface purchase {
+  productId: number
+}
+
 export interface user {
   id: string
   userName: string
@@ -24,6 +28,7 @@ export interface user {
   firstName: string
   lastName: string
   userType: string
+  bought: purchase[]
 }
 
 export interface photo {
@@ -69,6 +74,17 @@ export const productNull = {
   brand: { name: '', id: 0 },
   photos: [],
   categories: []
+}
+
+export const userNull = {
+  id: '',
+  userName: '',
+  email: '',
+  hashPasword: '',
+  firstName: '',
+  lastName: '',
+  userType: '',
+  bought: []
 }
 
 export const reviewNull = {

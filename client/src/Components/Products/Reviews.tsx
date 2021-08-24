@@ -41,6 +41,12 @@ export const Reviews = (props: { productId: number }) => {
     setHoverValue(newHoverValue)
   };
 
+  const handleShow = () => {
+    if (user.bought.some(
+      item => item.productId === product.id)
+    ) setShow(!show)
+  }
+
   const handleSubmit = () => {
     dispatch(addReview(review, ""))
     setReview(reviewNull);
@@ -57,7 +63,7 @@ export const Reviews = (props: { productId: number }) => {
       <div className='form-review'>
         <button
           className='btn-review'
-          onClick={() => setShow(!show)}
+          onClick={handleShow}
         >Write review</button>
         {show &&
           <div>
