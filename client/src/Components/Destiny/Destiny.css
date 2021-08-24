@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+
+.destiny-container{
+    display:flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;;
+}
+
+.destiny-form{
+    align-self: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    background-color: #b2b2f356;
+    width: 500px;
+    border-radius: 20px;
+}
+
+.cont-div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.text-especif{
+    display: flex;
+    flex-direction: column;
+}
+
+.cont-div input, .cont-div textarea{
+    border-radius: 10px;
+    border:none;
+}
+
+.soy-btn, .btn-map{
+    color: white;
+    background: #3c3c5e;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+}
+
+.btn-map{
+    margin-bottom: 20px;
+}
+
+.btn-map:hover{
+    color: white;
+    background: #3c3c5e;
+}
+
+.cont-div div{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.data-confirm{
+    align-self: center;
+}
+
+@media screen and (max-width: 875px){
+    
+    .destiny-form{
+        width: 350px;
+    }
+    
+}

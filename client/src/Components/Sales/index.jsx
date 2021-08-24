@@ -30,8 +30,8 @@ const SalesList = () => {
             <div className='back-sales'>
             <Link to='/adashboard' style={{ textDecoration: 'none' }}>
             <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
-          </Link>
-          </div>
+        </Link>
+        </div>
             <div className='filtro-sales'>
                 <select onChange={handleChange}>
                     <option value='---'>Filter state by:</option>

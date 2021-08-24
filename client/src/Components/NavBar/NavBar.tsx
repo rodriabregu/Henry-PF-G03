@@ -3,25 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink as Link } from 'react-router-dom';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line, RiLogoutBoxRLine } from 'react-icons/ri';
 import { FaBars } from 'react-icons/fa';
-import './NavBar.css';
 import { useAuth0 } from "@auth0/auth0-react";
-import { state } from '../../Redux/Reducers/Reducers'
+import { state, product, user } from '../../typesApp'
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import jwt_decode from 'jwt-decode';
-
-export interface Ee {
-  "name": "<anystring>",
-  "price": "<anystring>",
-  "stock": "<anystring>",
-  "id": "<anystring>",
-  "brand": "<anystring>",
-  "photo": "<anystring>",
-  "description": "<anystring>",
-  "value": "<anystring>",
-  "categories": "<anystring>",
-  "productId": "<anystring>",
-  "units": "<anystring>",
-}
+import './NavBar.css';
 
 export const NavBar = () => {
   const dispatch: Function = useDispatch()
@@ -29,8 +15,9 @@ export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string, sub: string }>();  //const {user} = useAuth0()
-  
-  const userLog:any=useSelector<any>(s=>s.user)
+
+  const userLog: user = useSelector((s: state) => s.user)
+
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
@@ -56,6 +43,7 @@ export const NavBar = () => {
   }
 
 
+
   /* 
     useEffect(() => {
       const allCartNoJson:any = localStorage.getItem('products-cart');
@@ -67,13 +55,13 @@ export const NavBar = () => {
     });
    */
 
+
   if (isAuthenticated) {
     GetToken()
       .then(resp => console.log(resp))
   }
 
   return (
-
     <header>
       <nav>
         <div className='nav-container'>
@@ -87,14 +75,15 @@ export const NavBar = () => {
               <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div>
                 <RiShoppingCartLine />
               </Link>
-
               {
-                admin && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
-              }
 
+                //admin && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+
+                userLog?.userType === 'Admin' && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+
+              }
               <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
               <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine /> </Link>
-
               <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' alt='profile' />{user?.name}</Link>
 
             </div>
@@ -105,15 +94,11 @@ export const NavBar = () => {
                 <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div>
                   <RiShoppingCartLine />
                 </Link>
-
-
                 <Link style={{ textDecoration: 'none' }} to='/login'> LOGIN / SIGN UP <RiAccountCircleLine /> </Link>
-
               </div>
             )
           }
         </div>
-
       </nav>
     </header>
   );
