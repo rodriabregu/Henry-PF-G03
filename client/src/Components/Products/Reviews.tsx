@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaStar } from "react-icons/fa";
 import { addReview } from '../../Redux/Actions/Products/addReview';
-import { state, review, product, productNull } from '../../typesApp'
-
+import { state, review, product, productNull, reviewNull } from '../../typesApp'
 import toast, { Toaster } from 'react-hot-toast';
 import '../ProductDetail/productDetail.css';
 
@@ -25,12 +24,7 @@ export const Reviews = (props: { productId: number }) => {
       (product: product) => product.id === productId
     )
   ) || productNull
-  const [review, setReview] = useState({
-    id: 0,
-    text: '',
-    stars: 1,
-    ProductId: 0,
-  });
+  const [review, setReview] = useState(reviewNull);
 
   function handleReview(e: any) {
     setReview({
@@ -47,16 +41,19 @@ export const Reviews = (props: { productId: number }) => {
     setHoverValue(newHoverValue)
   };
 
+  const handleSubmit = () => {
+    dispatch(addReview(review, ""))
+    setReview(reviewNull);
+    notify()
+  }
 
   return (
     <div><h3>Reviews</h3>
-      {
-        product.reviews.map((review: review) => {
-          return (
-            <div><span>{review.text}-{review.stars}</span></div>
-          )
-        })
-      }
+      {product.reviews.map((review: review) => {
+        return (<div><span>
+          {review.text}-{review.stars}
+        </span></div>)
+      })}
       <div className='form-review'>
         <button
           className='btn-review'
@@ -74,7 +71,7 @@ export const Reviews = (props: { productId: number }) => {
                       size={24}
                       onClick={() => setCurrentValue(index + 1)}
                       onMouseOver={() => handleMouseOver(index + 1)}
-                      onMouseLeave={()=>setHoverValue(undefined)}
+                      onMouseLeave={() => setHoverValue(undefined)}
                       color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
                       style={{ marginRight: 10, cursor: "pointer" }} />
                   )
@@ -88,7 +85,7 @@ export const Reviews = (props: { productId: number }) => {
                 />
                 <button
                   className='btn-addreview'
-                  onClick={() => dispatch(addReview(review, ""))}
+                  onClick={handleSubmit}
                 >Submit</button>
               </div>
               <Toaster />

@@ -23,7 +23,7 @@ export interface user {
   hashPasword: string
   firstName: string
   lastName: string
-  userType:string
+  userType: string
 }
 
 export interface photo {
@@ -49,7 +49,7 @@ export interface product {
 }
 
 export interface state {
-  products: product[], 
+  products: product[],
   productsDetail: product,
   AllProducts: product[],
   sales: {}[],
@@ -69,4 +69,11 @@ export const productNull = {
   brand: { name: '', id: 0 },
   photos: [],
   categories: []
+}
+
+export const reviewNull = {
+  id: 0,
+  text: '',
+  stars: 1,
+  ProductId: 0,
 }

@@ -4,11 +4,12 @@ import { review } from '../../../typesApp'
 
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 
-export const addReview = (review: review, userId: string | undefined) => {
+export const addReview = (review: review, userId?: string, notify?: Function) => {
 
   return async (dispatch: Function) => {
     try {
       await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, review);
+      if(notify) notify()
       const res: any = await axios.get(
         `http://${config.REACT_APP_API_URL}:3001/api/product/${review.ProductId}`
       )
