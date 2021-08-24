@@ -14,6 +14,7 @@ import postUser from '../controllers/postUser'
 import putCart from '../controllers/putCart'
 import putProduct from '../controllers/putProduct'
 import putSale from '../controllers/putSale'
+import getUsersInfo from '../controllers/getUsersInfo'
 
 import products from './products';
 import category from './categories';
@@ -39,6 +40,7 @@ router.post('/user', postUser)
 router.put('/cart/:userId', putCart)
 router.put('/product', putProduct)
 router.put('/sale', putSale)
+router.get('/getUsersInfo',getUsersInfo)
 
 router.use('/products/category', ProductCategoryRoute);
 router.use('/products', products);
