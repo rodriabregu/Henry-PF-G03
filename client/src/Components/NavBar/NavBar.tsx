@@ -29,6 +29,7 @@ export const NavBar = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0<{ name: string, picture?: string, sub: string }>();  //const {user} = useAuth0()
+  
   const userLog:any=useSelector<any>(s=>s.user)
 
   function toggleNavbar() {
@@ -65,6 +66,7 @@ export const NavBar = () => {
       });
     });
    */
+
   if (isAuthenticated) {
     GetToken()
       .then(resp => console.log(resp))
@@ -87,7 +89,7 @@ export const NavBar = () => {
               </Link>
 
               {
-                userLog?.userType==='Admin' && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
+                admin && <Link style={{ textDecoration: 'none' }} to='/adashboard'>ADMIN DASHBOARD</Link>
               }
 
               <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
