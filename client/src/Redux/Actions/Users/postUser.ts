@@ -1,16 +1,7 @@
 import axios from 'axios';
 import config from '../../../../src/config';
+import { user } from '../../../typesApp'
 export const POST_USER = 'POST_USER';
-
-export interface user {
-  id: string
-  userName: string
-  email: string
-  hashPasword: string
-  firstName: string
-  lastName: string
-  userType:string
-}
 
 export const postUser = (dataUser: user) => {
     return async (dispatch: Function) => {

@@ -2,6 +2,7 @@ import Offers from '../Offers';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
+import Slide from '../Slide/Slide'
 import './LandingPage.css';
 
 export const Landing = () => {
@@ -17,8 +18,9 @@ export const Landing = () => {
 
     return (
     <div className='landing'>
+        <Slide />
         {/* <div><img className="loading" src="https://images6.alphacoders.com/115/thumb-1920-1158225.png" alt="Enter" /></div> */}
-        <Offers filterProducts={filterProducts}/>
+       {/*  <Offers filterProducts={filterProducts}/> */}
     </div>
     )
 };

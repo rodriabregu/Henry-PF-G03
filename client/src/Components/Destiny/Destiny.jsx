@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Geocode from 'react-geocode'
 import Map from './Map'
 import axios from 'axios'
+import './Destiny.css';
 
 Geocode.setApiKey("AIzaSyBeDbO4AKXkxGq42frll9RTIKIYZCj-TEA");
 Geocode.setLanguage("en");
@@ -60,14 +61,16 @@ function Destiny() {
     }
 
     return (
-        <div>
-            <h1>Address and addessee </h1>
+        <div className='destiny-container'>
+            <div className='destiny-form'>
+                <div className='cont-div'>
+            <h1>Shipping Address </h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Address</label>
+                    <label>Address: </label>
                     <input type="text" required onChange={handleChange} name="address" />
                 </div>
-                <div>
+                <div className='text-especif'>
                     <label>Especifications: (floor, departament)</label>
                     <textarea onChange={handleChange} required name='especifications'></textarea>
                 </div>
@@ -80,19 +83,22 @@ function Destiny() {
                     <input type="text" required onChange={handleChange} name="dni" />
                 </div>
                 <div>
-                    <input type="submit" required value="Ok"></input>
+                    <input className='soy-btn' type="submit" required value="Ok"></input>
                 </div>
             </form>
-
+            </div>
+            </div>
             {
                 input.view && (
                     <>
                         <Map lat={input.lat} lng={input.lng} />
-                        <h3>Data</h3>
-                        <p>{input.formatted_address}</p>
-                        <p>Is this information correct?</p>
-                        <button onClick={sendData}>YES</button>
-                        {/* <button>NO</button> */}
+                        <div className='data-confirm'>
+                            <h3>Data</h3>
+                            <p>{input.formatted_address}</p>
+                            <p>Is this information correct?</p>
+                            <button className='btn-map' onClick={sendData}>YES</button>
+                            {/* <button>NO</button> */}
+                        </div>
 
                     </>
                 )

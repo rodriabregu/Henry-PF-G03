@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from '../../../../src/config'
-import { UPDATE_CART, item } from './updateCart'
+import { UPDATE_CART } from './updateCart'
+import { item } from '../../../typesApp'
 
 export const getCart = (userId: string | undefined) => {
 

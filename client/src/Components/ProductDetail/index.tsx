@@ -5,9 +5,9 @@ import { useParams, NavLink as Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa";
 import { getProductsDetail } from '../../Redux/Actions/Products/getProductsDetail';
-import { state } from "../../Redux/Reducers/Reducers"
+import { state, product, photo } from '../../typesApp'
 import EditingProduct from './editingComp';
-import AddCart from '../Products/addCart';
+import AddCart from '../Cart/addCart';
 import toast, { Toaster } from 'react-hot-toast';
 import config from '../../../src/config';
 import './productDetail.css';
@@ -19,7 +19,7 @@ const colors = {
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
-  const detail = useSelector((s: any) => s.productsDetail);
+  const detail: product = useSelector((s: state) => s.productsDetail);
   const user = useSelector((state: state) => state.user);
   const { id } = useParams<{ id: string }>();
   const [container, setContainer] = useState<any>()
@@ -51,8 +51,7 @@ const ProductDetail = () => {
   const notify = () => toast.success('Successfully review created!');
 
   const onSubmit = async () => {
-    const rev = review;
-    await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, rev);
+    await axios.post(`http://${config.REACT_APP_API_URL}:3001/api/reviews`, review);
     notify();
   };
 
@@ -104,11 +103,13 @@ const ProductDetail = () => {
         <div className='imgs'>
           <Link to='/home'><button className='btn-back'>Back to page</button></Link>
           <div className='product-img'>
-            <img src={detail.photos ? detail.photos[photo].url : ''} alt='img not found' width='380px' height='380px' />
+            <img src={detail.photos[photo]?.url} alt='img not found' width='380px' height='380px' />
           </div>
           <div className='subdetail'>
             <button name='prev' onClick={changePhoto}>{`<`}</button>
-            {detail.photos ? detail.photos.map((f: any) => <img src={f.url} width='50px' height='50px' alt='not found'></img>) : ''}
+            {detail.photos.map((f: photo) =>
+              <img src={f.url} width='50px' height='50px' alt='not found' />
+            )}
             <button name='next' onClick={changePhoto}>{`>`}</button>
           </div>
         </div>
@@ -119,19 +120,10 @@ const ProductDetail = () => {
               <h1>{detail.name}</h1>
               <h2>${detail.price}.00</h2>
               <h3>{detail.description}</h3>
-              <h3>Stock:{detail?.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
-              <h3>Brand: {detail.brand ? detail.brand.name : ''}</h3>
-              <AddCart
-                id={detail.id}
-                name={detail.name}
-                photos={detail.photos}
-                stock={detail.stock}
-                price={detail.price}
-                description={detail.description}
-                categories={detail.categories}
-                brand={detail.brand}
-              />
-              <h3>Review: {detail.review}</h3>
+              <h3>Stock:{detail.stock <= 0 ? <span>No disponible</span> : detail.stock}</h3>
+              <h3>Brand: {detail.brand.name}</h3>
+              <AddCart product={detail} />
+              <h3>Review: {review.text}</h3>
               {
                 container?.map((r: any) => {
                   return (

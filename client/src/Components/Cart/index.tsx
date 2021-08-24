@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PostSale } from '../../Redux/Actions/Sales/postSale';
-import { updateCart, item } from '../../Redux/Actions/Cart/updateCart';
+import { updateCart } from '../../Redux/Actions/Cart/updateCart';
 import { IoTrashOutline } from 'react-icons/io5';
-import { state, product } from '../../Redux/Reducers/Reducers'
+import { state, product, item } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
@@ -10,7 +10,7 @@ import './Cart.css';
 const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: state) => state.cart);
-  const user:any=useSelector<any>(s=>s.user)
+  const user: any = useSelector<any>(s => s.user)
   const url_pago = useSelector((state: state) => state.url_pago);
   const { isAuthenticated } = useAuth0();
   // const { user } = useAuth0<{
