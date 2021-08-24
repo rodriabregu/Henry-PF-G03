@@ -1,11 +1,8 @@
 import axios from 'axios';
 import config from '../../../../src/config';
-export const UPDATE_CART = "UPDATE_CART";
+import { item } from '../../../typesApp'
 
-export interface item {
-  productId: number
-  units: number
-};
+export const UPDATE_CART = "UPDATE_CART";
 
 export const updateCart = (items: item[], userId: string | undefined) => {
 

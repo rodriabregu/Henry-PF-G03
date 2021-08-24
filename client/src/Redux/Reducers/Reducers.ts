@@ -7,8 +7,9 @@ import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
-import { UPDATE_CART, item } from '../Actions/Cart/updateCart';
-import { POST_USER, user } from '../Actions/Users/postUser';
+import { UPDATE_CART } from '../Actions/Cart/updateCart';
+import { POST_USER } from '../Actions/Users/postUser';
+import { state } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
@@ -28,47 +29,10 @@ const initialState: state = {
   }
 };
 
-export interface brand {
-  name: string
-  id: number
-}
-
-export interface photo {
-  url: string
-  id: number
-}
-
-export interface category {
-  name: string
-  id: number
-}
-
-export interface product {
-  id: number
-  name: string
-  description: string
-  price: number
-  stock: number
-  brand: brand
-  photos: photo[]
-  categories: category[]
-}
-
-export interface state {
-  products: product[], //filtro o todos
-  productsDetail: {},
-  AllProducts: product[],
-  sales: {}[],
-  url_pago: string,
-  cart: item[],
-  user: user,
-};
-
 export interface action {
   type: string
   payload: any;
 }
-
 
 function getProductReducer(state: state = initialState, action: action): state {
   switch (action.type) {
