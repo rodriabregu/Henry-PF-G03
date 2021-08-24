@@ -9,7 +9,8 @@ import { GET_SALES } from '../Actions/Sales/getSale';
 import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART } from '../Actions/Cart/updateCart';
 import { POST_USER } from '../Actions/Users/postUser';
-import { state, productNull } from '../../typesApp'
+import { UPDATE_PRODUCT } from '../Actions/Products/addReview'
+import { state, product, productNull } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
@@ -83,6 +84,15 @@ function getProductReducer(state: state = initialState, action: action): state {
         ...state,
         sales: state.sales.filter((p: any) => p.id !== action.payload.id).concat(action.payload)
       };
+    case UPDATE_PRODUCT:
+      return {
+        ...state, products: state.products.map<product>(
+          (product: product): product => {
+            if (product.id === action.payload.id)
+              return action.payload
+            else return product
+          })
+      }
     case UPDATE_CART:
       return { ...state, cart: action.payload }
     case POST_USER:
