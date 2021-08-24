@@ -1,23 +1,23 @@
 import './Slide.css';
 import { Link } from 'react-router-dom';
 import {useRef, useEffect, useCallback} from 'react';
-import img1 from './img1.png';
-import img2 from './img2.jpg';
-import img3 from './img3.jpg';
-import img4 from './img4.png';
+import bannerimg1 from './bannerimg1.jpg';
+import bannerimg2 from './bannerimg2.jpg';
+import bannerimg3 from './bannerimg3.jpg';
+import bannerimg4 from './bannerimg4.jpg';
 
 
 export const Slide = ({
     autoplay = true,
     velocidad="1800",
-    interval="5000"
+    interval="8000"
 }) => { 
     const slide = useRef(null)
     const intervalSlide = useRef(null);
 
     const nextImage = useCallback(() => {
+        if(!slide.current) return;
         if(slide.current.children.length > 0){
-
 			const firstElement = slide.current.children[0];
 			slide.current.style.transition = `${velocidad}ms ease-out all`;
 
@@ -66,26 +66,26 @@ export const Slide = ({
 					nextImage();
 				}, interval);
 			});
-		}
+		} return function cleanup() {clearInterval(intervalSlide.current)}
 	}, [autoplay, interval, nextImage]);
 
     return (
     <div className='container-allslide'>
         <div className='container-slide' ref={slide}>
             <div className='slide'>
-                <Link to='/home'> <img src={img1} alt='home' width='800 px' height='500px'/></Link>
-                {/* <div className='text-slide'> <p>Welcome to</p> </div> */}
+                <div className='text-slide'> <p>Welcome! Click to enter FC Crotone E-commerce</p> </div>
+                <Link to='/home'> <img src={bannerimg1} alt='home' width='800 px' height='550px'/></Link>
             </div>
             <div className='slide'>
-                <Link to='/home'> <img src={img2} alt='home' width='800 px' height='500px'/></Link>
+                <Link to='/home'> <img src={bannerimg2} alt='home' width='800 px' height='550px'/></Link>
                 {/* <div className='text-slide'> <p>Holis</p> </div> */}
             </div>
             <div className='slide'>
-                <Link to='/home'> <img src={img3} alt='home' width='800 px' height='500px'/></Link>
+                <Link to='/home'> <img src={bannerimg3} alt='home' width='800 px' height='550px'/></Link>
                 {/* <div className='text-slide'> <p>Holis</p> </div> */}
             </div>
             <div className='slide'>
-                <Link to='/home'> <img src={img4} alt='home' width='800 px' height='500px'/></Link>
+                <Link to='/home'> <img src={bannerimg4} alt='home' width='800 px' height='550px'/></Link>
                 {/* <div className='text-slide'> <p>Holis</p> </div> */}
             </div>
         </div>
