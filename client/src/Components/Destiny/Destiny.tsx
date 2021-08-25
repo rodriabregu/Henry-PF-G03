@@ -65,10 +65,13 @@ function Destiny() {
         preferenceId && preferenceId[0].replace("pref_id=", "")
     };
     // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
-    if (url_pago) axios
+    if (url_pago) {
+      axios
       .post('http://localhost:3001/api/destiny', body)
       .then((resp) => console.log(resp))
       .catch((err) => console.error(err));
+      dispatch(updateCart([],user.id))
+    }
   };
 
   return (
