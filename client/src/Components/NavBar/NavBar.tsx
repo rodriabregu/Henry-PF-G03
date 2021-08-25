@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { state, product, user } from '../../typesApp'
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import jwt_decode from 'jwt-decode';
+import logo from './logo.png';
 import './NavBar.css';
 
 export const NavBar = () => {
@@ -50,7 +51,10 @@ export const NavBar = () => {
       <nav>
         <div className='nav-container'>
           <div className='link-home'>
+          <div className='div-btn-logo'> 
+            <Link to='/'> <img className='img-nav' src={logo} alt='FC Crotone' width='30px' height='30px'/></Link>
             <Link to='/home' style={{ textDecoration: 'none' }}> <button className='button-home'> HOME <RiHome2Line /> </button></Link>
+          </div>
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
           {isAuthenticated ? (

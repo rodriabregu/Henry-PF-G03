@@ -19,7 +19,7 @@ const Account = () => {
                     <span>Nickname: {user?.nickname}</span>
                 </div>
             </div>
-            <div>
+            <div className='mypurchases'>
                 <h3>My purchases</h3>
                 <Link to='/account/sales'>Here!</Link>
             </div>
