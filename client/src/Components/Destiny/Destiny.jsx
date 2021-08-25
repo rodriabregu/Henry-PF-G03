@@ -8,7 +8,7 @@ Geocode.setApiKey("AIzaSyBeDbO4AKXkxGq42frll9RTIKIYZCj-TEA");
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 
-function Destiny() {
+function Destiny(props) {
 
     const [input, setInput] = useState({
         address: '',
@@ -52,7 +52,7 @@ function Destiny() {
             description: input.especifications,
             fullName:input.fullName,
             dni:input.dni,
-            saleId:1
+            saleId:props.match.params.id
         }
        // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
         axios.post('http://localhost:3001/api/destiny',body)
