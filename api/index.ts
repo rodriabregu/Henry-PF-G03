@@ -3,7 +3,7 @@ import app from './src/app';
 import { addFilProducts } from './src/providers'
 
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log('database connected!');
     return addFilProducts();
