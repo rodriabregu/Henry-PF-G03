@@ -103,6 +103,7 @@ function App() {
               <Route exact path='/account' component={Account} />
               <Route path="/checkout/:saleId/:esta" component={PostSale} />
               <Route path='/usersInfo' component={UsersInfo}/>
+              <Route path='/destiny/:id' component={Destiny} />
               <Route path="/" component={Footer} />
             </div>
           ) : (
