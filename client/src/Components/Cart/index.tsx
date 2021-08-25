@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PostSale } from '../../Redux/Actions/Sales/postSale';
 import { updateCart } from '../../Redux/Actions/Cart/updateCart';
 import { IoTrashOutline } from 'react-icons/io5';
-import { state, product, item } from '../../typesApp'
+import { state, product, item, user } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
@@ -10,8 +10,7 @@ import './Cart.css';
 const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: state) => state.cart);
-  const user: any = useSelector<any>(s => s.user)
-  const url_pago = useSelector((state: state) => state.url_pago);
+  const user: user = useSelector((state: state) => state.user)
   const { isAuthenticated } = useAuth0();
 
   let total = 0;
@@ -48,9 +47,9 @@ const Cart = () => {
     dispatch(updateCart(newItems, user.id));
   };
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    if (items.length > 0) dispatch(PostSale({ userId: user.id, items }));
+  const handleSubmit = () => {
+    if (items.length > 0)
+      dispatch(PostSale({ userId: user.id, items }));
   };
 
   return (
@@ -80,22 +79,15 @@ const Cart = () => {
                       <div className='price-prod'>
                         <h5>(total: ${product.price * item.units}.00)</h5>
                         <input
-                          onChange={(event) => {
-                            onChangeUnits(event, product.stock);
-                          }}
+                          onChange={(event) => onChangeUnits(event, product.stock)}
                           type='number'
-                          min={1}
-                          max={product.stock}
                           value={item.units}
                           name={`${product.id}`}
                         />
                         <button
                           className='btn-remove'
-                          onClick={(event) => {
-                            event.preventDefault();
-                            removeCart(product.id);
-                          }}>
-                          Remove <IoTrashOutline />
+                          onClick={() => removeCart(product.id)}
+                        >Remove <IoTrashOutline />
                         </button>
                       </div>
                     </div>
@@ -105,30 +97,18 @@ const Cart = () => {
           })}
         <div className='buy'>
           <h3>Subtotal to pay: ${total}.00</h3>
-          {isAuthenticated ? (
-            url_pago ? (
-              <a style={{textDecoration:'none'}} href={url_pago}>
-                <button
-                  onClick={() => dispatch(updateCart([], user.id))}
-                  className='btn-confirm'>
-                  Confirm purchase
-                </button>
-              </a>
-            ) : (
-              items.length > 0 && (
-                <form onSubmit={handleSubmit}>
-                  <button className='btn-buy'>Confirm payment</button>
-                </form>
-              )
-            )
-          ) : items.length > 0 ? (
-            <>
-              <Link to='/login'>
-                Login here to buy!
+          {isAuthenticated ? (            
+            items.length > 0 && (
+              <Link to="/destiny/3">
+                <button onClick={handleSubmit}
+                  className='btn-buy'>
+                  Confirm payment</button>
               </Link>
-            </>
-          ) : (
-            ''
+            )
+          ) : items.length > 0 && (
+            <Link to='/login'>
+              Login here to buy!
+            </Link>
           )}
           <Link to='/home'>
             <button className='btn-backhome'>Back to home</button>
