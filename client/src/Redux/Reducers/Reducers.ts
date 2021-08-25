@@ -10,7 +10,7 @@ import { PUT_SALE } from '../Actions/Sales/putSale';
 import { UPDATE_CART } from '../Actions/Cart/updateCart';
 import { UDATE_USER } from '../Actions/Users/postUser';
 import { UPDATE_PRODUCT } from '../Actions/Products/addReview'
-import { state, product,userNull, productNull } from '../../typesApp'
+import { state, product, userNull, productNull } from '../../typesApp'
 
 const initialState: state = {
   products: [], //filtro o todos
@@ -53,16 +53,22 @@ function getProductReducer(state: state = initialState, action: action): state {
     case POST_PRODUCTS:
       return {
         ...state,
-        AllProducts:[...state.products,action.payload],
+        AllProducts: [...state.products, action.payload],
         products: [...state.products, action.payload]
       }
     case EDIT_PRODUCTS:
-      console.log('producto q estoy modificando ',action.payload.id)
+      console.log('producto q estoy modificando ', action.payload.id)
       return {
         ...state,
-        products: state.products.filter(p=>p.id!==action.payload.id).concat(action.payload),
-        AllProducts: state.AllProducts.filter(p=>p.id!==action.payload.id).concat(action.payload)
+        products: state.products.filter(p => p.id !== action.payload.id).concat(action.payload),
+        AllProducts: state.AllProducts.filter(p => p.id !== action.payload.id).concat(action.payload)
       }
+    case "URL_PAGO":
+      return {
+        ...state,
+        url_pago: action.payload,
+      }
+
     case POST_SALE:
       return {
         ...state,
