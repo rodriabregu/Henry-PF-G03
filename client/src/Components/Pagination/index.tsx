@@ -170,7 +170,7 @@ const Pagination = () => {
   return (
     <div>
       <div className='search-bar'>
-        <SearchBar onSearch={onSearch} />
+        <SearchBar onSearch={onSearch} filterp={filterp} />
       </div>
       <div className='filters'>
         <SelectCategory onChange={selectChange} path='categories' />

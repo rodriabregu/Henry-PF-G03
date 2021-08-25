@@ -7,8 +7,12 @@
     background-color: #b2b2f356;
     width: 450px;
     border-radius: 20px;
-    height: 300px;
+    height: 330px;
     align-self: center;
+}
+
+.mypurchases{
+    margin-left: 10px;
 }
 
 .card-account h2{

@@ -103,18 +103,11 @@
 .btn-buy{
     color: #7b7bc2;
     padding: 5px 10px 5px 10px;
-    /* margin-left: 18vh; */
-}
-
-.btn-buy:active {
-    transform: translateY(1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-confirm{
     background-color:  #3c3c5e;
     color:  #bcbdf1;
-    margin-top: 20px;
     padding: 5px 10px 5px 10px;
 }
 
@@ -122,12 +115,6 @@
     background-color:  #3c3c5e;
     color:  #bcbdf1;
 }
-
-.btn-confirm:active {
-    transform: translateY(1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
 
 .btn-buy:hover, .btn-confirm:hover, .btn-backhome:hover{
     background-color:  #bcbdf1;

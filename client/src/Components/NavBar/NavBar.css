@@ -9,6 +9,17 @@
     font-size: 15px; 
     flex-direction: row;
     padding: 5px;
+    z-index: 999;
+}
+
+.div-btn-logo{
+    display: flex;
+    padding: 6px 0 1px 3px;
+    column-gap: 3px;
+}
+
+.user-acc{
+    padding: 8px 3px 1px 8px;
 }
 
 .link-home button, .links-login a {
@@ -29,6 +40,11 @@
     cursor:pointer;
 }
 
+.links-login {
+    align-items: center;
+    display: flex;
+}
+
 .link-home button:hover,
 .link-home button.active, 
 .links-login a:hover,
@@ -41,9 +57,14 @@
     display: none;
 }
 
+.btn-home{
+    display: flex;
+    align-self: flex-start;
+}
+
 .navimg {
-    height:1.3em;
-    margin: 6px;
+    height:20px;
+    width: 20px;
     border-radius: 3px;
 }
 
@@ -77,6 +98,7 @@
     .links-login {
         display: flex;
         flex-direction: column-reverse;
+        align-items: stretch;
         overflow: hidden;
         height: 150px;
         font-size: 14px;
