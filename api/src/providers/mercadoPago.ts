@@ -35,5 +35,5 @@ export default async (user: appUser, items: appItem[], saleId: number): Promise<
   };
   const response = await mercadopago.preferences.create(preference)
   if (!response) throw Error("mercado pago no respondió")
-  return response
+  return response.body
 }

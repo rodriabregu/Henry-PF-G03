@@ -17,14 +17,20 @@ export class Sale extends Model<Sale> {
   })
   state!: string
 
+  @Column(DataType.STRING)
+  url_pago!: string
+
+  @Column(DataType.STRING)
+  preferenceId!: string
+
+  @Column(DataType.STRING)
+  purchaseId!: string
+
   @Column(DataType.DATE)
   date!: Date
 
   @ForeignKey(() => User)
   userId!: string
-
-  @Column(DataType.STRING)
-  purchaseId!: string
 
   @HasOne(() => Destiny)
   destiny!: Destiny

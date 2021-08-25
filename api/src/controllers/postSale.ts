@@ -25,7 +25,7 @@ export default async (req: Request, res: Response) => {
   try {
     const { userId, purchaseId, items } = req.body
 
-    if (!( userId && items && Array.isArray(items)))
+    if (!(userId && items && Array.isArray(items)))
       return res.status(404).json({
         message: "data is novalidate",
         data: {}
@@ -60,14 +60,21 @@ export default async (req: Request, res: Response) => {
     }
 
     const response = await mercadoPago(user.get(), newItems, saleId)
-    if (!response) throw { status: 505, message: "mercado pago does not respond" }
+    if (!response) {
+      throw {
+        status: 505,
+        message: "mercado pago does not respond"
+      }
+    }
+
+    newSale.update({ 
+      url_pago: response.init_point,
+      preferenceId: response.id
+    })
+
     return res.json({
       message: "successfully",
-      data: {
-        ...newSale.get(),
-        url_pago: response.body.init_point,
-        response
-      }
+      sale: newSale.get(),
     })
   } catch (error) {
     console.error(error)

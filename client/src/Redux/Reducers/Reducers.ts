@@ -66,7 +66,7 @@ function getProductReducer(state: state = initialState, action: action): state {
     case POST_SALE:
       return {
         ...state,
-        url_pago: action.payload.data.data.url_pago,
+        url_pago: action.payload.url_pago,
         sales: [...state.sales, action.payload]
       }
     case GET_SALES:
