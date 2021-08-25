@@ -30,6 +30,7 @@ import reviews from './reviews'
 import photos from './photo'
 import favs from './favourites'
 import destiny from './destiny'
+import stats from './stats'
 
 router.get('/cart/:userId', getCart)
 router.get('/product/:producId', getProduct)
@@ -59,5 +60,6 @@ router.use('/reviews', reviews)
 router.use('/photos', photos)
 router.use('/favs', favs)
 router.use('/destiny', destiny)
+router.use('/stats',stats)
 
 export default router;
