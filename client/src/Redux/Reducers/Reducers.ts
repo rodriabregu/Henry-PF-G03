@@ -58,8 +58,6 @@ function getProductReducer(state: state = initialState, action: action): state {
         products: state.AllProducts
       }
     case POST_PRODUCTS:
-      console.log('nuevo producto ',action.payload)
-      console.log('nuevo arreglo de productos ',[...state.products,action.payload])
       return {
         ...state,
         AllProducts:[...state.products,action.payload],
