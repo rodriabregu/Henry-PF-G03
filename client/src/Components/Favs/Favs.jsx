@@ -7,13 +7,9 @@ import './Favs.css'
 
 const Favs=()=>{
     const [favs,setFavs]=useState();
-    /* const [user,setUser]=useState();
-    const [idProduct,setIdProduct]=useState(); */
+    const user=useSelector(s => s.user)
 
-    const user=useSelector(s=>s.user)
-
-
-    const removeFav=async(productId)=>{        
+    const removeFav = async (productId) => {        
         await axios(`http://localhost:3001/api/favs`, {
             method:'delete',
             data: {
@@ -22,22 +18,21 @@ const Favs=()=>{
             }
         })
         .then(() => {
-            setFavs(favs.filter(f=>f.id!=productId))
+            setFavs(favs.filter(f => f.id != productId))
         })
     };
 
     useEffect(()=>{
         console.log('trayendo datos del usuario con id ',user.id)
         axios.get(`http://localhost:3001/api/favs/${user.id}`)
-            .then(resp=>{
+            .then( resp => {
                 setFavs(resp.data);
             })
     },[]);
 
-    return(     
-        <div className='wishlist'>   
+    return(
+        <div className='wishlist'>
             <h1>My wishlist <AiFillStar/> My favs</h1>
-            
         {
         favs <= 0 &&
             <div className='cardempty'>
@@ -45,7 +40,7 @@ const Favs=()=>{
                     <h3>Your favorites list is empty, stop by & <Link to='/home'>see the latest news</Link>!</h3>
                 </div>
             </div>
-        }     
+        }
             <div className='cards-container'>        
         { favs ? 
             (
@@ -59,15 +54,13 @@ const Favs=()=>{
                                 <button className='remove-fav' id={p.id} onClick={(e) => removeFav(e.target.id)}> Remove </button>
                             </div>
                         </div>
-                    </div>           
+                    </div>
                 )
                 ) : <h3>Loading...</h3>
             }
-            </div>             
-        
-        </div> 
+            </div>
+        </div>
     )
-}
-
+};
 
 export default Favs;

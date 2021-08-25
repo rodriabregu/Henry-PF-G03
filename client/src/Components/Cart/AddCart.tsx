@@ -11,9 +11,7 @@ export const AddCart = (props: { product: product }) => {
   const dispatch = useDispatch();
   const { user } = useAuth0<{ sub: string }>();
   const items: item[] = useSelector((state: state): item[] => state.cart);
-  const current: item =
-    items.find((item: item) => item.productId === product.id)
-    || { productId: product.id, units: 0 }
+  const current: item = items.find((item: item) => item.productId === product.id) || { productId: product.id, units: 0 };
 
   const addCart = (/* event */) => {
     if (current.units < product.stock) {
@@ -31,9 +29,7 @@ export const AddCart = (props: { product: product }) => {
     if (value > product.stock) value = product.stock;
     if (value <= 0) value = 1;
     current.units = value;
-    const newItems = items.filter(
-      (item) => item.productId !== current.productId
-    );
+    const newItems = items.filter((item) => item.productId !== current.productId);
     newItems.push(current);
     dispatch(updateCart(newItems, user?.sub));
   };
