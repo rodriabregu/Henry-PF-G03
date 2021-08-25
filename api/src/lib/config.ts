@@ -11,8 +11,8 @@ const config = {
   dev: process.env.NODE_ENV !== 'production',
   port: process.env.API_PORT || '3001',
   clientPort: process.env.CLIENT_PORT || '3000',
-  host: process.env.API_HOST || 'localhost',
-  cors: process.env.CORS || 'localhost:3000',
+  host: process.env.API_HOST || 'localhost',//'grupo03.sytes.net'
+  cors: process.env.CORS || 'localhost:3000',//'grupo03.sytes.net:3000'
 };
 
 export default config;

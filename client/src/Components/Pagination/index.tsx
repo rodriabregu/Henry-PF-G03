@@ -13,6 +13,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import SelectCategory from '../Products/SelectCategory';
 //import AddCart from '../Cart'; // PENDIENTE DE SOLVENTAR IMPLEMENTACION TS*/
 import './Pagination.css';
+import config from '../../config';
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,8 @@ const Pagination = () => {
 
   const addFav = async (productId: number) => {
     try {
-      let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: user.id })
+//      let resp = await axios.post(`http://localhost:3001/api/favs`, { productId, userId: user.id })
+      let resp = await axios.post(`http://${config.REACT_APP_API_URL}:${config.port}/api/favs`, { productId, userId: user.id })
       setFavs({ ...favs, productId })
     } catch (e) {
       console.log(e.response)
