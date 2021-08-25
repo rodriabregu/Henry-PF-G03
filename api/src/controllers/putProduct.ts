@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-
+import { productOptions } from '../@app';
 import { Product, ProductCategory } from '../db'
 /*
 const body = {
@@ -50,9 +50,11 @@ export default async (req: Request, res: Response) => {
         )
     ))
 
+    let dataProduct=await Product.findByPk(productId,productOptions)
+
     return res.json({
       message: "pruduct update successfully",
-      data: product.get()
+      data: dataProduct
     });
 
   } catch (error) {

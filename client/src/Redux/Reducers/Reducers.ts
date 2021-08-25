@@ -1,4 +1,4 @@
-import { GET_PRODUCTS } from '../Actions/Products/getProducts';
+import { getProducts, GET_PRODUCTS } from '../Actions/Products/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
 import { POST_PRODUCTS } from '../Actions/Products/postProducts';
@@ -57,9 +57,11 @@ function getProductReducer(state: state = initialState, action: action): state {
         products: [...state.products, action.payload]
       }
     case EDIT_PRODUCTS:
+      console.log('producto q estoy modificando ',action.payload.id)
       return {
         ...state,
-        products: [...state.products, action.payload]
+        products: state.products.filter(p=>p.id!==action.payload.id).concat(action.payload),
+        AllProducts: state.AllProducts.filter(p=>p.id!==action.payload.id).concat(action.payload)
       }
     case POST_SALE:
       return {
