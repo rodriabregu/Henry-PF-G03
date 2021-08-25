@@ -8,7 +8,7 @@ const Account = () => {
 
     return (
         <>
-        {   isAuthenticated ?
+        { isAuthenticated ?
         <div className='card-account'>
             <h2>My Account</h2>
             <div className='user-profile'>
