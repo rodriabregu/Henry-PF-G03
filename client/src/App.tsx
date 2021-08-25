@@ -32,6 +32,7 @@ import jwt_decode from 'jwt-decode';
 import SalesAccount from './Components/Account/salesAccount';
 //import { getTokenSourceMapRange, setSyntheticLeadingComments } from 'typescript';
 import UsersInfo from './Components/Users/usersInfo.jsx'
+import { useReducer } from 'react';
 
 function App() {
   const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>();
@@ -72,7 +73,7 @@ function App() {
       dispatch(postUser(dataUser))
       dispatch(getCart(user.sub))
     } else dispatch(getCart(""))
-  },[]);
+  },[user,isAuthenticated,dispatch]);
 
 
   if (isAuthenticated) {

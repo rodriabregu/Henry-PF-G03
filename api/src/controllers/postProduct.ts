@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
 import {
-  Product, Brand, ProductCategory, Photo
+  Product, Brand, ProductCategory, Photo, Category
 } from '../db'
+import { productOptions } from '../@app'
 
 /**
  * agrega un nuevo producto con los datos recividso por body 
@@ -72,9 +73,25 @@ export default async (req: Request, res: Response) => {
       )
     )
 
+    /*let dataProduct=await Product.findOne({
+      where:{id:productId},
+      include:[
+        {
+          model:Photo,
+          as:'photos'
+        },
+        {
+          model:Category,
+          as:'categories'
+        }        
+      ]
+    })*/
+
+    let dataProduct=await Product.findByPk(productId,productOptions)
+    
     return res.json({
       message: " product saved successfully ",
-      data: product.get()
+      data: dataProduct
     })
 
   } catch (error) {
