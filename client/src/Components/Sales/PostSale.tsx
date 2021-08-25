@@ -18,8 +18,9 @@ export default function PostSale() {
         saleState = res?.data?.data?.state
         setSales(saleState)
         console.log('saleState', res)
+        console.log('estado de la compra ',sales)
       });
-  })
+  },[])
 
   return (
     <div>{

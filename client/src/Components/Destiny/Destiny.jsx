@@ -95,8 +95,7 @@ function Destiny(props) {
                         <div className='data-confirm'>
                             <h3>Data</h3>
                             <p>{input.formatted_address}</p>
-                            <p>Is this information correct?</p>
-                            <button className='btn-map' onClick={sendData}>YES</button>
+                            <button className='btn-map' onClick={sendData}>Confirm purchase</button>
                             {/* <button>NO</button> */}
                         </div>
 
