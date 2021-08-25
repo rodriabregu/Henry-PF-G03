@@ -18,9 +18,17 @@ export default async (req: Request, res: Response) => {
   try {
     let { saleId, newState } = req.body
     saleId = parseInt(saleId);
-    if (!newState) {
+    if (!newState || !saleId) {
       newState = req.query.status
-      if (newState === "approved") newState = "Created"
+      const preference_id = req.query.preference_id
+      const findSAle = await Sale.findOne({
+        where: { preferenceId: preference_id }
+      })
+      if (!findSAle) throw { status: 404, message: "sale is not" }
+      saleId = findSAle.getDataValue("id")
+      if (newState === "approved") {
+        newState = "Created"
+      }
       if (newState === "rejected") newState = "Cancelled"
       if (newState === "pending") newState = "Pending"
     }
@@ -41,11 +49,10 @@ export default async (req: Request, res: Response) => {
 
       await sale.update({ state: "Created" })
       const { items, userId } = await sale.get()
-      
+
       await Promise.all(items.map(async (item: item) => {
 
-        const { productId, units } = item.get()        
-console.log("put ", " units: ", units)
+        const { productId, units } = item.get()
         const product = await Product.findByPk(productId)
         if (!product) throw Error("product not found")
         const { stock } = product.get()

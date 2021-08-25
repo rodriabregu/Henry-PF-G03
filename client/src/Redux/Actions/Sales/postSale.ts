@@ -8,7 +8,7 @@ export const PostSale = (dataProduct: any) => {
             .then(res => {
                 dispatch({
                     type: POST_SALE,
-                    payload: res
+                    payload: res.data.sale
                 })
             })
     };
