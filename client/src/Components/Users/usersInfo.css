@@ -1,0 +1,31 @@
+.table-users{
+    margin: 20px;
+    font-family: system-ui;
+    display: flex;
+    justify-content: center;
+}
+
+table, tr, td {
+    border: 1px solid black;
+    color: rgb(44, 65, 136);
+    font-family: system-ui;
+}
+    
+td{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+select{
+    border-radius: 8px;
+    background-color: #ffffff;
+    color:#2E2E48;
+    border: 1px solid #7b7bc2;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 875px){
+    table{
+        width: 100%;
+    }
+}
