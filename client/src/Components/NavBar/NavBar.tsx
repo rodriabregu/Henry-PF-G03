@@ -4,7 +4,7 @@ import { NavLink as Link } from 'react-router-dom';
 import { RiShoppingCartLine, RiAccountCircleLine, RiHome2Line, RiLogoutBoxRLine } from 'react-icons/ri';
 import { FaBars } from 'react-icons/fa';
 import { useAuth0 } from "@auth0/auth0-react";
-import { state, product, user } from '../../typesApp'
+import { state, /* product */ user } from '../../typesApp'
 import { getProducts } from '../../Redux/Actions/Products/getProducts';
 import jwt_decode from 'jwt-decode';
 import './NavBar.css';
@@ -17,7 +17,6 @@ export const NavBar = () => {
   const { user } = useAuth0<{ name: string, picture?: string, sub: string }>();  //const {user} = useAuth0()
 
   const userLog: user = useSelector((s: state) => s.user)
-
 
   function toggleNavbar() {
     setNavbarCollapsed(!navbarCollapsed);
@@ -40,12 +39,12 @@ export const NavBar = () => {
       setAdmin(false)
       return 'no es admin'
     }
-  }
+  };
 
   if (isAuthenticated) {
     GetToken()
       .then(resp => console.log(resp))
-  }
+  };
 
   return (
     <header>
@@ -55,9 +54,8 @@ export const NavBar = () => {
             <Link to='/home' style={{ textDecoration: 'none' }}> <button className='button-home'> HOME <RiHome2Line /> </button></Link>
             <span className='btn-menu' onClick={toggleNavbar}> <FaBars /></span>
           </div>
-          {isAuthenticated ? (
+          { isAuthenticated ? (
             <div className={`links-login ${navbarCollapsed && "collapsed"}`}>
-
               <Link style={{ textDecoration: 'none' }} to='/cart'> CART <div className='backg-cart'>{countCart}</div>
                 <RiShoppingCartLine />
               </Link>
@@ -67,7 +65,6 @@ export const NavBar = () => {
               <Link style={{ textDecoration: 'none' }} to='/favs'>FAVS</Link>
               <Link style={{ textDecoration: 'none' }} to='/logout'> LOGOUT<RiLogoutBoxRLine /> </Link>
               <Link style={{ textDecoration: 'none' }} to='/account'><img src={user?.picture} className='navimg' alt='profile' />{user?.name}</Link>
-
             </div>
           )
             :
