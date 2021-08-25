@@ -100,15 +100,6 @@ function Destiny() {
               <input className='soy-btn' type='submit' required value='Ok'></input>
             </div>
           </form>
-          {url_pago && (
-            <a style={{ textDecoration: 'none' }} href={url_pago}>
-              <button
-                onClick={() => dispatch(updateCart([], user.id))}
-                className='btn-confirm'>
-                Confirm purchase url
-              </button>
-            </a>
-          )}
         </div>
       </div>
 
@@ -118,9 +109,13 @@ function Destiny() {
           <div className='data-confirm'>
             <h3>Data</h3>
             <p>{input.formatted_address}</p>
-            <button className='btn-map' onClick={sendData}>
-              Confirm purchase
-            </button>
+            {url_pago &&
+              (<a style={{ textDecoration: 'none' }} href={url_pago}>
+                <button className='btn-map' onClick={sendData}>
+                  Confirm purchase
+                </button>
+              </a>)
+            }
             {/* <button>NO</button> */}
           </div>
         </>
