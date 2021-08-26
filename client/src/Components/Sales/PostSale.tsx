@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config'
 import PaySuccessful from './PaySuccesful';
 import ErrorPay from './ErrorPay';
-import './PostSale';
+import './PostSale.css';
 
 
 export default function PostSale() {
@@ -38,9 +38,11 @@ export default function PostSale() {
             <ErrorPay />
           </div>
       }
-      <Link to='/home'>
-        <button className='btn-backhome'>Back to home</button>
-      </Link>
+      <div className='div-btnhome'>
+        <Link to='/home'>
+          <button className='backhome'>Back to home</button>
+        </Link>
+      </div>
     </div>
   )
 };
