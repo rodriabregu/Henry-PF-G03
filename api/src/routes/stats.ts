@@ -9,9 +9,6 @@ import { Sale, SaleItem } from '../db';
 
 const router = Router();
 
-
-
-
 router.get('/', async (req: Request, res: Response) => {
 
     const compras=await Sale.findAll({
@@ -24,16 +21,16 @@ router.get('/', async (req: Request, res: Response) => {
         ]
     })
 
-    let suma=0;
+    let suma=0;   
     
     compras.forEach((c:any)=>c.items.forEach((i:any)=>suma+=(i.units*i.salePrice)))
-    //543
-    return res.json(suma)   
+    let amounts=[580,420,650,578,801,900,420,suma]
+    return res.json(amounts)   
 
 })
 
 
-router.get('/top5',async(req:Request,res:Response)=>{
+router.get('/top10',async(req:Request,res:Response)=>{
 
     const compras=await Sale.findAll({
         attributes: { exclude: ['updatedAt', 'createdAt'] },
@@ -60,9 +57,7 @@ router.get('/top5',async(req:Request,res:Response)=>{
     for(const p in productsCant){
         productsCantToArray.push({product:productsCant[p].productName,units:productsCant[p].units})
     }
-    
-    console.log(productsCantToArray)
-    
+      
     for(let i=0; i<productsCantToArray.length; i++){
         for(let j=i+1; j<productsCantToArray.length; j++){
             if(productsCantToArray[j].units>productsCantToArray[i].units){
@@ -76,15 +71,11 @@ router.get('/top5',async(req:Request,res:Response)=>{
     let arrayProducts=[];
     let arrayUnits=[];
     
-    for(let i=0; i<5; i++){
+    for(let i=0; i<10; i++){
         arrayProducts.push(productsCantToArray[i].product)
         arrayUnits.push(productsCantToArray[i].units)
     }
     
-    console.log(productsCantToArray)
-    console.log(arrayProducts)
-    console.log(arrayUnits)
-
     return res.json({
         products:arrayProducts,
         units:arrayUnits
