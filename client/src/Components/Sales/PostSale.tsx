@@ -7,6 +7,7 @@ import PaySuccessful from './PaySuccesful';
 import ErrorPay from './ErrorPay';
 import './PostSale';
 
+
 export default function PostSale() {
   const { saleId } = useParams<any>();
   const [sales, setSales] = useState<any>('')
@@ -18,10 +19,10 @@ export default function PostSale() {
       .then(res => {
         saleState = res?.data?.data?.state
         setSales(saleState)
-        console.log('saleState', res)
+        console.log('saleState', saleState)
         console.log('estado de la compra ', sales)
       });
-  }, [])
+  },[sales])
 
   return (
     <div className="div-postSale">
