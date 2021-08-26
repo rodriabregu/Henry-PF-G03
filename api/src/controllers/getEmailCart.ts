@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { User, Purchase } from '../db'
+import sendEmail from '../providers/sendEmail'
 
 /* 
  * Route : GET "api/cart/Emails/:userId"
@@ -9,24 +9,10 @@ import { User, Purchase } from '../db'
 
 export default async (req: Request, res: Response) => {
   try {
-
     const { userId } = req.params
-
-    const user = await User.findByPk(userId, {
-      attributes: { exclude: ['updatedAt', 'createdAt'] },
-      include: [
-        {
-          model: Purchase,
-          attributes: ["productId"]
-        }
-      ]
-    })
-
-    if (!user) throw { status: 404, message: " user not found" }
-
+    await sendEmail(userId, "Card")
     return res.json({
-      message: "successfully",
-      data: user.get()
+      message: "E-mails send successfully",
     })
   } catch (error) {
     console.error(error)

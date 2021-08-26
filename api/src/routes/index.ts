@@ -3,6 +3,7 @@ import { Router } from 'express';
 const router = Router();
 
 import getCart from '../controllers/getCart'
+import getEmailCart from '../controllers/getEmailCart'
 import getProduct from '../controllers/getProduct'
 import getProducts from '../controllers/getProducts'
 import getSales from '../controllers/getSales'
@@ -33,7 +34,8 @@ import destiny from './destiny'
 import stats from './stats'
 
 router.get('/cart/:userId', getCart)
-router.get('/product/:producId', getProduct)
+router.get('/cart/:userId/')
+router.get('/cart/Emails/:userId', getEmailCart)
 router.get('/products', getProducts)
 router.get('/sales', getSales)
 router.get('/sales/user/:userId', getSalesUser)
