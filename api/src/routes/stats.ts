@@ -17,14 +17,14 @@ router.get('/', async (req: Request, res: Response) => {
   })
 
   let suma = 0;
-
   compras.forEach((c: any) => c.items.forEach((i: any) => suma += (i.units * i.salePrice)))
   //543
-  return res.json(suma)
+  let amounts=[500,600,260,800,740,690,715,suma]
+  return res.json(amounts)
 
 })
 
-router.get('/top5', async (req: Request, res: Response) => {
+router.get('/top10', async (req: Request, res: Response) => {
 
   const compras = await Sale.findAll({
     attributes: { exclude: ['updatedAt', 'createdAt'] },
@@ -67,7 +67,7 @@ router.get('/top5', async (req: Request, res: Response) => {
   let arrayProducts = [];
   let arrayUnits = [];
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 10; i++) {
     arrayProducts.push(productsCantToArray[i].product)
     arrayUnits.push(productsCantToArray[i].units)
   }

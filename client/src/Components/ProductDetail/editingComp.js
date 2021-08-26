@@ -4,11 +4,14 @@ import SelectCategory from "../Products/SelectCategory";
 import toast, { Toaster } from 'react-hot-toast';
 import editProducts from "../../Redux/Actions/Products/editProducts";
 import './editComp.css';
+import { useSelector } from "react-redux";
 
 const notify = () => toast.success('Successfully editing created!');
 
 const EditingProduct = ({id, name, stock, price, description, categories, brand}) => {
   const dispatch = useDispatch()  
+  //const userLog: user = useSelector((s: state) => s.user)
+  const userLog=useSelector(s=>s.user);
 
   const [input, setInput] = useState({
     name: name,
@@ -74,10 +77,12 @@ const EditingProduct = ({id, name, stock, price, description, categories, brand}
     /* window.location.reload(); */
   };
 
-  return (
+  return (    
     <div className='form-edit'>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div><h2>Edit product</h2></div>
+        {
+          userLog?.userType === 'Admin'&&<div><h2>Edit product</h2></div>
+        }
         <div><label for="name">Product name:</label>
           <input
           type="text"

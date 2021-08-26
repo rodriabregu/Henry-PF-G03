@@ -49,7 +49,7 @@ const Stats = () => {
     const dataProducts = {
         labels: products,
         datasets: [{
-            label: 'Top 5 most selled products',
+            label: 'Top 10 most selled products',
             backgroundColor: '#afb0eee1',
             borderColor: 'black',
             borderWith: 1,
