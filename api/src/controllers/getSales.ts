@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { Sale, SaleItem } from '../db'
+import { Sale, SaleItem, Destiny } from '../db'
 
 /* 
  * Route : GET "api/sale/"
@@ -13,6 +13,10 @@ export default async (_req: Request, res: Response) => {
       include: [
         {
           model: SaleItem,
+          attributes: { exclude: ['updatedAt', 'createdAt'] }
+        },
+        {
+          model: Destiny,
           attributes: { exclude: ['updatedAt', 'createdAt'] }
         }
       ]

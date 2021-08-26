@@ -1,24 +1,56 @@
 import { readFileSync } from 'fs'
+import { IndexKind } from 'typescript'
 
 import {
-  Product, Photo, Brand, User, ProductCategory
+  Product, Photo, Brand, User,
+  Category, ProductCategory, CategoryType
 } from '../db'
 
 export default async () => {
   let count = await Product.count()
   if (count > 0) return `they already exist ${count} products in db!`
-  User.create({
-    userType: "Admin",
-    "userName": "user001",
-    "email": "user001@yopmail.com",
-    "firstName": "user001",
-    "lastName": "user002",
-    "hashPasword": "gTw34wNs64ndr75rXr56uVz"
-  })
+
   const products = await JSON.parse(
     readFileSync(__dirname + `/../lib/${"products"}.json`, 'utf8')
   )
   console.log("prooducts in fil: ", products.length);
+
+  User.findOrCreate({
+    where: { id: "gitHub|23423kj34234k34k2" },
+    defaults: {
+      id: "gitHub|23423kj34234k34k2",
+      userType: "Admin",
+      userName: "Admin",
+      email: "admincrotones@yopmail.com",
+      firstName: "Admin",
+      lastName: "Admin",
+      hashPasword: "gTw34wNs64ndr75rXr56uVz"
+    }
+  })
+
+  const categoryTypes = ['Gender', 'Garmen', 'Sport']
+
+  const categories = [
+    //Gender
+    ['Women', 'Men', 'Kids'],
+    //Garment
+    ['T-shirt', 'Short', 'Trousers', 'Hoody', 'Accesories'],
+    //Sport
+    ['Soccer', 'Hockey', 'Basketball', 'Tennis', 'Rugby', 'Running', 'Other']
+  ]
+
+  const promiseC: Promise<any>[] = [];
+
+  categoryTypes.map(async (cType: string, idx: number) => {
+    const { id } = (await CategoryType.create({ name: cType })).get()
+    categories[idx].map((category: string) => {
+      promiseC.push(
+        Category.findOrCreate({ where: { name: category, categoryTypeId: id } })
+      );
+    })
+  })
+
+  await Promise.all(promiseC)
 
   const AddProduct = async (product: any) => {
 
@@ -30,12 +62,9 @@ export default async () => {
     const [newPoduct] = await Product.findOrCreate({
       where: { name: product.name },
       defaults: {
-        isActive: true,
         name: product.name,
-        photo: product.photo,
         brandId,
         price: product.price,
-        //category: product.category,
         description: product.name + product.brand + product.category,
         stock: product.name.length
       }

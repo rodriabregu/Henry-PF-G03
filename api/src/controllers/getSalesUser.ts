@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { Sale, SaleItem } from '../db'
+import { Sale, SaleItem, Destiny } from '../db'
 
 /* 
  * Route : GET "api/sale/user/:userId"
@@ -17,12 +17,16 @@ export default async (req: Request, res: Response) => {
         {
           model: SaleItem,
           attributes: { exclude: ['updatedAt', 'createdAt'] }
+        },
+        {
+          model: Destiny,
+          attributes: { exclude: ['updatedAt', 'createdAt'] }
         }
       ]
     })
 
     if (!sales || sales.length < 1)
-      throw Error("No se encontrason Sales")
+      throw {status: 405, message:"No sales found"}
 
     return res.json({
       message: "successfully",

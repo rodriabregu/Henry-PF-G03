@@ -13,7 +13,7 @@ export class SaleItem extends Model<SaleItem> {
   @Column(DataType.INTEGER)
   productId!: number;
   
-  @Column
+  @Column(DataType.STRING)
   productName!: string;
 
   @Column(DataType.INTEGER)

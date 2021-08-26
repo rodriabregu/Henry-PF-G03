@@ -1,14 +1,25 @@
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux';
 import store from './Redux/Store';
+import { Provider } from 'react-redux';
+
+import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store= {store}>
+      <Auth0Provider
+       domain='dev-kpo8zvgy.us.auth0.com' 
+       clientId='Bf8TfhJE1SbgHOjHDLDgjJQEIsYHTWTD' 
+       redirectUri='http://localhost:3000/home'
+       audience='http://securityApi'
+       useRefreshTokens
+       cacheLocation="localstorage"
+      >
       <App />
+      </Auth0Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

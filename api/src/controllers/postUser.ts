@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { User } from '../db'
+import { User, Purchase } from '../db'
 import { appUser } from '../@app'
 import { sendEmail } from '../providers'
 /* 
@@ -11,6 +11,7 @@ import { sendEmail } from '../providers'
  *  Ejemplo body
  * 
  * const body = {
+    "id": "gitHub|23423kj34234k34k2",
     "userName": "J-esteban.345",
     "email": "esteban.345@yopmail.com",
     "firstName": "Juan Esteban",
@@ -23,42 +24,50 @@ export default async (req: Request, res: Response) => {
   try {
     const {
       userName, email, lastName,
-      hashPasword, firstName
+      hashPasword, firstName, id
     }: appUser = req.body
 
     if (!(
-      userName && /^([\-\w\.\_]{4,20})$/.test(userName)
-      && email
-      && /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
-      && lastName && /[a-z]{5,}/i.test(lastName)
-      && firstName && /[a-z]{5,}/i.test(firstName)
-      && hashPasword
-
+      id && typeof id === 'string' && id.length > 6
+      //&& userName && /^([\-\w\.\_]{4,20})$/.test(userName)
+      //&& /^[a-z][^\s@A-Z]+@[a-z]+\.[a-z]+$/g.test(email)
+      //&& lastName && /[a-z]{5,}/i.test(lastName)
+      //&& firstName && /[a-z]{5,}/i.test(firstName)
+      //&& hashPasword && email
     ))
-      return res.status(404).json({
-        data: {},
+      throw {
         status: 404,
-        message: "datos no validos"
-      });
+        message: "data is not validate"
+      }
 
     const [newUser, isNew] = await User.findOrCreate({
-      where: { userName },
+      where: { id },
       defaults: {
-        email, lastName,
-        hashPasword, firstName
-      }
+        email: email || "user.crotones@yopmail.com",
+        lastName: lastName || "user crotones",
+        userName: userName || "user crotones",
+        hashPasword: hashPasword || "user crotones",
+        firstName: firstName || "user crotones",
+      },
+      include: [
+        {
+          model: Purchase,
+          attributes: ["productId"]
+        }
+      ]
     })
-
-    if (!isNew) return res.status(404).json({
-      status: 404,
-      message: `the user ${userName} alreadi exist`
-    });
-
-    sendEmail(newUser.get().id, "Welcome")
+    /* 
+        if (!isNew) return res.status(404).json({
+          status: 404,
+          message: `the user ${userName} alreadi exist`
+        });
+     */
+    if (isNew) sendEmail(newUser.get().id, "Welcome")
 
     return res.json({
-      message: `munsage de confirmacion enviado a ${email}`,
-      data: newUser.get()
+      message: 'successfully',
+      isNew,
+      user: newUser.get()
     })
   } catch (error) {
     console.error(error)

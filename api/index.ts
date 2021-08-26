@@ -1,14 +1,12 @@
 import { sequelize } from './src/db';
 import app from './src/app';
 import { addFilProducts } from './src/providers'
-import addCategories from './src/providers/addCategories'
 
 sequelize
-  .sync({ force: true })
-  .then(async() => {
+  .sync({ force: false })
+  .then(() => {
     console.log('database connected!');
-    await addCategories();
-    return addFilProducts();     
+    return addFilProducts();
   })
   .then((message) => {
     console.log(message)

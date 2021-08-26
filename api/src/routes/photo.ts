@@ -1,5 +1,6 @@
-import { Request,Response } from 'express';
+import { Request, Response } from 'express';
 import Router from 'express';
+import config from '../lib/config' 
 const router=Router();
 
 const multer  = require('multer')
@@ -14,16 +15,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+router.post('/',/*upload.single('files')*/upload.array('files',5),(req:any,res:any)=>{
 
-
-router.post('/',upload.single('files'),(req:any,res:any)=>{
-
+  /*
   console.log('foto: ',req.file)
-  const path=`http://localhost:3001/${req.file.filename}`
+  const path=`http://${config.host}:${config.port}/${req.file.filename}`
   res.json(path);
+  */
+
+  const rutas=req.files.map((f:any)=>`http://${config.host}:${config.port}/${f.filename}`)
+  console.log(rutas)
+  return res.json(rutas)
 
 })
-
-
 
 export default router;

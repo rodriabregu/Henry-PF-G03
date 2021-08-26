@@ -1,5 +1,5 @@
 import {
-  Model, Column, Table, DataType, HasMany, ForeignKey
+  Model, Column, Table, DataType, HasMany, ForeignKey, HasOne
 } from 'sequelize-typescript'
 
 import { User } from "./User"
@@ -17,17 +17,23 @@ export class Sale extends Model<Sale> {
   })
   state!: string
 
-  @Column(DataType.DATE)
-  date!: Date
+  @Column(DataType.STRING)
+  url_pago!: string
 
-  @ForeignKey(() => User)
-  userId!: number
+  @Column(DataType.STRING)
+  preferenceId!: string
 
   @Column(DataType.STRING)
   purchaseId!: string
 
-  @ForeignKey(() => Destiny)
-  destinyId!: number
+  @Column(DataType.DATE)
+  date!: Date
+
+  @ForeignKey(() => User)
+  userId!: string
+
+  @HasOne(() => Destiny)
+  destiny!: Destiny
 
   @HasMany(() => SaleItem)
   items!: SaleItem[];

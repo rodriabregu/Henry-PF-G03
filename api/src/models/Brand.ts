@@ -1,16 +1,11 @@
 import {
-  Model, Column, Table, HasMany
+  Model, Column, Table, DataType
 } from 'sequelize-typescript';
-
-import { Product } from './Product';
 
 @Table
 export class Brand extends Model {
-
-  @HasMany(() => Product)
-  products!: Product[];
-
-  @Column
+  
+  @Column(DataType.STRING)
   name!: string;
 
 }

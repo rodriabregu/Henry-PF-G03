@@ -1,0 +1,22 @@
+.salesAccountcss{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: system-ui;
+    margin: 5px;
+}
+
+.s-details{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    color: white;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);;
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    width: 300px;
+    font-weight: 600;
+    margin: 5px;
+}
+

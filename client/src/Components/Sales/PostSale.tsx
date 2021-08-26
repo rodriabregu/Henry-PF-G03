@@ -1,31 +1,48 @@
 import axios from 'axios'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router'
+import { Link } from 'react-router-dom';
+import config from '../../config'
+import PaySuccessful from './PaySuccesful';
+import ErrorPay from './ErrorPay';
+import './PostSale.css';
+
 
 export default function PostSale() {
+  const { saleId } = useParams<any>();
+  const [sales, setSales] = useState<any>('')
+  const { search } = useLocation()
 
-    const { id, saleId, esta } = useParams<any>();
-
-    const [ sales, setSales ] = useState<any>('')
-
-    const {search} = useLocation()
-
+  useEffect(() => {
     let saleState: string = ""
+    axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/sale` + search, { saleId })
+      .then(res => {
+        saleState = res?.data?.data?.state
+        setSales(saleState)
+        console.log('saleState', saleState)
+        console.log('estado de la compra ', sales)
+      });
+  },[])
 
-    axios.put(`http://localhost:3001/sale`+search, {saleId})
-            .then(res => {
-              saleState = res?.data?.data?.state
-              setSales(saleState)
-              localStorage.removeItem('products-cart')
-              console.log('saleState',saleState)
-            })
-            
-
-    return (
-        <div>
-            <h1>saleId: {saleId}</h1>
-                <h1>saleState: {sales?sales:''}</h1>
-                <p>search: {search}</p>
-        </div>
-    )
-}
+  return (
+    <div className="div-postSale">
+      {
+        sales === "Created" ?
+          <div>
+            {/* En caso de que el producto haya sido pagado satisfactoriamente */}
+            <PaySuccessful />
+          </div>
+          :
+          <div>
+            {/* En caso de estar pendiente o cancelado */}
+            <ErrorPay />
+          </div>
+      }
+      <div className='div-btnhome'>
+        <Link to='/home'>
+          <button className='backhome'>Back to home</button>
+        </Link>
+      </div>
+    </div>
+  )
+};

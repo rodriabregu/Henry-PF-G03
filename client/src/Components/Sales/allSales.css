@@ -1,0 +1,64 @@
+.allSheet {
+    margin: 20px;
+    font-family: system-ui;
+    display: flex;
+    justify-content: center;
+ }
+
+
+.btn-dash{
+  margin-top: 30px;
+}
+
+table, td, th {
+    border: 1px solid black;
+    color: rgb(44, 65, 136);
+    font-family: system-ui;
+  }
+ 
+table{
+    border-radius: 10px;
+}
+
+th{
+    font-size: 18px;
+    font-weight: 500px;
+    color: white;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);;
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+    
+
+
+td{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+  table {
+    width: 600px;
+    border-collapse: collapse;   
+    }
+
+  .filtro-sales {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+      margin-top: -90px;
+      background-color: white;
+  }
+
+  .filtro-sales select{
+    border-radius: 8px;
+    background-color: #ffffff;
+    color:#2E2E48;
+    border: 1px solid #7b7bc2;
+    border-radius: 9px;
+  }
+   
+
+  .cardSale h4{
+    display: flex;
+    justify-content: flex-end;
+  }

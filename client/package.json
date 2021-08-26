@@ -5,6 +5,7 @@
   "author": "FT-14a Grupo 03",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^1.6.0",
     "@hookform/error-message": "^2.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -15,9 +16,16 @@
     "@types/uuid": "^8.3.1",
     "antd": "^4.16.10",
     "axios": "^0.21.1",
+    "chart.js": "^3.5.1",
+    "dotenv": "^10.0.0",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
+    "react-chartjs-2": "^3.0.4",
     "react-cool-form": "^0.4.1",
     "react-dom": "^17.0.2",
+    "react-geocode": "^0.2.3",
+    "react-google-maps": "^9.4.5",
     "react-hook-form": "^7.12.2",
     "react-hot-toast": "^2.1.0",
     "react-icons": "^4.2.0",
@@ -61,6 +69,7 @@
   },
   "devDependencies": {
     "@types/node": "^16.4.11",
+    "@types/react-geocode": "^0.2.0",
     "@types/react-router-dom": "^5.1.8"
   }
 }

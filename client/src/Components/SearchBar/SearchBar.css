@@ -1,19 +1,74 @@
 .container-search{
-    display: grid;
-    grid-auto-flow: dense;
-    justify-content: center;
-    margin-top: 1%;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    justify-content: stretch;
+    width: 300px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.result-list {
+    margin-top: 5px;
+    background-color: white;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    max-height: calc(40px*6);
+    overflow: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    justify-self: center;
+    width: 300px;
+    top: 40px;
+    scrollbar-width: thin;
+}
+
+.result-list::-webkit-scrollbar {
+    width: 6px;   
+}
+
+.clear-input {
+    height: 42px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0;
+    right: 5px;
+    color: #555;
+}
+
+.clear-input:hover {
+    color: #333;
+    cursor: pointer;
+}
+
+.result-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+}
+
+.result-list .result-list-item {
+    height: 40px;
+    align-items: center;
+    padding: 0 10px;
+    display: flex;
+    border-bottom: 1px #CCC solid;
+    font-family: system-ui;
+}
+
+.result-list .result-list-item:hover {
+    cursor: pointer;
+    background-color: #ddd;
 }
 
 .container-search input{
-    width: 300px;
     height: 40px;
+    width: 100%;
     background: white;
     border: none;
     font-size: 10pt;
-    float: left;
     color: #63717f;
-    padding-left: 40px;
+    padding: 0 40px;
     border-radius: 5px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS1m_P3215M6LZ5wHAgYLEJ4zFJj_XEO6gYzWdhhSPmIILd-wuxgfv3Y_sUNHlm_gxRUs&usqp=CAU');

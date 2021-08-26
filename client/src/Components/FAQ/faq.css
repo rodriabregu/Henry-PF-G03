@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.faq{
+    margin-top: 60px;
+    margin-bottom: 60px;
+    color: #2E2E48 ;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faq h1{
+    margin-bottom: 60px;
+}
+
+.faq span{
+    font-size: 20px;
+    border-bottom: 1px solid rgb(128, 128, 128);
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    align-items: center;
+    display: inline-flex;
+    column-gap: 8px;
+}
+
+
+
+.container-questions{   
+    width: 500px;
+    cursor: pointer;
+}
+
+.quest {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    transition: height 0.5s linear;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #b2b2f356;
+    border-radius: 10px;
+}
+
+
+.quest.collapsedQ {
+    height: 0;
+}
+
+@media screen and (max-width: 875px){ 
+
+    .faq{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        display: flex;
+        align-items: center;
+    }
+
+    
+    .container-questions{   
+        width: 370px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .faq span{
+        align-self:flex-start
+    }
+}

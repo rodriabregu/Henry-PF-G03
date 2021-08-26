@@ -1,23 +1,33 @@
-import { GET_PRODUCTS } from '../Actions/Products/getProducts';
+import { getProducts, GET_PRODUCTS } from '../Actions/Products/getProducts';
 import { GET_PRODUCTS_DETAIL } from '../Actions/Products/getProductsDetail';
 import { GET_FILTERED_PRODUCTS } from '../Actions/Products/getFilteredProducts';
 import { POST_PRODUCTS } from '../Actions/Products/postProducts';
 import { CLEAR_FILTERS } from '../Actions/Products/clearFilters';
-import { ADD_CART_PRODUCTS } from '../Actions/Products/addingCart';
 import { EDIT_PRODUCTS } from '../Actions/Products/editProducts';
 import { POST_SALE } from '../Actions/Sales/postSale';
 import { GET_SALES } from '../Actions/Sales/getSale';
+import { PUT_SALE } from '../Actions/Sales/putSale';
+import { UPDATE_CART } from '../Actions/Cart/updateCart';
+import { UDATE_USER } from '../Actions/Users/postUser';
+import { UPDATE_PRODUCT } from '../Actions/Products/addReview'
+import { state, product, userNull, productNull } from '../../typesApp'
 
-const initialState = {
-  products: [],//filtro o todos
-  productsDetail: {},
-  AllProducts: [],//no tocar!
-  cartProducts: [],
+const initialState: state = {
+  products: [], //filtro o todos
+  productsDetail: productNull,
+  AllProducts: [],
   sales: [],
-  url_pago: null
+  url_pago: "",
+  cart: [],
+  user: userNull
 };
 
-function getProductReducer(state:any = initialState, action: any) {
+export interface action {
+  type: string
+  payload: any;
+}
+
+function getProductReducer(state: state = initialState, action: action): state {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -35,12 +45,6 @@ function getProductReducer(state:any = initialState, action: any) {
         ...state,
         products: state.AllProducts.filter((p: any) => p.categories.find((c: any) => c.name === action.payload))
       }
-    /*
-    return {
-      ...state,
-      products: state.AllProducts.filter((p: any) => p.category === action.payload)
-    }
-    */
     case CLEAR_FILTERS:
       return {
         ...state,
@@ -49,29 +53,53 @@ function getProductReducer(state:any = initialState, action: any) {
     case POST_PRODUCTS:
       return {
         ...state,
+        AllProducts: [...state.products, action.payload],
         products: [...state.products, action.payload]
       }
     case EDIT_PRODUCTS:
+      console.log('producto q estoy modificando ', action.payload.id)
       return {
         ...state,
-        products: [...state.products, action.payload]
+        products: state.products.filter(p => p.id !== action.payload.id).concat(action.payload),
+        AllProducts: state.AllProducts.filter(p => p.id !== action.payload.id).concat(action.payload)
       }
-    case ADD_CART_PRODUCTS:
+    case "URL_PAGO":
       return {
         ...state,
-        cartProducts: state.cartProducts.concat(action.payload)
+        url_pago: action.payload,
       }
-      case POST_SALE:
-        return {
-          ...state, 
-          url_pago: action.payload.data.data.url_pago,
-          sales: [...state.sales, action.payload]
-        }
-      case GET_SALES:
-        return {
-          ...state,
-          sales: action.payload,
-        };
+
+    case POST_SALE:
+      return {
+        ...state,
+        url_pago: action.payload.url_pago,
+        sales: [...state.sales, action.payload]
+      }
+    case GET_SALES:
+      return {
+        ...state,
+        sales: action.payload,
+      };
+    case PUT_SALE:
+      return {
+        ...state,
+        sales: state.sales.filter((p: any) => p.id !== action.payload.id).concat(action.payload)
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state, products: state.products.map<product>(
+          (product: product): product => {
+            if (product.id === action.payload.id)
+              return action.payload
+            else return product
+          })
+      }
+    case UPDATE_CART:
+      return { ...state, cart: action.payload }
+    case UDATE_USER:
+      return {
+        ...state, user: action.payload
+      };
     default:
       return state;
   };

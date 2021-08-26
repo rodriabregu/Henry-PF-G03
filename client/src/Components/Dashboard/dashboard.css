@@ -1,0 +1,48 @@
+.sheet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+    font-family: system-ui;
+}
+
+.diva {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    border-radius: 6px;
+    box-sizing: content-box;
+    padding: 30px;
+    color: white;
+    margin: 5px;
+    height: 150px;
+    width: 200px;
+    text-align: center;
+}
+
+.div2{
+    display: flex;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@media screen and (max-width: 875px){
+    .sheet{
+        display: flex;
+        flex-direction: column;
+    }   
+
+    .diva{
+        width: 250px;
+    }
+
+    .div2{
+        display: flex;
+        flex-direction: column;
+    }
+}

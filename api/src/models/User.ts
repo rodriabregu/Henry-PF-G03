@@ -1,19 +1,27 @@
 import {
-  Model, Column, Table, HasMany, DataType, BelongsToMany
+  Model, Column, Table, HasMany, PrimaryKey,
+  DataType, BelongsToMany, Unique, AllowNull
 } from 'sequelize-typescript';
 
 import { Sale } from './Sale';
 import { Review } from './Review';
-//import { Product } from '../db';
-import {Product} from './Product'
-import ProductUser from './ProductUser';
+import { Product } from './Product';
+import { Purchase } from './Purchase';
+import { CartItem } from './CartItem';
 
+import ProductUser from './ProductUser';
 
 @Table
 export class User extends Model {
 
+  @PrimaryKey
+  @Unique(true)
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  id!: string;
+
   @Column({
-    defaultValue: 'user',
+    defaultValue: 'User',
     ...DataType.ENUM('Guest', 'User', 'Admin')
   })
   userType!: string;
@@ -21,20 +29,26 @@ export class User extends Model {
   @Column({ defaultValue: true })
   isActive!: boolean;
 
-  @Column({ unique: true })
-  userName!: string; //userName
+  @Column(DataType.STRING)
+  userName!: string;
 
-  @Column
+  @Column(DataType.STRING)
   email!: string;
 
-  @Column
+  @Column(DataType.STRING)
   hashPasword!: string;
 
-  @Column
+  @Column(DataType.STRING)
   firstName!: string;
 
-  @Column
+  @Column(DataType.STRING)
   lastName!: string;
+
+  @HasMany(() => CartItem)
+  cartItems!: CartItem[];
+
+  @HasMany(() => Purchase)
+  bought!: Purchase[];
 
   @HasMany(() => Sale)
   sales!: Sale[];
@@ -42,8 +56,7 @@ export class User extends Model {
   @HasMany(() => Review)
   reviews!: Review[];
 
-  @BelongsToMany(()=>Product,()=>ProductUser)
-  products!:Product[];
-
+  @BelongsToMany(() => Product, () => ProductUser)
+  products!: Product[];
 
 }

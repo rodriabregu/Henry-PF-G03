@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.form-register{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: 40px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #b2b2f356;
+    width: 500px;
+    border-radius: 20px;
+    align-self: center;
+}
+
+
+@media screen and (max-width: 875px){
+ 
+    .form-register{
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .img-card{
+        align-self: center;
+    }
+
+    .noauth{
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,37 +1,41 @@
-import {useState} from 'react'
-import axios from 'axios'
+import { useState } from 'react';
+import axios from 'axios';
+import config from '../../../src/config';
+import toast, { Toaster } from 'react-hot-toast';
 import './createCategory.css';
+import { NavLink as Link } from 'react-router-dom';
+import {FiArrowLeftCircle} from 'react-icons/fi';
+
+const notify = () => toast.success('Successfully category created!');
 
 const CreateCategory = () => {
-    
   const [category,setCategory]=useState('')
   const [message,setMessage]=useState('');
 
   const handleChange=(e:any)=>{
     setCategory(e.target.value)
-  }
+  };
 
-  
-  const handleSubmit=(e:any)=>{
+  const handleSubmit = (e:any) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/categories/new',{name:category})
+    axios.post(`http://${config.REACT_APP_API_URL}:3001/api/categories/new`,{name:category})
       .then(resp=>{
-        //console.log(resp.data)
-        setMessage(resp.data)
+        notify()
       })
       .catch(err=>{
-        //console.log(err.response.data)
         setMessage(err.response.data)
       })
-
       setTimeout(()=>{
         setMessage('')
       },10000)
-  }
-
+  };
 
   return (
-    <div className='form-c'>
+    <div className='all-container'>
+      <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+            <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
+          </Link>
+      <div className='form-c'>
       <form onSubmit={handleSubmit}>
           <div><h1>Add a new category</h1></div>
             <div>
@@ -41,11 +45,12 @@ const CreateCategory = () => {
             <div>
               <input className='btn-c' type="submit" value="Submit"/>
             </div>
+            <Toaster/>
             <div><h4>{message}</h4></div>
       </form>
+      </div>
     </div>
     );
-  };
+};
 
-
-  export default CreateCategory;
+export default CreateCategory;
