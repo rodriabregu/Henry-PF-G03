@@ -35,18 +35,7 @@ const SalesAccount = () => {
                     </div>
                   )
                 })}
-                <span>State: {f.state}</span>
-                {f.state === 'Pending' &&
-                  <NavLink to='/destiny/0'>
-                    <button
-                      onClick={() => dispatch({
-                        type: "URL_PAGO",
-                        payload: f.url_pago
-                      })}
-                      className='btn-backhome'
-                    >Continue</button>
-                  </NavLink>
-                }
+                <span>State: {f.state}</span>                
               </div>
             </>
           )
