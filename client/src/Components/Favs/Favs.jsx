@@ -4,7 +4,7 @@ import { NavLink as Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import './Favs.css'
-import config from './config';
+import config from '../../config';
 
 const Favs=()=>{
     const [favs,setFavs]=useState();

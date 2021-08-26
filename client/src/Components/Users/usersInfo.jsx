@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import ARI_URL from '../../../src/.env'
 
-import config from './config';
+import config from '../../config';
 
 const UsersInfo = () => {
 
@@ -14,7 +13,7 @@ const UsersInfo = () => {
     useEffect(() => {
 //        axios.get('http://localhost:3001/api/getUsersInfo')
         axios.get(`http://${config.REACT_APP_API_URL}:${config.port}/api/getUsersInfo`)
-        .then(resp => {0
+        .then(resp => {
                 console.log(resp.data)
                 setUsers(resp.data)
             })

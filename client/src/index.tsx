@@ -14,8 +14,8 @@ ReactDOM.render(
       <Auth0Provider
        domain='dev-kpo8zvgy.us.auth0.com' 
        clientId='Bf8TfhJE1SbgHOjHDLDgjJQEIsYHTWTD' 
-       redirectUri='http://localhost:3000/home'
-//       redirectUri='https://grupo03.sytes.net:3000/home'
+//       redirectUri='http://localhost:3000/home'
+       redirectUri='https://grupo03.sytes.net:3000/home'
        audience='http://securityApi'
        useRefreshTokens
        cacheLocation="localstorage"
