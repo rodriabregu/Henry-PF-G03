@@ -82,7 +82,7 @@ function Destiny() {
           <form onSubmit={handleSubmit}>
             <div>
               <label>Address: </label>
-              <input type='text' required onChange={handleChange} name='address' />
+              <input type='text' placeholder="street number city" required onChange={handleChange} name='address' />
             </div>
             <div className='text-especif'>
               <label>Especifications: (floor, departament)</label>
@@ -110,7 +110,7 @@ function Destiny() {
         <>
           <Map lat={input.lat} lng={input.lng} />
           <div className='data-confirm'>
-            <h3>Data</h3>
+            <h3>Destiny</h3>
             <p>{input.formatted_address}</p>
             {url_pago &&
               (<a style={{ textDecoration: 'none' }} href={url_pago}>
