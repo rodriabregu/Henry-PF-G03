@@ -21,7 +21,7 @@ const colors = {
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const detail: product = useSelector((s: state) => s.productsDetail);
-  const user = useSelector((state: state) => state.user);
+  const userLog = useSelector((state: state) => state.user);
   const { id } = useParams<{ id: string }>();
   const [container, setContainer] = useState<any>()
   const [photo, setPhoto] = useState(0);
@@ -32,6 +32,7 @@ const ProductDetail = () => {
   const stars = Array(5).fill(0)
 
   const { handleSubmit } = useForm();
+
 
   const [review, setReview] = useState({
     text: '',
@@ -113,7 +114,9 @@ const ProductDetail = () => {
           </div>
         </div>
         <div className='detail'>
-          <button className='btn-edit' onClick={changeEditing}>Edit product</button>
+           {
+              userLog.userType==="Admin"&&<button className='btn-edit' onClick={changeEditing}>Edit product</button> 
+           }
           {show2 ?
             <div>
               <h1>{detail.name}</h1>

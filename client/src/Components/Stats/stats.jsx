@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { Bar } from 'react-chartjs-2'
 import config from '../../../src/config';
+import { NavLink as Link } from 'react-router-dom';
+import {FiArrowLeftCircle} from 'react-icons/fi';
 
 const Stats = () => {
 
@@ -47,7 +49,7 @@ const Stats = () => {
     const dataProducts = {
         labels: products,
         datasets: [{
-            label: 'Top 5 most selled products',
+            label: 'Top 10 most selled products',
             backgroundColor: '#afb0eee1',
             borderColor: 'black',
             borderWith: 1,
@@ -64,7 +66,10 @@ const Stats = () => {
 
     return (
         <div style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-
+                <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+                <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
+                </Link>
+                <h1 style={{fontFamily:'system-ui'}}>Stats</h1>
             <select onChange={handleChange} style={{width:'150px'}}>
                 <option value="amount">Monthly amounts</option>
                 <option value="top">Top 10 products</option>
