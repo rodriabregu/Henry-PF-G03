@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { Product, User, Sale, Item } from '../db'
+import { Product, User, Sale, SaleItem } from '../db'
 import { mercadoPago } from '../providers'
 import { appItem } from '../@app'
 /* 
@@ -99,7 +99,7 @@ const addItem = async (item: appItem, saleId: number): Promise<any> => {
   const product = await Product.findByPk(productId)
   if (!product) throw Error("product not found")
   const { price, name } = product.get()
-  return await Item.create({
+  return await SaleItem.create({
     saleId,
     productId,
     productName: name,
