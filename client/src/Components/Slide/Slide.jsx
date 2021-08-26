@@ -73,20 +73,17 @@ export const Slide = ({
     <div className='container-allslide'>
         <div className='container-slide' ref={slide}>
             <div className='slide'>
-                <div className='text-slide'> <p>Welcome! Click to enter FC Crotone E-commerce</p> </div>
+                <div className='text-slide'> <p>Welcome! Click on image to enter FC Crotone E-commerce</p> </div>
                 <Link to='/home'> <img src={bannerimg1} alt='home' width='800 px' height='550px'/></Link>
             </div>
             <div className='slide'>
                 <Link to='/home'> <img src={bannerimg2} alt='home' width='800 px' height='550px'/></Link>
-                {/* <div className='text-slide'> <p>Holis</p> </div> */}
             </div>
             <div className='slide'>
                 <Link to='/home'> <img src={bannerimg3} alt='home' width='800 px' height='550px'/></Link>
-                {/* <div className='text-slide'> <p>Holis</p> </div> */}
             </div>
             <div className='slide'>
                 <Link to='/home'> <img src={bannerimg4} alt='home' width='800 px' height='550px'/></Link>
-                {/* <div className='text-slide'> <p>Holis</p> </div> */}
             </div>
         </div>
         <div className='buttons'>

@@ -22,7 +22,7 @@ export default function PostSale() {
         console.log('saleState', saleState)
         console.log('estado de la compra ', sales)
       });
-  },[sales])
+  },[])
 
   return (
     <div className="div-postSale">
