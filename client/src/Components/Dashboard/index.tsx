@@ -22,6 +22,12 @@ const AdminDash = () => {
                     <span>Here you can see a list of sales, and more detailed information about them.</span>
                 </div>
             </Link>
+            <Link style={{ textDecoration: 'none' }} to='/usersInfo'>
+                <div className='diva'>
+                    <h2>MANAGE USERS</h2>
+                    <span>Here you can see a list of users, and change their permissions</span>
+                </div>
+            </Link>
         </div>
     )
 };
