@@ -28,7 +28,7 @@
 }
 
 .text-slide{
-    background-color: rgba(98, 108, 136, 0.445);
+    background-color: rgba(87, 100, 136, 0.733);
     color: white;
     width: 100%;
     padding: 1px ;
@@ -38,6 +38,7 @@
     font: 800;
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
 }
 
 .buttons{
