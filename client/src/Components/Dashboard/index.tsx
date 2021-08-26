@@ -35,12 +35,6 @@ const AdminDash = () => {
                         <span>Here you can see a stats about products and sells</span>
                     </div>
                 </Link>
-                <Link style={{ textDecoration: 'none' }} to='/products'>
-                    <div className='diva'>
-                        <h2>STATS</h2>
-                        <span>Here you can see a stats about products and sells</span>
-                    </div>
-                </Link>
                 <Link style={{ textDecoration: 'none' }} to='/productsList'>
                     <div className='diva'>
                         <h2>PRODUCTS</h2>
