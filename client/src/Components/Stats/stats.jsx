@@ -35,10 +35,10 @@ const Stats = () => {
         labels: ["January", "February", "March", "April", "May", "June", "July", "August"],
         datasets: [{
             label: 'Amounts per month',
-            backgroundColor: 'rgba(0,255,0,1)',
+            backgroundColor: '#afb0eee1',
             borderColor: 'black',
             borderWith: 1,
-            hoverBackgroundColor: 'rgba(0,255,0,0.2)',
+            hoverBackgroundColor: '#afb0eece',
             hoverBorderColor: '#FF0000',
             data: amounts
         }]
@@ -48,10 +48,10 @@ const Stats = () => {
         labels: products,
         datasets: [{
             label: 'Top 5 most selled products',
-            backgroundColor: 'rgba(0,255,0,1)',
+            backgroundColor: '#afb0eee1',
             borderColor: 'black',
             borderWith: 1,
-            hoverBackgroundColor: 'rgba(0,255,0,0.2)',
+            hoverBackgroundColor: '#afb0eece',
             hoverBorderColor: '#FF0000',
             data: units
         }]
@@ -63,9 +63,9 @@ const Stats = () => {
     }
 
     return (
-        <div>
+        <div style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
 
-            <select onChange={handleChange}>
+            <select onChange={handleChange} style={{width:'150px'}}>
                 <option value="amount">Monthly amounts</option>
                 <option value="top">Top 10 products</option>
             </select>
