@@ -12,7 +12,6 @@ const html = async (accion: string, userId: string): Promise<string> => {
       const user = await User.findByPk(userId,
         { include: { model: CartItem } }
       )
-      console.log(user)
       if (!user) throw { status: 404, message: " user not found" }
       const { cartItems } = user.get()
       if (!cartItems || cartItems.length <= 0) { throw { status: 404, message: " cart not found" } }
@@ -30,7 +29,7 @@ const html = async (accion: string, userId: string): Promise<string> => {
 }
 
 /**
- * user
+ * userId 
  * accion
  */
 export default async (userId: string, accion: string, saleId: number = 0) => {
