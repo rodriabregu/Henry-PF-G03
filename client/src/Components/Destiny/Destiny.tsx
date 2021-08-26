@@ -7,6 +7,8 @@ import Map from './Map';
 import axios from 'axios';
 import './Destiny.css';
 
+import config from '../../config';
+
 Geocode.setApiKey('AIzaSyBeDbO4AKXkxGq42frll9RTIKIYZCj-TEA');
 Geocode.setLanguage('en');
 Geocode.setRegion('es');
@@ -67,7 +69,9 @@ function Destiny() {
     // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
     if (url_pago) {
       axios
-      .post('http://localhost:3001/api/destiny', body)
+
+      .post(`http://${config.REACT_APP_API_URL}:${config.port}/api/destiny`)
+//      .post('http://localhost:3001/api/destiny', body)
       .then((resp) => console.log(resp))
       .catch((err) => console.error(err));
       dispatch(updateCart([],user.id))
