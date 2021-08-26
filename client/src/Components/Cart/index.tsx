@@ -65,7 +65,7 @@ const Cart = () => {
             if (product)
               return (
                 <div className='item'>
-                  <form>
+                  <div>
                     <div className='detalle'>
                       <img
                         src={product.photos[0].url}
@@ -93,7 +93,7 @@ const Cart = () => {
                         </button>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               );
           })}

@@ -12,7 +12,7 @@ const Logout = () => {
   useEffect(() => {
     return () => {
       axios.get(
-        `http://${config.REACT_APP_API_URL}:${config.port}/api/cart/${user?.sub}`
+        `http://${config.REACT_APP_API_URL}:${config.port}/api/cart/Emails/${user?.sub}`
       )
     }
   }, []);
