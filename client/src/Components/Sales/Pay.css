@@ -1,7 +1,7 @@
 .errorpay, .pay{
     display: flex;
     justify-content: center;
-
+    margin-bottom: 20px;
 }
 
 .card-error, .card-s{

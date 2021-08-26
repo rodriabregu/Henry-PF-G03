@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import config from '../../config'
 import PaySuccessful from './PaySuccesful';
 import ErrorPay from './ErrorPay';
-import './PostSale';
+import './PostSale.css';
+
 
 export default function PostSale() {
   const { saleId } = useParams<any>();
@@ -18,10 +19,10 @@ export default function PostSale() {
       .then(res => {
         saleState = res?.data?.data?.state
         setSales(saleState)
-        console.log('saleState', res)
+        console.log('saleState', saleState)
         console.log('estado de la compra ', sales)
       });
-  }, [])
+  },[sales])
 
   return (
     <div className="div-postSale">
@@ -37,9 +38,11 @@ export default function PostSale() {
             <ErrorPay />
           </div>
       }
-      <Link to='/home'>
-        <button className='btn-backhome'>Back to home</button>
-      </Link>
+      <div className='div-btnhome'>
+        <Link to='/home'>
+          <button className='backhome'>Back to home</button>
+        </Link>
+      </div>
     </div>
   )
 };
