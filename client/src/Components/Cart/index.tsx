@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { PostSale } from '../../Redux/Actions/Sales/postSale';
 import { updateCart } from '../../Redux/Actions/Cart/updateCart';
 import { IoTrashOutline } from 'react-icons/io5';
-import { state, product, item, user } from '../../typesApp'
+import { state, product, item } from '../../typesApp'
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
@@ -10,7 +9,7 @@ import './Cart.css';
 const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: state) => state.cart);
-  const user: user = useSelector((state: state) => state.user)
+  const user = useSelector((state: state) => state.user);
   const { isAuthenticated } = useAuth0();
 
   let total = 0;
@@ -45,13 +44,6 @@ const Cart = () => {
       return item;
     });
     dispatch(updateCart(newItems, user.id));
-  };
-
-  const handleSubmit = () => {
-    if (items.length > 0) {
-      dispatch(PostSale({ userId: user.id, items }));
-      dispatch(updateCart([], user.id));
-    }
   };
 
   return (
@@ -101,10 +93,10 @@ const Cart = () => {
           <h3>Subtotal to pay: ${total}.00</h3>
           {isAuthenticated ? (
             items.length > 0 && (
-              <Link to="/destiny/3">
-                <button onClick={handleSubmit}
-                  className='btn-buy'>
-                  Confirm payment</button>
+              <Link to="/destiny/0">
+                <button
+                  className='btn-buy'
+                >Confirm payment</button>
               </Link>
             )
           ) : items.length > 0 && (
