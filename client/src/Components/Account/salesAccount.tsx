@@ -44,7 +44,7 @@ const SalesAccount = () => {
                         payload: f.url_pago
                       })}
                       className='btn-backhome'
-                    >continuar</button>
+                    >Continue</button>
                   </NavLink>
                 }
               </div>
