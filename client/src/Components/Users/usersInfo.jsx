@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+
+import config from '../../config';
+
 import { NavLink as Link } from "react-router-dom";
 import { FiArrowLeftCircle } from "react-icons/fi";
 import './usersInfo.css';
@@ -12,8 +15,9 @@ const UsersInfo = () => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/getUsersInfo')
-            .then(resp => {
+//        axios.get('http://localhost:3001/api/getUsersInfo')
+        axios.get(`http://${config.REACT_APP_API_URL}:${config.port}/api/getUsersInfo`)
+        .then(resp => {
                 console.log(resp.data)
                 setUsers(resp.data)
             })
@@ -56,8 +60,9 @@ const UsersInfo = () => {
             rol: e.target.value
         }
         console.log('mandando ', body)
-        axios.put(`http://localhost:3001/api/putRol`, { id: e.target.id, rol: e.target.value })
-            .then(resp => {
+//        axios.put(`http://localhost:3001/api/putRol`, { id: e.target.id, rol: e.target.value })
+        axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/putRol`, { id: e.target.id, rol: e.target.value })
+        .then(resp => {
                 setMessage(resp.data)
                 setTimeout(() => {
                     setMessage('')
@@ -75,7 +80,8 @@ const UsersInfo = () => {
     const changeIsActive = (e) => {
         const id = e.target.name;
         const isActive = e.target.value;
-        axios.put('http://localhost:3001/api/deleteUser', { id, isActive })
+//        axios.put('http://localhost:3001/api/deleteUser', { id, isActive })
+        axios.put(`http://${config.REACT_APP_API_URL}:${config.port}/api/deleteUser`, { id, isActive })
             .then(resp => console.log(resp))
             .catch(err => console.log(err))
     }

@@ -4,13 +4,15 @@ import { NavLink as Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import './Favs.css'
+import config from '../../config';
 
 const Favs=()=>{
     const [favs,setFavs]=useState();
     const user=useSelector(s => s.user)
 
     const removeFav = async (productId) => {        
-        await axios(`http://localhost:3001/api/favs`, {
+//        await axios(`http://localhost:3001/api/favs`, {
+        await axios(`http://${config.REACT_APP_API_URL}:${config.port}/api/favs`, {
             method:'delete',
             data: {
                 userId:user.id,
@@ -24,8 +26,9 @@ const Favs=()=>{
 
     useEffect(()=>{
         console.log('trayendo datos del usuario con id ',user.id)
-        axios.get(`http://localhost:3001/api/favs/${user.id}`)
-            .then( resp => {
+//        axios.get(`http://localhost:3001/api/favs/${user.id}`)
+        axios.get(`http://${config.REACT_APP_API_URL}:${config.port}/api/favs/${user.id}`)
+        .then( resp => {
                 setFavs(resp.data);
             })
     },[]);
