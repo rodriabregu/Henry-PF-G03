@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { Product, Sale, Purchase, Item } from '../db';
+import { Product, Sale, Purchase, SaleItem } from '../db';
 import { sendEmail } from '../providers'
 /* 
  * Route : PUT "api/sale/"
@@ -38,7 +38,7 @@ export default async (req: Request, res: Response) => {
     if (!(typeof saleId === "number" && states.includes(newState)))
       throw { status: 404, message: "data is not validate" }
 
-    const sale = await Sale.findByPk(saleId, { include: { model: Item } })
+    const sale = await Sale.findByPk(saleId, { include: { model: SaleItem } })
     if (!sale) throw { status: 404, message: "sale is not" }
 
     const { state, items, userId, id } = sale.get()

@@ -5,6 +5,11 @@
     justify-content: center;
  }
 
+
+.btn-dash{
+  margin-top: 30px;
+}
+
 table, td, th {
     border: 1px solid black;
     color: rgb(44, 65, 136);
@@ -46,6 +51,10 @@ td{
 
   .filtro-sales select{
     border-radius: 8px;
+    background-color: #ffffff;
+    color:#2E2E48;
+    border: 1px solid #7b7bc2;
+    border-radius: 9px;
   }
    
 

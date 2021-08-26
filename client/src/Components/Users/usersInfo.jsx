@@ -3,6 +3,10 @@ import axios from 'axios';
 
 import config from '../../config';
 
+import { NavLink as Link } from "react-router-dom";
+import { FiArrowLeftCircle } from "react-icons/fi";
+import './usersInfo.css';
+
 const UsersInfo = () => {
 
     const [users, setUsers] = useState()
@@ -83,9 +87,16 @@ const UsersInfo = () => {
     }
 
     return (
-        <div>
+        <div className='table-users'>
+            <div className='div-btndashuser'>
+                <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+                <button className='btn-dashuser'> <FiArrowLeftCircle/> Dashboard</button>
+                </Link>
+            </div>
+            <div>
+                <h1>Users Info</h1>
             <table>
-                <tr>
+                <tr style={{backgroundColor:'#b6b6ec'}}>
                     <td>id</td>
                     <td>userType</td>
                     <td>isActive</td>
@@ -120,6 +131,7 @@ const UsersInfo = () => {
                     )
                 }
             </table>
+            </div>
             <div>{message}</div>
         </div >
 

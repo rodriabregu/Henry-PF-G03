@@ -48,8 +48,10 @@ const Cart = () => {
   };
 
   const handleSubmit = () => {
-    if (items.length > 0)
+    if (items.length > 0) {
       dispatch(PostSale({ userId: user.id, items }));
+      dispatch(updateCart([], user.id));
+    }
   };
 
   return (
@@ -63,7 +65,7 @@ const Cart = () => {
             if (product)
               return (
                 <div className='item'>
-                  <form>
+                  <div>
                     <div className='detalle'>
                       <img
                         src={product.photos[0].url}
@@ -91,13 +93,13 @@ const Cart = () => {
                         </button>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               );
           })}
         <div className='buy'>
           <h3>Subtotal to pay: ${total}.00</h3>
-          {isAuthenticated ? (            
+          {isAuthenticated ? (
             items.length > 0 && (
               <Link to="/destiny/3">
                 <button onClick={handleSubmit}

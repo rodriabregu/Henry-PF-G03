@@ -32,6 +32,7 @@ import jwt_decode from 'jwt-decode';
 import SalesAccount from './Components/Account/salesAccount';
 //import { getTokenSourceMapRange, setSyntheticLeadingComments } from 'typescript';
 import UsersInfo from './Components/Users/usersInfo.jsx'
+import Stats from './Components/Stats/stats';
 import { useReducer } from 'react';
 
 function App() {
@@ -104,6 +105,7 @@ function App() {
               <Route path="/checkout/:saleId/:esta" component={PostSale} />
               <Route path='/usersInfo' component={UsersInfo}/>
               <Route path='/destiny/:id' component={Destiny} />
+              <Route path="/stats" component={Stats}/>
               <Route path="/" component={Footer} />
             </div>
           ) : (
@@ -130,6 +132,7 @@ function App() {
               <Route path="/checkout/:saleId/:esta" component={PostSale} />
               <Route path='/destiny/:id' component={Destiny} />
               <Route path='/usersInfo' component={NoAuth}/>
+              <Route path="/stats" component={NoAuth}/>
               <Route path="/" component={Footer} />
             </div>
           )
@@ -161,7 +164,9 @@ function App() {
           <Route path='/destiny/:id' component={NoAuth} />
           <Route path="/checkout/:saleId/:esta" component={NoAuth} />
           <Route path='/usersInfo' component={NoAuth}/>
+          <Route path="/stats" component={NoAuth}/>
           <Route path="/" component={Footer} />
+          
         </div>
       </Router>
     )

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { updateCart } from '../../Redux/Actions/Cart/updateCart';
 import { useDispatch, useSelector } from 'react-redux';
 import Geocode from 'react-geocode';
+import { Link } from 'react-router-dom';
 import { state, user } from '../../typesApp'
 import Map from './Map';
 import axios from 'axios';
@@ -14,9 +14,7 @@ Geocode.setLanguage('en');
 Geocode.setRegion('es');
 
 function Destiny() {
-  const dispatch = useDispatch()
   const url_pago = useSelector((state: state) => state.url_pago);
-  const user: user = useSelector((state: state) => state.user)
   const [input, setInput] = useState({
     address: '',
     lat: 0,
@@ -72,9 +70,8 @@ function Destiny() {
 
       .post(`http://${config.REACT_APP_API_URL}:${config.port}/api/destiny`)
 //      .post('http://localhost:3001/api/destiny', body)
-      .then((resp) => console.log(resp))
-      .catch((err) => console.error(err));
-      dispatch(updateCart([],user.id))
+        .then((resp) => console.log(resp))
+        .catch((err) => console.error(err));
     }
   };
 
@@ -86,7 +83,7 @@ function Destiny() {
           <form onSubmit={handleSubmit}>
             <div>
               <label>Address: </label>
-              <input type='text' required onChange={handleChange} name='address' />
+              <input type='text' placeholder="street number city" required onChange={handleChange} name='address' />
             </div>
             <div className='text-especif'>
               <label>Especifications: (floor, departament)</label>
@@ -105,6 +102,9 @@ function Destiny() {
             </div>
             <div>
               <input className='soy-btn' type='submit' required value='Ok'></input>
+              <Link to='/home'>
+                <button className='btn-backhome'>Cancel</button>
+              </Link>
             </div>
           </form>
         </div>
@@ -114,7 +114,7 @@ function Destiny() {
         <>
           <Map lat={input.lat} lng={input.lng} />
           <div className='data-confirm'>
-            <h3>Data</h3>
+            <h3>Destiny</h3>
             <p>{input.formatted_address}</p>
             {url_pago &&
               (<a style={{ textDecoration: 'none' }} href={url_pago}>
@@ -123,7 +123,6 @@ function Destiny() {
                 </button>
               </a>)
             }
-            {/* <button>NO</button> */}
           </div>
         </>
       )}
