@@ -18,13 +18,13 @@ export const Reviews = (props: { productId: number }) => {
   const [show, setShow] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState(1);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [review, setReview] = useState(reviewNull);
   const stars = Array(5).fill(0)
   const product: product = useSelector(
     (state: state) => state.products.find(
       (product: product) => product.id === productId
     )
   ) || productNull
-  const [review, setReview] = useState(reviewNull);
 
   function handleReview(e: any) {
     setReview({
@@ -50,6 +50,7 @@ export const Reviews = (props: { productId: number }) => {
   const handleSubmit = () => {
     dispatch(addReview(review, ""))
     setReview(reviewNull);
+    setShow(false)
     notify()
   }
 
@@ -57,7 +58,7 @@ export const Reviews = (props: { productId: number }) => {
     <div><h3>Reviews</h3>
       {product.reviews.map((review: review) => {
         return (<div><span>
-          {review.text}-{review.stars}
+          {review.text}
         </span></div>)
       })}
       <div className='form-review'>
