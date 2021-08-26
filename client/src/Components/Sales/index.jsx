@@ -26,12 +26,8 @@ const SalesList = () => {
     }, [allSales.length]);
 
     return (
-        <div>
-            <div className='back-sales'>
-            <Link to='/adashboard' style={{ textDecoration: 'none' }}>
-            <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
-        </Link>
-        </div>
+        <div className='back-sales'>
+            <div className='div-btn-filter'>
             <div className='filtro-sales'>
                 <select onChange={handleChange}>
                     <option value='---'>Filter state by:</option>
@@ -42,6 +38,7 @@ const SalesList = () => {
                     <option value='Cancelled'> Cancelled </option>
                 </select>
             </div>
+        </div>
                 <div className='cardSale'>
                 <table>
                     <tr>
@@ -72,6 +69,9 @@ const SalesList = () => {
                 }
                 </table>
                 </div>
+                        <Link to='/adashboard' style={{ textDecoration: 'none' }}>
+                        <button className='btn-dash'> <FiArrowLeftCircle/> Dashboard</button>
+        </Link>
         </div>
     )
 };

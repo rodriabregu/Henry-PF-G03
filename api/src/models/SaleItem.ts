@@ -5,7 +5,7 @@ import {
 import { Sale } from './Sale';
 
 @Table
-export class Item extends Model<Item> {
+export class SaleItem extends Model<SaleItem> {
   
   @ForeignKey(() => Sale)
   saleId!: number;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from 'axios';
+import './usersInfo.css';
 
 const UsersInfo = () => {
 
@@ -78,9 +79,9 @@ const UsersInfo = () => {
     }
 
     return (
-        <div>
+        <div className='table-users'>
             <table>
-                <tr>
+                <tr style={{backgroundColor:'#b6b6ec'}}>
                     <td>id</td>
                     <td>userType</td>
                     <td>isActive</td>

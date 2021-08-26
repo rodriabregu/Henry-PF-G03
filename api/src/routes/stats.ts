@@ -1,7 +1,12 @@
+
 import { request, Request, Response, Router } from 'express'
 import { isEmptyStatement } from 'typescript';
 import { Sale } from '../db';
 import { Item } from '../models/Item';
+
+import { Request, Response, Router } from 'express'
+import { Sale, SaleItem } from '../db';
+
 const router = Router();
 
 
@@ -13,7 +18,7 @@ router.get('/', async (req: Request, res: Response) => {
         attributes: { exclude: ['updatedAt', 'createdAt'] },
         include: [
             {
-                model: Item,
+                model: SaleItem,
                 attributes: { exclude: ['updatedAt', 'createdAt'] }
             }
         ]
