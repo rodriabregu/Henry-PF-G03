@@ -1,8 +1,27 @@
 .table-users{
-    margin: 20px;
     font-family: system-ui;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-btndashuser{
+    margin-bottom: 10px;
+}
+
+.btn-dashuser{
+    background-color:  #3c3c5e;
+    color:  #bcbdf1;
+    border:none;
+    border-radius: 10px;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 4px 4px 4px 4px;
+}
+
+.btn-dashuser:hover{
+    background-color:  #bcbdf1;
+    color:  #2E2E48;
 }
 
 table, tr, td {
