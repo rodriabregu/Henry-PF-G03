@@ -76,14 +76,11 @@ function Destiny() {
         preferenceId && preferenceId[0].replace("pref_id=", "")
     };
     // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
-    if (url_pago) {
-      axios
-
-      .post(`http://${config.REACT_APP_API_URL}:${config.port}/api/destiny`)
-//      .post('http://localhost:3001/api/destiny', body)
-        .then((resp) => console.log(resp))
-        .catch((err) => console.error(err));
-    }
+    axios
+      .post(`http://${config.REACT_APP_API_URL}:${config.port}/api/destiny`, body)
+      //      .post('http://localhost:3001/api/destiny', body)
+      .then((resp) => console.log(resp))
+      .catch((err) => console.error(err));
   };
 
   return (
