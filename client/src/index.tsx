@@ -13,7 +13,7 @@ ReactDOM.render(
       <Auth0Provider
        domain='dev-kpo8zvgy.us.auth0.com' 
        clientId='Bf8TfhJE1SbgHOjHDLDgjJQEIsYHTWTD' 
-       redirectUri={`http://${config.REACT_APP_API_URL}:${config.REACT_APP_CLIENT_PORT}/home`}
+       redirectUri={`httsp://${config.REACT_APP_API_URL}:${config.REACT_APP_CLIENT_PORT}/home`}
        audience='http://securityApi'
        useRefreshTokens
        cacheLocation="localstorage"
