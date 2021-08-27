@@ -75,7 +75,6 @@ function Destiny() {
       preferenceId:
         preferenceId && preferenceId[0].replace("pref_id=", "")
     };
-    // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
     axios
       .post(`http://${config.REACT_APP_API_URL}:${config.port}/api/destiny`, body)
       //      .post('http://localhost:3001/api/destiny', body)
