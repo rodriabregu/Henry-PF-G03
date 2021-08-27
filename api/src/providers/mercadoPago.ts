@@ -27,9 +27,9 @@ export default async (user: appUser, items: appItem[], saleId: number): Promise<
       }
     }),
     back_urls: {
-      success: `http://${config.host}:${config.clientPort}/checkout/${saleId}/success`,
-      failure: `http://${config.host}:${config.clientPort}/checkout/${saleId}/failure`,
-      pending: `http://${config.host}:${config.clientPort}/checkout/${saleId}/pending`
+      success: `${config.prot}://${config.host}:${config.clientPort}/checkout/${saleId}/success`,
+      failure: `${config.prot}://${config.host}:${config.clientPort}/checkout/${saleId}/failure`,
+      pending: `${config.prot}://${config.host}:${config.clientPort}/checkout/${saleId}/pending`
     },
     auto_return: "approved",
   };

@@ -2,16 +2,23 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Geocode from 'react-geocode';
 import { Link } from 'react-router-dom';
-import { state, user } from '../../typesApp'
+import { PostSale } from '../../Redux/Actions/Sales/postSale';
+import { updateCart } from '../../Redux/Actions/Cart/updateCart';
+import { state, user } from '../../typesApp';
 import Map from './Map';
 import axios from 'axios';
 import './Destiny.css';
+
+import config from '../../config';
 
 Geocode.setApiKey('AIzaSyBeDbO4AKXkxGq42frll9RTIKIYZCj-TEA');
 Geocode.setLanguage('en');
 Geocode.setRegion('es');
 
 function Destiny() {
+  const dispatch = useDispatch();
+  const items = useSelector((state: state) => state.cart);
+  const user = useSelector((state: state) => state.user)
   const url_pago = useSelector((state: state) => state.url_pago);
   const [input, setInput] = useState({
     address: '',
@@ -34,21 +41,27 @@ function Destiny() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    Geocode.fromAddress(input.address)
-      .then((resp) => {
-        const { lat, lng } = resp.results[0].geometry.location;
-        const { formatted_address } = resp.results[0];
-        setInput({
-          ...input,
-          lat,
-          lng,
-          view: true,
-          formatted_address,
+    if (items.length > 0) {
+      Geocode.fromAddress(input.address)
+        .then((resp) => {
+          const { lat, lng } = resp.results[0].geometry.location;
+          const { formatted_address } = resp.results[0];
+          setInput({
+            ...input,
+            lat,
+            lng,
+            view: true,
+            formatted_address,
+          });
+
+          dispatch(PostSale({ userId: user.id, items }));
+          dispatch(updateCart([], user.id));
+
+        })
+        .catch((e) => {
+          console.error(e);
         });
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    }
   };
 
   const sendData = () => {
@@ -63,12 +76,11 @@ function Destiny() {
         preferenceId && preferenceId[0].replace("pref_id=", "")
     };
     // {localAddress,mapAddress,description,fullName,dni,saleId}=req.body;
-    if (url_pago) {
-      axios
-        .post('http://localhost:3001/api/destiny', body)
-        .then((resp) => console.log(resp))
-        .catch((err) => console.error(err));
-    }
+    axios
+      .post(`http://${config.REACT_APP_API_URL}:${config.port}/api/destiny`, body)
+      //      .post('http://localhost:3001/api/destiny', body)
+      .then((resp) => console.log(resp))
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -97,10 +109,12 @@ function Destiny() {
               <input type='text' required onChange={handleChange} name='dni' />
             </div>
             <div>
-              <input className='soy-btn' type='submit' required value='Ok'></input>
-              <Link to='/home'>
+              {items.length > 0 && <input
+                className='soy-btn' type='submit' required value='Ok'>
+              </input>}
+              {!url_pago && <Link to='/home'>
                 <button className='btn-backhome'>Cancel</button>
-              </Link>
+              </Link>}
             </div>
           </form>
         </div>

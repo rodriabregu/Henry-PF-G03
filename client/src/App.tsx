@@ -34,6 +34,8 @@ import SalesAccount from './Components/Account/salesAccount';
 import UsersInfo from './Components/Users/usersInfo.jsx'
 import Stats from './Components/Stats/stats';
 import { useReducer } from 'react';
+import ListProducts from './Components/Products/listProducts';
+
 
 function App() {
   const { isAuthenticated } = useAuth0<{ isAuthenticated: boolean }>();
@@ -106,6 +108,7 @@ function App() {
               <Route path='/usersInfo' component={UsersInfo}/>
               <Route path='/destiny/:id' component={Destiny} />
               <Route path="/stats" component={Stats}/>
+              <Route path="/productsList" component={ListProducts}/>
               <Route path="/" component={Footer} />
             </div>
           ) : (

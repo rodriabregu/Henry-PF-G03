@@ -16,13 +16,23 @@ const html = async (accion: string, userId: string): Promise<string> => {
       const { cartItems } = user.get()
       if (!cartItems || cartItems.length <= 0) { throw { status: 404, message: " cart not found" } }
 
-      return (await cartItems.reduce(async (message: string, item: { productId: number }) => {
-        const product = await Product.findByPk(item.productId)
-        if (!product) throw { status: 404, message: " product not found" }
-        const { name, description, brand, price } = product.get()
-        return message + `<div><p>${name}</p><p>${description}</p><p>brand:${brand}</p><p>price: ${price}.00</p></div>`
-      }, "<body><h4> Helo {firstName} There were pending products in your cart</h4></br>")
-      ) + `<a href=\"http://${config.host}:${config.clientPort}/cart\">continue with your purchase</a><body>`
+      const divsProducts: string[] = await Promise.all(
+        cartItems.map(async (item: { productId: number, units: number }) => {
+          const product = await Product.findByPk(item.productId)
+          if (!product) throw { status: 404, message: " product not found" }
+          const { name, price } = await product.get()
+          return `<div><h5>${name}</h5><p>units: ${item.units}</p><p>price: ${price}.00</p></div>`
+        })
+      )
+      let message =
+        "<body><h4> Helo {firstName} There were pending products in your cart</h4></br><div>"
+
+      divsProducts.map(
+        (divProduct: string) => message += divProduct
+      )
+
+      return message +=
+        `</div><a href=\"http://${config.host}:${config.clientPort}/cart\">continue with your purchase here </a></body>`
     default:
       return "<p> message club crotones </p>";
   }
