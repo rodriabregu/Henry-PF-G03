@@ -103,44 +103,46 @@ const UsersInfo = () => {
             </div>
             <div>
                 <h1>Users Info</h1>
-            <table>
-                <tr style={{backgroundColor:'#b6b6ec'}}>
-                    <td>id</td>
-                    <td>userType</td>
-                    <td>isActive</td>
-                    <td>userName</td>
-                    <td>Email</td>
-                    <td>Rol</td>
-                    <td>Password Reset</td>
-                </tr>
-                {
-                    users?.map(u =>
-                        <tr>
-                            <td>{u.id}</td>
-                            <td>{u.userType}</td>
-                            {/* <td>{u.isActive ? 'True':'False'}</td> */}
-                            <td>
-                                <span>yes</span>
-                                <input type="radio" name={`${u.id}`} value="true" onClick={changeIsActive} defaultChecked={u.isActive ? true : false} radioGroup={`radio${u.id}`} />
-                                <span>no</span>
-                                <input type="radio" name={`${u.id}`} value="false" onClick={changeIsActive} defaultChecked={!u.isActive ? true : false} radioGroup={`radio${u.id}`} />
-
-                            </td>
-                            <td>{u.userName}</td>
-                            <td>{u.email}</td>
-                            <select id={u.id} select onChange={handleChange}>
-                                <option value={u.userType} selected disabled hidden>
-                                    {u.userType}
-                                </option>
-                                <option>Admin</option>
-                                <option>User</option>
-                                <option>Blocked</option>
-                            </select>
-                            <td><button id={u.id} onClick={reset}>Reset</button></td>
+                <div className='div-table'>
+                    <table>
+                        <tr style={{backgroundColor:'#b6b6ec'}}>
+                            <td>id</td>
+                            <td>userType</td>
+                            <td>isActive</td>
+                            <td>userName</td>
+                            <td>Email</td>
+                            <td>Rol</td>
+                            <td>Password Reset</td>
                         </tr>
-                    )
-                }
-            </table>
+                        {
+                            users?.map(u =>
+                                <tr>
+                                    <td>{u.id}</td>
+                                    <td>{u.userType}</td>
+                                    {/* <td>{u.isActive ? 'True':'False'}</td> */}
+                                    <td>
+                                        <span>yes</span>
+                                        <input type="radio" name={`${u.id}`} value="true" onClick={changeIsActive} defaultChecked={u.isActive ? true : false} radioGroup={`radio${u.id}`} />
+                                        <span>no</span>
+                                        <input type="radio" name={`${u.id}`} value="false" onClick={changeIsActive} defaultChecked={!u.isActive ? true : false} radioGroup={`radio${u.id}`} />
+
+                                    </td>
+                                    <td>{u.userName}</td>
+                                    <td>{u.email}</td>
+                                    <select id={u.id} select onChange={handleChange}>
+                                        <option value={u.userType} selected disabled hidden>
+                                            {u.userType}
+                                        </option>
+                                        <option>Admin</option>
+                                        <option>User</option>
+                                        <option>Blocked</option>
+                                    </select>
+                                    <td><button id={u.id} onClick={reset}>Reset</button></td>
+                                </tr>
+                            )
+                        }
+                    </table>
+                </div>
             </div>
             <div>{message}</div>
         </div >
