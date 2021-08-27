@@ -27,6 +27,7 @@ const SalesList = () => {
 
     return (
         <div className='back-sales'>
+            <h1 style={{fontFamily:'system-ui'}}>All Sales</h1>
             <div className='div-btn-filter'>
             <div className='filtro-sales'>
                 <select onChange={handleChange}>

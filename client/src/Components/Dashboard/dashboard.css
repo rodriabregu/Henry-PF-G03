@@ -1,10 +1,11 @@
 .sheet {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
     font-family: system-ui;
+    max-width: 850px;
+    margin: 40px auto;
 }
 
 .diva {
@@ -21,10 +22,6 @@
     text-align: center;
 }
 
-.div2{
-    display: flex;
-}
-
 @keyframes gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -32,17 +29,11 @@
 }
 
 @media screen and (max-width: 875px){
-    .sheet{
-        display: flex;
-        flex-direction: column;
-    }   
+     
 
     .diva{
         width: 250px;
     }
 
-    .div2{
-        display: flex;
-        flex-direction: column;
-    }
+   
 }

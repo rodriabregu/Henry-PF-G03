@@ -1,0 +1,15 @@
+.product-table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tablediv{
+    overflow-x: auto;
+    width: 90vw;
+}
+
+.tablediv table {
+    width: 100%;
+}
