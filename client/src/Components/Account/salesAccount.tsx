@@ -18,6 +18,7 @@ const SalesAccount = () => {
 
   return (
     <div className='salesAccountcss'>
+      <h1>My purchases</h1>
       {
         filterUser?.map((f: any) => {
           return (
@@ -27,16 +28,18 @@ const SalesAccount = () => {
                 {f.items?.map((x: any) => {
                   return (
                     <div>
-                      <NavLink to={`/product/${x.productId}`}>
+                      <NavLink style={{textDecoration:'none', color:'#cecff1'}} to={`/product/${x.productId}`}>
                         <span>{x.productName}{<br />}</span>
                       </NavLink>
-                      <span>Price: {x.salePrice}{<br />}</span>
-                      <span>Units: {x.units}</span>
+                      <span>Units: {x.units}{<br />}</span>
+                      <span>Price: ${x.salePrice}{<br />}</span>
+                      { x.units > 1 ? <span>Total Price for item: ${x.units*x.salePrice}{<br />}</span> : ''}
+                      {<br />}
                     </div>
                   )
                 })}
-                <span>State: {f.state}</span>
-                {f.state === 'Pending' &&
+                {/*<span>State: {f.state}</span>
+                 {f.state === 'Pending' &&
                   <NavLink to='/destiny/0'>
                     <button
                       onClick={() => dispatch({
@@ -46,7 +49,7 @@ const SalesAccount = () => {
                       className='btn-backhome'
                     >Continue</button>
                   </NavLink>
-                }
+                } */}
               </div>
             </>
           )
