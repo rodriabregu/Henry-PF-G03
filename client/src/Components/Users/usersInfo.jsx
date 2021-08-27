@@ -80,6 +80,14 @@ const UsersInfo = () => {
             .catch(err => console.log(err))
     }
 
+    const reset=(e)=>{
+        setMessage(`User's ${e.target.id} new password: crotone123`)
+
+        setTimeout(()=>{
+            setMessage('')
+        },10000)
+    }
+
     return (
         <div className='table-users'>
             <div className='div-btndashuser'>
@@ -97,6 +105,7 @@ const UsersInfo = () => {
                     <td>userName</td>
                     <td>Email</td>
                     <td>Rol</td>
+                    <td>Password Reset</td>
                 </tr>
                 {
                     users?.map(u =>
@@ -121,6 +130,7 @@ const UsersInfo = () => {
                                 <option>User</option>
                                 <option>Blocked</option>
                             </select>
+                            <td><button id={u.id} onClick={reset}>Reset</button></td>
                         </tr>
                     )
                 }
