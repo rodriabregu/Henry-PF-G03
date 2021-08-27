@@ -11,10 +11,26 @@
     width: 800px;
     background-color: #b2b2f356;
     border-radius: 20px;
+    padding: 20px 20px 20px 20px;
+}
+
+.div-logos{
+    justify-content: space-between;
+    width: 700px;
+    padding: 10px 10px 10px 10px;
 }
 
 @media screen and (max-width: 875px){
     .container-about{
         width: 350px;
+    }
+
+    .div-logos{
+        width: 350px;
+        flex-direction: column;
+    }
+
+    .div-logos img{
+        padding: 10px 0px 10px 0px;
     }
 }

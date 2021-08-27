@@ -10,7 +10,7 @@ import bannerimg4 from './bannerimg4.jpg';
 export const Slide = ({
     autoplay = true,
     velocidad="1800",
-    interval="8000"
+    interval="4000"
 }) => { 
     const slide = useRef(null)
     const intervalSlide = useRef(null);

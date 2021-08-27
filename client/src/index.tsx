@@ -7,15 +7,13 @@ import { Provider } from 'react-redux';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import config from './config';
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store= {store}>
       <Auth0Provider
        domain='dev-kpo8zvgy.us.auth0.com' 
        clientId='Bf8TfhJE1SbgHOjHDLDgjJQEIsYHTWTD' 
-//       redirectUri='http://localhost:3000/home'
-       redirectUri='https://grupo03.sytes.net:3000/home'
+       redirectUri={`httsp://${config.REACT_APP_API_URL}:${config.REACT_APP_CLIENT_PORT}/home`}
        audience='http://securityApi'
        useRefreshTokens
        cacheLocation="localstorage"

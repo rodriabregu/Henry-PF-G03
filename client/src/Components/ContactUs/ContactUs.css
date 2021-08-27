@@ -9,13 +9,10 @@
 }
 
 .container-cards{
-    display: grid;
-    grid-gap: 5rem 1rem;
-    gap: 3rem 1rem;
-    grid-auto-flow: dense;
-    grid-template-rows: 20rem 20rem;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 15rem));
-    justify-content: space-around;
+    display: flex;
+    justify-content: center;
+    gap: 3rem 3rem;
+    flex-wrap: wrap;
     text-align: center;
     margin: 20px 40px 80px 40px;
     font-family: 'Montserrat', sans-serif;
